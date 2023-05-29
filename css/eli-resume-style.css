@@ -25,7 +25,7 @@
   }
 
   :root {
-    --primary-color:        #6fa9ff;
+    --primary-color:        #71a6f5;
     --white-color:          #ffffff;
     --dark-color:           #010101;
     --menu-bg-color:        #002136;
@@ -292,8 +292,8 @@
 
  
     .square-image {
-    width: 100px;
-    height: 100px;
+    width: 275px;
+    height: 150px;
     object-fit: cover;
   }
 
@@ -325,6 +325,7 @@
     background: var(--dark-color);
     color: var(--white-color);
   }
+  
 
 
   /*---------------------------------------
@@ -408,7 +409,7 @@
   -----------------------------------------*/
 
   .testimonials {
-    background: #f9f9f9;
+    background: #d9d9d9;
   }
 
   .testimonials-image {
@@ -442,8 +443,8 @@
     background: var(--primary-color);
   }
   .same-size-image {
-      width: 200px;
-      height: 200px;
+      width: 50px;
+      height: 50px;
       object-fit: cover;
       border-radius: 50%;
       overflow: hidden;
