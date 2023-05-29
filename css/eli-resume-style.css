@@ -443,21 +443,18 @@
     background: var(--primary-color);
   }
   .same-size-image {
-      width: 50px;
-      height: 50px;
+      width: 100px;
+      height: 100px;
       object-fit: cover;
       border-radius: 50%;
       overflow: hidden;
   }
-  .same-size-small-image {
-    width: 50;
-    height: 50;
-    object-fit: none;
-    border-radius: 50%;
-    overflow: hidden;
+  
+
+.experience-section {
+  margin-top: 20px;
+  text-align: center;
 }
-
-
 
 .company-container {
   display: flex;
