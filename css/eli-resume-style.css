@@ -479,6 +479,15 @@
   height: auto;
   margin-bottom: 10px;
 }
+@media (max-width: 767px) {
+  .company-container {
+    display: block;
+  }
+  
+  .company {
+    width: 100%;
+  }
+}
 
   /*---------------------------------------
      CONTACT               
