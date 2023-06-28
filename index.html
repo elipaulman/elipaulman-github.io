@@ -68,7 +68,7 @@
       </div>
     </nav>
 
-    <!-- HERO -->
+    <!-- INTO SECTION -->
     <section class="hero d-flex flex-column justify-content-center align-items-center" id="intro">
 
       <div class="container">
@@ -93,6 +93,7 @@
       </div>
     </section>
 
+    <!-- ABOUT ME SECTION -->
 
     <section class="about section-padding" id="about">
       <div class="container">
@@ -128,42 +129,69 @@
         </div>
     </section>
 
-
-    <section class="experience section-padding" id="experience">
-      <div class="container">
+   <!-- EXPERIENCE SECTION -->
+<section class="testimonials section-padding" id="testimonials">
+  <div class="container">
+    <div class="row">
+      <div class="col-12">
         <h3 class="mb-5 text-center">Experience</h3>
+        <div class="owl-carousel owl-theme" id="experience-carousel">
 
-        <div class="row about-third">
-
-          <div class="col-lg-4 col-md-4 col-12">
-            <h6 class="mb-0">Software QA Tester</h6>
-            <span>London Computer Systems</span>
-            <p>Creating and executed software test plans for the Rent Manager 12 API. Used Heidi SQL software to view
-              and
-              manage database contents. Managed tickets and logged activity through JIRA.</p>
-            <img src="images/Companies/LCSLogo1.png" class="square-image" alt="Company 1 Logo">
+          <div class="item">
+            <div class="experience-thumb d-flex">
+              <div class="experience-info">
+                <h6 class="mb-0">Software QA Tester</h6>
+                <span>London Computer Systems</span>
+                <p>Creating and executed software test plans for the Rent Manager 12 API. Used Heidi SQL software to view
+                  and manage database contents. Managed tickets and logged activity through JIRA.</p>
+              </div>
+            </div>
+            <div class="experience-thumb d-flex">
+              <div class="experience-image">
+                <img src="images/Companies/LCSLogo1.png" class="square-image" alt="Company 1 Logo" alt="LCSLogo1">
+              </div>
+            </div>
           </div>
 
-          <div class="col-lg-4 col-md-4 col-12">
-            <h6 class="mb-0">Guest Service Advocate</h6>
-            <span>Target</span>
-            <p>Interacted with guests to create a positive experience. Resolved issues and worked with guests to reach
-              positive solutions to problems.</p>
-            <img src="images/Companies/TargetLogo2.png" class="square-image" alt="Company 2 Logo">
+          <div class="item">
+            <div class="experience-thumb d-flex">
+              <div class="experience-info">
+                <h6 class="mb-0">Guest Service Advocate</h6>
+                <span>Target</span>
+                <p>Interacted with guests to create a positive experience. Resolved issues and worked with guests to reach
+                  resolutions.</p>
+              </div>
+            </div>
+            <div class="experience-thumb d-flex">
+              <div class="experience-image">
+                <img src="images/Companies/TargetLogo2.png" class="square-image" alt="Company 2 Logo">
+              </div>
+            </div>
           </div>
 
-          <div class="col-lg-4 col-md-4 col-12">
-            <h6 class="mb-0">Kitchen Lead</h6>
-            <span>Broadway Barrel House</span>
-            <p>Oversaw kitchen efficiency, accuracy, and quality of 7-10 people. Created preperation lists based on
-              inventory.</p>
-            <img src="images/Companies/BBHLogo1.jpg" class="square-image" alt="Company 3 Logo">
+          <div class="item">
+            <div class="experience-thumb d-flex">
+              <div class="experience-info">
+                <h6 class="mb-0">Kitchen Lead</h6>
+                <span>Broadway Barrel House</span>
+                <p>Oversaw kitchen efficiency, accuracy, and quality of 7-10 people. Created preparation lists based on
+                  inventory.</p>
+              </div>
+            </div>
+            <div class="experience-thumb d-flex">
+              <div class="experience-image">
+                <img src="images/Companies/BBHLogo1.jpg" class="square-image" alt="Company 3 Logo">
+              </div>
+            </div>
           </div>
 
         </div>
       </div>
-      </div>
-    </section>
+    </div>
+  </div>
+</section>
+
+    <!-- PROJECTS SECTION -->
 
     <section class="projects section-padding" id="projects">
       <div class="container">
@@ -204,7 +232,8 @@
                 <div class="project-info">
                   <h4>Dictionary Generator</h4>
                   <p>Given a valid properly formatted text file of words and respective definitions, creates a
-                    dictionary of html pages including a glossary of terms and links pages for each term and its respective definition. Also highlights and links additional terms found
+                    dictionary of html pages including a glossary of terms and links pages for each term and its
+                    respective definition. Also highlights and links additional terms found
                     in the glossary that appear within the definition of other words.</p>
                 </div>
               </div>
