@@ -16,24 +16,26 @@ window.addEventListener("load", () => {
       lat = position.coords.latitude;
 
       // API URL
-      const base = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&exclude={part}&appid=${api}`;
+      const base = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${api}`;
 
       // Calling the API
       fetch(base)
-        .then((response) => {
-          return response.json();
-        })
+        .then((response) => response.json())
         .then((data) => {
           console.log(data);
-          const temperatureInKelvin = data.current.temp;
-          const temperatureInCelsius = Math.floor(temperatureInKelvin - kelvin);
+          const temperatureInCelsius = Math.floor(data.main.temp - kelvin);
           const temperatureInFahrenheit = Math.floor((temperatureInCelsius * 9) / 5 + 32);
           temperature.textContent = temperatureInFahrenheit + "°F";
-          summary.textContent = data.current.weather[0].description;
-          loc.textContent = data.timezone;
-          let icon1 = data.current.weather[0].icon;
+          summary.textContent = data.weather[0].description;
+          loc.textContent = data.name + ", " + data.sys.country;
+          let icon1 = data.weather[0].icon;
           icon.innerHTML = `<img src="icons/${icon1}.svg" style='height:10rem'/>`;
+        })
+        .catch((error) => {
+          console.log("Error fetching weather data:", error);
         });
     });
+  } else {
+    console.log("Geolocation is not supported by this browser.");
   }
 });
