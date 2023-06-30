@@ -18,7 +18,7 @@ window.addEventListener("load", () => {
       const api = "a492a768764e969820914c25cd2b788a";
 
       // API URL
-      const base = `http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=a492a768764e969820914c25cd2b788a`;
+      const base = `https://api.openweathermap.org/data/2.5/weather?lat={lat}&lon={lon}&appid=a492a768764e969820914c25cd2b788a`;
 
       // Calling the API
       fetch(base)
