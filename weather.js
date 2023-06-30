@@ -1,10 +1,8 @@
 // Declaring the variables
 let lon;
 let lat;
-let temperature = document.querySelector(".temp");
-let summary = document.querySelector(".summary");
-let loc = document.querySelector(".location");
-let icon = document.querySelector(".icon");
+let currentWeatherContainer = document.querySelector(".container");
+let forecastList = document.querySelector(".forecast-list");
 const kelvin = 273;
 const apiKey = "a492a768764e969820914c25cd2b788a";
 
@@ -15,14 +13,18 @@ window.addEventListener("load", () => {
       lon = position.coords.longitude;
       lat = position.coords.latitude;
 
-      // API URL
-      const base = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`;
+      // API URLs
+      const currentWeatherURL = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`;
+      const forecastURL = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`;
 
-      // Calling the API
-      fetch(base)
+      // Clear existing forecast entries
+      forecastList.innerHTML = '';
+
+      // Fetching current weather data
+      fetch(currentWeatherURL)
         .then((response) => {
           if (!response.ok) {
-            throw new Error("Weather data not available");
+            throw new Error("Current weather data not available");
           }
           return response.json();
         })
@@ -30,15 +32,53 @@ window.addEventListener("load", () => {
           console.log(data);
           const temperatureInCelsius = Math.floor(data.main.temp - kelvin);
           const temperatureInFahrenheit = Math.floor((temperatureInCelsius * 9) / 5 + 32);
-          temperature.textContent = temperatureInFahrenheit + "°F";
-          summary.textContent = data.weather[0].description;
-          loc.textContent = data.name + ", " + data.sys.country;
-          let icon1 = data.weather[0].icon;
-          const iconUrl = `https://openweathermap.org/img/wn/${icon1}.png`;
-          icon.innerHTML = `<img src="${iconUrl}" style='height:10rem'/>`;
+
+          // Update current weather container
+          currentWeatherContainer.innerHTML = `
+            <div class="icon">
+              <img src="https://openweathermap.org/img/wn/${data.weather[0].icon}.png" style="height: 5rem;" />
+            </div>
+            <div class="temp">${temperatureInFahrenheit}°F</div>
+            <div class="summary">${data.weather[0].description}</div>
+            <div class="location">${data.name}</div>
+          `;
         })
         .catch((error) => {
-          console.log("Error fetching weather data:", error);
+          console.log("Error fetching current weather data:", error);
+        });
+
+      // Fetching forecast data
+      fetch(forecastURL)
+        .then((response) => {
+          if (!response.ok) {
+            throw new Error("Forecast data not available");
+          }
+          return response.json();
+        })
+        .then((data) => {
+          console.log(data);
+          const forecasts = data.list;
+          forecasts.forEach((forecast) => {
+            const forecastDateTime = new Date(forecast.dt_txt);
+            if (forecastDateTime.getHours() === 12) { // Retrieve only the forecasts for 12:00 PM
+              const temperatureInCelsius = Math.floor(forecast.main.temp - kelvin);
+              const temperatureInFahrenheit = Math.floor((temperatureInCelsius * 9) / 5 + 32);
+              const forecastItem = document.createElement("div");
+              forecastItem.classList.add("forecast-item");
+              forecastItem.innerHTML = `
+                <div class="forecast-date">${forecastDateTime.toDateString()}</div>
+                <div class="forecast-temp">${temperatureInFahrenheit}°F</div>
+                <div class="forecast-summary">${forecast.weather[0].description}</div>
+                <div class="forecast-icon">
+                  <img src="https://openweathermap.org/img/wn/${forecast.weather[0].icon}.png" style="height: 5rem;" />
+                </div>
+              `;
+              forecastList.appendChild(forecastItem);
+            }
+          });
+        })
+        .catch((error) => {
+          console.log("Error fetching forecast data:", error);
         });
     });
   } else {
