@@ -521,6 +521,7 @@ a:hover {
   width: 50%;
   height: auto;
   margin-bottom: 10px;
+  background-color: transparent;
 }
 
 @media (max-width: 767px) {
