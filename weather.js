@@ -40,8 +40,12 @@ window.addEventListener("load", () => {
             </div>
             <div class="temp">${temperatureInFahrenheit}°F</div>
             <div class="summary">${data.weather[0].description}</div>
+            <div class="rain-chance">Rain: ${data.main.humidity}%</div>
             <div class="location">${data.name}</div>
           `;
+
+          // Update page background based on weather condition
+          updatePageBackground(data.weather[0].main);
         })
         .catch((error) => {
           console.log("Error fetching current weather data:", error);
@@ -58,23 +62,42 @@ window.addEventListener("load", () => {
         .then((data) => {
           console.log(data);
           const forecasts = data.list;
+
+          // Group the forecasts by date
+          const groupedForecasts = {};
           forecasts.forEach((forecast) => {
-            const forecastDateTime = new Date(forecast.dt_txt);
-            if (forecastDateTime.getHours() === 12) { // Retrieve only the forecasts for 12:00 PM
+            const forecastDate = new Date(forecast.dt_txt.split(' ')[0]).toDateString();
+            if (!groupedForecasts[forecastDate]) {
+              groupedForecasts[forecastDate] = [];
+            }
+            groupedForecasts[forecastDate].push(forecast);
+          });
+
+          // Iterate through the grouped forecasts
+          Object.entries(groupedForecasts).forEach(([date, forecasts]) => {
+            const temperatureHighArray = [];
+            const temperatureLowArray = [];
+
+            forecasts.forEach((forecast) => {
               const temperatureInCelsius = Math.floor(forecast.main.temp - kelvin);
               const temperatureInFahrenheit = Math.floor((temperatureInCelsius * 9) / 5 + 32);
-              const forecastItem = document.createElement("div");
-              forecastItem.classList.add("forecast-item");
-              forecastItem.innerHTML = `
-                <div class="forecast-date">${forecastDateTime.toDateString()}</div>
-                <div class="forecast-temp">${temperatureInFahrenheit}°F</div>
-                <div class="forecast-summary">${forecast.weather[0].description}</div>
-                <div class="forecast-icon">
-                  <img src="https://openweathermap.org/img/wn/${forecast.weather[0].icon}.png" style="height: 5rem;" />
-                </div>
-              `;
-              forecastList.appendChild(forecastItem);
-            }
+              temperatureHighArray.push(temperatureInFahrenheit);
+              temperatureLowArray.push(temperatureInFahrenheit);
+            });
+
+            const temperatureHighInFahrenheit = Math.max(...temperatureHighArray);
+            const temperatureLowInFahrenheit = Math.min(...temperatureLowArray);
+
+            const forecastItem = document.createElement("div");
+            forecastItem.classList.add("forecast-item");
+            forecastItem.innerHTML = `
+              <div class="forecast-date">${date}</div>
+              <div class="forecast-temp">High: ${temperatureHighInFahrenheit}°F | Low: ${temperatureLowInFahrenheit}°F</div>
+              <div class="forecast-icon">
+                <img src="https://openweathermap.org/img/wn/${forecasts[0].weather[0].icon}.png" style="height: 8rem;" />
+              </div>
+            `;
+            forecastList.appendChild(forecastItem);
           });
         })
         .catch((error) => {
@@ -85,3 +108,17 @@ window.addEventListener("load", () => {
     console.log("Geolocation is not supported by this browser.");
   }
 });
+
+// Update the page background based on the weather condition
+function updatePageBackground(weatherCondition) {
+  const body = document.querySelector("body");
+  if (weatherCondition.includes("Cloud")) {
+    body.style.background = "linear-gradient(rgb(104, 159, 184), rgb(37, 94, 163))";
+  } else if (weatherCondition.includes("Rain")) {
+    body.style.background = "linear-gradient(rgb(20, 47, 81), rgb(6, 15, 26))";
+  } else if (weatherCondition.includes("Clear")) {
+    body.style.background = "linear-gradient(rgb(25, 117, 210), rgb(9, 47, 85))";
+  } else {
+    body.style.background = "linear-gradient(rgb(3, 35, 63), rgb(0, 0, 0))";
+  }
+}

@@ -1,90 +1,154 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
-	<meta charset="UTF-8" />
-	<meta http-equiv="X-UA-Compatible" content="IE=edge" />
-	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
-	<!--The CSS styling-->
-	<style>
-	* {
-		margin: 0;
-		padding: 0;
-		box-sizing: border-box;
-	}
-	body {
-		height: 100vh;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-		justify-content: center;
-		background: linear-gradient(rgb(104, 159, 184), rgb(37, 94, 163));
-		font-size: 2rem;
-		font-family: sans-serif;
-		color: rgb(7, 9, 10);
-	}
-	.container {
-		height: 20rem;
-		width: 15rem;
-		background-color: rgb(194, 216, 252);
-		text-align: center;
-		padding-top: 12px;
-		border-radius: 16px;
-		border: 2px solid rgb(14, 43, 1);
-		margin-bottom: 16px;
-	}
-	.forecast-item {
-		margin-bottom: 12px;
-		display: inline-block;
-		width: 120px;
-		vertical-align: top;
-		padding: 10px;
-	}
-	.forecast-date {
-		font-weight: bold;
-	}
-	.forecast-temp {
-		margin-top: 6px;
-	}
-	.forecast-icon img {
-		height: 5rem;
-	}
-	</style>
+  <meta charset="UTF-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <!--The CSS styling-->
+  <style>
+    * {
+      margin: 20;
+      padding: 20;
+      box-sizing: border-box;
+    }
+
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: 2rem;
+      font-family: "Roboto", sans-serif;
+      color: rgb(255, 255, 255);
+    }
+
+    .container {
+      height: 20rem;
+      width: 15rem;
+      background-color: rgba(255, 255, 255, 0.1);
+      text-align: center;
+      padding-top: 12px;
+      border-radius: 16px;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      margin-bottom: 16px;
+      box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.2);
+    }
+
+    .current-conditions {
+      margin-bottom: 12px;
+      padding: 10px;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      border-radius: 8px;
+    }
+
+    .forecast-item {
+      margin-bottom: 12px;
+      width: 180px;
+      /* Adjust the width value as desired */
+      text-align: center;
+      padding: 10px;
+      border: 2px solid rgba(255, 255, 255, 0.2);
+      border-radius: 8px;
+    }
+
+    .forecast-list {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-between;
+      margin: 0 -12px;
+    }
+
+    .forecast-item {
+      margin: 12px;
+    }
+
+    .forecast-date {
+      font-weight: bold;
+      font-size: 1.2rem;
+    }
+
+    .forecast-temp {
+      margin-top: 6px;
+      font-size: 1.2rem;
+    }
+
+    .forecast-icon img {
+      height: 5rem;
+    }
+
+    /* Mobile Styles */
+    @media (max-width: 767px) {
+      .forecast-item {
+        display: block;
+        width: 100%;
+      }
+
+      .container {
+        margin: 12px;
+      }
+
+      .forecast-list {
+        margin: -6px 12px;
+      }
+
+      .forecast-item {
+        margin: 6px;
+      }
+    }
+
+    /* Computer Styles */
+    @media (min-width: 768px) {
+      .forecast-item {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 220px; /* Adjust the width value as desired */
+      }
+    }
+  </style>
 </head>
+
 <body>
-	<div class="container">
-		<div class="icon">---</div>
-		<div class="temp">-°F</div>
-		<div class="summary">----</div>
-		<div class="location"></div>
-	</div>
-	<div class="forecast-list">
-		<div class="forecast-item">
-			<div class="forecast-date">Monday</div>
-			<div class="forecast-temp">75°F</div>
-			<div class="forecast-icon"><img src="icon.png" alt="Weather Icon" /></div>
-		</div>
-		<div class="forecast-item">
-			<div class="forecast-date">Tuesday</div>
-			<div class="forecast-temp">80°F</div>
-			<div class="forecast-icon"><img src="icon.png" alt="Weather Icon" /></div>
-		</div>
-		<div class="forecast-item">
-			<div class="forecast-date">Wednesday</div>
-			<div class="forecast-temp">72°F</div>
-			<div class="forecast-icon"><img src="icon.png" alt="Weather Icon" /></div>
-		</div>
-		<div class="forecast-item">
-			<div class="forecast-date">Thursday</div>
-			<div class="forecast-temp">77°F</div>
-			<div class="forecast-icon"><img src="icon.png" alt="Weather Icon" /></div>
-		</div>
-		<div class="forecast-item">
-			<div class="forecast-date">Friday</div>
-			<div class="forecast-temp">82°F</div>
-			<div class="forecast-icon"><img src="icon.png" alt="Weather Icon" /></div>
-		</div>
-	</div>
-	<!--Linking the javascript code-->
-	<script src="weather.js"></script>
+  <div class="container">
+    <div class="current-conditions">
+      <div class="icon">---</div>
+      <div class="temp">-°F</div>
+      <div class="summary">----</div>
+      <div class="rain-chance">Rain: --%</div>
+      <div class="location"></div>
+    </div>
+  </div>
+  <div class="forecast-list">
+    <div class="forecast-item" id="forecast-item-0">
+      <div class="forecast-date">---</div>
+      <div class="forecast-temp">--°F</div>
+      <div class="forecast-icon"><img src="icon.png" alt="Weather Icon" /></div>
+    </div>
+    <div class="forecast-item" id="forecast-item-1">
+      <div class="forecast-date">---</div>
+      <div class="forecast-temp">--°F</div>
+      <div class="forecast-icon"><img src="icon.png" alt="Weather Icon" /></div>
+    </div>
+    <div class="forecast-item" id="forecast-item-2">
+      <div class="forecast-date">---</div>
+      <div class="forecast-temp">--°F</div>
+      <div class="forecast-icon"><img src="icon.png" alt="Weather Icon" /></div>
+    </div>
+    <div class="forecast-item" id="forecast-item-3">
+      <div class="forecast-date">---</div>
+      <div class="forecast-temp">--°F</div>
+      <div class="forecast-icon"><img src="icon.png" alt="Weather Icon" /></div>
+    </div>
+    <div class="forecast-item" id="forecast-item-4">
+      <div class="forecast-date">---</div>
+      <div class="forecast-temp">--°F</div>
+      <div class="forecast-icon"><img src="icon.png" alt="Weather Icon" /></div>
+    </div>
+  </div>
+  <!--Linking the JavaScript code-->
+  <script src="weather.js"></script>
 </body>
+
 </html>
