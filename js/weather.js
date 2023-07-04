@@ -100,7 +100,7 @@ function updateForecast(data) {
     const temperatureHigh = Math.max(...temperatureHighArray);
     const temperatureLow = Math.min(...temperatureLowArray);
     const iconCode = forecasts[0].weather[0].icon;
-    const rainPercentage = forecasts.reduce((total, f) => total + (f.rain && f.rain['3h'] ? f.rain['3h'] : 0), 0) / forecasts.length * 100;
+    const rainPercentage = (forecasts.reduce((total, f) => total + f.pop, 0) / forecasts.length) * 100;
 
     // Create forecast item
     const forecastItem = document.createElement("div");
