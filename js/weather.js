@@ -61,13 +61,17 @@ function updateCurrentWeather(data) {
   const temperatureInCelsius = Math.floor(data.main.temp - kelvin);
   const temperatureInFahrenheit = Math.floor((temperatureInCelsius * 9) / 5 + 32);
 
+  // Capitalize the current condition
+  const condition = data.weather[0].description;
+  const capitalizedCondition = condition.charAt(0).toUpperCase() + condition.slice(1);
+
   // Update current weather container
   currentWeatherContainer.innerHTML = `
     <div class="icon">
       <img src="https://openweathermap.org/img/wn/${data.weather[0].icon}.png" style="height: 5rem;" />
     </div>
     <div class="temp">${temperatureInFahrenheit}°F</div>
-    <div class="summary">${data.weather[0].description}</div>
+    <div class="summary">${capitalizedCondition}</div>
     <div class="rain-chance">Rain: ${data.main.humidity}%</div>
     <div class="location">${data.name}</div>
   `;
@@ -96,6 +100,7 @@ function updateForecast(data) {
     const temperatureHigh = Math.max(...temperatureHighArray);
     const temperatureLow = Math.min(...temperatureLowArray);
     const iconCode = forecasts[0].weather[0].icon;
+    const rainPercentage = forecasts.reduce((total, f) => total + (f.rain && f.rain['3h'] ? f.rain['3h'] : 0), 0) / forecasts.length * 100;
 
     // Create forecast item
     const forecastItem = document.createElement("div");
@@ -104,13 +109,13 @@ function updateForecast(data) {
       <div class="forecast-date">${date}</div>
       <div class="forecast-temp">${temperatureLow}°F - ${temperatureHigh}°F</div>
       <div class="forecast-icon"><img src="https://openweathermap.org/img/wn/${iconCode}.png" alt="Weather Icon" /></div>
+      <div class="rain-chance">Rain: ${rainPercentage.toFixed(0)}%</div>
     `;
 
     // Append forecast item to forecast list
     forecastList.appendChild(forecastItem);
   });
 }
-
 
 function updatePageBackground(weatherCondition) {
   // Update background color or image based on weather condition
