@@ -119,7 +119,6 @@ function updateForecast(data) {
 
 function updatePageBackground(weatherCondition) {
   // Update background color or image based on weather condition
-  // Example implementation, you can customize this based on your preferences
   const body = document.querySelector("body");
   switch (weatherCondition) {
     case "Clear":
