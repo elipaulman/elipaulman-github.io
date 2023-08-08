@@ -24,7 +24,7 @@ function fetchWeatherData() {
   const forecastURL = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`;
 
   // Clear existing forecast entries
-  forecastList.innerHTML = '';
+  forecastList.innerHTML = "";
 
   // Fetching current weather data
   fetch(currentWeatherURL)
@@ -59,11 +59,14 @@ function fetchWeatherData() {
 
 function updateCurrentWeather(data) {
   const temperatureInCelsius = Math.floor(data.main.temp - kelvin);
-  const temperatureInFahrenheit = Math.floor((temperatureInCelsius * 9) / 5 + 32);
+  const temperatureInFahrenheit = Math.floor(
+    (temperatureInCelsius * 9) / 5 + 32
+  );
 
   // Capitalize the current condition
   const condition = data.weather[0].description;
-  const capitalizedCondition = condition.charAt(0).toUpperCase() + condition.slice(1);
+  const capitalizedCondition =
+    condition.charAt(0).toUpperCase() + condition.slice(1);
 
   // Update current weather container
   currentWeatherContainer.innerHTML = `
@@ -86,7 +89,7 @@ function updateForecast(data) {
   // Group the forecasts by date
   const groupedForecasts = {};
   forecasts.forEach((forecast) => {
-    const forecastDate = new Date(forecast.dt_txt.split(' ')[0]).toDateString();
+    const forecastDate = new Date(forecast.dt_txt.split(" ")[0]).toDateString();
     if (!groupedForecasts[forecastDate]) {
       groupedForecasts[forecastDate] = [];
     }
@@ -95,12 +98,18 @@ function updateForecast(data) {
 
   // Iterate through the grouped forecasts
   Object.entries(groupedForecasts).forEach(([date, forecasts]) => {
-    const temperatureHighArray = forecasts.map((f) => Math.floor((f.main.temp_max - kelvin) * 9 / 5 + 32));
-    const temperatureLowArray = forecasts.map((f) => Math.floor((f.main.temp_min - kelvin) * 9 / 5 + 32));
+    const temperatureHighArray = forecasts.map((f) =>
+      Math.floor(((f.main.temp_max - kelvin) * 9) / 5 + 32)
+    );
+    const temperatureLowArray = forecasts.map((f) =>
+      Math.floor(((f.main.temp_min - kelvin) * 9) / 5 + 32)
+    );
     const temperatureHigh = Math.max(...temperatureHighArray);
     const temperatureLow = Math.min(...temperatureLowArray);
     const iconCode = forecasts[0].weather[0].icon;
-    const rainPercentage = (forecasts.reduce((total, f) => total + f.pop, 0) / forecasts.length) * 100;
+    const rainPercentage =
+      (forecasts.reduce((total, f) => total + f.pop, 0) / forecasts.length) *
+      100;
 
     // Create forecast item
     const forecastItem = document.createElement("div");
