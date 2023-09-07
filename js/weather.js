@@ -6,6 +6,7 @@ let forecastList = document.querySelector(".forecast-list");
 const kelvin = 273;
 const apiKey = "a492a768764e969820914c25cd2b788a";
 
+
 window.addEventListener("load", () => {
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition((position) => {
