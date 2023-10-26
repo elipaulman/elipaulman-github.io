@@ -1,6 +1,7 @@
+/* Reset some default styles */
 * {
-  margin: 20;
-  padding: 20;
+  margin: 0;
+  padding: 0;
   box-sizing: border-box;
 }
 
@@ -10,137 +11,137 @@ body {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  font-size: 2rem;
   font-family: "Roboto", sans-serif;
-  color: rgb(255, 255, 255);
+  background: linear-gradient(to bottom, #5b84b3, #0a2b41);
+  color: #fff;
 }
 
 .container {
-  height: 20rem;
-  width: 15rem;
-  background-color: rgba(255, 255, 255, 0.1);
+  height: auto;
+  width: 90%;
+  max-width: 400px;
+  background-color: rgba(255, 255, 255, 0.2);
   text-align: center;
-  padding-top: 12px;
+  padding: 20px;
   border-radius: 16px;
-  border: 2px solid rgba(255, 255, 255, 0.2);
-  margin-bottom: 16px;
-  box-shadow: 0px 0px 20px rgba(255, 255, 255, 0.2);
+  box-shadow: 0 0 20px rgba(255, 255, 255, 0.2);
+  margin-bottom: 20px;
 }
 
-.forecast-item {
-  margin-bottom: 12px;
-  width: 180px;
-  /* Adjust the width value as desired */
-  text-align: center;
-  padding: 10px;
-  border: 2px solid rgba(255, 255, 255, 0.2);
-  border-radius: 8px;
+.current-conditions {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px;
+}
+
+.icon {
+  font-size: 48px;
+  color: #fff;
+}
+
+.temp {
+  font-size: 36px;
+  font-weight: bold;
+}
+
+.summary {
+  margin-top: 10px;
+  font-size: 24px;
+}
+
+.rain-chance {
+  margin-top: 10px;
+  font-size: 20px;
+}
+
+.location {
+  margin-top: 10px;
+  font-size: 24px;
 }
 
 .forecast-list {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-between;
-  margin: 0 -12px;
+  margin: 0 -10px;
 }
 
 .forecast-item {
-  margin: 12px;
+  width: calc(33.33% - 20px);
+  background-color: rgba(255, 255, 255, 0.15);
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+  text-align: center;
+  padding: 20px;
+  margin: 10px;
 }
 
-.forecast-date {
-  font-weight: bold;
-  font-size: 1.2rem;
+.forecast-item img {
+  width: 50px;
+  height: 50px;
 }
 
-.forecast-temp {
-  margin-top: 6px;
-  font-size: 1.2rem;
+.location-input {
+  display: flex;
+  flex-direction: column; /* Make the children stack vertically */
+  align-items: center; /* Center children horizontally */
+  margin-top: 20px;
 }
 
-.forecast-icon img {
+#location-input {
+  padding: 10px;
+  width: 100%; /* Set the width to 100% */
+  text-align: center;
+  border: none;
+  border-radius: 8px;
+  background-color: rgba(255, 255, 255, 0.2);
+  color: #fff;
+  font-size: 16px;
+}
+input::placeholder {
+  color: #fff;
+}
+
+#get-weather-button {
+  padding: 10px 20px;
+  background-color: #da7603;
+  color: #fff;
+  border: none;
+  width: 100%; /* Set the width to 100% */
+  text-align: center;
+  border-radius: 8px;
+  cursor: pointer;
+  margin-top: 10px;
+  font-size: 16px;
+}
+
+#get-weather-button:hover {
+  background-color: #ffc99d;
 }
 
 /* Mobile Styles */
 @media (max-width: 767px) {
   .forecast-item {
-    display: block;
     width: 100%;
   }
 
   .container {
-    margin: 12px;
+    margin: 10px;
   }
 
   .forecast-list {
-    margin: -6px 12px;
+    margin: 0 -10px;
   }
 
   .forecast-item {
-    margin: 6px;
-  }
-
-  .location-input {
-    margin-bottom: 00px;
-    margin-top: 20px;
-  }
-
-  .location-input input[type="text"],
-  .location-input button {
-    margin-bottom: 0px;
-  }
-
-  .location-input button {
-    display: block;
-    width: calc(100% - 24px);
+    margin: 10px;
   }
 }
 
 /* Computer Styles */
 @media (min-width: 768px) {
   .forecast-item {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 220px;
-    /* Adjust the width value as desired */
+    width: calc(33.33% - 20px); /* Set to 33.33% for 3 items per row */
   }
-}
-
-/* Location box styles */
-.location-input {
-  display: flex;
-  align-items: center;
-  margin-bottom: 16px;
-}
-
-.location-input input[type="text"] {
-  flex: 1;
-  height: 3rem;
-  padding: 8px;
-  font-size: 1.2rem;
-  border-radius: 8px;
-  border: 2px solid rgba(255, 255, 255, 0.2);
-  background-color: rgba(255, 255, 255, 0.1);
-  color: rgb(255, 255, 255);
-  margin-right: 4px;
-}
-
-.location-input input[type="text"]::placeholder {
-  color: rgba(255, 255, 255, 0.5);
-}
-
-.location-input button {
-  height: 3rem;
-  padding: 8px 16px;
-  font-size: 1.2rem;
-  border-radius: 8px;
-  border: none;
-  background-color: #ff7700;
-  color: #ffffff;
-  cursor: pointer;
-}
-
-.location-input button:hover {
-  background-color: #ffc99d;
 }
