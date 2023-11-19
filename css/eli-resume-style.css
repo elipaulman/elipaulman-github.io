@@ -171,6 +171,7 @@ a:hover {
   right: 0;
   left: 0;
   opacity: 0;
+  text-align: center;
 }
 
 .navbar.scroll {
