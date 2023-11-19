@@ -404,11 +404,20 @@ a:hover {
   font-weight: 500;
   text-decoration: none;
   border-radius: 4px;
+  margin-bottom: 10px;
   transition: background-color 0.3s ease;
 }
 
 .view-all-projects:hover {
   background-color: #005fab;
+}
+
+.project-info h4 {
+  text-align: center;
+}
+
+.project-info p {
+  text-align: left;
 }
 
 .card-header button.btn-link {
