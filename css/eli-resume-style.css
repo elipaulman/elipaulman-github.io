@@ -399,7 +399,7 @@ a:hover {
 .view-all-projects {
   display: inline-block;
   padding: 12px 24px;
-  background-color: #0077b5;
+  background-color: #378fc6;
   color: #ffffff;
   font-size: 16px;
   font-weight: 500;
@@ -410,7 +410,8 @@ a:hover {
 }
 
 .view-all-projects:hover {
-  background-color: #005fab;
+  background-color: #022b42;
+  color: #ffffff;
 }
 
 .project-info h4 {
@@ -428,7 +429,7 @@ a:hover {
 
 .card-header button.btn-link {
   color: #282828; /* Set the color of the button text to dark grey */
-  background-color: #9cb7c8; /* Replace "your-color" with the desired background color value */
+  background-color: #86c1e5ad ; /* Replace "your-color" with the desired background color value */
 }
 
 /*---------------------------------------
