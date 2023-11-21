@@ -426,9 +426,13 @@ a:hover {
   color: #000; /* Set the color of the button text */
   background-color: #f8f9fa; /* Set the background color of the button */
 }
+.card-header button.btn-link:hover {
+  color: #ffffff; /* Set the color of the button text */
+  background-color:#378fc6 /* Set the background color of the button */
+}
 
 .card-header button.btn-link {
-  color: #282828; /* Set the color of the button text to dark grey */
+  color: #434343; /* Set the color of the button text to dark grey */
   background-color: #86c1e5ad ; /* Replace "your-color" with the desired background color value */
 }
 
