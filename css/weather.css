@@ -2,7 +2,6 @@
 * {
   margin: 0;
   padding: 0;
-  box-sizing: border-box;
 }
 
 body {
@@ -12,7 +11,7 @@ body {
   align-items: center;
   justify-content: center;
   font-family: "Roboto", sans-serif;
-  background: linear-gradient(to bottom, #5b84b3, #0a2b41);
+  background: linear-gradient(to bottom, #338aed, #0a2b41);
   color: #fff;
 }
 
@@ -142,6 +141,6 @@ input::placeholder {
 /* Computer Styles */
 @media (min-width: 768px) {
   .forecast-item {
-    width: calc(33.33% - 20px); /* Set to 33.33% for 3 items per row */
+    width: calc(33.33% - 20px); 
   }
 }
