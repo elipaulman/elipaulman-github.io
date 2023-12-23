@@ -127,24 +127,13 @@ function updateForecast(data) {
   });
 }
 
-function updatePageBackground(weatherCondition) {
-  // Update background color or image based on weather condition
+function updatePageBackground() {
+  // Update background color with the defined gradient
   const body = document.querySelector("body");
-  switch (weatherCondition) {
-    case "Clear":
-      body.style.backgroundColor = "#5dbcd2";
-      break;
-    case "Clouds":
-      body.style.backgroundColor = "#607d8b";
-      break;
-    case "Rain":
-      body.style.backgroundImage = "url('rainy-background.jpg')";
-      body.style.backgroundSize = "cover";
-      break;
-    default:
-      body.style.backgroundColor = "#4caf50";
-  }
+  body.style.background = "linear-gradient(to bottom, #338aed, #0a2b41)";
+  body.style.color = "#fff";
 }
+
 
 // Event listener for the "Get Weather" button
 const getWeatherButton = document.getElementById("get-weather-button");
