@@ -126,6 +126,18 @@ input::placeholder {
     width: 100%;
   }
 
+  header, footer {
+    background: #338aed; 
+    color: #fff;
+    padding: 10px; 
+  }
+
+  footer {
+    background: #0a2b41; 
+    color: #fff;
+    padding: 10px; 
+  }
+
   .container {
     margin: 10px;
   }
