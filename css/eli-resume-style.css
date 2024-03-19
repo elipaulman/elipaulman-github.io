@@ -25,7 +25,7 @@
 :root {
   --primary-color: #9cb7c8;
   --white-color: #ffffff;
-  --dark-color: #010101;
+  --dark-color: #1b1b1b;
   --menu-bg-color: #378fc6;
 
   --gray-color: #ffffff;
@@ -91,7 +91,7 @@ h6 {
   font-size: var(--h6-font-size);
 }
 
-p {
+p, li {
   color: var(--p-color);
   font-size: var(--p-font-size);
   font-weight: var(--font-weight-light);
@@ -300,12 +300,13 @@ a:hover {
 .hero-title,
 .email-link {
   background: var(--dark-color);
+  padding-top: 5rem;
   border-radius: var(--border-radius-medium);
   color: var(--white-color);
   display: inline-block;
   margin: 0.5rem 0;
-  padding: 0.5rem 2rem 1.5rem 2rem;
-  font-size: 2.2em;
+  padding: .5rem 2rem 1.5rem 2rem;
+  font-size: 3.35em;
 }
 
 .email-link {
@@ -685,7 +686,7 @@ a:hover {
   }
 
   .email-link {
-    font-size: 28px;
+    font-size: 2em; /* adjust as needed */
   }
 }
 
@@ -714,18 +715,18 @@ a:hover {
 
 @media screen and (max-width: 768px) {
   .hero-text {
-    position: relative;
-    top: 1.5rem;
+    text-align: center;
   }
 }
 
 @media screen and (max-width: 480px) {
   .hero-title {
-    font-size: 26px;
+    font-size: 3em; /* adjust as needed */
   }
 
   .email-link {
-    font-size: 20px;
+    font-size: 25px;
     padding: 0.3rem 2rem 0.6rem 2rem;
+    margin-bottom: 0.0rem;
   }
 }
