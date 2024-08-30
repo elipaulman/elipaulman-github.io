@@ -22,6 +22,14 @@
   font-style: normal;
 }
 
+@media (min-width: 576px) {
+  .projects .row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+  }
+}
+
 :root {
   --primary-color: #9cb7c8;
   --white-color: #ffffff;
@@ -364,6 +372,8 @@ a:hover {
   margin-top: 0;
 }
 
+
+
 /*---------------------------------------
      FAQ                 
   -----------------------------------------*/
@@ -422,6 +432,8 @@ a:hover {
 .project-info p {
   text-align: left;
 }
+
+
 
 .card-header button.btn-link {
   color: #000; /* Set the color of the button text */
