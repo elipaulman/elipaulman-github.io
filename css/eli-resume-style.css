@@ -1005,6 +1005,109 @@ a:hover {
   font-size: 48px; /* Adjust the value to make the icons bigger */
 }
 
+/* Add to existing CSS */
+/* ------------------- HERO ANIMATIONS ------------------- */
+.hero-title {
+  animation: slideUpFadeIn 1s ease-out both;
+  animation-delay: 0.3s;
+}
+
+.email-link {
+  animation: slideUpFadeIn 1s ease-out both;
+  animation-delay: 0.5s;
+}
+
+@keyframes slideUpFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ------------------- PROJECT CARD ANIMATIONS ------------------- */
+.project-item {
+  transform: scale(0.95);
+  transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1), 
+              box-shadow 0.4s ease;
+}
+
+.project-item.animate {
+  animation: cardEntrance 0.6s ease-out forwards;
+}
+
+@keyframes cardEntrance {
+  from {
+    opacity: 0;
+    transform: translateY(20px) scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ------------------- TIMELINE ENHANCEMENTS ------------------- */
+.timeline-item {
+  opacity: 0;
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.timeline-item.visible {
+  opacity: 1;
+}
+
+.timeline-item:nth-child(odd) { transform: translateX(-30px); }
+.timeline-item:nth-child(even) { transform: translateX(30px); }
+.timeline-item.visible { transform: translateX(0); }
+
+/* ------------------- SOCIAL LINK ANIMATIONS ------------------- */
+.social-links li {
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.4s ease;
+}
+
+.social-links.loaded li {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.social-links li:nth-child(1) { transition-delay: 0.1s; }
+.social-links li:nth-child(2) { transition-delay: 0.2s; }
+.social-links li:nth-child(3) { transition-delay: 0.3s; }
+.social-links li:nth-child(4) { transition-delay: 0.4s; }
+
+/* ------------------- INTERACTIVE HOVER EFFECTS ------------------- */
+.nav-link {
+  position: relative;
+  overflow: hidden;
+}
+
+.nav-link::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: var(--primary-color);
+  transition: width 0.3s ease;
+}
+
+.nav-link:hover::after {
+  width: 100%;
+}
+
+/* ------------------- SCROLL TRIGGERED ANIMATIONS ------------------- */
+@keyframes scaleProgress {
+  0% { transform: scaleX(0); }
+  100% { transform: scaleX(1); }
+}
+
 /*---------------------------------------
      RESPONSIVE STYLES              
   -----------------------------------------*/
