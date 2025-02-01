@@ -45,6 +45,29 @@
     $('#experience-carousel').owlCarousel({
         loop:true,
         margin:10,
+        dots: true,
+        autoplay: true,
+        responsiveClass:true,
+        responsive:{
+            0:{
+                items:1,
+            },
+            900:{
+                items:2,
+            },
+            1200:{
+                items:3,
+                loop:false
+            }
+        }
+    })
+
+    // PROJECTS CAROUSEL
+    $('#projects-carousel').owlCarousel({
+        loop:true,
+        margin:10,
+        autoplay: true,
+        dots: true,
         responsiveClass:true,
         responsive:{
             0:{

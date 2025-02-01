@@ -407,24 +407,6 @@ a:hover {
   margin: 1.5rem 2rem 0 2rem;
 }
 
-.view-all-projects {
-  display: inline-block;
-  padding: 12px 24px;
-  background-color: #378fc6;
-  color: #ffffff;
-  font-size: 16px;
-  font-weight: 500;
-  text-decoration: none;
-  border-radius: 4px;
-  margin-bottom: 10px;
-  transition: background-color 0.3s ease;
-}
-
-.view-all-projects:hover {
-  background-color: #022b42;
-  color: #ffffff;
-}
-
 .project-info h4 {
   text-align: center;
 }
@@ -433,20 +415,247 @@ a:hover {
   text-align: left;
 }
 
+.card {
+  border: none !important;
+  box-shadow: none !important;
+  background-color: transparent; /* Ensure no background color */
 
+}
 
 .card-header button.btn-link {
-  color: #000; /* Set the color of the button text */
-  background-color: #f8f9fa; /* Set the background color of the button */
+  width: 100%;
+  text-align: left;
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #434343; 
+  background-color: #86c1e5ad;
+  border-radius: 15px;
+  padding: 12px 20px;
+  transition: all 0.3s ease-in-out;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-decoration: none;
+  border: none;
 }
+
+/* Hover & Active Styles */
 .card-header button.btn-link:hover {
-  color: #ffffff; /* Set the color of the button text */
-  background-color:#378fc6 /* Set the background color of the button */
+  color: #ffffff;
+  background-color: #378fc6;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
 
-.card-header button.btn-link {
-  color: #434343; /* Set the color of the button text to dark grey */
-  background-color: #86c1e5ad ; /* Replace "your-color" with the desired background color value */
+/* Rotate icon when active */
+.card-header button.btn-link::after {
+  content: "▼"; /* Arrow indicator */
+  font-size: 1rem;
+  transition: transform 0.3s ease-in-out;
+}
+
+.card-header button.btn-link[aria-expanded="true"]::after {
+  transform: rotate(180deg);
+}
+
+/* Expanded Card Effect */
+.card-body {
+  padding: 15px 20px;
+  background: #f8f9fa;
+  border-radius: 0 0 15px 15px;
+  transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+
+
+
+/* Hide border when collapsed */
+.card:not(:first-of-type) {
+  margin-top: 10px;
+}
+
+/*---------------------------------------
+     PROJECT LINKS ENHANCEMENT              
+  -----------------------------------------*/
+.project-item {
+  background: var(--white-color);
+  border-radius: 15px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  border: 1px solid rgba(0,0,0,0.1);
+  height: 100%;
+  display: flex;
+  height: 100%; /* Fixed minimum height */
+  min-height: 300px; /* Fixed maximum height */
+  max-height: 500px;
+}
+
+.project-overlay {
+  padding: 2rem;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  height: 100%; /* Ensure full height */
+}
+
+/* Align buttons consistently */
+.project-info {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  flex-grow: 1; /* Fill available space */
+}
+
+.project-info p {
+  flex: 1;
+  margin-bottom: 1.5rem;
+  overflow: auto; /* Handle overflow content */
+  padding-right: 10px; /* Prevent scrollbar overlap */
+}
+
+.view-project-link {
+  margin-top: auto;
+  align-self: center;
+  width: fit-content;
+  flex-shrink: 0; /* Prevent button shrinking */
+}
+
+/* Carousel item adjustments */
+.owl-item {
+  display: flex;
+  height: auto;
+}
+
+#projects-carousel .item {
+  padding: 15px; /* Space between cards */
+  height: 100%;
+}
+
+/* Keep existing button styles */
+.view-project-link {
+  display: inline-block;
+  padding: 0.8rem 2rem;
+  background-color: var(--menu-bg-color);
+  color: var(--white-color) !important;
+  border-radius: var(--border-radius-medium);
+  font-size: var(--base-font-size);
+  font-weight: var(--font-weight-light);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+}
+
+.view-project-link:hover {
+  background-color: var(--dark-color);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.view-project-link::after {
+  content: "→";
+  margin-left: 0.5rem;
+  transition: transform 0.3s ease;
+}
+
+.view-project-link:hover::after {
+  transform: translateX(3px);
+}
+
+/* Maintain view-all-projects styling */
+.view-all-projects {
+  display: inline-block;
+  padding: 0.8rem 2rem;
+  background-color: var(--menu-bg-color);
+  color: var(--white-color) !important;
+  border-radius: var(--border-radius-medium);
+  font-size: var(--base-font-size);
+  font-weight: var(--font-weight-light);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: all 0.3s ease;
+  border: 1px solid transparent;
+}
+
+.view-all-projects:hover {
+  background-color: var(--dark-color);
+  transform: translateY(-2px);
+  box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+}
+
+.view-project-link {
+  margin-top: auto;
+  align-self: center;
+  width: 180px; /* Fixed width */
+  text-align: center; /* Center text */
+  padding: 0.8rem 1rem; /* Adjusted padding */
+  display: flex !important; /* Use flex for perfect centering */
+  align-items: center;
+  justify-content: center;
+  gap: 8px; /* Space between text and arrow */
+  flex-shrink: 0;
+  min-height: 45px; /* Fixed minimum height */
+}
+
+/* Remove the arrow pseudo-element */
+.view-project-link::after {
+  content: none;
+}
+
+/* Add this to ensure button content alignment */
+.view-project-link span {
+  display: inline-block;
+  vertical-align: middle;
+}
+
+/* Add this to handle varying text lengths */
+.project-info a {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Update carousel item padding */
+#projects-carousel .item {
+  padding: 15px 10px; /* Adjusted padding */
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .view-project-link {
+    width: 160px;
+    padding: 0.7rem 1rem;
+    font-size: 0.9em;
+  }
+}
+
+@media (max-width: 576px) {
+  .view-project-link {
+    width: 140px;
+    padding: 0.6rem 0.8rem;
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .project-item {
+    min-height: 450px;
+    max-height: 450px;
+  }
+  
+  .project-overlay {
+    padding: 1.5rem;
+  }
+}
+
+@media (max-width: 576px) {
+  .project-item {
+    min-height: 400px;
+    max-height: 400px;
+  }
+  
+  .project-info p {
+    font-size: 0.95em;
+  }
 }
 
 /*---------------------------------------
@@ -478,23 +687,8 @@ a:hover {
   width: 100%;
 }
 
-.testimonials .owl-theme .owl-dots.disabled + .owl-dots {
-  margin-top: 2rem;
-}
-
 .testimonials .owl-theme .owl-dots .owl-dot {
   outline: none;
-}
-
-.testimonials .owl-theme .owl-dots .owl-dot span {
-  width: 30px;
-  height: 3px;
-  margin: 5px;
-}
-
-.testimonials .owl-theme .owl-dots .owl-dot.active span,
-.testimonials .owl-theme .owl-dots .owl-dot:hover span {
-  background: var(--dark-color);
 }
 
 .same-size-image {
@@ -551,6 +745,141 @@ a:hover {
     width: 50%;
   }
 }
+
+/* EXPERIENCE TIMELINE */
+.experience-timeline {
+  position: relative;
+  background: #f5f5f5; /* Light grey background */
+  padding: 50px 0;
+}
+
+.timeline {
+  position: relative;
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 20px 0;
+}
+
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  width: 3px;
+  height: 100%;
+  background: var(--primary-color);
+  transform: translateX(-50%);
+}
+
+/* Timeline Items */
+.timeline-item {
+  position: relative;
+  width: 100%;
+  margin-bottom: 60px; /* More spacing to avoid overlap */
+}
+
+/* Timeline Circles */
+.timeline-item::after {
+  content: '';
+  position: absolute;
+  top: -15px;
+  left: 50%;
+  width: 15px;
+  height: 15px;
+  background: var(--primary-color);
+  border: 3px solid var(--menu-bg-color);
+  border-radius: 50%;
+  transform: translateX(-50%);
+  z-index: 2;
+}
+
+/* Date Positioning */
+.timeline-date {
+  position: absolute;
+  top: -35px; /* Move date higher */
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--primary-color);
+  color: white;
+  padding: 5px 12px;
+  border-radius: 5px;
+  font-size: 14px;
+  font-weight: bold;
+  white-space: nowrap;
+  z-index: 3;
+}
+
+/* Timeline Content */
+.timeline-content {
+  position: relative;
+  width: 48%;
+  padding: 15px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.timeline-content:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.15);
+}
+
+/* Positioning Items Alternately */
+.timeline-item:nth-child(odd) .timeline-content {
+  left: 0%;
+  text-align: left;
+}
+
+.timeline-item:nth-child(even) .timeline-content {
+  left: 53%;
+  text-align: left;
+}
+
+.timeline-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 5px;
+}
+
+.timeline-logo {
+  max-width: 50px;
+  height: auto;
+  margin-bottom: 5px;
+}
+
+/* Timeline Logos */
+.timeline-logo {
+  max-width: 60px;
+  height: auto;
+  margin: 5px auto;
+  display: block;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .timeline::before {
+    left: 20px;
+  }
+
+  .timeline-item::after {
+    left: 20px;
+  }
+
+  .timeline-date {
+    left: 50px;
+    transform: translateX(0);
+    text-align: left;
+  }
+
+  .timeline-content {
+    width: calc(100% - 80px); /* Ensures content doesn't shrink too much */
+    left: 50px !important;
+    right: 20px;
+  }
+}
+
 
 /*---------------------------------------
      CONTACT               
