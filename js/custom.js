@@ -46,7 +46,7 @@
         loop:true,
         margin:10,
         dots: true,
-        autoplay: true,
+        autoplay: false,
         responsiveClass:true,
         responsive:{
             0:{
@@ -66,7 +66,7 @@
     $('#projects-carousel').owlCarousel({
         loop:true,
         margin:10,
-        autoplay: true,
+        autoplay: false,
         dots: true,
         responsiveClass:true,
         responsive:{

@@ -18,7 +18,7 @@ function handleScrollAnimations() {
             // Add a shorter delay based on the item's position
             setTimeout(() => {
                 item.classList.add('visible');
-            }, index * 100); // 100ms delay between each item
+            }, index * 50); // 100ms delay between each item
         }
     });
 }

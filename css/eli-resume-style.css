@@ -1118,12 +1118,14 @@ a:hover {
 
 .contact-info-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); /* Updated */
   gap: 2rem;
   margin-bottom: 1rem;
-  max-width: 800px;
+  max-width: 100%; /* Updated */
   margin-left: auto;
   margin-right: auto;
+  width: 100%; /* Added */
+  padding: 0 15px; /* Added */
 }
 
 .contact-item {
@@ -1135,6 +1137,7 @@ a:hover {
   border-radius: 12px;
   transition: all 0.3s ease;
   border: 1px solid var(--border-color);
+  min-width: 0; /* Added */
 }
 
 .contact-item.phone {
@@ -1252,7 +1255,7 @@ a:hover {
 
 @media (max-width: 992px) {
   .contact-info-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: 1fr;
   }
   
   .contact-item.phone {
