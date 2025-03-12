@@ -371,7 +371,8 @@
                   <h4>Attendance Processor</h4>
                   <p>
                     Automated CSV processing tool that streamlines educational
-                    institution reporting. Developed for the Greater Ohio Virtual School.
+                    institution reporting. Developed for the Greater Ohio
+                    Virtual School.
                   </p>
                   <p class="tech-used">Tech used: Python, Flask, Pandas</p>
                   <a
@@ -417,10 +418,10 @@
                   </p>
                   <p class="tech-used">Tech used: MERN Stack, Tailwind CSS</p>
                   <a
-                    href="https://github.com/cfgcolumbus24/Team-16"
+                    href="https://alumni-network-platform-9aov.onrender.com"
                     class="view-project-link"
                     target="_blank"
-                    >View Repo</a
+                    >View Live Demo</a
                   >
                 </div>
               </div>
@@ -759,7 +760,9 @@
                   </div>
                   <div class="contact-item email">
                     <i class="fas fa-envelope"></i>
-                    <a href="mailto:eli.paulman@gmail.com">eli.paulman@gmail.com</a>
+                    <a href="mailto:eli.paulman@gmail.com"
+                      >eli.paulman@gmail.com</a
+                    >
                   </div>
                   <div class="contact-item email">
                     <i class="fas fa-envelope"></i>
@@ -767,17 +770,29 @@
                   </div>
                 </div>
                 <div class="social-links-container">
-                  <a href="https://www.linkedin.com/in/elijah-paulman-ab1011226/" class="social-link linkedin" target="_blank">
+                  <a
+                    href="https://www.linkedin.com/in/elijah-paulman-ab1011226/"
+                    class="social-link linkedin"
+                    target="_blank"
+                  >
                     <i class="fab fa-linkedin"></i>
                     <span>LinkedIn</span>
                   </a>
-                  <a href="https://github.com/elipaulman" class="social-link github" target="_blank">
+                  <a
+                    href="https://github.com/elipaulman"
+                    class="social-link github"
+                    target="_blank"
+                  >
                     <i class="fab fa-github"></i>
                     <span>GitHub</span>
                   </a>
                 </div>
                 <div class="resume-download">
-                  <a href="Resumes/Eli_Paulman_Resume.pdf" class="custom-btn btn" download>
+                  <a
+                    href="Resumes/Eli_Paulman_Resume.pdf"
+                    class="custom-btn btn"
+                    download
+                  >
                     <i class="fas fa-download"></i>
                     Download Resume
                   </a>
@@ -790,6 +805,15 @@
       </div>
     </section>
 
+    <!-- Dark Mode Toggle Button -->
+    <button
+      class="theme-toggle"
+      id="theme-toggle"
+      aria-label="Toggle dark mode"
+    >
+      <i class="fas fa-moon"></i>
+    </button>
+
     <!-- SCRIPTS -->
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.min.js"></script>
@@ -798,51 +822,6 @@
     <script src="js/custom.js"></script>
     <script src="js/animation.js"></script>
     <script src="js/timeline-animation.js"></script>
-
-    <!-- Dark Mode Toggle Button -->
-    <button class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
-      <i class="fas fa-moon"></i>
-    </button>
-
-    <script>
-      // Dark mode toggle functionality
-      const themeToggle = document.getElementById('theme-toggle');
-      const icon = themeToggle.querySelector('i');
-      
-      // Function to update theme and icon
-      function setTheme(theme) {
-        document.documentElement.setAttribute('data-theme', theme);
-        localStorage.setItem('theme', theme);
-        updateIcon(theme === 'dark');
-      }
-
-      // Function to update icon
-      function updateIcon(isDark) {
-        icon.className = isDark ? 'fas fa-sun' : 'fas fa-moon';
-      }
-
-      // Check for saved theme preference or system preference
-      const savedTheme = localStorage.getItem('theme');
-      if (savedTheme) {
-        setTheme(savedTheme);
-      } else {
-        // Check system preference
-        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        setTheme(prefersDark ? 'dark' : 'light');
-      }
-
-      // Listen for system theme changes
-      window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
-        if (!localStorage.getItem('theme')) {
-          setTheme(e.matches ? 'dark' : 'light');
-        }
-      });
-
-      // Toggle theme on button click
-      themeToggle.addEventListener('click', () => {
-        const currentTheme = document.documentElement.getAttribute('data-theme');
-        setTheme(currentTheme === 'dark' ? 'light' : 'dark');
-      });
-    </script>
+    <script src="js/theme-toggle.js"></script>
   </body>
 </html>
