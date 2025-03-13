@@ -497,7 +497,7 @@ a:hover {
 
 .skill-item i {
   font-size: 2.5rem;
-  color: #007bff; /* Blue accent color */
+  color: var(--menu-bg-color, #378fc6);
   margin-bottom: 0.8rem;
   transition: color 0.3s ease;
 }
