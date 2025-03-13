@@ -412,6 +412,158 @@ a:hover {
   margin-top: 0;
 }
 
+
+/*---------------------------------------
+     SKILLS                
+-----------------------------------------*/
+/* Skills Section */
+.skills-section {
+  background-color: var(--bg-color); /* Use your base background color */
+  transition: background-color 0.3s ease; /* Add transition for smooth theme changes */
+  overflow: hidden; /*  Prevent animation from overflowing */
+}
+
+.skills-section .section-title {
+  text-align: center;
+  margin-bottom: 3rem;
+  font-size: 2.2rem;
+  color: var(--text-color);
+  transition: color 0.3s ease; /* Add transition for smooth theme changes */
+  position: relative;
+}
+
+.skills-section .section-title::after {
+  content: '';
+  display: block;
+  width: 50px;
+  height: 3px;
+  background: var(--menu-bg-color, #378fc6);
+  margin: 0.5rem auto;
+}
+
+.skills-category {
+  margin-bottom: 3rem;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.9);
+  border-radius: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  transition: background-color 0.3s ease, box-shadow 0.3s ease; /* Add transition for smooth theme changes */
+}
+
+.skills-category h3 {
+  color: #333;
+  margin-bottom: 1.5rem;
+  font-size: 1.4rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  transition: color 0.3s ease; /* Add transition for smooth theme changes */
+}
+
+.skills-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+  gap: 1.5rem;
+  justify-content: center;
+}
+
+.skill-item {
+  text-align: center;
+  padding: 1.5rem;
+  border-radius: 8px;
+  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1); /* Smoother transition */
+  background: rgba(249, 249, 249, 0.9);
+  opacity: 0; /* Start with 0 opacity */
+  transform: translateY(20px); /* Initial position off-screen */
+}
+
+/* Animate on scroll (JS will add this class) */
+.skill-item.animate {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.skill-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 5px 15px rgba(0, 123, 255, 0.2);
+  background: white;
+}
+
+.skill-item i {
+  font-size: 2.5rem;
+  color: #007bff; /* Blue accent color */
+  margin-bottom: 0.8rem;
+  transition: color 0.3s ease;
+}
+
+.skill-item h6 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 500;
+  color: #444;
+  transition: color 0.3s ease;
+}
+
+/* Mobile Responsiveness */
+@media (max-width: 768px) {
+  .skills-content {
+    grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+  }
+
+  .skill-item {
+    padding: 1rem;
+  }
+
+  .skill-item i {
+    font-size: 2rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .skills-section {
+    padding: 3rem 0;
+  }
+
+  .skills-category {
+    padding: 1.5rem;
+  }
+}
+
+/* Dark Mode for Skills Section */
+[data-theme="dark"] .skills-section {
+  background-color: var(--bg-color); /* Use your base background color */
+}
+
+[data-theme="dark"] .skills-section .section-title {
+  color: var(--text-color);
+}
+
+[data-theme="dark"] .skills-category {
+  background: rgba(54, 54, 54, 0.9);
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3); /* Darker shadow */
+}
+
+[data-theme="dark"] .skills-category h3 {
+  color: #ddd;  /* Lighter text color */
+}
+
+[data-theme="dark"] .skill-item {
+  background: rgba(80, 80, 80, 0.9);
+}
+
+[data-theme="dark"] .skill-item:hover {
+  background: #555;
+  box-shadow: 0 5px 15px rgba(0, 123, 255, 0.4);  /* Brighter shadow */
+}
+
+[data-theme="dark"] .skill-item i {
+  color: #66b3ff;  /* Light blue accent color */
+}
+
+[data-theme="dark"] .skill-item h6 {
+  color: #ccc;  /* Lighter text color */
+}
+
 /*---------------------------------------
      FAQ                 
   -----------------------------------------*/
@@ -874,7 +1026,7 @@ a:hover {
   margin-bottom: 60px;
   opacity: 0;
   transform: translateY(20px);
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.8s ease-in-out;
 }
 
 .timeline-item.visible {
