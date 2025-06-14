@@ -1,0 +1,18 @@
+{
+  "programmingLanguages": [
+    { "name": "Python", "icon": "fab fa-python" },
+    { "name": "C#", "icon": "fas fa-code" },
+    { "name": "Java", "icon": "fab fa-java" },
+    { "name": "C", "icon": "fab fa-cuttlefish" },
+    { "name": "SQL", "icon": "fas fa-database" },
+    { "name": "JavaScript", "icon": "fab fa-js-square" }
+  ],
+  "frameworks": [
+    { "name": "React", "icon": "fab fa-react" },
+    { "name": "Vue.js", "icon": "fab fa-vuejs" },
+    { "name": "Node.js", "icon": "fab fa-node-js" },
+    { "name": "REST APIs", "icon": "fas fa-cogs" },
+    { "name": "AWS", "icon": "fab fa-aws" },
+    { "name": "GraphQL", "icon": "fas fa-project-diagram" }
+  ]
+}

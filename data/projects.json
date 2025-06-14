@@ -1,0 +1,58 @@
+[
+  {
+    "id": "attendance-processor",
+    "title": "Attendance Processor",
+    "description": "Automated CSV processing tool that streamlines educational institution reporting. Developed for the Greater Ohio Virtual School.",
+    "techUsed": "Python, Flask, Pandas",
+    "link": "https://govs-csv-processor.onrender.com/",
+    "linkText": "View Live Demo"
+  },
+  {
+    "id": "legends-of-zelda",
+    "title": "Legends of Zelda",
+    "description": "NES-style 2D adventure game featuring classic dungeon exploration mechanics.",
+    "techUsed": "C#, MonoGame Framework",
+    "link": "https://github.com/elipaulman/Legends-Of-Zelda",
+    "linkText": "View Repo"
+  },
+  {
+    "id": "alumni-social-platform",
+    "title": "Alumni Social Platform",
+    "description": "Winner of JP Morgan Chase Code for Good - Networking platform for LMCC community.",
+    "techUsed": "MERN Stack, Tailwind CSS",
+    "link": "https://alumni-network-platform-9aov.onrender.com",
+    "linkText": "View Live Demo"
+  },
+  {
+    "id": "weather-app",
+    "title": "Weather App",
+    "description": "A responsive weather app based on user location and search. Built using OpenWeatherMap API.",
+    "techUsed": "OpenWeatherMap API, Github Pages, HTML, CSS",
+    "link": "https://epaulman.com/weather",
+    "linkText": "View Live Demo"
+  },
+  {
+    "id": "brutus-the-plumber",
+    "title": "Brutus the Plumber",
+    "description": "2D Mario-style console game with physics simulation and custom data structures.",
+    "techUsed": "C, Custom Graphics Library",
+    "link": "https://github.com/elipaulman/Mario_C_Simulation",
+    "linkText": "View Repo"
+  },
+  {
+    "id": "tech-learning-platform",
+    "title": "Tech Learning Platform",
+    "description": "A responsive web platform promoting tech literacy through personalized learning paths and progress tracking.",
+    "techUsed": "React.js, Tailwind CSS, Firebase",
+    "link": "https://github.com/elipaulman/Code_For_Good_2023",
+    "linkText": "View Repo"
+  },
+  {
+    "id": "money-tracker",
+    "title": "Money Tracker",
+    "description": "Full-stack financial management application with transaction monitoring and reporting.",
+    "techUsed": "MERN Stack (MongoDB, Express, React, Node.js)",
+    "link": "https://drive.google.com/drive/folders/1q3LZYRDItUGH2cQZ-w84OfMQLvAVJbbz",
+    "linkText": "View Demo"
+  }
+]
