@@ -1,0 +1,49 @@
+[
+  {
+    "id": "ohio-state",
+    "institution": "Ohio State University",
+    "degree": "B.S. CSE",
+    "image": "images/testimonials/OhioLogo.jpg",
+    "imageAlt": "Ohio State University",
+    "details": [
+      "3.8 GPA",
+      "Engineering Scholars",
+      "Dean's list 2022-Present."
+    ]
+  },
+  {
+    "id": "sinclair",
+    "institution": "Sinclair Community College",
+    "degree": "A.S Liberal Arts of Science",
+    "image": "images/testimonials/SinclairLogo.jpg",
+    "imageAlt": "Sinclair Community College",
+    "details": [
+      "4.0 GPA",
+      "50 CCP credits",
+      "Dean's list 2021-2022."
+    ]
+  },
+  {
+    "id": "lebanon-high",
+    "institution": "Lebanon City Schools",
+    "degree": "High School",
+    "image": "images/testimonials/Lebanon1.png",
+    "imageAlt": "Lebanon City Schools",
+    "details": [
+      "4.6 GPA",
+      "Top 1% of class",
+      "National Honor Society"
+    ]
+  },
+  {
+    "id": "current",
+    "institution": "Current",
+    "degree": "Future Opportunities",
+    "image": "images/testimonials/EarthLogo.png",
+    "imageAlt": "Current",
+    "details": [
+      "Industry experience",
+      "Software Developer Intern"
+    ]
+  }
+]
