@@ -1,9 +1,20 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6ENGFNQ089"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-6ENGFNQ089');
+    </script>
+
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Weather App - Eli Paulman</title>
+    <meta name="description" content="Interactive weather app by Eli Paulman" />
     <link rel="stylesheet" href="css/weather.css" />
     <link rel="icon" type="image/x-icon" href="images/weather-favicon.png" />
   </head>
@@ -63,6 +74,7 @@
         <button id="get-weather-button">Get Weather</button>
       </div>
     </div>
+    <script src="js/analytics.js"></script>
     <script src="js/weather.js"></script>
   </body>
 </html>
