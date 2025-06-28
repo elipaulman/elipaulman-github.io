@@ -8,14 +8,38 @@ const apiKey = "a492a768764e969820914c25cd2b788a";
 
 
 window.addEventListener("load", () => {
+  // Track weather app load
+  if (typeof Analytics !== 'undefined') {
+    Analytics.trackWeatherPageVisit();
+    Analytics.trackEvent('weather_app_load', {
+      event_category: 'weather',
+      event_label: 'initial_load'
+    });
+  }
+
   if (navigator.geolocation) {
     navigator.geolocation.getCurrentPosition((position) => {
       lon = position.coords.longitude;
       lat = position.coords.latitude;
+      
+      // Track geolocation usage
+      if (typeof Analytics !== 'undefined') {
+        Analytics.trackEvent('geolocation_used', {
+          event_category: 'weather',
+          event_label: 'auto_location'
+        });
+      }
+      
       fetchWeatherData();
     });
   } else {
     console.log("Error fetching current location.");
+    if (typeof Analytics !== 'undefined') {
+      Analytics.trackEvent('geolocation_error', {
+        event_category: 'weather',
+        event_label: 'not_supported'
+      });
+    }
   }
 });
 
@@ -26,6 +50,14 @@ function fetchWeatherData() {
 
   // Clear existing forecast entries
   forecastList.innerHTML = "";
+
+  // Track weather data fetch
+  if (typeof Analytics !== 'undefined') {
+    Analytics.trackEvent('weather_data_fetch', {
+      event_category: 'weather',
+      event_label: 'api_call'
+    });
+  }
 
   // Fetching current weather data
   fetch(currentWeatherURL)
@@ -40,6 +72,12 @@ function fetchWeatherData() {
     })
     .catch((error) => {
       console.log("Error fetching current weather data:", error);
+      if (typeof Analytics !== 'undefined') {
+        Analytics.trackEvent('weather_api_error', {
+          event_category: 'weather',
+          event_label: 'current_weather_failed'
+        });
+      }
     });
 
   // Fetching forecast data
@@ -52,9 +90,16 @@ function fetchWeatherData() {
     })
     .then((data) => {
       updateForecast(data);
+      updatePageBackground();
     })
     .catch((error) => {
       console.log("Error fetching forecast data:", error);
+      if (typeof Analytics !== 'undefined') {
+        Analytics.trackEvent('weather_api_error', {
+          event_category: 'weather',
+          event_label: 'forecast_failed'
+        });
+      }
     });
 }
 
@@ -68,6 +113,17 @@ function updateCurrentWeather(data) {
   const condition = data.weather[0].description;
   const capitalizedCondition =
     condition.charAt(0).toUpperCase() + condition.slice(1);
+
+  // Track weather condition
+  if (typeof Analytics !== 'undefined') {
+    Analytics.trackEvent('weather_condition_viewed', {
+      weather_condition: data.weather[0].main,
+      temperature: temperatureInFahrenheit,
+      location: data.name,
+      event_category: 'weather',
+      event_label: data.weather[0].main
+    });
+  }
 
   // Update current weather container
   currentWeatherContainer.innerHTML = `
@@ -142,6 +198,15 @@ getWeatherButton.addEventListener("click", () => {
   const location = locationInput.value.trim();
 
   if (location) {
+    // Track manual location search
+    if (typeof Analytics !== 'undefined') {
+      Analytics.trackEvent('manual_location_search', {
+        search_term: location,
+        event_category: 'weather',
+        event_label: 'user_input'
+      });
+    }
+
     const geocodingAPI = `https://api.openweathermap.org/geo/1.0/direct?q=${location}&limit=1&appid=${apiKey}`;
 
     fetch(geocodingAPI)
@@ -154,10 +219,29 @@ getWeatherButton.addEventListener("click", () => {
       .then((data) => {
         lat = data[0].lat;
         lon = data[0].lon;
+        
+        // Track successful location search
+        if (typeof Analytics !== 'undefined') {
+          Analytics.trackEvent('location_search_success', {
+            searched_location: location,
+            found_location: data[0].name,
+            event_category: 'weather',
+            event_label: 'search_successful'
+          });
+        }
+        
         fetchWeatherData();
       })
       .catch((error) => {
         console.log("Error fetching geolocation data:", error);
+        if (typeof Analytics !== 'undefined') {
+          Analytics.trackEvent('location_search_error', {
+            searched_location: location,
+            error_type: 'location_not_found',
+            event_category: 'weather',
+            event_label: 'search_failed'
+          });
+        }
       });
   }
 });
