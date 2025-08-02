@@ -1305,7 +1305,7 @@ a:hover {
 }
 
 .contact-item.email {
-  justify-content: flex-start;
+  justify-content: center;
 }
 
 .contact-item:hover {
@@ -1418,7 +1418,7 @@ a:hover {
   }
   
   .contact-item.phone {
-    grid-column: 1 / -1;
+    grid-column: auto;
   }
 }
 
@@ -1457,6 +1457,75 @@ a:hover {
   
   .social-link i {
     font-size: 1.4rem;
+  }
+}
+
+/* Add new breakpoint for smaller screens like iPhone SE */
+@media (max-width: 480px) {
+  .contact-box {
+    padding: 2rem 1rem;
+    margin: 0.5rem;
+  }
+  
+  .contact-info-grid {
+    padding: 0 5px;
+    max-width: 100%;
+  }
+  
+  .contact-item {
+    padding: 1rem 0.8rem;
+  }
+  
+  .contact-item i {
+    font-size: 1.2rem;
+    width: 40px;
+    height: 40px;
+  }
+  
+  .contact-item a {
+    font-size: 1rem;
+  }
+  
+  .social-links-container {
+    flex-direction: column;
+    align-items: center;
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+  
+  .social-link {
+    width: 100%;
+    max-width: 280px;
+    padding: 0.9rem 1.5rem;
+    font-size: 1.1rem;
+    margin: 0;
+  }
+  
+  .social-link i {
+    font-size: 1.3rem;
+  }
+}
+
+/* Extra small screens (iPhone SE and similar) */
+@media (max-width: 375px) {
+  .contact-box {
+    padding: 1.5rem 0.8rem;
+    margin: 0.25rem;
+  }
+  
+  .social-links-container {
+    gap: 0.8rem;
+    margin: 1rem 0;
+  }
+  
+  .social-link {
+    max-width: 260px;
+    padding: 0.8rem 1.2rem;
+    font-size: 1rem;
+  }
+  
+  .social-link i {
+    font-size: 1.2rem;
   }
 }
 
