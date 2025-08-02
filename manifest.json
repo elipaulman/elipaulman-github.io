@@ -1,0 +1,44 @@
+{
+  "name": "Weather App - Eli Paulman",
+  "short_name": "Weather App",
+  "description": "Advanced weather app with air quality, forecasts, and data visualization",
+  "start_url": "/weather.html",
+  "display": "standalone",
+  "background_color": "#338aed",
+  "theme_color": "#338aed",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "images/weather-favicon.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "images/weather-favicon.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
+    },
+    {
+      "src": "images/weather-favicon.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ],
+  "categories": ["weather", "utilities"],
+  "screenshots": [],
+  "shortcuts": [
+    {
+      "name": "Current Weather",
+      "short_name": "Current",
+      "description": "View current weather conditions",
+      "url": "/weather.html",
+      "icons": [
+        {
+          "src": "images/weather-favicon.png",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ]
+}
