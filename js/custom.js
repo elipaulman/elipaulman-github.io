@@ -67,6 +67,7 @@ $(function () {
       margin: 10,
       autoplay: false,
       dots: true,
+      nav: false,
       responsiveClass: true,
       responsive: {
         0: {

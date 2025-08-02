@@ -7,9 +7,10 @@
     "logo": "images/Companies/Amazon-Logo.png",
     "logoAlt": "Amazon Logo",
     "responsibilities": [
-      "Built scalable product catalog system managing 13,000+ trade-in items with advanced filtering and search",
-      "Automated ETL workflows using Vue.js, AWS AppSync, and Lambda, reducing manual processes by 60%",
-      "Developed ML models with AWS SageMaker for predictive trade-in value analysis"
+      "Built scalable, full-stack product catalog system managing 13,000+ trade-in items with historical pricing, merchant data, and server-side filtering/search",
+      "Automated catalog generation and ETL workflows using Vue.js, AWS AppSync (GraphQL), and Lambda, reducing manual input by ~60%",
+      "Took ownership of production system, driving full development cycle from requirements to deployment",
+      "Collaborated with cross-functional stakeholders ensuring successful deployment and adoption"
     ]
   },
   {
