@@ -3,7 +3,7 @@
 A modern, responsive portfolio website featuring a data-driven resume and a Progressive Web App (PWA) weather application.
 
 ## 🔗 Quick Links
- 
+
 <div align="center">
 
 **🌐 [Portfolio Website](https://epaulman.com/) | 🌦️ [Weather App](https://epaulman.com/weather) | 💼 [LinkedIn](https://www.linkedin.com/in/elijahpaulman/) | 🐙 [GitHub](https://github.com/elipaulman)**
