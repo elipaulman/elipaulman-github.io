@@ -1,0 +1,27 @@
+{
+  "name": "eli-portfolio",
+  "version": "1.0.0",
+  "description": "Elijah Paulman's personal portfolio website",
+  "scripts": {
+    "validate-json": "node scripts/validate-data.js",
+    "optimize-images": "echo 'Image optimization would go here'",
+    "minify-css": "echo 'CSS minification would go here'",
+    "build": "npm run validate-json",
+    "serve": "python -m http.server 8000",
+    "validate": "npm run validate-json"
+  },
+  "keywords": [
+    "portfolio",
+    "personal-website",
+    "computer-science",
+    "resume"
+  ],
+  "author": "Elijah Paulman <eli.paulman@gmail.com>",
+  "license": "MIT",
+  "devDependencies": {
+    "json-schema": "^0.4.0"
+  },
+  "engines": {
+    "node": ">=14.0.0"
+  }
+}

@@ -1,4 +1,4 @@
-// Data loader and renderer for portfolio sections
+// Enhanced data loader and renderer for portfolio sections
 class PortfolioDataLoader {
   constructor() {
     this.data = {
@@ -9,30 +9,78 @@ class PortfolioDataLoader {
       personal: {},
       faq: []
     };
+    this.cache = new Map();
+    this.loadingStates = new Set();
   }
 
   async loadAllData() {
     try {
-      const [experienceRes, projectsRes, educationRes, skillsRes, personalRes, faqRes] = await Promise.all([
-        fetch('data/experience.json'),
-        fetch('data/projects.json'),
-        fetch('data/education.json'),
-        fetch('data/skills.json'),
-        fetch('data/personal.json'),
-        fetch('data/faq.json')
-      ]);
+      // Show loading states
+      this.showLoadingStates();
 
-      this.data.experience = await experienceRes.json();
-      this.data.projects = await projectsRes.json();
-      this.data.education = await educationRes.json();
-      this.data.skills = await skillsRes.json();
-      this.data.personal = await personalRes.json();
-      this.data.faq = await faqRes.json();
+      const dataPromises = [
+        this.loadDataWithCache('data/experience.json', 'experience'),
+        this.loadDataWithCache('data/projects.json', 'projects'),
+        this.loadDataWithCache('data/education.json', 'education'),
+        this.loadDataWithCache('data/skills.json', 'skills'),
+        this.loadDataWithCache('data/personal.json', 'personal'),
+        this.loadDataWithCache('data/faq.json', 'faq')
+      ];
 
+      await Promise.all(dataPromises);
       this.renderAllSections();
+      this.hideLoadingStates();
     } catch (error) {
       console.error('Error loading portfolio data:', error);
+      this.showErrorState();
     }
+  }
+
+  async loadDataWithCache(url, key) {
+    // Simple in-memory caching
+    if (this.cache.has(url)) {
+      this.data[key] = this.cache.get(url);
+      return this.data[key];
+    }
+
+    try {
+      const response = await fetch(url);
+      if (!response.ok) {
+        throw new Error(`HTTP error! status: ${response.status}`);
+      }
+      const data = await response.json();
+      this.cache.set(url, data);
+      this.data[key] = data;
+      return data;
+    } catch (error) {
+      console.error(`Failed to load ${url}:`, error);
+      throw error;
+    }
+  }
+
+  showLoadingStates() {
+    const sections = ['.skills-content', '.timeline', '#projects-carousel', '#testimonials-carousel', '#accordionExample'];
+    sections.forEach(selector => {
+      const element = document.querySelector(selector);
+      if (element) {
+        element.innerHTML = '<div class="loading">Loading...</div>';
+      }
+    });
+  }
+
+  hideLoadingStates() {
+    const loadingElements = document.querySelectorAll('.loading');
+    loadingElements.forEach(el => el.remove());
+  }
+
+  showErrorState() {
+    const sections = ['.skills-content', '.timeline', '#projects-carousel', '#testimonials-carousel', '#accordionExample'];
+    sections.forEach(selector => {
+      const element = document.querySelector(selector);
+      if (element) {
+        element.innerHTML = '<div class="error">Failed to load content. Please refresh the page.</div>';
+      }
+    });
   }
 
   renderAllSections() {
