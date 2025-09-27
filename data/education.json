@@ -38,12 +38,12 @@
   {
     "id": "current",
     "institution": "Current",
-    "degree": "Future Opportunities",
+    "degree": "New Grad Opportunities",
     "image": "images/testimonials/EarthLogo.png",
     "imageAlt": "Current",
     "details": [
       "Industry experience",
-      "Software Developer Intern"
+      "New Grad SWE roles"
     ]
   }
 ]
