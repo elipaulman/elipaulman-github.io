@@ -27,6 +27,34 @@
     <!-- MAIN CSS -->
     <link rel="stylesheet" href="css/eli-resume-style.css" />
     <link rel="icon" type="image/x-icon" href="images/favicon-32x32.png" />
+
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Person",
+      "name": "Elijah Paulman",
+      "jobTitle": "Computer Science Student",
+      "worksFor": {
+        "@type": "Organization",
+        "name": "The Ohio State University"
+      },
+      "email": "eli.paulman@gmail.com",
+      "url": "https://elipaulman.github.io",
+      "sameAs": [
+        "https://www.linkedin.com/in/elijah-paulman-ab1011226/",
+        "https://github.com/elipaulman"
+      ],
+      "knowsAbout": [
+        "Computer Science",
+        "Software Engineering",
+        "Web Development",
+        "JavaScript",
+        "Python",
+        "Java"
+      ]
+    }
+    </script>
   </head>
 
   <body data-spy="scroll" data-target="#navbarNav" data-offset="50">
@@ -90,6 +118,7 @@
               src="images/EliStandingClear.png"
               class="img-fluid"
               alt="Eli Personal Website"
+              loading="lazy"
             />
           </div>
           <div
@@ -134,6 +163,7 @@
               src="images/EliSitting.jpg"
               class="about-image img-fluid"
               alt="Eli's Resume HTML Template"
+              loading="lazy"
             />
           </div>
         </div>

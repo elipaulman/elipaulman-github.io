@@ -900,14 +900,21 @@ a:hover {
 }
 
 /* Responsive adjustments */
+/* Consolidated responsive styles */
 @media (max-width: 768px) {
   .project-item {
     min-height: 450px;
     max-height: 450px;
   }
-  
+
   .project-overlay {
     padding: 1.5rem;
+  }
+
+  .view-project-link {
+    width: 160px;
+    padding: 0.7rem 1rem;
+    font-size: 0.9em;
   }
 }
 
@@ -916,9 +923,14 @@ a:hover {
     min-height: 400px;
     max-height: 400px;
   }
-  
+
   .project-info p {
     font-size: 0.95em;
+  }
+
+  .view-project-link {
+    width: 140px;
+    padding: 0.6rem 0.8rem;
   }
 }
 
@@ -1748,7 +1760,7 @@ a:hover {
   }
 }
 
-/* Dark Mode Toggle Button */
+/* Enhanced Dark Mode Toggle Button */
 .theme-toggle {
   position: fixed;
   bottom: 20px;
@@ -1767,13 +1779,135 @@ a:hover {
   transition: all 0.3s ease;
 }
 
-.theme-toggle:hover {
+.theme-toggle:hover,
+.theme-toggle:focus {
   transform: scale(1.1);
   box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
 }
 
 .theme-toggle i {
   color: var(--white-color);
   font-size: 20px;
+  transition: transform 0.3s ease;
 }
 
+.theme-toggle:hover i {
+  transform: rotate(180deg);
+}
+
+/* Enhanced focus styles for better accessibility */
+.theme-toggle:focus-visible {
+  outline: 3px solid var(--primary-color);
+  outline-offset: 3px;
+}
+
+/*---------------------------------------
+     LOADING AND ERROR STATES
+  -----------------------------------------*/
+
+.loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  color: var(--p-color);
+  font-size: var(--base-font-size);
+}
+
+.loading::before {
+  content: '';
+  width: 20px;
+  height: 20px;
+  border: 2px solid var(--menu-bg-color);
+  border-top: 2px solid transparent;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin-right: 0.5rem;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.error {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+  color: #dc3545;
+  background: rgba(220, 53, 69, 0.1);
+  border: 1px solid rgba(220, 53, 69, 0.2);
+  border-radius: 8px;
+  font-size: var(--base-font-size);
+  margin: 1rem 0;
+}
+
+.error::before {
+  content: '⚠';
+  margin-right: 0.5rem;
+  font-size: 1.2rem;
+}
+
+/*---------------------------------------
+     ENHANCED ACCESSIBILITY
+  -----------------------------------------*/
+
+/* Skip to main content link */
+.skip-to-main {
+  position: absolute;
+  top: -40px;
+  left: 6px;
+  background: var(--menu-bg-color);
+  color: var(--white-color);
+  padding: 8px;
+  text-decoration: none;
+  border-radius: 4px;
+  z-index: 1000;
+  transition: top 0.3s;
+}
+
+.skip-to-main:focus {
+  top: 6px;
+}
+
+/* Focus indicators for better keyboard navigation */
+.nav-link:focus,
+.custom-btn:focus,
+.view-project-link:focus,
+.social-link:focus {
+  outline: 2px solid var(--primary-color);
+  outline-offset: 2px;
+}
+
+/* High contrast mode support */
+@media (prefers-contrast: high) {
+  :root {
+    --primary-color: #0066cc;
+    --menu-bg-color: #004499;
+    --border-color: rgba(0,0,0,0.5);
+  }
+
+  [data-theme="dark"] {
+    --primary-color: #66b3ff;
+    --menu-bg-color: #4d94db;
+    --border-color: rgba(255,255,255,0.3);
+  }
+}
+
+/* Reduced motion support */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .loading::before {
+    animation: none;
+  }
+}
