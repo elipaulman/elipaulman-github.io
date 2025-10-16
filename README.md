@@ -97,7 +97,7 @@ Just open an issue or submit a pull request. I love collaborating with other dev
 
 **Elijah Paulman**
 - 📧 **Email**: eli.paulman@gmail.com
-- 💼 **LinkedIn**: [linkedin.com/in/elijah-paulman-ab1011226/](https://www.linkedin.com/in/elijahpaulman/)
+- 💼 **LinkedIn**: [linkedin.com/in/elijahpaulman/](https://www.linkedin.com/in/elijahpaulman/)
 - 🐙 **GitHub**: [github.com/elipaulman](https://github.com/elipaulman)
 
 Feel free to reach out if you want to chat about code, opportunities, or just say hi!

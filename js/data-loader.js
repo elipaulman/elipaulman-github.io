@@ -314,18 +314,24 @@ class PortfolioDataLoader {
     educationCarousel.innerHTML = this.data.education
       .map(edu => `
         <div class="item">
-          <div class="testimonials-thumb d-flex">
-            <div class="testimonials-image">
-              <img
-                src="${edu.image}"
-                class="same-size-image round-image"
-                alt="${edu.imageAlt}"
-              />
-            </div>
-            <div class="testimonials-info">
-              <h6 class="mb-0">${edu.institution}</h6>
-              <span>${edu.degree}</span>
-              ${edu.details.map(detail => `<li>${detail}</li>`).join('')}
+          <div class="testimonials-thumb">
+            <div class="education-grid">
+              <div class="testimonials-image">
+                <img
+                  src="${edu.image}"
+                  class="same-size-image round-image"
+                  alt="${edu.imageAlt}"
+                />
+              </div>
+              <div class="education-header">
+                <h6 class="mb-0">${edu.institution}</h6>
+                <span>${edu.degree}</span>
+              </div>
+              <div class="education-details">
+                <ul>
+                  ${edu.details.map(detail => `<li>${detail}</li>`).join('')}
+                </ul>
+              </div>
             </div>
           </div>
         </div>
@@ -337,16 +343,15 @@ class PortfolioDataLoader {
       $('#testimonials-carousel').owlCarousel({
         items: 1,
         loop: true,
-        margin: 20,
+        margin: 25,
         nav: false,
         dots: true,
-        autoplay: true,
-        autoplayTimeout: 4000,
+        autoplay: false,
         responsive: {
           576: { items: 1 },
-          768: { items: 2 },
+          768: { items: 1 },
           992: { items: 2 },
-          1200: { items: 3 }
+          1400: { items: 2 }
         }
       });
     }
