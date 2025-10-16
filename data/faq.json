@@ -3,9 +3,10 @@
     "id": "technical-skills",
     "question": "What are your technical skills?",
     "answer": {
-      "programmingLanguages": "Java, C, C#, Python, x86 Assembly, SQL, JavaScript (React), HTML, CSS",
-      "software": "Visual Studio, VS Code, Eclipse, Git/GitHub, MongoDB, Postman, Matlab, SolidWorks, Microsoft Office, Google Suite",
-      "otherSkills": "Data Structures & Algorithms, AWS Cloud Essentials, REST APIs, Agile, electronic and computer hardware, circuit assembly, 3D printing"
+      "programmingLanguages": "Java, C#, Python, TypeScript, JavaScript, C, SQL, HTML, CSS, x86 Assembly",
+      "software": "Git/GitHub, VS Code, AWS (Lambda, AppSync, S3), MongoDB, MySQL, Postman, Visual Studio, Firebase, Elasticsearch, Matlab, Microsoft Office, Google Suite, SolidWorks",
+      "frameworks": "React, Vue.js, Node.js, Express, Next.js, Flask, LangChain, Tailwind CSS, .NET",
+      "otherSkills": "REST & GraphQL APIs, Machine Learning, Computer Vision, CI/CD, Data Structures & Algorithms, Agile Development, Test-Driven Development, Technical Documentation, Full Stack Development, IoT (ESP32), electronic and computer hardware, circuit assembly, 3D printing"
     },
     "expanded": true
   },
@@ -17,13 +18,13 @@
         "Engineers for a Sustainable World club (ESW)",
         "OHI/O club (Ohio State's Hackathon Program)",
         "Engineering Scholars program",
-        "Google Student Developer Club"
+        "Claude Builder Club"
       ],
       "roles": [
-        "President and former Director of Community Service for ESW",
-        "Member of the Marketing and Communications Committee for OHI/O",
+        "Former President and Director of Community Service for ESW",
+        "Former Member of the Marketing and Communications Committee for OHI/O",
         "Member of the Engineering Scholars program",
-        "Member of the Google Student Developer club"
+        "Member of the Claude Builder Club"
       ],
       "goals": "In my roles and leadership positions, I prioritize promoting tech literacy, sustainability, and community outreach. I'm passionate about making technology accessible to all and advancing sustainability efforts."
     },

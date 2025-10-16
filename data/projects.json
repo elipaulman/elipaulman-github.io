@@ -1,5 +1,13 @@
 [
   {
+    "id": "repo-rover",
+    "title": "RepoRover",
+    "description": "AI-powered GitHub repository analysis tool using vector embeddings for semantic code search and contextual Q&A.",
+    "techUsed": "Python, Flask, LangChain, OpenAI API, Elasticsearch, Next.js",
+    "link": "https://github.com/elipaulman/Repo_Rover",
+    "linkText": "View Repo"
+  },
+  {
     "id": "attendance-processor",
     "title": "Attendance Processor",
     "description": "Automated CSV processing tool that streamlines educational institution reporting. Developed for the Greater Ohio Virtual School.",

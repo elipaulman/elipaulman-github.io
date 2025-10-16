@@ -376,7 +376,7 @@ a:hover {
 }
 
 /*---------------------------------------
-     ABOUT                
+     ABOUT
   -----------------------------------------*/
 
 .about-third {
@@ -385,6 +385,25 @@ a:hover {
 
 .about-image {
   border-radius: var(--border-radius-small);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+}
+
+.about-image:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+}
+
+.about .row {
+  align-items: flex-start;
+}
+
+.about .col-lg-6 h3 {
+  margin-bottom: 1.5rem;
+}
+
+.about .col-lg-5 {
+  margin-top: calc(var(--h3-font-size) + 1.5rem);
 }
 
 .profile-list li {
@@ -418,6 +437,12 @@ a:hover {
   margin-top: 0;
 }
 
+@media (max-width: 991px) {
+  .about .col-lg-5 {
+    margin-top: 2rem;
+  }
+}
+
 
 /*---------------------------------------
      SKILLS                
@@ -445,6 +470,40 @@ a:hover {
   height: 3px;
   background: var(--menu-bg-color, #378fc6);
   margin: 0.5rem auto;
+}
+
+/* Add blue underline to all section titles */
+.about h3,
+.experience-timeline h3,
+.projects h3,
+.testimonials h3,
+.faq h3 {
+  position: relative;
+  display: inline-block;
+  width: 100%;
+}
+
+/* Center-aligned underlines for centered sections */
+.experience-timeline h3::after,
+.projects h3::after,
+.testimonials h3::after {
+  content: '';
+  display: block;
+  width: 50px;
+  height: 3px;
+  background: var(--menu-bg-color, #378fc6);
+  margin: 0.5rem auto;
+}
+
+/* Left-aligned underlines for left-aligned sections */
+.about h3::after,
+.faq h3::after {
+  content: '';
+  display: block;
+  width: 50px;
+  height: 3px;
+  background: var(--menu-bg-color, #378fc6);
+  margin: 0.5rem 0;
 }
 
 .skills-category {
@@ -940,25 +999,106 @@ a:hover {
 
 .testimonials {
   background: var(--testimonials-bg);
+  padding: 2rem 0;
+}
+
+.testimonials .item {
+  padding: 1rem;
+}
+
+.testimonials-thumb {
+  background: var(--card-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 15px;
+  padding: 2rem;
+  box-shadow: var(--card-shadow);
+  transition: all 0.3s ease;
+  margin: 0.5rem;
+}
+
+.testimonials-thumb:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+  border-color: var(--primary-color);
+}
+
+.education-grid {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  grid-template-rows: auto 1fr;
+  gap: 1rem;
+  min-height: 180px;
 }
 
 .testimonials-image {
-  margin: 0 1rem 1rem 1rem;
-  width: 100px;
-  height: 100px;
+  grid-column: 1;
+  grid-row: 1;
+  width: 120px;
+  height: 120px;
   border-radius: 50%;
   overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  transition: all 0.3s ease;
+  justify-self: center;
+  align-self: start;
+}
+
+.testimonials-image:hover {
+  transform: scale(1.1);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
 }
 
 .testimonials-image img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  background-color: transparent;
+  object-position: center;
+  display: block;
+  transition: transform 0.3s ease;
 }
 
-.testimonials-info {
-  width: 100%;
+.testimonials-image:hover img {
+  transform: scale(1.05);
+}
+
+.education-header {
+  grid-column: 2;
+  grid-row: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 0.5rem;
+}
+
+.education-header h6 {
+  font-size: 1.3rem;
+  color: var(--text-color);
+  margin-bottom: 0.5rem;
+}
+
+.education-header span {
+  color: var(--p-color);
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+.education-details {
+  grid-column: 1 / -1;
+  grid-row: 2;
+  margin-top: 0.5rem;
+}
+
+.education-details ul {
+  list-style: disc;
+  padding-left: 1.5rem;
+  margin: 0;
+}
+
+.education-details li {
+  color: var(--p-color);
+  font-size: var(--base-font-size);
+  line-height: 1.6;
+  margin-bottom: 0.5rem;
 }
 
 .testimonials .owl-theme .owl-dots .owl-dot {
@@ -966,11 +1106,12 @@ a:hover {
 }
 
 .same-size-image {
-  width: 100px;
-  height: 100px;
+  width: 120px;
+  height: 120px;
   object-fit: cover;
+  object-position: center;
   border-radius: 50%;
-  overflow: hidden;
+  display: block;
 }
 
 .round-image {
@@ -1228,7 +1369,7 @@ a:hover {
 .contact {
   background: var(--section-bg);
   position: relative;
-  padding: 6rem 0 8rem 0;
+  padding: 3rem 0 8rem 0;
   overflow: hidden;
 }
 
@@ -1260,8 +1401,8 @@ a:hover {
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
-  width: 100px;
-  height: 4px;
+  width: 50px;
+  height: 3px;
   background: var(--menu-bg-color);
   border-radius: 2px;
 }
@@ -1601,23 +1742,49 @@ a:hover {
 
 /* ------------------- HERO ANIMATIONS ------------------- */
 .hero-title {
-  animation: slideUpFadeIn 1s ease-out both;
+  animation: fadeInSlide 0.8s ease-out both;
   animation-delay: 0.3s;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
+}
+
+.hero-title:hover {
+  transform: translateY(-8px) scale(1.05);
+  box-shadow: 0 15px 40px rgba(55, 143, 198, 0.4);
+  filter: brightness(1.1);
+}
+
+[data-theme="dark"] .hero-title:hover {
+  box-shadow: 0 15px 40px rgba(122, 165, 194, 0.5);
+  filter: brightness(1.15);
 }
 
 .email-link {
-  animation: slideUpFadeIn 1s ease-out both;
-  animation-delay: 0.5s;
+  animation: fadeInSlide 0.8s ease-out both;
+  animation-delay: 0.6s;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  position: relative;
 }
 
-@keyframes slideUpFadeIn {
+.email-link:hover {
+  transform: translateY(-8px) scale(1.08);
+  box-shadow: 0 15px 40px rgba(156, 183, 200, 0.5);
+  filter: brightness(1.1);
+}
+
+[data-theme="dark"] .email-link:hover {
+  box-shadow: 0 15px 40px rgba(122, 165, 194, 0.6);
+  filter: brightness(1.15);
+}
+
+@keyframes fadeInSlide {
   from {
     opacity: 0;
-    transform: translateY(30px);
+    transform: translateX(-30px);
   }
   to {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateX(0);
   }
 }
 
