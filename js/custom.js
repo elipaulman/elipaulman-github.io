@@ -5,20 +5,50 @@ $(function () {
     $('.navbar .nav-link').on('click', function () {
       $(".navbar-collapse").collapse('hide');
     });
-  
+
+    // Throttled scroll handler for better performance
+    var scrollTimeout;
+    var skillsAnimationTriggered = false;
+
     $(window).on('scroll', function () {
-  
-      /*----------------------------------------------------*/
-      /*  Navigation Menu Scroll
-      /*----------------------------------------------------*/
-  
-      var b = $(window).scrollTop();
-  
-      if (b > 72) {
-        $(".navbar").addClass("scroll");
-      } else {
-        $(".navbar").removeClass("scroll");
+      // Clear existing timeout
+      if (scrollTimeout) {
+        clearTimeout(scrollTimeout);
       }
+
+      // Throttle scroll events (only run every 15ms)
+      scrollTimeout = setTimeout(function() {
+        var scrollTop = $(window).scrollTop();
+
+        /*----------------------------------------------------*/
+        /*  Navigation Menu Scroll
+        /*----------------------------------------------------*/
+        if (scrollTop > 72) {
+          $(".navbar").addClass("scroll");
+        } else {
+          $(".navbar").removeClass("scroll");
+        }
+
+        /*----------------------------------------------------*/
+        /*  Skills Animation Trigger
+        /*----------------------------------------------------*/
+        if (!skillsAnimationTriggered) {
+          var skillsSection = $('#skills');
+          if (skillsSection.length) {
+            var skillsOffset = skillsSection.offset().top - $(window).height() + 100;
+
+            if (scrollTop > skillsOffset) {
+              skillsAnimationTriggered = true;
+              $('.skill-item').each(function (i) {
+                var $this = $(this);
+                setTimeout(function () {
+                  $this.addClass('animate');
+                }, 150 * (i + 1));
+              });
+            }
+          }
+        }
+      }, 15);
     });
   
     // TESTIMONIALS CAROUSEL
@@ -88,35 +118,24 @@ $(function () {
   
     // SMOOTHSCROLL
     $('.navbar .nav-link').on('click', function (event) {
-      var $anchor = $(this);
-      $('html, body').stop().animate({
-        scrollTop: $($anchor.attr('href')).offset().top - 49
-      }, 1000);
       event.preventDefault();
-    });
-  
-    // Skills Section Animation
-    function skillsAnimation() {
-      var skillsSection = $('#skills'); // Updated to select by ID
-      if (skillsSection.length) {
-        var skillsOffset = skillsSection.offset().top - $(window).height() + 100; // Trigger a bit before
-  
-        if ($(window).scrollTop() > skillsOffset) {
-          $('.skill-item').each(function (i) {
-            var $this = $(this);
-            setTimeout(function () {
-              $this.addClass('animate');
-            }, 150 * (i + 1)); // Stagger the animations
-          });
-        }
-      }
-    }
-  
-    // Initial check on document ready
-    skillsAnimation();
 
-    // Scroll event listener
-    $(window).on('scroll', skillsAnimation);
+      var $anchor = $(this);
+      var targetOffset = $($anchor.attr('href')).offset().top - 49;
+
+      // Disable CSS smooth scroll during jQuery animation
+      $('html').addClass('js-scrolling');
+
+      $('html, body').stop().animate({
+        scrollTop: targetOffset
+      }, {
+        duration: 300,
+        complete: function() {
+          // Re-enable CSS smooth scroll after animation
+          $('html').removeClass('js-scrolling');
+        }
+      });
+    });
 
     // FAQ SCROLL FIX - Prevent auto-scrolling when cards open/close on mobile
     $(document).on('show.bs.collapse hide.bs.collapse', '.faq .collapse', function(e) {
