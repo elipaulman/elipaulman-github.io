@@ -64,7 +64,7 @@ $(function () {
     // PROJECTS CAROUSEL
     $('#projects-carousel').owlCarousel({
       loop: true,
-      margin: 10,
+      margin: 20,
       autoplay: false,
       dots: true,
       nav: false,
@@ -72,12 +72,15 @@ $(function () {
       responsive: {
         0: {
           items: 1,
+          margin: 20
         },
         900: {
           items: 2,
+          margin: 20
         },
         1200: {
           items: 3,
+          margin: 25,
           loop: false
         }
       }
@@ -111,7 +114,59 @@ $(function () {
   
     // Initial check on document ready
     skillsAnimation();
-  
+
     // Scroll event listener
     $(window).on('scroll', skillsAnimation);
+
+    // FAQ SCROLL FIX - Prevent auto-scrolling when cards open/close on mobile
+    $(document).on('show.bs.collapse hide.bs.collapse', '.faq .collapse', function(e) {
+      // Add class to disable smooth scrolling during animation
+      $('html').addClass('faq-animating');
+
+      // Store the current scroll position
+      var scrollPos = $(window).scrollTop();
+      var $card = $(this).closest('.card');
+      var cardTop = $card.offset().top;
+      var navbarHeight = $('.navbar').outerHeight() || 80;
+
+      // If the card is being shown and is below the current viewport
+      if (e.type === 'show') {
+        // Use setTimeout to execute after Bootstrap's internal scroll
+        setTimeout(function() {
+          // Only adjust scroll if user is already viewing the FAQ section
+          // and the card opening would push content significantly
+          var currentScroll = $(window).scrollTop();
+          var cardVisibleTop = cardTop - navbarHeight - 20;
+
+          // If the card header is above the visible area or too close to top
+          if (currentScroll > cardVisibleTop - 50) {
+            $('html, body').stop().animate({
+              scrollTop: cardVisibleTop
+            }, 300);
+          }
+        }, 50);
+      }
+
+      // Remove class after animation completes
+      setTimeout(function() {
+        $('html').removeClass('faq-animating');
+      }, 400);
+    });
+
+    // Improved FAQ collapse behavior - smooth animations
+    $(document).on('shown.bs.collapse', '.faq .collapse', function() {
+      var $card = $(this).closest('.card');
+      var $button = $card.find('[data-toggle="collapse"]');
+
+      // Add visual feedback
+      $button.addClass('expanded');
+    });
+
+    $(document).on('hidden.bs.collapse', '.faq .collapse', function() {
+      var $card = $(this).closest('.card');
+      var $button = $card.find('[data-toggle="collapse"]');
+
+      // Remove visual feedback
+      $button.removeClass('expanded');
+    });
   });

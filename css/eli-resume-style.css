@@ -79,10 +79,19 @@
   --card-bg: #363636;
   --text-color: #ffffff;
   --section-bg: #1a1a1a;
-  --timeline-bg: #2d2d2d;
+  --timeline-bg: #1f1f1f;
   --testimonials-bg: #2d2d2d;
   --card-shadow: 0 4px 15px rgba(0,0,0,0.3);
   --border-color: rgba(255,255,255,0.1);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+/* Disable smooth scroll during FAQ interactions to prevent conflicts */
+html.faq-animating {
+  scroll-behavior: auto;
 }
 
 body {
@@ -338,8 +347,12 @@ a:hover {
   color: var(--dark-color); /* Or var(--text-color); or a color that contrasts with the background */
 }
 /*---------------------------------------
-     ABOUT ME                
+     ABOUT ME
   -----------------------------------------*/
+
+.hero-text {
+  text-align: center;
+}
 
 .hero-title,
 .email-link {
@@ -375,6 +388,73 @@ a:hover {
   color: var(--white-color);
 }
 
+/* Hero Social Links */
+.hero-social-links {
+  display: flex;
+  gap: 1.5rem;
+  margin-top: 1.5rem;
+  justify-content: center;
+  animation: fadeInSlide 0.8s ease-out both;
+  animation-delay: 0.9s;
+}
+
+.hero-social-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 50px;
+  height: 50px;
+  background: var(--primary-color);
+  border-radius: 50%;
+  color: var(--dark-color);
+  font-size: 1.5rem;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+
+.hero-social-link:hover {
+  background: var(--menu-bg-color);
+  color: var(--white-color);
+  transform: translateY(-5px) scale(1.1);
+  box-shadow: 0 8px 20px rgba(55, 143, 198, 0.4);
+}
+
+[data-theme="dark"] .hero-social-link {
+  background: var(--primary-color);
+  color: var(--dark-color);
+}
+
+[data-theme="dark"] .hero-social-link:hover {
+  background: var(--menu-bg-color);
+  color: var(--white-color);
+  box-shadow: 0 8px 20px rgba(122, 165, 194, 0.5);
+}
+
+@media screen and (max-width: 768px) {
+  .hero-social-links {
+    gap: 1.2rem;
+  }
+
+  .hero-social-link {
+    width: 45px;
+    height: 45px;
+    font-size: 1.3rem;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .hero-social-links {
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+
+  .hero-social-link {
+    width: 40px;
+    height: 40px;
+    font-size: 1.2rem;
+  }
+}
+
 /*---------------------------------------
      ABOUT
   -----------------------------------------*/
@@ -408,12 +488,40 @@ a:hover {
 
 .profile-list li {
   margin: 0.3rem 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem;
 }
 
 .profile-list strong {
-  display: inline-block;
-  width: 30%;
-  margin-right: 1rem;
+  flex-shrink: 0;
+  min-width: fit-content;
+}
+
+.profile-list a {
+  color: var(--menu-bg-color);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  position: relative;
+}
+
+.profile-list a:hover {
+  color: var(--primary-color);
+  text-decoration: underline;
+}
+
+/* Responsive adjustments for profile list */
+@media (max-width: 576px) {
+  .profile-list li {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.2rem;
+  }
+
+  .profile-list strong {
+    width: 100%;
+  }
 }
 
 .rounded-image {
@@ -456,7 +564,6 @@ a:hover {
 
 .skills-section .section-title {
   text-align: center;
-  margin-bottom: 3rem;
   font-size: 2.2rem;
   color: var(--text-color);
   transition: color 0.3s ease; /* Add transition for smooth theme changes */
@@ -493,6 +600,25 @@ a:hover {
   height: 3px;
   background: var(--menu-bg-color, #378fc6);
   margin: 0.5rem auto;
+}
+
+/* Consistent spacing for all sections */
+.about,
+.skills-section,
+.experience-timeline,
+.projects,
+.testimonials,
+.faq {
+  padding: 3rem 0;
+}
+
+.about h3,
+.skills-section .section-title,
+.experience-timeline h3,
+.projects h3,
+.testimonials h3,
+.faq h3 {
+  margin-bottom: 2rem;
 }
 
 /* Left-aligned underlines for left-aligned sections */
@@ -585,10 +711,6 @@ a:hover {
 }
 
 @media (max-width: 480px) {
-  .skills-section {
-    padding: 3rem 0;
-  }
-
   .skills-category {
     padding: 1.5rem;
   }
@@ -640,6 +762,7 @@ a:hover {
   background-color: transparent;
   border-radius: 15px;
   overflow: hidden;
+  scroll-margin-top: 100px;
 }
 
 .faq .card-header {
@@ -664,6 +787,7 @@ a:hover {
   text-decoration: none;
   border: none;
   margin: 0;
+  position: relative;
 }
 
 .faq .btn-link:hover {
@@ -678,6 +802,27 @@ a:hover {
   outline: none;
 }
 
+.faq .btn-link.expanded {
+  background-color: var(--primary-color);
+  color: var(--dark-color);
+}
+
+.faq .btn-link:active {
+  transform: scale(0.98);
+}
+
+/* Touch device improvements */
+@media (hover: none) and (pointer: coarse) {
+  .faq .btn-link:hover {
+    transform: none;
+  }
+
+  .faq .btn-link:active {
+    background-color: var(--primary-color);
+    transform: scale(0.98);
+  }
+}
+
 .faq .card-body {
   padding: 20px;
   background: var(--card-bg);
@@ -685,6 +830,7 @@ a:hover {
   border-radius: 0 0 15px 15px;
   margin-top: 5px;
   border: 1px solid var(--border-color);
+  transition: all 0.3s ease;
 }
 
 .faq .card-body h5 {
@@ -728,6 +874,71 @@ a:hover {
 
 .faq .btn-link[aria-expanded="true"]::after {
   transform: rotate(180deg);
+}
+
+/* Smooth collapse transitions */
+.faq .collapse {
+  transition: height 0.35s ease;
+}
+
+.faq .collapsing {
+  transition: height 0.35s ease;
+}
+
+/* Mobile FAQ improvements */
+@media (max-width: 768px) {
+  .faq .card {
+    scroll-margin-top: 80px;
+  }
+
+  .faq .btn-link {
+    font-size: 1rem;
+    padding: 12px 15px;
+  }
+
+  .faq .card-body {
+    padding: 15px;
+  }
+
+  .faq .card-body h5 {
+    font-size: 1rem;
+  }
+
+  .faq .card-body p,
+  .faq .card-body li {
+    font-size: 0.95rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .faq .card {
+    scroll-margin-top: 70px;
+    margin-bottom: 0.75rem;
+  }
+
+  .faq .btn-link {
+    font-size: 0.95rem;
+    padding: 10px 12px;
+  }
+
+  .faq .btn-link::after {
+    font-size: 0.7rem;
+  }
+
+  .faq .card-body {
+    padding: 12px;
+  }
+
+  .faq .card-body h5 {
+    font-size: 0.95rem;
+    margin-bottom: 0.75rem;
+  }
+
+  .faq .card-body p,
+  .faq .card-body li {
+    font-size: 0.9rem;
+    line-height: 1.5;
+  }
 }
 
 .project-info h4 {
@@ -805,8 +1016,8 @@ a:hover {
   height: 100%;
   display: flex;
   height: 100%;
-  min-height: 300px;
-  max-height: 500px;
+  min-height: 380px;
+  max-height: 550px;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -837,6 +1048,8 @@ a:hover {
   margin-bottom: 1.5rem;
   overflow: auto;
   padding-right: 10px;
+  font-size: 0.95em;
+  line-height: 1.6;
 }
 
 .view-project-link {
@@ -853,7 +1066,7 @@ a:hover {
 }
 
 #projects-carousel .item {
-  padding: 15px;
+  padding: 15px 8px;
   height: 100%;
 }
 
@@ -962,8 +1175,8 @@ a:hover {
 /* Consolidated responsive styles */
 @media (max-width: 768px) {
   .project-item {
-    min-height: 450px;
-    max-height: 450px;
+    min-height: 420px;
+    max-height: 500px;
   }
 
   .project-overlay {
@@ -980,11 +1193,11 @@ a:hover {
 @media (max-width: 576px) {
   .project-item {
     min-height: 400px;
-    max-height: 400px;
+    max-height: 500px;
   }
 
   .project-info p {
-    font-size: 0.95em;
+    font-size: 0.9em;
   }
 
   .view-project-link {
@@ -999,7 +1212,6 @@ a:hover {
 
 .testimonials {
   background: var(--testimonials-bg);
-  padding: 2rem 0;
 }
 
 .testimonials .item {
@@ -1163,7 +1375,6 @@ a:hover {
 .experience-timeline {
   position: relative;
   background: var(--timeline-bg); /* Light grey background */
-  padding: 50px 0;
 }
 
 .timeline {
@@ -1288,6 +1499,18 @@ a:hover {
   height: auto;
   margin: 5px auto;
   display: block;
+}
+
+/* Dark Mode Timeline Enhancements */
+[data-theme="dark"] .timeline-content {
+  background: #434343;
+  border: 1px solid rgba(255,255,255,0.2);
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+}
+
+[data-theme="dark"] .timeline-content:hover {
+  border-left: 4px solid var(--menu-bg-color);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.7);
 }
 
 /* Responsive Design */
@@ -1909,11 +2132,6 @@ a:hover {
   }
 }
 
-@media screen and (max-width: 768px) {
-  .hero-text {
-    text-align: center;
-  }
-}
 
 @media screen and (max-width: 480px) {
   .hero-title {

@@ -7,7 +7,8 @@ class PortfolioDataLoader {
       education: [],
       skills: {},
       personal: {},
-      faq: []
+      faq: [],
+      socials: {}
     };
     this.cache = new Map();
     this.loadingStates = new Set();
@@ -24,7 +25,8 @@ class PortfolioDataLoader {
         this.loadDataWithCache('data/education.json', 'education'),
         this.loadDataWithCache('data/skills.json', 'skills'),
         this.loadDataWithCache('data/personal.json', 'personal'),
-        this.loadDataWithCache('data/faq.json', 'faq')
+        this.loadDataWithCache('data/faq.json', 'faq'),
+        this.loadDataWithCache('data/socials.json', 'socials')
       ];
 
       await Promise.all(dataPromises);
@@ -84,6 +86,7 @@ class PortfolioDataLoader {
   }
 
   renderAllSections() {
+    this.renderSocials();
     this.renderPersonalInfo();
     this.renderSkills();
     this.renderExperience();
@@ -92,26 +95,133 @@ class PortfolioDataLoader {
     this.renderFAQ();
   }
 
-  renderPersonalInfo() {
-    const { personal } = this.data;
-    
-    // Update hero section
-    const heroTitle = document.querySelector('.hero-title');
-    const emailLink = document.querySelector('.email-link');
-    if (heroTitle) heroTitle.textContent = `Hello, I'm ${personal.shortName}`;
-    if (emailLink) {
-      emailLink.textContent = personal.email;
-      emailLink.href = `mailto:${personal.email}`;
+  renderSocials() {
+    const { socials } = this.data;
+
+    // Update structured data for SEO
+    const structuredData = document.querySelector('script[type="application/ld+json"]');
+    if (structuredData) {
+      const data = JSON.parse(structuredData.textContent);
+      data.email = socials.email.primary;
+      data.url = socials.website;
+      data.sameAs = [socials.socialMedia.linkedin.url, socials.socialMedia.github.url];
+      structuredData.textContent = JSON.stringify(data, null, 2);
     }
 
-    // Update about section
-    const aboutName = document.querySelector('.profile-list li strong');
-    const aboutEmail = document.querySelector('.profile-list li a[href*="mailto"]');
-    if (aboutName) aboutName.nextSibling.textContent = personal.name;
-    if (aboutEmail) {
-      aboutEmail.textContent = personal.email;
-      aboutEmail.href = `mailto:${personal.email}`;
+    // Update hero section email
+    const heroEmail = document.getElementById('hero-email');
+    if (heroEmail) {
+      heroEmail.href = `mailto:${socials.email.primary}`;
+      heroEmail.textContent = socials.email.primary;
     }
+
+    // Update hero social links
+    const heroSocialLinks = document.getElementById('hero-social-links');
+    if (heroSocialLinks) {
+      heroSocialLinks.innerHTML = `
+        <a
+          href="${socials.resume.path}"
+          class="hero-social-link"
+          download
+          aria-label="${socials.resume.label}"
+        >
+          <i class="${socials.resume.icon}"></i>
+        </a>
+        <a
+          href="${socials.socialMedia.linkedin.url}"
+          class="hero-social-link"
+          target="_blank"
+          aria-label="${socials.socialMedia.linkedin.label}"
+        >
+          <i class="${socials.socialMedia.linkedin.icon}"></i>
+        </a>
+        <a
+          href="${socials.socialMedia.github.url}"
+          class="hero-social-link"
+          target="_blank"
+          aria-label="${socials.socialMedia.github.label}"
+        >
+          <i class="${socials.socialMedia.github.icon}"></i>
+        </a>
+      `;
+    }
+
+    // Update about section email
+    const aboutEmail = document.getElementById('about-email');
+    if (aboutEmail) {
+      aboutEmail.innerHTML = `
+        <strong>Email :</strong><a href="mailto:${socials.email.primary}">${socials.email.primary}</a><i class="fas fa-arrow-right custom-icon"></i>
+      `;
+    }
+
+    // Update GitHub repositories link
+    const githubReposLink = document.getElementById('github-repos-link');
+    if (githubReposLink) {
+      githubReposLink.href = socials.socialMedia.github.repositories;
+    }
+
+    // Update contact section
+    const contactInfo = document.getElementById('contact-info');
+    if (contactInfo) {
+      contactInfo.innerHTML = `
+        <div class="contact-item phone">
+          <i class="fas fa-phone"></i>
+          <a href="tel:${socials.phone.replace(/\D/g, '')}">${socials.phone}</a>
+        </div>
+        <div class="contact-item email">
+          <i class="fas fa-envelope"></i>
+          <a href="mailto:${socials.email.primary}">${socials.email.primary}</a>
+        </div>
+        <div class="contact-item email">
+          <i class="fas fa-envelope"></i>
+          <a href="mailto:${socials.email.school}">${socials.email.school}</a>
+        </div>
+      `;
+    }
+
+    const contactSocialLinks = document.getElementById('contact-social-links');
+    if (contactSocialLinks) {
+      contactSocialLinks.innerHTML = `
+        <a
+          href="${socials.socialMedia.linkedin.url}"
+          class="social-link linkedin"
+          target="_blank"
+        >
+          <i class="${socials.socialMedia.linkedin.icon}"></i>
+          <span>${socials.socialMedia.linkedin.label}</span>
+        </a>
+        <a
+          href="${socials.socialMedia.github.url}"
+          class="social-link github"
+          target="_blank"
+        >
+          <i class="${socials.socialMedia.github.icon}"></i>
+          <span>${socials.socialMedia.github.label}</span>
+        </a>
+      `;
+    }
+
+    const contactResume = document.getElementById('contact-resume');
+    if (contactResume) {
+      contactResume.innerHTML = `
+        <a
+          href="${socials.resume.path}"
+          class="custom-btn btn"
+          download
+        >
+          <i class="fas fa-download"></i>
+          ${socials.resume.label}
+        </a>
+      `;
+    }
+  }
+
+  renderPersonalInfo() {
+    const { personal } = this.data;
+
+    // Update hero section
+    const heroTitle = document.querySelector('.hero-title');
+    if (heroTitle) heroTitle.textContent = `Hello, I'm ${personal.shortName}`;
 
     // Update about text
     const aboutParagraphs = document.querySelectorAll('.about p');
@@ -119,30 +229,6 @@ class PortfolioDataLoader {
       aboutParagraphs[0].textContent = personal.about.short;
       aboutParagraphs[1].textContent = personal.about.detailed;
     }
-
-    // Update contact section
-    const phoneLink = document.querySelector('a[href*="tel"]');
-    const emailLinks = document.querySelectorAll('a[href*="mailto"]');
-    const linkedInLink = document.querySelector('a[href*="linkedin"]');
-    const githubLink = document.querySelector('a[href*="github"]');
-
-    if (phoneLink) {
-      phoneLink.textContent = personal.phone;
-      phoneLink.href = `tel:${personal.phone.replace(/\D/g, '')}`;
-    }
-
-    emailLinks.forEach(link => {
-      if (link.textContent.includes('eli.paulman')) {
-        link.textContent = personal.email;
-        link.href = `mailto:${personal.email}`;
-      } else if (link.textContent.includes('paulman.2')) {
-        link.textContent = personal.schoolEmail;
-        link.href = `mailto:${personal.schoolEmail}`;
-      }
-    });
-
-    if (linkedInLink) linkedInLink.href = personal.linkedIn;
-    if (githubLink) githubLink.href = personal.github;
   }
 
   renderFAQ() {
@@ -182,7 +268,7 @@ class PortfolioDataLoader {
           <div class="card-header" id="${headingId}">
             <h2 class="mb-0">
               <button
-                class="btn btn-link"
+                class="btn btn-link ${faq.expanded ? 'expanded' : ''}"
                 type="button"
                 data-toggle="collapse"
                 data-target="#${collapseId}"
@@ -294,14 +380,14 @@ class PortfolioDataLoader {
       $('#projects-carousel').owlCarousel({
         items: 1,
         loop: true,
-        margin: 10,
+        margin: 20,
         nav: false,
         dots: true,
         autoplay: true,
         autoplayTimeout: 5000,
         responsive: {
-          768: { items: 2 },
-          1024: { items: 3 }
+          768: { items: 2, margin: 20 },
+          1024: { items: 3, margin: 25 }
         }
       });
     }

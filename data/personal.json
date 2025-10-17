@@ -1,7 +1,7 @@
 {
   "name": "Elijah Paulman",
   "shortName": "Eli",
-  "title": "Computer Science & Engineering Student",
+  "title": "Software Engineer specializing in AI/ML | Graduating Dec 2025",
   "email": "eli.paulman@gmail.com",
   "schoolEmail": "paulman.2@osu.edu",
   "phone": "(513)-491-6464",
@@ -13,8 +13,8 @@
   "linkedIn": "https://www.linkedin.com/in/elijahpaulman/",
   "github": "https://github.com/elipaulman",
   "about": {
-    "short": "Computer Science & Engineering student at The Ohio State University with production experience at Amazon and London Computer Systems, plus leadership in sustainable tech initiatives.",
-    "detailed": "Full-stack software engineer with experience across enterprise systems, cloud infrastructure, and scalable product catalogs. Led 20+ engineers as ESW President, won multiple J.P. Morgan hackathons, and delivered production-ready solutions with measurable impact. Passionate about leveraging technology for meaningful change."
+    "short": "I am a Computer Science & Engineering student at The Ohio State University specializing in AI/ML, graduating December 2025. I have production experience at Amazon and London Computer Systems building scalable applications with a focus on intelligent automation.",
+    "detailed": "At Amazon, I automated catalog systems managing over 13,000 items, achieving 60% efficiency gains. At LCS, I built REST APIs serving over 100,000 users. I have developed AI-powered applications using LangChain and OpenAI APIs, led 20+ engineers as ESW President, and won multiple J.P. Morgan hackathons. I am available for software engineering roles starting January 2026."
   },
   "hobbies": "I enjoy playing guitar, mountain biking, skiing, kayaking, and spending time with friends and family. I also like to create cool projects on my 3D printer, and with Arduino."
 }
