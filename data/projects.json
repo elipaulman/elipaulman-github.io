@@ -2,7 +2,7 @@
   {
     "id": "repo-rover",
     "title": "RepoRover",
-    "description": "AI-powered GitHub repository analysis tool using vector embeddings for semantic code search and contextual Q&A.",
+    "description": "AI-powered repository intelligence platform leveraging RAG architecture with vector embeddings for semantic code search. Enables natural language queries over codebases using LangChain and OpenAI models.",
     "techUsed": "Python, Flask, LangChain, OpenAI API, Elasticsearch, Next.js",
     "link": "https://github.com/elipaulman/Repo_Rover",
     "linkText": "View Repo"
@@ -10,7 +10,7 @@
   {
     "id": "attendance-processor",
     "title": "Attendance Processor",
-    "description": "Automated CSV processing tool that streamlines educational institution reporting. Developed for the Greater Ohio Virtual School.",
+    "description": "Production data pipeline automating attendance reporting for Greater Ohio Virtual School. Processes complex CSV transformations with Pandas, reducing manual work from hours to seconds.",
     "techUsed": "Python, Flask, Pandas",
     "link": "https://govs-csv-processor.onrender.com/",
     "linkText": "View Live Demo"
@@ -18,7 +18,7 @@
   {
     "id": "legends-of-zelda",
     "title": "Legends of Zelda",
-    "description": "NES-style 2D adventure game featuring classic dungeon exploration mechanics.",
+    "description": "NES-inspired 2D game engine built from scratch with custom collision detection, sprite animation system, and state-based enemy AI. Implements design patterns for scalable game architecture.",
     "techUsed": "C#, MonoGame Framework",
     "link": "https://github.com/elipaulman/Legends-Of-Zelda",
     "linkText": "View Repo"
@@ -26,7 +26,7 @@
   {
     "id": "alumni-social-platform",
     "title": "Alumni Social Platform",
-    "description": "Winner of JP Morgan Chase Code for Good - Networking platform for LMCC community.",
+    "description": "Award-winning full-stack social network (JP Morgan Chase Code for Good). Built scalable REST API with JWT authentication, real-time messaging, and profile matching algorithms for LMCC alumni community.",
     "techUsed": "MERN Stack, Tailwind CSS",
     "link": "https://alumni-network-platform-9aov.onrender.com",
     "linkText": "View Live Demo"
@@ -34,7 +34,7 @@
   {
     "id": "weather-app",
     "title": "Weather App",
-    "description": "A responsive weather app based on user location and search. Built using OpenWeatherMap API.",
+    "description": "Location-aware weather dashboard with geolocation integration and dynamic search. Features responsive design and real-time API data fetching with error handling and loading states.",
     "techUsed": "OpenWeatherMap API, Github Pages, HTML, CSS",
     "link": "https://epaulman.com/weather",
     "linkText": "View Live Demo"
@@ -42,7 +42,7 @@
   {
     "id": "brutus-the-plumber",
     "title": "Brutus the Plumber",
-    "description": "2D Mario-style console game with physics simulation and custom data structures.",
+    "description": "Low-level game implementation in C featuring real-time physics engine, custom collision detection algorithms, and memory-efficient data structures. Console-rendered graphics with optimized frame updates.",
     "techUsed": "C, Custom Graphics Library",
     "link": "https://github.com/elipaulman/Mario_C_Simulation",
     "linkText": "View Repo"
@@ -50,7 +50,7 @@
   {
     "id": "tech-learning-platform",
     "title": "Tech Learning Platform",
-    "description": "A responsive web platform promoting tech literacy through personalized learning paths and progress tracking.",
+    "description": "EdTech platform with adaptive learning paths and real-time progress analytics. Implements Firebase authentication, Firestore database with complex queries, and component-based React architecture for scalability.",
     "techUsed": "React.js, Tailwind CSS, Firebase",
     "link": "https://github.com/elipaulman/Code_For_Good_2023",
     "linkText": "View Repo"
@@ -58,7 +58,7 @@
   {
     "id": "money-tracker",
     "title": "Money Tracker",
-    "description": "Full-stack financial management application with transaction monitoring and reporting.",
+    "description": "Full-stack financial dashboard with secure user authentication, CRUD operations for transactions, and data visualization. Features RESTful API design and MongoDB aggregation pipelines for spending insights.",
     "techUsed": "MERN Stack (MongoDB, Express, React, Node.js)",
     "link": "https://drive.google.com/drive/folders/1q3LZYRDItUGH2cQZ-w84OfMQLvAVJbbz",
     "linkText": "View Demo"

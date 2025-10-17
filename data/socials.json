@@ -1,0 +1,26 @@
+{
+  "email": {
+    "primary": "eli.paulman@gmail.com",
+    "school": "paulman.2@osu.edu"
+  },
+  "phone": "(513)-491-6464",
+  "socialMedia": {
+    "linkedin": {
+      "url": "https://www.linkedin.com/in/elijahpaulman/",
+      "label": "LinkedIn",
+      "icon": "fab fa-linkedin"
+    },
+    "github": {
+      "url": "https://github.com/elipaulman",
+      "label": "GitHub",
+      "icon": "fab fa-github",
+      "repositories": "https://github.com/elipaulman?tab=repositories"
+    }
+  },
+  "website": "https://elipaulman.github.io",
+  "resume": {
+    "path": "Resumes/Eli_Paulman_Resume.pdf",
+    "label": "Download Resume",
+    "icon": "fas fa-file-download"
+  }
+}
