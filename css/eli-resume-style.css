@@ -89,7 +89,8 @@ html {
   scroll-behavior: smooth;
 }
 
-/* Disable smooth scroll during FAQ interactions to prevent conflicts */
+/* Disable smooth scroll during jQuery animations to prevent conflicts */
+html.js-scrolling,
 html.faq-animating {
   scroll-behavior: auto;
 }
