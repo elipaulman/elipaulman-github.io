@@ -364,7 +364,7 @@ class PortfolioDataLoader {
                 ${project.tags ? `<div class="project-tags">
                   ${project.tags.map(tag => `<span class="project-tag ${tag}">${tag === 'winner' ? '🏆 Winner' : tag}</span>`).join('')}
                 </div>` : ''}
-                <p>${project.description}</p>
+                <p class="project-description">${project.description}</p>
                 <p class="tech-used">Tech used: ${project.techUsed}</p>
                 <a
                   href="${project.link}"
@@ -383,13 +383,13 @@ class PortfolioDataLoader {
       $('#projects-carousel').owlCarousel({
         items: 1,
         loop: true,
-        margin: 20,
+        margin: 15,
         nav: false,
         dots: true,
         autoplay: false,
         responsive: {
-          768: { items: 2, margin: 20 },
-          1024: { items: 3, margin: 25 }
+          768: { items: 2, margin: 15 },
+          1024: { items: 3, margin: 18 }
         }
       });
     }
