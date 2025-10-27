@@ -1099,7 +1099,7 @@ a:hover {
 }
 
 #projects-carousel .owl-item {
-  height: 550px;
+  height: 570px;
 }
 
 #testimonials-carousel .owl-item {
@@ -1218,7 +1218,7 @@ a:hover {
 /* Consolidated responsive styles */
 @media (max-width: 768px) {
   #projects-carousel .owl-item {
-    height: 500px;
+    height: 520px;
   }
 
   .project-overlay {
@@ -1234,7 +1234,7 @@ a:hover {
 
 @media (max-width: 576px) {
   #projects-carousel .owl-item {
-    height: 480px;
+    height: 500px;
   }
 
   .project-info p {
