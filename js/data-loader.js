@@ -361,6 +361,9 @@ class PortfolioDataLoader {
             <div class="project-overlay">
               <div class="project-info">
                 <h4>${project.title}</h4>
+                ${project.tags ? `<div class="project-tags">
+                  ${project.tags.map(tag => `<span class="project-tag ${tag}">${tag === 'winner' ? '🏆 Winner' : tag}</span>`).join('')}
+                </div>` : ''}
                 <p>${project.description}</p>
                 <p class="tech-used">Tech used: ${project.techUsed}</p>
                 <a
@@ -383,8 +386,7 @@ class PortfolioDataLoader {
         margin: 20,
         nav: false,
         dots: true,
-        autoplay: true,
-        autoplayTimeout: 5000,
+        autoplay: false,
         responsive: {
           768: { items: 2, margin: 20 },
           1024: { items: 3, margin: 25 }

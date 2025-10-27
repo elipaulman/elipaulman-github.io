@@ -1,5 +1,14 @@
 [
   {
+    "id": "indoor-navigator",
+    "title": "Indoor Navigator",
+    "description": "HackOHI/O 2025 campus navigation system with sensor-based indoor positioning, outdoor pathfinding, and garage navigation. Features classroom schedules for all buildings, ADA-compliant routing, and sensor fusion for real-time tracking without WiFi infrastructure.",
+    "techUsed": "JavaScript, HTML5 Canvas, PWA, Sensor Fusion, Python, Flask",
+    "link": "https://hack-ohio-2025.onrender.com",
+    "linkText": "View Live Demo",
+    "tags": ["hackathon"]
+  },
+  {
     "id": "repo-rover",
     "title": "RepoRover",
     "description": "AI-powered repository intelligence platform leveraging RAG architecture with vector embeddings for semantic code search. Enables natural language queries over codebases using LangChain and OpenAI models.",
@@ -29,7 +38,8 @@
     "description": "Award-winning full-stack social network (JP Morgan Chase Code for Good). Built scalable REST API with JWT authentication, real-time messaging, and profile matching algorithms for LMCC alumni community.",
     "techUsed": "MERN Stack, Tailwind CSS",
     "link": "https://alumni-network-platform-9aov.onrender.com",
-    "linkText": "View Live Demo"
+    "linkText": "View Live Demo",
+    "tags": ["hackathon", "winner"]
   },
   {
     "id": "weather-app",
@@ -53,7 +63,8 @@
     "description": "EdTech platform with adaptive learning paths and real-time progress analytics. Implements Firebase authentication, Firestore database with complex queries, and component-based React architecture for scalability.",
     "techUsed": "React.js, Tailwind CSS, Firebase",
     "link": "https://github.com/elipaulman/Code_For_Good_2023",
-    "linkText": "View Repo"
+    "linkText": "View Repo",
+    "tags": ["hackathon", "winner"]
   },
   {
     "id": "money-tracker",

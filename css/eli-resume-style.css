@@ -1016,9 +1016,7 @@ a:hover {
   border: 1px solid var(--border-color);
   height: 100%;
   display: flex;
-  height: 100%;
-  min-height: 380px;
-  max-height: 550px;
+  flex-direction: column;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
@@ -1045,12 +1043,42 @@ a:hover {
 }
 
 .project-info p {
-  flex: 1;
   margin-bottom: 1.5rem;
-  overflow: auto;
   padding-right: 10px;
   font-size: 0.95em;
   line-height: 1.6;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 9;
+  -webkit-box-orient: vertical;
+}
+
+.project-tags {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+  margin-bottom: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.project-tag {
+  display: inline-block;
+  padding: 4px 12px;
+  border-radius: 12px;
+  font-size: 0.85em;
+  font-weight: 600;
+  text-transform: capitalize;
+}
+
+.project-tag.hackathon {
+  background-color: #86c1e5;
+  color: #ffffff;
+}
+
+.project-tag.winner {
+  background-color: #ffd700;
+  color: #333333;
 }
 
 .view-project-link {
@@ -1063,12 +1091,14 @@ a:hover {
 /* Carousel item adjustments */
 .owl-item {
   display: flex;
-  height: auto;
+  height: 550px;
 }
 
 #projects-carousel .item {
   padding: 15px 8px;
   height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 /* Keep existing button styles */
@@ -1175,9 +1205,8 @@ a:hover {
 /* Responsive adjustments */
 /* Consolidated responsive styles */
 @media (max-width: 768px) {
-  .project-item {
-    min-height: 420px;
-    max-height: 500px;
+  .owl-item {
+    height: 500px;
   }
 
   .project-overlay {
@@ -1192,13 +1221,13 @@ a:hover {
 }
 
 @media (max-width: 576px) {
-  .project-item {
-    min-height: 400px;
-    max-height: 500px;
+  .owl-item {
+    height: 480px;
   }
 
   .project-info p {
     font-size: 0.9em;
+    -webkit-line-clamp: 7;
   }
 
   .view-project-link {
