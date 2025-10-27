@@ -414,6 +414,7 @@ class PortfolioDataLoader {
               <div class="education-header">
                 <h6 class="mb-0">${edu.institution}</h6>
                 <span>${edu.degree}</span>
+                ${edu.dates ? `<span class="education-dates">${edu.dates}</span>` : ''}
               </div>
               <div class="education-details">
                 <ul>
