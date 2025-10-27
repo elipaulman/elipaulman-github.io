@@ -1096,7 +1096,14 @@ a:hover {
 /* Carousel item adjustments */
 .owl-item {
   display: flex;
+}
+
+#projects-carousel .owl-item {
   height: 550px;
+}
+
+#testimonials-carousel .owl-item {
+  height: auto;
 }
 
 #projects-carousel .item {
@@ -1210,7 +1217,7 @@ a:hover {
 /* Responsive adjustments */
 /* Consolidated responsive styles */
 @media (max-width: 768px) {
-  .owl-item {
+  #projects-carousel .owl-item {
     height: 500px;
   }
 
@@ -1226,7 +1233,7 @@ a:hover {
 }
 
 @media (max-width: 576px) {
-  .owl-item {
+  #projects-carousel .owl-item {
     height: 480px;
   }
 
@@ -1250,7 +1257,7 @@ a:hover {
 }
 
 .testimonials .item {
-  padding: 1rem;
+  padding: 15px 12px;
 }
 
 .testimonials-thumb {
@@ -1260,7 +1267,7 @@ a:hover {
   padding: 2rem;
   box-shadow: var(--card-shadow);
   transition: all 0.3s ease;
-  margin: 0.5rem;
+  margin: 0.5rem 0.5rem 0 0.5rem;
 }
 
 .testimonials-thumb:hover {
@@ -1346,6 +1353,25 @@ a:hover {
   font-size: var(--base-font-size);
   line-height: 1.6;
   margin-bottom: 0.5rem;
+}
+
+#testimonials-carousel {
+  padding-bottom: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+#testimonials-carousel .owl-stage-outer {
+  padding-bottom: 0 !important;
+  margin-bottom: 0 !important;
+}
+
+#projects-carousel .owl-dots,
+#testimonials-carousel .owl-dots {
+  margin-top: 1.25rem !important;
+}
+
+#testimonials-carousel .owl-dots {
+  padding-top: 0 !important;
 }
 
 .testimonials .owl-theme .owl-dots .owl-dot {
