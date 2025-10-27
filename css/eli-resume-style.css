@@ -1461,8 +1461,9 @@ a:hover {
   width: 100%;
   margin-bottom: 60px;
   opacity: 0;
-  transform: translateY(20px);
-  transition: all 0.8s ease-in-out;
+  transform: translateY(24px);
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.45s ease-out;
+  will-change: transform, opacity;
 }
 
 .timeline-item.visible {
@@ -1494,10 +1495,11 @@ a:hover {
   color: var(--text-color);
   border-radius: 8px;
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.45s ease-out, box-shadow 0.4s ease, border-color 0.45s ease;
   border-left: 4px solid transparent;
   opacity: 0;
-  transform: translateX(-20px);
+  transform: translateX(-16px);
+  will-change: transform, opacity;
 }
 
 .timeline-item.visible .timeline-content {
@@ -1520,8 +1522,9 @@ a:hover {
   white-space: nowrap;
   z-index: 3;
   opacity: 0;
-  transform: translateX(-50%) translateY(-20px);
-  transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+  transform: translateX(-50%) translateY(-18px);
+  transition: transform 0.45s cubic-bezier(0.33, 1, 0.68, 1), opacity 0.35s ease-out;
+  will-change: transform, opacity;
 }
 
 .timeline-item.visible .timeline-date {
