@@ -29,10 +29,7 @@ export function Hero({ socials }: HeroProps) {
           <div className="rounded-2xl border border-[var(--border)] bg-[var(--panel)] px-8 py-6 sm:px-10 shadow-[0_12px_50px_rgba(0,0,0,0.28)]">
             <div className="flex flex-wrap items-center gap-3">
               <span className="inline-flex items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--panel)] px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-[var(--accent)]">
-                New Grad SWE • AI/ML • Cloud
-              </span>
-              <span className="rounded-full border border-[var(--border)] bg-[var(--panel)] px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-[var(--muted)]">
-                Available Jan 2026
+                New Grad SWE / AI/ML / Cloud / Jan 2026
               </span>
             </div>
           </div>
@@ -51,7 +48,7 @@ export function Hero({ socials }: HeroProps) {
             </div>
           </div>
 
-          <div className="grid grid-cols-2 gap-3 sm:grid-cols-2 md:grid-cols-4">
+          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-4">
             <Link
               href={`mailto:${socials.email.primary}`}
               className={`${accentCta} border-[var(--accent)] bg-[color-mix(in_srgb,var(--accent)_12%,transparent)] text-[var(--text-strong)] hover:-translate-y-0.5 hover:shadow-[0_15px_60px_rgba(34,211,238,0.25)]`}
@@ -90,7 +87,7 @@ export function Hero({ socials }: HeroProps) {
           </div>
         </div>
 
-        <div className="order-1 relative mx-auto w-full max-w-[280px] sm:max-w-sm lg:order-2 lg:max-w-md lg:mx-0">
+        <div className="order-1 relative mx-auto w-full max-w-full px-1 sm:max-w-sm sm:px-4 lg:order-2 lg:mx-0 lg:max-w-md lg:px-0">
           <div className="absolute inset-0 translate-x-4 translate-y-6 rounded-[28px] bg-[linear-gradient(135deg,rgba(125,211,252,0.38),rgba(167,139,250,0.32))] blur-3xl" />
           <div className="relative aspect-[4/5] overflow-hidden rounded-[28px] border border-[var(--border)] bg-[var(--panel)]">
             <Image

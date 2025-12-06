@@ -100,7 +100,7 @@ export function AboutSection() {
               <span className="pill">Leadership</span>
               <span className="pill">Rapid prototyping</span>
             </div>
-            <div className="mt-5 flex items-center gap-3 rounded-xl border border-[var(--border)] bg-[color-mix(in_srgb,theme(colors.sky.500)_14%,transparent)] px-4 py-3 text-sm text-[var(--text-strong)]">
+            <div className="mt-5 hidden items-center gap-3 rounded-xl border border-[var(--border)] bg-[color-mix(in_srgb,theme(colors.sky.500)_14%,transparent)] px-4 py-3 text-sm text-[var(--text-strong)] sm:flex">
               <MailIcon className="h-4 w-4" />
               <span>Available for new grad SWE roles starting January 2026.</span>
             </div>
