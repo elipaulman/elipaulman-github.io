@@ -21,11 +21,13 @@ jobs:
         with:
           node-version: 20
           cache: npm
-          cache-dependency-path: next-portfolio/package-lock.json
+          cache-dependency-path: |
+            next-portfolio/package-lock.json
+            next-portfolio/package.json
 
       - name: Install dependencies
         working-directory: next-portfolio
-        run: npm ci
+        run: npm ci --prefer-offline
 
       - name: Lint
         working-directory: next-portfolio
