@@ -21,11 +21,11 @@ export function Hero({ socials }: HeroProps) {
   return (
     <section
       id="intro"
-      className="section-shell relative overflow-hidden rounded-3xl border border-[var(--border)] bg-[var(--panel)] px-6 sm:px-10 lg:px-16"
+      className="section-shell relative overflow-hidden rounded-3xl border border-[var(--border)] bg-[var(--panel)] px-5 sm:px-8 lg:px-14"
     >
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_12%_18%,rgba(125,211,252,0.18),transparent_35%),radial-gradient(circle_at_82%_5%,rgba(167,139,250,0.18),transparent_30%),radial-gradient(circle_at_55%_90%,rgba(14,165,233,0.18),transparent_32%)]" />
-      <div className="grid items-center gap-8 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
-        <div className="space-y-6 pl-4 pr-2 sm:pl-6 sm:pr-4">
+      <div className="grid items-center gap-7 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
+        <div className="space-y-6 px-1 sm:px-4">
           <div className="rounded-2xl border border-[var(--border)] bg-[var(--panel)] px-8 py-6 sm:px-10 shadow-[0_12px_50px_rgba(0,0,0,0.28)]">
             <div className="flex flex-wrap items-center gap-3">
               <span className="inline-flex items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--panel)] px-4 py-2 text-xs font-semibold uppercase tracking-[0.18em] text-[var(--accent)]">
@@ -37,7 +37,7 @@ export function Hero({ socials }: HeroProps) {
             </div>
           </div>
 
-          <div className="space-y-6 rounded-2xl border border-[var(--border)] bg-[var(--panel)] px-8 py-8 sm:px-10 sm:py-10 shadow-[0_18px_70px_rgba(0,0,0,0.28)]">
+          <div className="space-y-6 rounded-2xl border border-[var(--border)] bg-[var(--panel)] px-6 py-7 sm:px-9 sm:py-9 shadow-[0_18px_70px_rgba(0,0,0,0.28)]">
             <p className="text-sm font-semibold uppercase tracking-[0.25em] text-[var(--muted)]">
               Hello, I&apos;m
             </p>
@@ -51,7 +51,7 @@ export function Hero({ socials }: HeroProps) {
             </div>
           </div>
 
-          <div className="grid gap-3 sm:grid-cols-2 md:grid-cols-4">
+          <div className="grid grid-cols-2 gap-3 sm:grid-cols-2 md:grid-cols-4">
             <Link
               href={`mailto:${socials.email.primary}`}
               className={`${accentCta} border-[var(--accent)] bg-[color-mix(in_srgb,var(--accent)_12%,transparent)] text-[var(--text-strong)] hover:-translate-y-0.5 hover:shadow-[0_15px_60px_rgba(34,211,238,0.25)]`}

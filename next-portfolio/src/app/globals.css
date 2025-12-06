@@ -60,7 +60,7 @@ a {
 }
 
 .section-shell {
-  padding: 4rem 0;
+  padding: 3.5rem 0;
 }
 
 @media (min-width: 1024px) {
@@ -76,6 +76,16 @@ a {
   padding: 2rem;
   box-shadow: var(--glow);
   position: relative;
+}
+
+@media (max-width: 640px) {
+  .section-shell {
+    padding: 2.5rem 0;
+  }
+
+  .glass-panel {
+    padding: 1.25rem;
+  }
 }
 
 .pill {
