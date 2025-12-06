@@ -7,7 +7,7 @@ Next.js (App Router, TS, Tailwind v4) static-export portfolio, with a standalone
 - `src/data` — JSON content (experience, projects, skills, socials, etc.).
 - `public/` — static assets, fonts, resume, images. Weather app lives in `public/weather`.
 - `.github/workflows/deploy.yml` — GitHub Pages deploy pipeline (builds `out/`).
-
+ 
 ## Running locally
 ```bash
 npm install
