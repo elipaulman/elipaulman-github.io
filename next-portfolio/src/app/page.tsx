@@ -39,7 +39,7 @@ export default function Home() {
       <div className="relative min-h-screen">
         <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_10%_20%,rgba(109,40,217,0.12),transparent_25%),radial-gradient(circle_at_90%_10%,rgba(56,189,248,0.16),transparent_22%),radial-gradient(circle_at_50%_80%,rgba(59,130,246,0.12),transparent_30%)]" />
         <NavBar resumePath={socials.resume.path} />
-        <main className="mx-auto max-w-6xl px-6 pb-16">
+        <main className="mx-auto max-w-6xl px-4 sm:px-6 pb-14 sm:pb-16">
           <Hero socials={socials} />
           <AboutSection />
           <SkillsSection />
