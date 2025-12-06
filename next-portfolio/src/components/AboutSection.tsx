@@ -70,7 +70,7 @@ export function AboutSection() {
                   </Link>
                   <Link
                     href={`mailto:${personal.schoolEmail}`}
-                    className="block text-xs font-medium text-[var(--muted)] hover:text-[var(--accent)]"
+                    className="block font-semibold hover:text-[var(--accent)]"
                   >
                     {personal.schoolEmail}
                   </Link>
