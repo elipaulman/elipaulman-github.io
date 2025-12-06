@@ -1,0 +1,45 @@
+{
+  "programmingLanguages": [
+    { "name": "Python" },
+    { "name": "C#" },
+    { "name": "Java" },
+    { "name": "TypeScript" },
+    { "name": "JavaScript" },
+    { "name": "C" },
+    { "name": "SQL" },
+    { "name": "HTML" },
+    { "name": "CSS" },
+    { "name": "x86 Assembly" }
+  ],
+  "frameworks": [
+    { "name": "React" },
+    { "name": "Next.js" },
+    { "name": "Vue.js" },
+    { "name": "Node.js" },
+    { "name": "Flask" },
+    { "name": ".NET" },
+    { "name": "REST APIs" },
+    { "name": "GraphQL" },
+    { "name": "AWS (Lambda, AppSync, S3)" }
+  ],
+  "tools": [
+    { "name": "Git" },
+    { "name": "GitHub" },
+    { "name": "MySQL" },
+    { "name": "MongoDB" },
+    { "name": "Visual Studio" },
+    { "name": "VS Code" },
+    { "name": "MATLAB" }
+  ],
+  "skills": [
+    { "name": "Machine Learning" },
+    { "name": "Computer Vision" },
+    { "name": "CI/CD" },
+    { "name": "Technical Documentation" },
+    { "name": "Backend" },
+    { "name": "Full Stack" },
+    { "name": "Statistics" },
+    { "name": "Agile Development" },
+    { "name": "Test-Driven Development" }
+  ]
+}

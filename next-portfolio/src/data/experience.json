@@ -1,0 +1,103 @@
+[
+  {
+    "id": "amazon-intern",
+    "date": "May 2025 - August 2025",
+    "title": "Software Development Engineering Intern — Devices",
+    "company": "Amazon",
+    "logo": "images/Companies/Amazon-Logo.png",
+    "logoAlt": "Amazon Logo",
+    "responsibilities": [
+      "Built full-stack catalog system managing 13,000+ trade-in items with historical pricing and server-side filtering",
+      "Automated catalog generation using Vue.js, AWS AppSync, and Lambda, reducing manual input by ~60%",
+      "Drove full development cycle from requirements to deployment with cross-functional stakeholders"
+    ]
+  },
+  {
+    "id": "esw-president",
+    "date": "August 2024 - May 2025",
+    "title": "President",
+    "company": "Engineers for a Sustainable World",
+    "logo": "images/Companies/esw_logo.png",
+    "logoAlt": "ESW Logo",
+    "responsibilities": [
+      "Led 20+ engineers in sustainable technology initiatives, managing project timelines and resources",
+      "Drove green technology innovation with focus on environmental impact reduction",
+      "Established digital presence and outreach programs, increasing engagement by 40%"
+    ]
+  },
+  {
+    "id": "codepath-tip",
+    "date": "February 2025 - April 2025",
+    "title": "Technical Interview Prep Fellow",
+    "company": "CodePath TIP102",
+    "logo": "images/Companies/CodePathLogoMedium.png",
+    "logoAlt": "CodePath Logo",
+    "responsibilities": [
+      "Completed intensive 12-week program in algorithms, data structures, and system design",
+      "Practiced technical interviews with FAANG industry mentors and optimized coding solutions"
+    ]
+  },
+  {
+    "id": "jpmc-hackathon-2024",
+    "date": "November 2024",
+    "title": "Code for Good Hackathon Winner",
+    "company": "J.P. Morgan Chase & Co.",
+    "logo": "images/Companies/JP-Morgan-Chase-Logo.png",
+    "logoAlt": "JPMC Logo",
+    "responsibilities": [
+      "Won 1st place among 20+ teams by developing full-stack alumni networking platform for NYC cultural nonprofit",
+      "Delivered production-ready application using MERN stack with advanced user authentication and real-time features"
+    ]
+  },
+  {
+    "id": "lcs-developer",
+    "date": "May 2024 - August 2024",
+    "title": "Software Developer Intern",
+    "company": "London Computer Systems",
+    "logo": "images/Companies/LCSLogo1.png",
+    "logoAlt": "LCS Logo",
+    "responsibilities": [
+      "Developed REST APIs using C#/.NET and SQL for enterprise software serving 100,000+ users",
+      "Resolved 20+ critical bugs and re-engineered query engine, achieving 40% performance improvement",
+      "Delivered 7 feature implementations for new leasing center module"
+    ]
+  },
+  {
+    "id": "ibm-accelerate",
+    "date": "June 2024 - August 2024",
+    "title": "Software Engineering Fellow",
+    "company": "IBM Accelerate Program",
+    "logo": "images/Companies/IBM_logo.png",
+    "logoAlt": "IBM Logo",
+    "responsibilities": [
+      "Completed rigorous 8-week software engineering program covering algorithms, cybersecurity, and cloud-native development",
+      "Mastered modern web technologies including JavaScript, React, Node.js through hands-on projects and mentorship",
+      "Built industry connections through networking with IBM engineers and technology leaders"
+    ]
+  },
+  {
+    "id": "jpmc-hackathon-2023",
+    "date": "November 2023",
+    "title": "Code for Good Hackathon Winner",
+    "company": "J.P. Morgan Chase & Co.",
+    "logo": "images/Companies/JP-Morgan-Chase-Logo.png",
+    "logoAlt": "JPMC Logo",
+    "responsibilities": [
+      "Secured 1st place among 20+ competing teams by developing comprehensive web application for Pyramid CDC nonprofit",
+      "Implemented user authentication, skills assessments, and personalized learning paths using modern web technologies"
+    ]
+  },
+  {
+    "id": "lcs-qa",
+    "date": "May 2023 - August 2023",
+    "title": "Software QA Engineer Intern",
+    "company": "London Computer Systems",
+    "logo": "images/Companies/LCSLogo1.png",
+    "logoAlt": "LCS Logo",
+    "responsibilities": [
+      "Developed comprehensive API testing framework with 50+ automated test cases using Postman and JIRA integration",
+      "Executed rigorous REST API validation ensuring 100% accuracy between expected and actual JSON responses",
+      "Collaborated with development teams to identify and resolve 15+ critical software defects, reducing bug resolution time"
+    ]
+  }
+]
