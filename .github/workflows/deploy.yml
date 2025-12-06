@@ -20,14 +20,10 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: 20
-          cache: npm
-          cache-dependency-path: |
-            next-portfolio/package-lock.json
-            next-portfolio/package.json
 
       - name: Install dependencies
         working-directory: next-portfolio
-        run: npm ci --prefer-offline
+        run: npm ci
 
       - name: Lint
         working-directory: next-portfolio
