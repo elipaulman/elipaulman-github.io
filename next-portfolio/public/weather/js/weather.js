@@ -14,6 +14,21 @@ const apiKey = "a492a768764e969820914c25cd2b788a";
 let weatherCache = new Map();
 const CACHE_DURATION = 10 * 60 * 1000; // 10 minutes
 
+// Utility to escape HTML meta-characters in user-controlled input
+function escapeHtml(text) {
+  return String(text).replace(/[&<>"'/]/g, function(s) {
+    switch (s) {
+      case '&': return '&amp;';
+      case '<': return '&lt;';
+      case '>': return '&gt;';
+      case '"': return '&quot;';
+      case "'": return '&#39;';
+      case '/': return '&#47;';
+      default: return s;
+    }
+  });
+}
+
 // Temperature conversion utilities
 function convertTemperature(temp, fromUnit, toUnit) {
   if (fromUnit === toUnit) return temp;
@@ -62,7 +77,7 @@ function showErrorMessage(message) {
   currentWeatherContainer.innerHTML = `
     <div class="error-message">
       <i class="fas fa-exclamation-triangle"></i>
-      <p>${message}</p>
+      <p>${escapeHtml(message)}</p>
       <button onclick="retryWeatherFetch()" style="margin-top: 10px; padding: 8px 16px; background: rgba(255,255,255,0.2); border: none; border-radius: 4px; color: white; cursor: pointer;">
         Try Again
       </button>
