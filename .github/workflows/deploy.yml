@@ -12,9 +12,6 @@ permissions:
 jobs:
   build:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: next-portfolio
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -24,14 +21,18 @@ jobs:
         with:
           node-version: 20
           cache: npm
+          cache-dependency-path: next-portfolio/package-lock.json
 
       - name: Install dependencies
+        working-directory: next-portfolio
         run: npm ci
 
       - name: Lint
+        working-directory: next-portfolio
         run: npm run lint
 
       - name: Build (static export)
+        working-directory: next-portfolio
         run: npm run build
 
       - name: Upload artifact
