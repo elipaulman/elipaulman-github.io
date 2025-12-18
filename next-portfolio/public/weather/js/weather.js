@@ -1,4 +1,3 @@
-// Declaring the variables
 let lon;
 let lat;
 let currentWeatherContainer = document.querySelector(".current-conditions");
@@ -70,7 +69,6 @@ function showLoadingState() {
 }
 
 function hideLoadingState() {
-  // Loading state will be replaced by actual data
 }
 
 function showErrorMessage(message) {
@@ -92,18 +90,6 @@ function retryWeatherFetch() {
 }
 
 window.addEventListener("load", () => {
-  // Register Service Worker for PWA functionality (DISABLED FOR DEVELOPMENT)
-  // if ('serviceWorker' in navigator) {
-  //   navigator.serviceWorker.register('/sw.js')
-  //     .then(registration => {
-  //       console.log('SW registered: ', registration);
-  //     })
-  //     .catch(registrationError => {
-  //       console.log('SW registration failed: ', registrationError);
-  //     });
-  // }
-
-  // Track weather app load
   if (typeof Analytics !== 'undefined') {
     Analytics.trackWeatherPageVisit();
     Analytics.trackEvent('weather_app_load', {
@@ -112,13 +98,8 @@ window.addEventListener("load", () => {
     });
   }
 
-  // Initialize unit toggle event listeners
   setupUnitToggle();
-  
-  // Initialize refresh button
   setupRefreshButton();
-  
-  // Initialize location autocomplete
   setupLocationAutocomplete();
 
   if (navigator.geolocation) {
@@ -127,8 +108,7 @@ window.addEventListener("load", () => {
       (position) => {
         lon = position.coords.longitude;
         lat = position.coords.latitude;
-        
-        // Track geolocation usage
+
         if (typeof Analytics !== 'undefined') {
           Analytics.trackEvent('geolocation_used', {
             event_category: 'weather',
@@ -162,8 +142,6 @@ window.addEventListener("load", () => {
 });
 
 function fetchWeatherData() {
-  // Re-enable caching for production
-  // Check cache first
   const cacheKey = `${lat}-${lon}`;
   const cachedData = getCachedWeather(cacheKey);
   
@@ -178,18 +156,14 @@ function fetchWeatherData() {
     return;
   }
 
-  // API URLs
   const currentWeatherURL = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${apiKey}`;
   const forecastURL = `https://api.openweathermap.org/data/2.5/forecast?lat=${lat}&lon=${lon}&appid=${apiKey}`;
   const airQualityURL = `https://api.openweathermap.org/data/2.5/air_pollution?lat=${lat}&lon=${lon}&appid=${apiKey}`;
 
-  // Show loading state
   showLoadingState();
 
-  // Clear existing forecast entries
   forecastList.innerHTML = "";
 
-  // Track weather data fetch
   if (typeof Analytics !== 'undefined') {
     Analytics.trackEvent('weather_data_fetch', {
       event_category: 'weather',
@@ -197,7 +171,6 @@ function fetchWeatherData() {
     });
   }
 
-  // Fetch weather data, forecast, and air quality
   Promise.all([
     fetch(currentWeatherURL),
     fetch(forecastURL),
@@ -210,13 +183,11 @@ function fetchWeatherData() {
     if (!forecastResponse.ok) {
       throw new Error(`Forecast: ${forecastResponse.status}`);
     }
-    // Air quality might fail, so we don't throw an error for it
-    
+
     const currentData = await currentResponse.json();
     const forecastData = await forecastResponse.json();
     const airQualityData = airQualityResponse.ok ? await airQualityResponse.json() : null;
-    
-    // Store data globally and in cache
+
     currentWeatherData = currentData;
     currentForecastData = forecastData;
     currentAirQualityData = airQualityData;
@@ -255,12 +226,10 @@ function updateCurrentWeather(data) {
   const displayTemp = currentUnit === 'fahrenheit' ? tempFahrenheit : tempCelsius;
   const tempUnit = currentUnit === 'fahrenheit' ? '°F' : '°C';
 
-  // Capitalize the current condition
   const condition = data.weather[0].description;
   const capitalizedCondition =
     condition.charAt(0).toUpperCase() + condition.slice(1);
 
-  // Track weather condition
   if (typeof Analytics !== 'undefined') {
     Analytics.trackEvent('weather_condition_viewed', {
       weather_condition: data.weather[0].main,
@@ -271,7 +240,6 @@ function updateCurrentWeather(data) {
     });
   }
 
-  // Calculate advanced weather metrics
   const heatIndex = calculateHeatIndex(tempFahrenheit, data.main.humidity);
   const windChillF = calculateWindChill(tempFahrenheit, Math.round(data.wind.speed * 2.237));
   const dewPointF = calculateDewPoint(tempFahrenheit, data.main.humidity);
@@ -282,7 +250,6 @@ function updateCurrentWeather(data) {
   const displayWindChill = currentUnit === 'fahrenheit' ? windChillF : Math.round((windChillF - 32) * 5/9);
   const displayDewPoint = currentUnit === 'fahrenheit' ? dewPointF : Math.round((dewPointF - 32) * 5/9);
 
-  // Update current weather container
   currentWeatherContainer.innerHTML = `
     <div class="icon">
       <img src="https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png" style="height: 5rem;" alt="${capitalizedCondition}" />
@@ -304,8 +271,6 @@ function updateCurrentWeather(data) {
       <div><i class="fas fa-moon"></i> Sunset: ${new Date(data.sys.sunset * 1000).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</div>
     </div>
   `;
-
-  // Note: updatePageBackground is called separately in fetchWeatherData
 }
 
 function setupUnitToggle() {
@@ -356,7 +321,6 @@ function refreshWeatherDisplay() {
     updateCurrentWeather(currentWeatherData);
     updateForecast(currentForecastData);
     if (currentAirQualityData) updateAirQuality(currentAirQualityData);
-    // Preserve the weather-based background
     updatePageBackground(currentWeatherData.weather[0].main);
   }
 }
@@ -366,10 +330,6 @@ function setupRefreshButton() {
   
   refreshBtn.addEventListener('click', () => {
     if (lat && lon) {
-      // Clear cache for fresh data (DISABLED FOR DEVELOPMENT)
-      // const cacheKey = `${lat}-${lon}`;
-      // weatherCache.delete(cacheKey);
-      
       fetchWeatherData();
       
       if (typeof Analytics !== 'undefined') {
@@ -391,7 +351,7 @@ function setupLocationAutocomplete() {
   locationInput.addEventListener('input', (e) => {
     clearTimeout(timeout);
     const query = e.target.value.trim();
-    suggestionSelected = false; // Reset when user types
+    suggestionSelected = false;
     
     if (query.length > 2) {
       timeout = setTimeout(() => {
@@ -401,15 +361,13 @@ function setupLocationAutocomplete() {
       hideSuggestions();
     }
   });
-  
-  // Hide suggestions when clicking outside
+
   document.addEventListener('click', (e) => {
     if (!locationInput.contains(e.target) && !suggestionsContainer.contains(e.target)) {
       hideSuggestions();
     }
   });
 
-  // Track if suggestion was selected
   window.suggestionSelected = false;
 }
 
@@ -440,8 +398,7 @@ function showSuggestions(locations) {
   }).join('');
   
   suggestionsContainer.style.display = 'block';
-  
-  // Add click handlers for suggestions
+
   suggestionsContainer.querySelectorAll('.suggestion-item').forEach(item => {
     item.addEventListener('click', () => {
       const selectedLat = item.dataset.lat;
@@ -451,13 +408,11 @@ function showSuggestions(locations) {
       document.getElementById("location-input").value = selectedName;
       lat = parseFloat(selectedLat);
       lon = parseFloat(selectedLon);
-      
-      // Mark that a suggestion was selected
+
       window.suggestionSelected = true;
-      
+
       hideSuggestions();
-      
-      // Automatically fetch weather when suggestion is clicked
+
       fetchWeatherData();
       
       if (typeof Analytics !== 'undefined') {
@@ -476,12 +431,9 @@ function hideSuggestions() {
 }
 
 function checkWeatherAlerts(data) {
-  // Note: OpenWeatherMap free tier doesn't include alerts
-  // This is a placeholder for when alerts are available
   if (data.alerts && data.alerts.length > 0) {
     showWeatherAlert(data.alerts[0]);
   } else {
-    // Remove any existing alerts
     const existingAlert = document.querySelector('.weather-alert');
     if (existingAlert) {
       existingAlert.remove();
@@ -490,7 +442,6 @@ function checkWeatherAlerts(data) {
 }
 
 function showWeatherAlert(alert) {
-  // Remove any existing alerts first
   const existingAlert = document.querySelector('.weather-alert');
   if (existingAlert) {
     existingAlert.remove();
@@ -509,12 +460,10 @@ function showWeatherAlert(alert) {
   container.insertBefore(alertDiv, container.firstChild);
 }
 
-// Enhanced forecast function with unit support
 function updateForecast(data) {
   const forecasts = data.list;
   const tempUnit = currentUnit === 'fahrenheit' ? '°F' : '°C';
 
-  // Group the forecasts by date
   const groupedForecasts = {};
   forecasts.forEach((forecast) => {
     const forecastDate = new Date(forecast.dt_txt.split(" ")[0]).toDateString();
@@ -524,14 +473,11 @@ function updateForecast(data) {
     groupedForecasts[forecastDate].push(forecast);
   });
 
-  // Clear existing forecast items
   forecastList.innerHTML = "";
 
-  // Get all available forecast days (usually 5-6 days)
   const availableDays = Object.entries(groupedForecasts);
   console.log(`Available forecast days: ${availableDays.length}`);
 
-  // Show all available days for better layout (typically 6 days)
   availableDays.forEach(([date, forecasts]) => {
     const temperatureHighArray = forecasts.map((f) =>
       currentUnit === 'fahrenheit' ? 
@@ -550,7 +496,6 @@ function updateForecast(data) {
     const condition = forecasts[0].weather[0].description;
     const capitalizedCondition = condition.charAt(0).toUpperCase() + condition.slice(1);
 
-    // Format date nicely - shorter format for more cards
     const dateObj = new Date(date);
     const isToday = dateObj.toDateString() === new Date().toDateString();
     const isTomorrow = dateObj.toDateString() === new Date(Date.now() + 86400000).toDateString();
@@ -568,7 +513,6 @@ function updateForecast(data) {
       });
     }
 
-    // Create forecast item with improved compact layout
     const forecastItem = document.createElement("div");
     forecastItem.classList.add("forecast-item");
     forecastItem.innerHTML = `
@@ -584,7 +528,6 @@ function updateForecast(data) {
       </div>
     `;
 
-    // Add click handler for detailed view (future enhancement)
     forecastItem.addEventListener('click', () => {
       if (typeof Analytics !== 'undefined') {
         Analytics.trackEvent('forecast_day_clicked', {
@@ -594,23 +537,19 @@ function updateForecast(data) {
       }
     });
 
-    // Append forecast item to forecast list
     forecastList.appendChild(forecastItem);
   });
-  
-  // Create temperature chart
+
   createTemperatureChart(data);
 }
 
-// Weather data visualization with Chart.js
 let temperatureChart = null;
 
 function createTemperatureChart(forecastData) {
   const ctx = document.getElementById('temperatureChart');
   if (!ctx) return;
-  
-  // Extract hourly data for next 24 hours
-  const hourlyData = forecastData.list.slice(0, 8); // 8 data points = 24 hours (3-hour intervals)
+
+  const hourlyData = forecastData.list.slice(0, 8);
   
   const labels = hourlyData.map(item => {
     const date = new Date(item.dt * 1000);
@@ -625,8 +564,7 @@ function createTemperatureChart(forecastData) {
   });
   
   const precipitation = hourlyData.map(item => (item.pop * 100));
-  
-  // Destroy existing chart if it exists
+
   if (temperatureChart) {
     temperatureChart.destroy();
   }
@@ -685,19 +623,16 @@ function createTemperatureChart(forecastData) {
       }
     }
   });
-  
-  // Show the chart container
+
   document.querySelector('.weather-chart-container').style.display = 'block';
 }
 
-// Event listener for the "Get Weather" button
 const getWeatherButton = document.getElementById("get-weather-button");
 getWeatherButton.addEventListener("click", () => {
   const locationInput = document.getElementById("location-input");
   const location = locationInput.value.trim();
 
   if (location) {
-    // Track manual location search
     if (typeof Analytics !== 'undefined') {
       Analytics.trackEvent('manual_location_search', {
         search_term: location,
@@ -706,10 +641,8 @@ getWeatherButton.addEventListener("click", () => {
       });
     }
 
-    // If user typed a location manually (not from suggestions), search for it
     const geocodingAPI = `https://api.openweathermap.org/geo/1.0/direct?q=${location}&limit=1&appid=${apiKey}`;
 
-    // Show loading state while searching
     showLoadingState();
 
     fetch(geocodingAPI)
@@ -726,12 +659,10 @@ getWeatherButton.addEventListener("click", () => {
         
         lat = data[0].lat;
         lon = data[0].lon;
-        
-        // Update input with the found location name
+
         const foundLocationName = `${data[0].name}${data[0].state ? ', ' + data[0].state : ''}, ${data[0].country}`;
         locationInput.value = foundLocationName;
-        
-        // Track successful location search
+
         if (typeof Analytics !== 'undefined') {
           Analytics.trackEvent('location_search_success', {
             searched_location: location,
@@ -740,10 +671,7 @@ getWeatherButton.addEventListener("click", () => {
             event_label: 'search_successful'
           });
         }
-        
-        // Clear cache for new location (DISABLED FOR DEVELOPMENT)
-        // weatherCache.clear();
-        
+
         fetchWeatherData();
       })
       .catch((error) => {
@@ -763,25 +691,20 @@ getWeatherButton.addEventListener("click", () => {
   }
 });
 
-// Add Enter key support for location input
 document.getElementById("location-input").addEventListener("keypress", (e) => {
   if (e.key === "Enter") {
-    // Only trigger button click if no suggestion was recently selected
     if (!window.suggestionSelected) {
       document.getElementById("get-weather-button").click();
     }
-    // Reset the flag
     window.suggestionSelected = false;
   }
 });
 
 function updatePageBackground(weatherMain) {
   const body = document.querySelector("body");
-  
-  // Debug logging to see what weather condition we're getting
+
   console.log("Weather condition received:", weatherMain);
-  
-  // Set background based on weather condition
+
   switch(weatherMain?.toLowerCase()) {
     case 'clear':
       body.style.background = "linear-gradient(to bottom, #87CEEB, #4682B4)";
@@ -830,12 +753,10 @@ function updatePageBackground(weatherMain) {
   body.style.color = "#fff";
 }
 
-// Air Quality Index functions
 function updateAirQuality(data) {
   const aqi = data.list[0].main.aqi;
   const components = data.list[0].components;
-  
-  // AQI levels: 1=Good, 2=Fair, 3=Moderate, 4=Poor, 5=Very Poor
+
   const aqiLevels = {
     1: { label: 'Good', color: '#00e400', description: 'Air quality is satisfactory' },
     2: { label: 'Fair', color: '#ffff00', description: 'Air quality is acceptable' },
@@ -845,8 +766,7 @@ function updateAirQuality(data) {
   };
   
   const aqiInfo = aqiLevels[aqi] || aqiLevels[1];
-  
-  // Create or update air quality container
+
   let airQualityContainer = document.querySelector('.air-quality-container');
   if (!airQualityContainer) {
     airQualityContainer = document.createElement('div');
@@ -905,7 +825,6 @@ function updateAirQuality(data) {
   `;
 }
 
-// Advanced Weather Calculations
 function calculateHeatIndex(tempF, humidity) {
   if (tempF < 80) return tempF;
   

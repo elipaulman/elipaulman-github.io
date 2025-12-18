@@ -32,14 +32,14 @@
   },
   {
     "id": "graduation",
-    "question": "When will you graduate?",
-    "answer": "I am graduating in December 2025 and available to start full-time positions in January 2026.",
+    "question": "When did you graduate?",
+    "answer": "I graduated in December 2025.",
     "expanded": false
   },
   {
     "id": "goals",
     "question": "What are your goals?",
-    "answer": "I am actively seeking entry-level full-time software engineering positions, with a particular interest in AI/ML roles. I'm passionate about leveraging machine learning to solve real-world problems and am eager to contribute to innovative AI-driven projects in the industry.",
+    "answer": "I'm focused on AI/ML impact work and building products that ship quickly and deliver measurable value.",
     "expanded": false
   },
   {

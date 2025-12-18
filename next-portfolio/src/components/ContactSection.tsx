@@ -19,7 +19,7 @@ export function ContactSection() {
         <SectionHeading
           eyebrow="Contact"
           title="Let's Build Together"
-          description="Open to new grad SWE roles (Jan 2026 start). I respond fastest on email or LinkedIn."
+          description="I respond fastest on email or LinkedIn."
         />
         <div className="grid gap-6 md:grid-cols-[1.2fr_0.8fr] md:items-stretch">
           <div className="flex h-full flex-col rounded-2xl border border-[var(--border)] bg-[var(--panel)] p-6 shadow-[0_15px_60px_rgba(0,0,0,0.3)]">
@@ -108,7 +108,7 @@ export function ContactSection() {
               </Link>
             </div>
             <p className="text-sm text-[var(--muted)]">
-              Fastest way to reach me is email. I usually reply within a day.
+              The fastest way to reach me is email. I usually reply within a day.
             </p>
             <div className="flex-1" />
           </div>

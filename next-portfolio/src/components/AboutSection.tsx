@@ -29,7 +29,7 @@ export function AboutSection() {
             </div>
             <div className="grid gap-3 sm:grid-cols-2">
               <Callout title="What I&apos;m looking for">
-                New grad SWE roles (Jan 2026 start). Love backend + AI features with measurable impact.
+                Focused on building AI/ML-powered products with measurable impact.
               </Callout>
               <Callout title="How I work">
                 Bias for action, fast iterations, clean API boundaries, and crisp documentation.
@@ -102,7 +102,7 @@ export function AboutSection() {
             </div>
             <div className="mt-5 hidden items-center gap-3 rounded-xl border border-[var(--border)] bg-[color-mix(in_srgb,theme(colors.sky.500)_14%,transparent)] px-4 py-3 text-sm text-[var(--text-strong)] sm:flex">
               <MailIcon className="h-4 w-4" />
-              <span>Available for new grad SWE roles starting January 2026.</span>
+              <span>Reach out if you want to build something impactful together.</span>
             </div>
           </div>
         </div>
