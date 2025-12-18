@@ -1,20 +1,20 @@
 {
   "name": "Elijah Paulman",
   "shortName": "Eli",
-  "title": "Software Engineer specializing in AI/ML | Graduating Dec 2025",
+  "title": "Software Engineer specializing in AI/ML | Graduated Dec 2025",
   "email": "eli.paulman@gmail.com",
   "schoolEmail": "paulman.2@osu.edu",
   "phone": "(513)-491-6464",
   "location": "Columbus, OH",
   "website": "epaulman.com",
-  "gpa": "3.8",
+  "gpa": "3.85",
   "university": "The Ohio State University",
   "graduationDate": "December 2025",
   "linkedIn": "https://www.linkedin.com/in/elijahpaulman/",
   "github": "https://github.com/elipaulman",
   "about": {
-    "short": "I am a Computer Science & Engineering student at The Ohio State University specializing in AI/ML, graduating December 2025. I have production experience at Amazon and London Computer Systems building scalable applications with a focus on intelligent automation.",
-    "detailed": "At Amazon, I automated catalog systems managing over 13,000 items, achieving 60% efficiency gains. At LCS, I built REST APIs serving over 100,000 users. I have developed AI-powered applications using LangChain and OpenAI APIs, led 20+ engineers as ESW President, and won multiple J.P. Morgan hackathons. I am available for software engineering roles starting January 2026."
+    "short": "I am a Computer Science & Engineering graduate from The Ohio State University (December 2025) specializing in AI/ML. I have production experience at Amazon and London Computer Systems building scalable applications with a focus on intelligent automation.",
+    "detailed": "At Amazon, I automated catalog systems managing over 13,000 items, achieving 60% efficiency gains. At LCS, I built REST APIs serving over 100,000 users. I have developed AI-powered applications using LangChain and OpenAI APIs, led 20+ engineers as ESW President, and won multiple J.P. Morgan hackathons."
   },
   "hobbies": "I enjoy playing guitar, mountain biking, skiing, kayaking, and spending time with friends and family. I also like to create cool projects on my 3D printer, and with Arduino."
 }

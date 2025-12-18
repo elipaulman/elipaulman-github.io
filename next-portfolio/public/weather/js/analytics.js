@@ -96,8 +96,7 @@ class Analytics {
   }
 
   static trackEngagement() {
-    // Track time on page milestones
-    const milestones = [30, 60, 120, 300]; // seconds
+    const milestones = [30, 60, 120, 300];
     let timeOnPage = 0;
     
     const interval = setInterval(() => {
@@ -110,12 +109,11 @@ class Analytics {
           event_label: `${timeOnPage}s`
         });
       }
-      
-      // Stop tracking after 5 minutes
+
       if (timeOnPage >= 300) {
         clearInterval(interval);
       }
-    }, 10000); // Check every 10 seconds
+    }, 10000);
   }
 
   static trackScrollDepth() {
@@ -146,13 +144,10 @@ class Analytics {
   }
 }
 
-// Initialize analytics tracking when DOM is ready
 document.addEventListener('DOMContentLoaded', function() {
-  // Start engagement tracking
   Analytics.trackEngagement();
   Analytics.trackScrollDepth();
 
-  // Track resume downloads
   const resumeLinks = document.querySelectorAll('a[href*="Resume"], a[href*="resume"], a[href*="cv"]');
   resumeLinks.forEach(link => {
     link.addEventListener('click', function() {
@@ -161,7 +156,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  // Track email contacts
   const emailLinks = document.querySelectorAll('a[href^="mailto:"]');
   emailLinks.forEach(link => {
     link.addEventListener('click', function() {
@@ -169,7 +163,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  // Track phone contacts
   const phoneLinks = document.querySelectorAll('a[href^="tel:"]');
   phoneLinks.forEach(link => {
     link.addEventListener('click', function() {
@@ -177,7 +170,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  // Track social media clicks
   const linkedinLinks = document.querySelectorAll('a[href*="linkedin"]');
   linkedinLinks.forEach(link => {
     link.addEventListener('click', function() {
@@ -192,7 +184,6 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  // Track navigation clicks
   const navLinks = document.querySelectorAll('.nav-link');
   navLinks.forEach(link => {
     link.addEventListener('click', function() {
@@ -201,28 +192,23 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   });
 
-  // Track project interactions
   document.addEventListener('click', function(e) {
-    // Track project carousel clicks
     if (e.target.closest('.view-project-link')) {
       const projectCard = e.target.closest('.project-item') || e.target.closest('.item');
       const projectTitle = projectCard?.querySelector('h4')?.textContent || 'Unknown Project';
       Analytics.trackProjectView(projectTitle);
     }
 
-    // Track "View All Projects" click
     if (e.target.closest('.view-all-projects')) {
       Analytics.trackSocialClick('github_projects');
     }
 
-    // Track theme toggle
     if (e.target.closest('#theme-toggle')) {
       const isDark = document.body.classList.contains('dark-mode');
       Analytics.trackThemeToggle(isDark ? 'light' : 'dark');
     }
   });
 
-  // Track FAQ interactions
   document.addEventListener('click', function(e) {
     if (e.target.closest('[data-toggle="collapse"]')) {
       const button = e.target.closest('[data-toggle="collapse"]');
@@ -231,7 +217,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   });
 
-  // Track skill hover interactions
   document.addEventListener('mouseenter', function(e) {
     if (e.target.closest('.skill-item')) {
       const skillName = e.target.querySelector('h6')?.textContent || 'Unknown Skill';
@@ -239,7 +224,6 @@ document.addEventListener('DOMContentLoaded', function() {
     }
   }, true);
 
-  // Track timeline item views using Intersection Observer
   const timelineObserver = new IntersectionObserver((entries) => {
     entries.forEach(entry => {
       if (entry.isIntersecting) {
@@ -249,22 +233,18 @@ document.addEventListener('DOMContentLoaded', function() {
     });
   }, { threshold: 0.5 });
 
-  // Observe timeline items when they're loaded
   const observeTimelineItems = () => {
     const timelineItems = document.querySelectorAll('.timeline-item');
     timelineItems.forEach(item => timelineObserver.observe(item));
   };
 
-  // Initial observation and re-observe after dynamic content loads
   setTimeout(observeTimelineItems, 1000);
-  
-  // Track weather app visits if on weather page
+
   if (window.location.pathname.includes('weather')) {
     Analytics.trackWeatherPageVisit();
   }
 });
 
-// Track page visibility changes
 document.addEventListener('visibilitychange', function() {
   if (document.visibilityState === 'visible') {
     Analytics.trackEvent('page_focus', {
@@ -279,7 +259,6 @@ document.addEventListener('visibilitychange', function() {
   }
 });
 
-// Track exit intent (when user moves mouse to top of page)
 let exitIntentTracked = false;
 document.addEventListener('mouseleave', function(e) {
   if (e.clientY <= 0 && !exitIntentTracked) {
