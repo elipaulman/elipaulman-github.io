@@ -21,7 +21,7 @@ export function Hero({ socials }: HeroProps) {
   return (
     <section
       id="intro"
-      className="section-shell relative overflow-hidden rounded-3xl border border-[var(--border)] bg-[var(--panel)] px-5 sm:px-8 lg:px-14"
+      className="relative overflow-hidden rounded-3xl border border-[var(--border)] bg-[var(--panel)] px-5 sm:px-8 lg:px-14 pt-6 pb-14 sm:pt-12 sm:pb-14 lg:pt-14 lg:pb-20"
     >
       <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_12%_18%,rgba(125,211,252,0.18),transparent_35%),radial-gradient(circle_at_82%_5%,rgba(167,139,250,0.18),transparent_30%),radial-gradient(circle_at_55%_90%,rgba(14,165,233,0.18),transparent_32%)]" />
       <div className="grid items-center gap-7 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
@@ -80,8 +80,8 @@ export function Hero({ socials }: HeroProps) {
         </div>
 
         <div className="order-1 relative mx-auto w-full max-w-full px-1 sm:max-w-sm sm:px-4 lg:order-2 lg:mx-0 lg:max-w-md lg:px-0">
-          <div className="absolute inset-0 translate-x-4 translate-y-6 rounded-[28px] bg-[linear-gradient(135deg,rgba(125,211,252,0.38),rgba(167,139,250,0.32))] blur-3xl" />
-          <div className="relative aspect-[4/5] overflow-hidden rounded-[28px] border border-[var(--border)] bg-[var(--panel)]">
+          <div className="absolute inset-0 translate-x-4 translate-y-6 rounded-[24px] sm:rounded-[48px] lg:rounded-[56px] bg-[linear-gradient(135deg,rgba(125,211,252,0.38),rgba(167,139,250,0.32))] blur-3xl" />
+          <div className="relative aspect-[4/5] overflow-hidden rounded-[24px] sm:rounded-[48px] lg:rounded-[56px] border border-[var(--border)] bg-[var(--panel)]">
             <Image
               src="/images/EliStandingClear.png"
               alt="Portrait of Elijah Paulman"
