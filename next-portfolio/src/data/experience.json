@@ -1,5 +1,18 @@
 [
   {
+    "id": "apple-sqe",
+    "date": "January 2026 - Present",
+    "title": "Software Quality Engineer",
+    "company": "Apple",
+    "logo": "images/Companies/apple_logo.png",
+    "logoAlt": "Apple Logo",
+    "responsibilities": [
+      "Testing carrier services integrations that enable seamless iPhone activation and setup with wireless carriers",
+      "Automating testing platforms to improve efficiency and coverage across carrier onboarding workflows",
+      "Ensuring quality and reliability of native carrier onboarding experience for Apple customers"
+    ]
+  },
+  {
     "id": "amazon-intern",
     "date": "May 2025 - August 2025",
     "title": "Software Development Engineering Intern — Devices",
