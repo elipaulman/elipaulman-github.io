@@ -28,6 +28,7 @@
   --logo-filter: invert(1) hue-rotate(180deg);
 
   --line-number: rgba(255, 255, 255, 0.1);
+  --dot-color: rgba(255, 255, 255, 0.07);
 
   --font-mono: "JetBrains Mono", "Fira Code", "Cascadia Code", monospace;
   --font-display: "Syne", system-ui, sans-serif;
@@ -63,6 +64,7 @@
   --logo-filter: none;
 
   --line-number: rgba(15, 23, 42, 0.06);
+  --dot-color: rgba(15, 23, 42, 0.045);
 
   color-scheme: light;
 }
@@ -105,7 +107,9 @@ html {
 body {
   margin: 0;
   min-height: 100vh;
-  background: var(--bg);
+  background:
+    radial-gradient(circle, var(--dot-color) 1px, transparent 1px) 0 0 / 24px 24px,
+    var(--bg);
   color: var(--text);
   font-family: var(--font-sans);
   letter-spacing: -0.01em;
