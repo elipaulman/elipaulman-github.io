@@ -34,7 +34,7 @@ export function AboutSection() {
 
             <div className="grid gap-4 sm:grid-cols-2">
               <div className="card">
-                <p className="font-mono text-xs text-[var(--accent)]">// focus</p>
+                <p className="font-mono text-xs text-[var(--accent)]">{'// focus'}</p>
                 <p className="mt-2 font-display text-sm font-semibold tracking-tight text-[var(--text-strong)]">
                   What I focus on
                 </p>
@@ -43,7 +43,7 @@ export function AboutSection() {
                 </p>
               </div>
               <div className="card">
-                <p className="font-mono text-xs text-[var(--accent)]">// method</p>
+                <p className="font-mono text-xs text-[var(--accent)]">{'// method'}</p>
                 <p className="mt-2 font-display text-sm font-semibold tracking-tight text-[var(--text-strong)]">
                   How I work
                 </p>

@@ -35,7 +35,7 @@ export function Hero({ socials }: HeroProps) {
             />
           </div>
           <p className="font-mono text-xs tracking-wide text-[var(--accent)]">
-            // hello, I&apos;m
+            {'// hello, I\'m'}
           </p>
         </div>
 

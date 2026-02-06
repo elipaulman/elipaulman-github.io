@@ -47,7 +47,7 @@ export function ProjectsGrid() {
                 {project.description}
               </p>
               <p className="mt-3 font-mono text-xs text-[var(--accent)]">
-                // {project.techUsed.toLowerCase()}
+                {'// '}{project.techUsed.toLowerCase()}
               </p>
               <div className="mt-auto pt-4">
                 <Link

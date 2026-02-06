@@ -71,7 +71,7 @@ export function NavBar({ resumePath }: { resumePath: string }) {
                 onClick={() => setOpen(false)}
                 className="block rounded-lg px-4 py-2.5 font-mono text-sm text-[var(--muted)] transition-colors duration-200 hover:bg-[var(--panel-hover)] hover:text-[var(--text-strong)]"
               >
-                <span className="text-[var(--accent)] opacity-50">// </span>
+                <span className="text-[var(--accent)] opacity-50">{'// '}</span>
                 {link.label}
               </Link>
             ))}

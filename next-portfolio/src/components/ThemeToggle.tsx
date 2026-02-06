@@ -1,34 +1,40 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useCallback, useSyncExternalStore } from "react";
 import { MoonIcon, SunIcon } from "./icons";
 
 type Theme = "dark" | "light";
 
+function subscribe(callback: () => void) {
+  window.addEventListener("storage", callback);
+  return () => window.removeEventListener("storage", callback);
+}
+
+function getThemeSnapshot(): Theme {
+  const stored = window.localStorage.getItem("theme");
+  if (stored === "light" || stored === "dark") return stored;
+  return window.matchMedia("(prefers-color-scheme: dark)").matches
+    ? "dark"
+    : "light";
+}
+
+function getServerSnapshot(): Theme {
+  return "dark";
+}
+
 export function ThemeToggle() {
-  const [theme, setTheme] = useState<Theme>("dark");
-  const [mounted, setMounted] = useState(false);
+  const theme = useSyncExternalStore(
+    subscribe,
+    getThemeSnapshot,
+    getServerSnapshot,
+  );
 
-  useEffect(() => {
-    const stored = window.localStorage.getItem("theme");
-    if (stored === "light" || stored === "dark") {
-      setTheme(stored);
-    } else {
-      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-      setTheme(prefersDark ? "dark" : "light");
-    }
-    setMounted(true);
-  }, []);
-
-  useEffect(() => {
-    if (!mounted) return;
-    document.documentElement.dataset.theme = theme;
-    window.localStorage.setItem("theme", theme);
-  }, [theme, mounted]);
-
-  const toggleTheme = () => {
-    setTheme((prev) => (prev === "dark" ? "light" : "dark"));
-  };
+  const toggleTheme = useCallback(() => {
+    const next: Theme = theme === "dark" ? "light" : "dark";
+    window.localStorage.setItem("theme", next);
+    document.documentElement.dataset.theme = next;
+    window.dispatchEvent(new Event("storage"));
+  }, [theme]);
 
   return (
     <button
@@ -43,7 +49,8 @@ export function ThemeToggle() {
         <MoonIcon className="h-3.5 w-3.5" />
       )}
       <span className="hidden sm:inline">
-        // {theme === "dark" ? "light" : "dark"}
+        {"// "}
+        {theme === "dark" ? "light" : "dark"}
       </span>
     </button>
   );
