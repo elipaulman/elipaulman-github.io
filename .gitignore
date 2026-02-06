@@ -46,3 +46,7 @@ $RECYCLE.BIN/
 # Build outputs (if you add build process in future)
 dist/
 build/
+
+# Claude Code
+.claude/
+.playwright-mcp/

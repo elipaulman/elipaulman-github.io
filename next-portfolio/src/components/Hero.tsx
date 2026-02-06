@@ -1,95 +1,104 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useState } from "react";
 import { personal } from "@/lib/data";
 import type { Socials } from "@/types";
-import {
-  ExternalIcon,
-  GitHubIcon,
-  LinkedInIcon,
-  MailIcon,
-  DocumentIcon,
-} from "./icons";
+import { GitHubIcon, LinkedInIcon, MailIcon, DocumentIcon } from "./icons";
 
 type HeroProps = {
   socials: Socials;
 };
 
 export function Hero({ socials }: HeroProps) {
-  const accentCta =
-    "inline-flex items-center justify-center gap-2 rounded-full border px-5 py-3 text-sm font-semibold transition duration-150";
+  const [showCursor, setShowCursor] = useState(true);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setShowCursor(false), 4000);
+    return () => clearTimeout(timer);
+  }, []);
 
   return (
-    <section
-      id="intro"
-      className="relative overflow-hidden rounded-3xl border border-[var(--border)] bg-[var(--panel)] px-5 sm:px-8 lg:px-14 pt-6 pb-14 sm:pt-12 sm:pb-14 lg:pt-14 lg:pb-20"
-    >
-      <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_12%_18%,rgba(125,211,252,0.18),transparent_35%),radial-gradient(circle_at_82%_5%,rgba(167,139,250,0.18),transparent_30%),radial-gradient(circle_at_55%_90%,rgba(14,165,233,0.18),transparent_32%)]" />
-      <div className="grid items-center gap-7 lg:grid-cols-[1.1fr_0.9fr] lg:gap-16">
-        <div className="order-2 space-y-6 px-1 sm:px-4 lg:order-1">
-          <div className="space-y-6 rounded-2xl border border-[var(--border)] bg-[var(--panel)] px-6 py-7 sm:px-9 sm:py-9 shadow-[0_18px_70px_rgba(0,0,0,0.28)]">
-            <p className="text-sm font-semibold uppercase tracking-[0.25em] text-[var(--muted)]">
-              Hello, I&apos;m
-            </p>
-            <div className="space-y-2">
-              <h1 className="text-4xl font-semibold leading-tight text-[var(--text-strong)] sm:text-5xl">
-                {personal.name}
-              </h1>
-              <p className="max-w-2xl text-lg text-[var(--muted)] sm:text-xl">
-                {personal.title}
-              </p>
-            </div>
+    <section id="intro" className="relative py-24 sm:py-32 lg:py-40">
+      <div className="space-y-8 text-center sm:text-left">
+        {/* Avatar + greeting */}
+        <div className="flex items-center justify-center gap-4 sm:justify-start">
+          <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-full ring-[1.5px] ring-[var(--accent)] ring-offset-2 ring-offset-[var(--bg)]">
+            <Image
+              src="/images/EliStandingClear.png"
+              alt="Elijah Paulman"
+              fill
+              className="object-cover object-top"
+              sizes="56px"
+              priority
+            />
           </div>
+          <p className="font-mono text-xs tracking-wide text-[var(--accent)]">
+            // hello, I&apos;m
+          </p>
+        </div>
 
-          <div className="grid grid-cols-1 gap-3 sm:grid-cols-2 md:grid-cols-4">
-            <Link
-              href={`mailto:${socials.email.primary}`}
-              className={`${accentCta} border-[var(--accent)] bg-[color-mix(in_srgb,var(--accent)_12%,transparent)] text-[var(--text-strong)] hover:-translate-y-0.5 hover:shadow-[0_15px_60px_rgba(34,211,238,0.25)]`}
-            >
-              <MailIcon className="h-4 w-4" />
-              Email
-            </Link>
-            <Link
-              href={socials.resume.path}
-              className={`${accentCta} border-[var(--accent)] bg-[color-mix(in_srgb,var(--accent)_12%,transparent)] text-[var(--text-strong)] hover:-translate-y-0.5 hover:shadow-[0_15px_60px_rgba(34,211,238,0.25)]`}
-              download
-            >
-              <DocumentIcon className="h-4 w-4" />
-              Resume
-            </Link>
+        {/* Name */}
+        <h1 className="heading-display text-5xl text-[var(--text-strong)] sm:text-6xl lg:text-7xl xl:text-8xl">
+          {personal.name}
+        </h1>
+
+        {/* Typing subtitle */}
+        <div className="flex justify-center overflow-hidden sm:justify-start">
+          <p
+            className={`inline-block overflow-hidden whitespace-nowrap border-r-2 border-[var(--accent)] font-mono text-sm text-[var(--muted)] sm:text-base ${
+              !showCursor ? "border-transparent" : ""
+            }`}
+            style={{
+              "--typing-width": `${personal.title.length}ch`,
+              animation: `typing 3s steps(${personal.title.length}, end) forwards, blink-caret 0.75s step-end 5`,
+              width: "0",
+            } as React.CSSProperties}
+          >
+            {personal.title}
+          </p>
+        </div>
+
+        {/* CTA buttons */}
+        <div className="flex flex-wrap items-center justify-center gap-3 pt-4 sm:justify-start">
+          <Link
+            href={`mailto:${socials.email.primary}`}
+            className="inline-flex items-center gap-2 rounded-lg border border-[var(--accent)] bg-[var(--accent-dim)] px-5 py-2.5 font-mono text-sm font-medium text-[var(--text-strong)] transition-all duration-200 hover:shadow-[0_0_24px_var(--accent-glow)]"
+          >
+            <MailIcon className="h-4 w-4" />
+            contact me
+          </Link>
+          <Link
+            href={socials.resume.path}
+            download
+            className="inline-flex items-center gap-2 rounded-lg border border-[var(--border)] px-5 py-2.5 font-mono text-sm text-[var(--muted)] transition-all duration-200 hover:border-[var(--border-hover)] hover:text-[var(--text-strong)]"
+          >
+            <DocumentIcon className="h-4 w-4" />
+            resume.pdf
+          </Link>
+
+          <span className="mx-1 hidden h-5 w-px bg-[var(--border)] sm:block" />
+
+          <div className="flex gap-2">
             <Link
               href={socials.socialMedia.github.url}
-              className={`${accentCta} border-[var(--accent)] bg-[color-mix(in_srgb,var(--accent)_12%,transparent)] text-[var(--text-strong)] hover:-translate-y-0.5 hover:shadow-[0_15px_60px_rgba(34,211,238,0.25)]`}
               target="_blank"
               rel="noreferrer"
+              className="inline-flex items-center justify-center rounded-lg border border-[var(--border)] p-2.5 text-[var(--muted)] transition-all duration-200 hover:border-[var(--border-hover)] hover:text-[var(--text-strong)]"
+              aria-label="GitHub"
             >
               <GitHubIcon className="h-4 w-4" />
-              GitHub
-              <ExternalIcon className="h-3.5 w-3.5" />
             </Link>
             <Link
               href={socials.socialMedia.linkedin.url}
-              className={`${accentCta} border-[var(--accent)] bg-[color-mix(in_srgb,var(--accent)_12%,transparent)] text-[var(--text-strong)] hover:-translate-y-0.5 hover:shadow-[0_15px_60px_rgba(34,211,238,0.25)]`}
               target="_blank"
               rel="noreferrer"
+              className="inline-flex items-center justify-center rounded-lg border border-[var(--border)] p-2.5 text-[var(--muted)] transition-all duration-200 hover:border-[var(--border-hover)] hover:text-[var(--text-strong)]"
+              aria-label="LinkedIn"
             >
               <LinkedInIcon className="h-4 w-4" />
-              LinkedIn
-              <ExternalIcon className="h-3.5 w-3.5" />
             </Link>
-          </div>
-        </div>
-
-        <div className="order-1 relative mx-auto w-full max-w-full px-1 sm:max-w-sm sm:px-4 lg:order-2 lg:mx-0 lg:max-w-md lg:px-0">
-          <div className="absolute inset-0 translate-x-4 translate-y-6 rounded-[24px] sm:rounded-[48px] lg:rounded-[56px] bg-[linear-gradient(135deg,rgba(125,211,252,0.38),rgba(167,139,250,0.32))] blur-3xl" />
-          <div className="relative aspect-[4/5] overflow-hidden rounded-[24px] sm:rounded-[48px] lg:rounded-[56px] border border-[var(--border)] bg-[var(--panel)]">
-            <Image
-              src="/images/EliStandingClear.png"
-              alt="Portrait of Elijah Paulman"
-              fill
-              priority
-              sizes="(min-width: 1024px) 420px, 100vw"
-              className="object-cover object-top"
-            />
           </div>
         </div>
       </div>

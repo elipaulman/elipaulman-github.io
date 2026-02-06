@@ -5,25 +5,26 @@ import { MoonIcon, SunIcon } from "./icons";
 
 type Theme = "dark" | "light";
 
-function getInitialTheme(): Theme {
-  if (typeof window === "undefined") return "dark";
-  const stored = window.localStorage.getItem("theme");
-  if (stored === "light" || stored === "dark") return stored;
-  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-  return prefersDark ? "dark" : "light";
-}
-
 export function ThemeToggle() {
-  const [theme, setTheme] = useState<Theme>(() => getInitialTheme());
+  const [theme, setTheme] = useState<Theme>("dark");
+  const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
-    if (typeof document !== "undefined") {
-      document.documentElement.dataset.theme = theme;
+    const stored = window.localStorage.getItem("theme");
+    if (stored === "light" || stored === "dark") {
+      setTheme(stored);
+    } else {
+      const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+      setTheme(prefersDark ? "dark" : "light");
     }
-    if (typeof window !== "undefined") {
-      window.localStorage.setItem("theme", theme);
-    }
-  }, [theme]);
+    setMounted(true);
+  }, []);
+
+  useEffect(() => {
+    if (!mounted) return;
+    document.documentElement.dataset.theme = theme;
+    window.localStorage.setItem("theme", theme);
+  }, [theme, mounted]);
 
   const toggleTheme = () => {
     setTheme((prev) => (prev === "dark" ? "light" : "dark"));
@@ -33,15 +34,17 @@ export function ThemeToggle() {
     <button
       type="button"
       onClick={toggleTheme}
-      className="flex items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--panel)] px-4 py-2 text-sm font-medium text-[var(--text-strong)] transition hover:-translate-y-0.5 hover:border-[var(--accent)] hover:text-[var(--accent)] hover:shadow-[0_10px_40px_rgba(0,0,0,0.25)]"
+      className="flex items-center gap-2 rounded-lg border border-[var(--border)] bg-transparent px-3 py-1.5 font-mono text-[0.7rem] text-[var(--muted)] transition-all duration-200 hover:border-[var(--border-hover)] hover:text-[var(--text-strong)]"
       aria-label="Toggle theme"
     >
       {theme === "dark" ? (
-        <SunIcon className="h-4 w-4" />
+        <SunIcon className="h-3.5 w-3.5" />
       ) : (
-        <MoonIcon className="h-4 w-4" />
+        <MoonIcon className="h-3.5 w-3.5" />
       )}
-      <span className="hidden sm:inline">{theme === "dark" ? "Light" : "Dark"} mode</span>
+      <span className="hidden sm:inline">
+        // {theme === "dark" ? "light" : "dark"}
+      </span>
     </button>
   );
 }

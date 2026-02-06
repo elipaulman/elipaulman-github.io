@@ -1,43 +1,56 @@
+"use client";
+
 import { faq, personal } from "@/lib/data";
 import { SectionHeading } from "./SectionHeading";
+import { ChevronDownIcon } from "./icons";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 export function FAQSection() {
+  const reveal = useScrollReveal();
+
   return (
     <section id="faq" className="section-shell">
-      <div className="glass-panel space-y-6">
+      <div ref={reveal} className="reveal space-y-6">
         <SectionHeading
-          eyebrow="FAQ"
+          tag="faq"
           title="Quick Answers"
           description="A few things recruiters and teammates usually ask me."
         />
-        <div className="space-y-3">
+
+        <div className="space-y-0 divide-y divide-[var(--border)]">
           {faq.map((item) => (
             <details
               key={item.id}
               open={item.expanded}
-              className="group rounded-2xl border border-[var(--border)] bg-[var(--panel)] p-6 shadow-[0_10px_40px_rgba(0,0,0,0.25)] transition hover:-translate-y-0.5 hover:border-[var(--accent)]"
+              className="group py-5"
             >
-              <summary className="flex cursor-pointer list-none items-center justify-between gap-3 text-base font-semibold text-[var(--text-strong)]">
-                <span>{item.question}</span>
-                <span className="text-sm text-[var(--muted)] group-open:hidden">+</span>
-                <span className="text-sm text-[var(--muted)] hidden group-open:inline">−</span>
+              <summary className="flex cursor-pointer list-none items-center justify-between gap-3">
+                <span className="flex items-center gap-3">
+                  <span className="font-mono text-xs text-[var(--accent)]">
+                    //
+                  </span>
+                  <span className="font-display text-base font-semibold tracking-tight text-[var(--text-strong)]">
+                    {item.question}
+                  </span>
+                </span>
+                <ChevronDownIcon className="h-4 w-4 shrink-0 text-[var(--muted)] transition-transform duration-300 group-open:rotate-180" />
               </summary>
-              <div className="mt-3 space-y-2 text-sm text-[var(--muted)]">
+              <div className="mt-3 ml-7 border-l-2 border-[var(--accent-dim)] pl-4 text-sm leading-relaxed text-[var(--text)]">
                 {renderAnswer(item)}
               </div>
             </details>
           ))}
-          <p className="text-center text-sm text-[var(--muted)]">
-            Still curious? Email me at{" "}
-            <a
-              href={`mailto:${personal.email}`}
-              className="font-semibold text-[var(--accent)]"
-            >
-              {personal.email}
-            </a>
-            .
-          </p>
         </div>
+
+        <p className="pt-2 text-center font-mono text-sm text-[var(--muted)]">
+          // still curious?{" "}
+          <a
+            href={`mailto:${personal.email}`}
+            className="font-semibold text-[var(--accent)] hover:underline"
+          >
+            {personal.email}
+          </a>
+        </p>
       </div>
     </section>
   );
@@ -50,37 +63,41 @@ function renderAnswer(item: (typeof faq)[number]) {
 
   if (item.id === "technical-skills") {
     return (
-      <>
+      <div className="space-y-2">
         <p>
-          <strong>Programming Languages & Frameworks:</strong>{" "}
+          <strong className="text-[var(--text-strong)]">Languages & Frameworks:</strong>{" "}
           {item.answer.programmingLanguages}
         </p>
         <p>
-          <strong>Software:</strong> {item.answer.software}
+          <strong className="text-[var(--text-strong)]">Software:</strong>{" "}
+          {item.answer.software}
         </p>
         <p>
-          <strong>Other Skills:</strong> {item.answer.otherSkills}
+          <strong className="text-[var(--text-strong)]">Other Skills:</strong>{" "}
+          {item.answer.otherSkills}
         </p>
-      </>
+      </div>
     );
   }
 
   if (item.id === "involvement" && item.answer.leadership && item.answer.roles) {
     return (
-      <>
+      <div className="space-y-2">
         <p>
-          <strong>Leadership & Involvement:</strong>{" "}
+          <strong className="text-[var(--text-strong)]">Leadership:</strong>{" "}
           {item.answer.leadership.join(", ")}
         </p>
         <p>
-          <strong>Roles:</strong> {item.answer.roles.join(", ")}
+          <strong className="text-[var(--text-strong)]">Roles:</strong>{" "}
+          {item.answer.roles.join(", ")}
         </p>
-        {item.answer.goals ? (
+        {item.answer.goals && (
           <p>
-            <strong>Leadership Goals:</strong> {item.answer.goals}
+            <strong className="text-[var(--text-strong)]">Goals:</strong>{" "}
+            {item.answer.goals}
           </p>
-        ) : null}
-      </>
+        )}
+      </div>
     );
   }
 

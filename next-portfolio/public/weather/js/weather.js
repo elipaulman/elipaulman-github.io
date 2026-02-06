@@ -76,7 +76,7 @@ function showErrorMessage(message) {
     <div class="error-message">
       <i class="fas fa-exclamation-triangle"></i>
       <p>${escapeHtml(message)}</p>
-      <button onclick="retryWeatherFetch()" style="margin-top: 10px; padding: 8px 16px; background: rgba(255,255,255,0.2); border: none; border-radius: 4px; color: white; cursor: pointer;">
+      <button onclick="retryWeatherFetch()" style="margin-top: 10px; padding: 8px 16px; background: rgba(0,229,160,0.08); border: 1px solid #00e5a0; border-radius: 8px; color: #f1f5f9; cursor: pointer; font-family: var(--font-mono); font-size: 0.8rem;">
         Try Again
       </button>
     </div>
@@ -576,16 +576,16 @@ function createTemperatureChart(forecastData) {
       datasets: [{
         label: `Temperature (${currentUnit === 'fahrenheit' ? '°F' : '°C'})`,
         data: temperatures,
-        borderColor: '#00e4ff',
-        backgroundColor: 'rgba(0, 228, 255, 0.1)',
+        borderColor: '#00e5a0',
+        backgroundColor: 'rgba(0, 229, 160, 0.08)',
         borderWidth: 3,
         fill: true,
         tension: 0.4
       }, {
         label: 'Precipitation (%)',
         data: precipitation,
-        borderColor: '#ff6b6b',
-        backgroundColor: 'rgba(255, 107, 107, 0.1)',
+        borderColor: '#64748b',
+        backgroundColor: 'rgba(100, 116, 139, 0.08)',
         borderWidth: 2,
         fill: false,
         yAxisID: 'y1'
@@ -597,27 +597,27 @@ function createTemperatureChart(forecastData) {
       plugins: {
         legend: {
           labels: {
-            color: '#fff'
+            color: '#94a3b8'
           }
         }
       },
       scales: {
         x: {
-          ticks: { color: '#fff' },
-          grid: { color: 'rgba(255, 255, 255, 0.1)' }
+          ticks: { color: '#64748b' },
+          grid: { color: 'rgba(255, 255, 255, 0.04)' }
         },
         y: {
           type: 'linear',
           display: true,
           position: 'left',
-          ticks: { color: '#fff' },
-          grid: { color: 'rgba(255, 255, 255, 0.1)' }
+          ticks: { color: '#64748b' },
+          grid: { color: 'rgba(255, 255, 255, 0.04)' }
         },
         y1: {
           type: 'linear',
           display: true,
           position: 'right',
-          ticks: { color: '#ff6b6b' },
+          ticks: { color: '#64748b' },
           grid: { drawOnChartArea: false }
         }
       }
@@ -707,7 +707,7 @@ function updatePageBackground(weatherMain) {
 
   switch(weatherMain?.toLowerCase()) {
     case 'clear':
-      body.style.background = "linear-gradient(to bottom, #87CEEB, #4682B4)";
+      body.style.background = "linear-gradient(180deg, #0a0a0f 0%, #0c1a15 50%, #0a0a0f 100%)";
       break;
     case 'clouds':
     case 'overcast':
@@ -715,7 +715,7 @@ function updatePageBackground(weatherMain) {
     case 'scattered clouds':
     case 'broken clouds':
     case 'few clouds':
-      body.style.background = "linear-gradient(to bottom, #708090, #2F4F4F)";
+      body.style.background = "linear-gradient(180deg, #0a0a0f 0%, #0f1419 50%, #0a0a0f 100%)";
       break;
     case 'rain':
     case 'drizzle':
@@ -723,16 +723,16 @@ function updatePageBackground(weatherMain) {
     case 'moderate rain':
     case 'heavy rain':
     case 'shower rain':
-      body.style.background = "linear-gradient(to bottom, #4682B4, #191970)";
+      body.style.background = "linear-gradient(180deg, #0a0a0f 0%, #0a0f1a 50%, #0a0a0f 100%)";
       break;
     case 'thunderstorm':
     case 'thunderstorms':
-      body.style.background = "linear-gradient(to bottom, #2F4F4F, #000000)";
+      body.style.background = "linear-gradient(180deg, #0a0a0f 0%, #0a0a12 50%, #050508 100%)";
       break;
     case 'snow':
     case 'light snow':
     case 'heavy snow':
-      body.style.background = "linear-gradient(to bottom, #B0C4DE, #4682B4)";
+      body.style.background = "linear-gradient(180deg, #0a0a0f 0%, #0f1219 50%, #0a0a0f 100%)";
       break;
     case 'mist':
     case 'fog':
@@ -743,14 +743,14 @@ function updatePageBackground(weatherMain) {
     case 'ash':
     case 'squall':
     case 'tornado':
-      body.style.background = "linear-gradient(to bottom, #D3D3D3, #696969)";
+      body.style.background = "linear-gradient(180deg, #0a0a0f 0%, #12121a 50%, #0a0a0f 100%)";
       break;
     default:
       console.log("Using default background for weather condition:", weatherMain);
-      body.style.background = "linear-gradient(to bottom, #338aed, #0a2b41)";
+      body.style.background = "#0a0a0f";
   }
-  
-  body.style.color = "#fff";
+
+  body.style.color = "#94a3b8";
 }
 
 function updateAirQuality(data) {
@@ -776,49 +776,49 @@ function updateAirQuality(data) {
   }
   
   airQualityContainer.innerHTML = `
-    <h3 style="margin: 20px 0 15px 0; color: #fff; text-align: center;">
-      <i class="fas fa-wind"></i> Air Quality Index
+    <h3 style="margin: 20px 0 15px 0; color: #f1f5f9; text-align: center; font-family: var(--font-display); font-weight: 600; font-size: 1rem; letter-spacing: -0.02em;">
+      <i class="fas fa-wind" style="color: #00e5a0;"></i> Air Quality Index
     </h3>
     <div class="aqi-main" style="text-align: center; margin-bottom: 15px;">
-      <div class="aqi-value" style="display: inline-block; padding: 10px 20px; border-radius: 20px; background: ${aqiInfo.color}; color: #000; font-weight: bold; margin-bottom: 10px; cursor: help; transition: all 0.3s ease;" 
+      <div class="aqi-value" style="display: inline-block; padding: 8px 20px; border-radius: 8px; background: ${aqiInfo.color}; color: #000; font-weight: 600; font-family: var(--font-mono); font-size: 0.9rem; margin-bottom: 10px; cursor: help; transition: all 0.2s ease;"
            title="Air Quality Index (AQI) - A standardized scale from 1-5 that indicates air pollution levels. Based on concentrations of major pollutants including PM2.5, PM10, ozone, and nitrogen dioxide."
-           onmouseover="this.style.transform='scale(1.05)'" 
+           onmouseover="this.style.transform='scale(1.05)'"
            onmouseout="this.style.transform='scale(1)'">
         ${aqi} - ${aqiInfo.label}
       </div>
-      <div class="aqi-description" style="color: rgba(255,255,255,0.9); font-size: 14px;">
+      <div class="aqi-description" style="color: #94a3b8; font-size: 0.85rem;">
         ${aqiInfo.description}
       </div>
     </div>
     <div class="air-pollutants">
-      <div class="pollutant-item" style="text-align: center; padding: 8px; background: rgba(255,255,255,0.1); border-radius: 8px; cursor: help;" 
+      <div class="pollutant-item"
            title="PM2.5 - Fine particulate matter smaller than 2.5 micrometers. Can penetrate deep into lungs and bloodstream. Main sources: vehicle emissions, industrial processes, wildfires.">
-        <div style="font-weight: bold;">PM2.5</div>
+        <div style="font-weight: 600; color: #f1f5f9;">PM2.5</div>
         <div>${components.pm2_5.toFixed(1)} µg/m³</div>
       </div>
-      <div class="pollutant-item" style="text-align: center; padding: 8px; background: rgba(255,255,255,0.1); border-radius: 8px; cursor: help;" 
+      <div class="pollutant-item"
            title="PM10 - Coarse particulate matter smaller than 10 micrometers. Can irritate eyes, nose, and throat. Main sources: dust storms, construction, road dust.">
-        <div style="font-weight: bold;">PM10</div>
+        <div style="font-weight: 600; color: #f1f5f9;">PM10</div>
         <div>${components.pm10.toFixed(1)} µg/m³</div>
       </div>
-      <div class="pollutant-item" style="text-align: center; padding: 8px; background: rgba(255,255,255,0.1); border-radius: 8px; cursor: help;" 
+      <div class="pollutant-item"
            title="O₃ - Ground-level ozone (smog). Can cause respiratory problems and eye irritation. Formed when sunlight reacts with pollutants from vehicles and industry.">
-        <div style="font-weight: bold;">O₃</div>
+        <div style="font-weight: 600; color: #f1f5f9;">O₃</div>
         <div>${components.o3.toFixed(1)} µg/m³</div>
       </div>
-      <div class="pollutant-item" style="text-align: center; padding: 8px; background: rgba(255,255,255,0.1); border-radius: 8px; cursor: help;" 
+      <div class="pollutant-item"
            title="NO₂ - Nitrogen dioxide. Can cause respiratory issues and reduced lung function. Main sources: vehicle emissions, power plants, industrial activities.">
-        <div style="font-weight: bold;">NO₂</div>
+        <div style="font-weight: 600; color: #f1f5f9;">NO₂</div>
         <div>${components.no2.toFixed(1)} µg/m³</div>
       </div>
-      ${components.so2 ? `<div class="pollutant-item" style="text-align: center; padding: 8px; background: rgba(255,255,255,0.1); border-radius: 8px; cursor: help;" 
+      ${components.so2 ? `<div class="pollutant-item"
            title="SO₂ - Sulfur dioxide. Can cause breathing difficulties and throat irritation. Main sources: fossil fuel combustion, industrial processes, volcanoes.">
-        <div style="font-weight: bold;">SO₂</div>
+        <div style="font-weight: 600; color: #f1f5f9;">SO₂</div>
         <div>${components.so2.toFixed(1)} µg/m³</div>
       </div>` : ''}
-      ${components.co ? `<div class="pollutant-item" style="text-align: center; padding: 8px; background: rgba(255,255,255,0.1); border-radius: 8px; cursor: help;" 
+      ${components.co ? `<div class="pollutant-item"
            title="CO - Carbon monoxide. Colorless, odorless gas that can be deadly in high concentrations. Reduces oxygen delivery to organs. Main sources: vehicle emissions, faulty heating systems.">
-        <div style="font-weight: bold;">CO</div>
+        <div style="font-weight: 600; color: #f1f5f9;">CO</div>
         <div>${(components.co / 1000).toFixed(2)} mg/m³</div>
       </div>` : ''}
     </div>

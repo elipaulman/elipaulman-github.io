@@ -37,19 +37,37 @@ export default function Home() {
   return (
     <>
       <div className="relative min-h-screen">
-        <div className="absolute inset-0 -z-10 bg-[radial-gradient(circle_at_10%_20%,rgba(109,40,217,0.12),transparent_25%),radial-gradient(circle_at_90%_10%,rgba(56,189,248,0.16),transparent_22%),radial-gradient(circle_at_50%_80%,rgba(59,130,246,0.12),transparent_30%)]" />
+        {/* Subtle accent gradient at top */}
+        <div className="pointer-events-none fixed inset-0 -z-10 bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,var(--accent-dim),transparent)]" />
+
         <NavBar resumePath={socials.resume.path} />
-        <main className="mx-auto max-w-6xl px-4 sm:px-6 pb-14 sm:pb-16">
+        <main className="mx-auto max-w-5xl px-5 pb-14 sm:px-8 sm:pb-16">
           <Hero socials={socials} />
+
+          <div className="accent-line" />
           <AboutSection />
           <SkillsSection />
+
+          <div className="accent-line" />
           <ExperienceTimeline />
+
+          <div className="accent-line" />
           <ProjectsGrid />
+
+          <div className="accent-line" />
           <EducationSection />
           <FAQSection />
+
+          <div className="accent-line" />
           <ContactSection />
-          <footer className="mt-10 text-center text-xs text-[var(--muted)]">
-            Built with Next.js · Last updated {new Date().getFullYear()}
+
+          <footer className="mt-20 border-t border-[var(--border)] pt-8 pb-10 text-center">
+            <p className="font-mono text-xs text-[var(--muted)]">
+              Designed & built by {personal.name}
+            </p>
+            <p className="mt-2 font-mono text-[0.65rem] text-[var(--line-number)]">
+              Next.js + TypeScript &middot; {new Date().getFullYear()}
+            </p>
           </footer>
         </main>
       </div>

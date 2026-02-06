@@ -1,108 +1,116 @@
-import type { ReactNode } from "react";
+"use client";
+
 import Link from "next/link";
 import { personal, socials } from "@/lib/data";
 import { SectionHeading } from "./SectionHeading";
-import { LocationIcon, MailIcon } from "./icons";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 export function AboutSection() {
+  const reveal = useScrollReveal();
   const websiteUrl = personal.website.startsWith("http")
     ? personal.website
     : `https://${personal.website}`;
 
   return (
     <section id="about" className="section-shell">
-      <div className="glass-panel space-y-8">
+      <div ref={reveal} className="reveal space-y-8">
         <SectionHeading
-          eyebrow="About"
+          tag="about"
           title="Who I Am"
           description="I ship fast, keep things maintainable, and love pairing AI/ML with solid product instincts."
         />
-        <div className="grid gap-10 lg:grid-cols-[1.2fr_0.8fr] lg:items-start">
+
+        <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-start">
+          {/* Bio */}
           <div className="space-y-6">
-            <div className="rounded-2xl border border-[var(--border)] bg-[var(--panel)] p-6 shadow-[0_12px_50px_rgba(0,0,0,0.28)]">
-              <p className="leading-relaxed text-[var(--muted)]">
+            <div className="card">
+              <p className="leading-relaxed text-[var(--text)]">
                 {personal.about.short}
               </p>
-              <p className="mt-4 leading-relaxed text-[var(--muted)]">
+              <p className="mt-4 leading-relaxed text-[var(--text)]">
                 {personal.about.detailed}
               </p>
             </div>
-            <div className="grid gap-3 sm:grid-cols-2">
-              <Callout title="What I&apos;m looking for">
-                Focused on building AI/ML-powered products with measurable impact.
-              </Callout>
-              <Callout title="How I work">
-                Bias for action, fast iterations, clean API boundaries, and crisp documentation.
-              </Callout>
+
+            <div className="grid gap-4 sm:grid-cols-2">
+              <div className="card">
+                <p className="font-mono text-xs text-[var(--accent)]">// focus</p>
+                <p className="mt-2 font-display text-sm font-semibold tracking-tight text-[var(--text-strong)]">
+                  What I focus on
+                </p>
+                <p className="mt-1 text-sm text-[var(--muted)]">
+                  Quality engineering, test automation, and building AI/ML-powered products with measurable impact.
+                </p>
+              </div>
+              <div className="card">
+                <p className="font-mono text-xs text-[var(--accent)]">// method</p>
+                <p className="mt-2 font-display text-sm font-semibold tracking-tight text-[var(--text-strong)]">
+                  How I work
+                </p>
+                <p className="mt-1 text-sm text-[var(--muted)]">
+                  Bias for action, fast iterations, clean API boundaries, and crisp documentation.
+                </p>
+              </div>
             </div>
           </div>
-          <div className="rounded-2xl border border-[var(--border)] bg-[var(--panel)] p-6 shadow-[0_15px_60px_rgba(0,0,0,0.35)]">
-            <div className="space-y-4 text-sm text-[var(--text-strong)]">
-              <div className="flex items-center justify-between gap-3">
-                <span className="text-[var(--muted)]">Name</span>
-                <span className="font-semibold">{personal.name}</span>
-              </div>
-              <div className="flex items-center justify-between gap-3">
-                <span className="text-[var(--muted)]">University</span>
-                <span className="font-semibold text-right">
-                  {personal.university}
-                </span>
-              </div>
-              <div className="flex items-center justify-between gap-3">
-                <span className="text-[var(--muted)]">Website</span>
-                <Link
-                  href={websiteUrl}
-                  className="font-semibold text-[var(--accent)]"
-                  target="_blank"
-                  rel="noreferrer"
-                >
-                  {personal.website.replace(/^https?:\/\//, "")}
-                </Link>
-              </div>
-              <div className="flex items-start justify-between gap-3">
-                <span className="text-[var(--muted)]">Email</span>
-                <div className="space-y-1 text-right font-semibold">
+
+          {/* Terminal card */}
+          <div className="card overflow-hidden">
+            <div className="flex items-center gap-2 border-b border-[var(--border)] pb-3 mb-4">
+              <span className="h-2.5 w-2.5 rounded-full bg-red-400/50" />
+              <span className="h-2.5 w-2.5 rounded-full bg-yellow-400/50" />
+              <span className="h-2.5 w-2.5 rounded-full bg-green-400/50" />
+              <span className="ml-2 font-mono text-xs text-[var(--muted)]">
+                elijah@portfolio ~ $
+              </span>
+            </div>
+
+            <div className="space-y-3 font-mono text-sm">
+              <TerminalRow label="name" value={personal.name} />
+              <TerminalRow label="university" value={personal.university} />
+              <TerminalRow
+                label="website"
+                value={
+                  <Link
+                    href={websiteUrl}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-[var(--accent)] hover:underline"
+                  >
+                    {personal.website.replace(/^https?:\/\//, "")}
+                  </Link>
+                }
+              />
+              <TerminalRow
+                label="email"
+                value={
                   <Link
                     href={`mailto:${personal.email}`}
-                    className="hover:text-[var(--accent)]"
+                    className="text-[var(--text-strong)] hover:text-[var(--accent)]"
                   >
                     {personal.email}
                   </Link>
+                }
+              />
+              <TerminalRow
+                label="phone"
+                value={
                   <Link
-                    href={`mailto:${personal.schoolEmail}`}
-                    className="block font-semibold hover:text-[var(--accent)]"
+                    href={`tel:${socials.phone.replace(/\D/g, "")}`}
+                    className="text-[var(--text-strong)] hover:text-[var(--accent)]"
                   >
-                    {personal.schoolEmail}
+                    {socials.phone}
                   </Link>
-                </div>
-              </div>
-              <div className="flex items-center justify-between gap-3">
-                <span className="text-[var(--muted)]">Phone</span>
-                <Link
-                  href={`tel:${socials.phone.replace(/\D/g, "")}`}
-                  className="font-semibold hover:text-[var(--accent)]"
-                >
-                  {socials.phone}
-                </Link>
-              </div>
-              <div className="flex items-center justify-between gap-3">
-                <span className="text-[var(--muted)]">Location</span>
-                <span className="inline-flex items-center gap-2 rounded-full border border-[var(--border)] px-3 py-1 text-xs font-semibold text-[var(--text-strong)]">
-                  <LocationIcon className="h-4 w-4" />
-                  {personal.location}
-                </span>
-              </div>
+                }
+              />
+              <TerminalRow label="location" value={personal.location} />
             </div>
+
             <div className="mt-6 flex flex-wrap gap-2">
               <span className="pill">Full-stack</span>
               <span className="pill">AI/ML</span>
               <span className="pill">Cloud</span>
               <span className="pill">Leadership</span>
-              <span className="pill">Rapid prototyping</span>
-            </div>
-            <div className="mt-5 hidden items-center gap-3 rounded-xl border border-[var(--border)] bg-[color-mix(in_srgb,theme(colors.sky.500)_14%,transparent)] px-4 py-3 text-sm text-[var(--text-strong)] sm:flex">
-              <MailIcon className="h-4 w-4" />
-              <span>Reach out if you want to build something impactful together.</span>
             </div>
           </div>
         </div>
@@ -111,16 +119,18 @@ export function AboutSection() {
   );
 }
 
-type CalloutProps = {
-  title: string;
-  children: ReactNode;
-};
-
-function Callout({ title, children }: CalloutProps) {
+function TerminalRow({
+  label,
+  value,
+}: {
+  label: string;
+  value: React.ReactNode;
+}) {
   return (
-    <div className="rounded-2xl border border-[var(--border)] bg-[var(--panel)] p-5 shadow-[0_10px_40px_rgba(0,0,0,0.25)]">
-      <p className="text-sm font-semibold text-[var(--text-strong)]">{title}</p>
-      <p className="mt-2 text-sm text-[var(--muted)]">{children}</p>
+    <div className="flex gap-2">
+      <span className="shrink-0 text-[var(--accent)]">{label}</span>
+      <span className="text-[var(--muted)]">=</span>
+      <span className="min-w-0 text-[var(--text-strong)]">{value}</span>
     </div>
   );
 }
