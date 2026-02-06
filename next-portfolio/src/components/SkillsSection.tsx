@@ -1,72 +1,48 @@
+"use client";
+
 import { skills } from "@/lib/data";
 import { SectionHeading } from "./SectionHeading";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
+
+const categories = [
+  { key: "programmingLanguages" as const, label: "languages" },
+  { key: "frameworks" as const, label: "frameworks" },
+  { key: "tools" as const, label: "tools" },
+  { key: "skills" as const, label: "specialties" },
+];
 
 export function SkillsSection() {
-  const languagesFrameworks = [
-    ...skills.programmingLanguages.slice(0, 7),
-    ...(skills.frameworks ?? []).slice(0, 4),
-  ];
-  const toolsSpecialties = [
-    ...(skills.tools ?? []).slice(0, 6),
-    ...(skills.skills ?? []).slice(0, 4),
-  ];
+  const reveal = useScrollReveal();
 
   return (
     <section id="skills" className="section-shell">
-      <div className="glass-panel space-y-6">
+      <div ref={reveal} className="reveal space-y-8">
         <SectionHeading
-          eyebrow="Skills"
+          tag="skills"
           title="Stacks I Build With"
           description="Languages, frameworks, platforms, and specialties I rely on to ship production-grade software."
         />
-        <div className="grid gap-6 md:grid-cols-2">
-          <SkillCard title="Languages & Frameworks" items={languagesFrameworks} />
-          <SkillCard title="Tools & Specialties" items={toolsSpecialties} />
+
+        <div className="reveal-stagger grid gap-4 sm:grid-cols-2">
+          {categories.map((cat) => {
+            const items = skills[cat.key] ?? [];
+            return (
+              <div key={cat.key} className="reveal card card-glow">
+                <p className="mb-4 font-mono text-xs text-[var(--accent)]">
+                  // {cat.label}
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {items.map((item) => (
+                    <span key={item.name} className="pill">
+                      {item.name}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            );
+          })}
         </div>
       </div>
     </section>
-  );
-}
-
-type SkillCardProps = {
-  title: string;
-  items: { name: string }[];
-};
-
-function SkillCard({ title, items }: SkillCardProps) {
-  return (
-    <div className="rounded-2xl border border-[var(--border)] bg-[var(--panel)] p-5 shadow-[0_15px_60px_rgba(0,0,0,0.3)]">
-      <h3 className="text-lg font-semibold text-[var(--text-strong)]">{title}</h3>
-      <div className="mt-4 flex flex-wrap gap-2">
-        {items.map((item, idx) => (
-          <SkillBadge key={item.name} item={item} index={idx} />
-        ))}
-      </div>
-    </div>
-  );
-}
-
-function SkillBadge({ item, index }: { item: { name: string }; index: number }) {
-  const glyphPalette = [
-    "linear-gradient(135deg, #38bdf8, #0ea5e9)",
-    "linear-gradient(135deg, #a78bfa, #7c3aed)",
-    "linear-gradient(135deg, #fb923c, #f97316)",
-    "linear-gradient(135deg, #34d399, #16a34a)",
-  ];
-
-  const glyph = item.name.slice(0, 2).toUpperCase();
-  const bg = glyphPalette[index % glyphPalette.length];
-
-  return (
-    <span className="pill inline-flex items-center gap-2 px-3 py-1 text-xs font-semibold">
-      <span
-        aria-hidden
-        className="flex h-6 w-6 shrink-0 items-center justify-center rounded-full text-[0.65rem] font-semibold text-[color-mix(in_srgb,white_78%,#0b1725)] shadow-[0_6px_18px_rgba(0,0,0,0.18)] ring-1 ring-[color-mix(in_srgb,var(--accent)_28%,transparent)]"
-        style={{ backgroundImage: bg }}
-      >
-        {glyph}
-      </span>
-      {item.name}
-    </span>
   );
 }

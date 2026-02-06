@@ -1,11 +1,17 @@
 import type { Metadata } from "next";
-import { Space_Grotesk } from "next/font/google";
+import { Inter, Syne } from "next/font/google";
 import "./globals.css";
 import { personal, socials } from "@/lib/data";
 
-const spaceGrotesk = Space_Grotesk({
+const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-space-grotesk",
+  variable: "--font-inter",
+  display: "swap",
+});
+
+const syne = Syne({
+  subsets: ["latin"],
+  variable: "--font-display",
   display: "swap",
 });
 
@@ -50,7 +56,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={`${spaceGrotesk.variable} bg-[var(--bg)] text-[var(--text)] antialiased`}>
+      <body className={`${inter.variable} ${syne.variable} bg-[var(--bg)] text-[var(--text)] antialiased`}>
         {children}
       </body>
     </html>

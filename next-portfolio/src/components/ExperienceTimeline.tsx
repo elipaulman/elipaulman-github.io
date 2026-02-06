@@ -1,56 +1,75 @@
+"use client";
+
 import Image from "next/image";
 import { experience } from "@/lib/data";
 import { SectionHeading } from "./SectionHeading";
+import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 export function ExperienceTimeline() {
+  const reveal = useScrollReveal();
+
   return (
     <section id="experience" className="section-shell">
-      <div className="glass-panel space-y-8">
+      <div ref={reveal} className="reveal">
         <SectionHeading
-          eyebrow="Experience"
-          title="Building and Shipping"
-          description="Internships, fellowships, and wins that taught me how to ship quickly, lead teams, and own outcomes."
+          tag="experience"
+          title="Building & Shipping"
+          description="Full-time roles, internships, and wins that taught me how to ship quickly, lead teams, and own outcomes."
         />
-        <div className="grid gap-6">
-          {experience.map((role) => (
-            <article
-              key={role.id}
-              className="grid grid-cols-[auto_1fr] gap-4 rounded-2xl border border-[var(--border)] bg-[var(--panel)] p-5 sm:p-6 shadow-[0_15px_60px_rgba(0,0,0,0.3)] md:items-start"
-            >
-              <div className="flex h-14 w-14 items-center justify-center rounded-xl border border-[var(--border)] bg-[var(--logo-bg)]">
-                <Image
-                  src={`/${role.logo}`}
-                  alt={role.logoAlt}
-                  width={44}
-                  height={44}
-                  className="h-10 w-10 object-contain"
-                />
-              </div>
-              <div className="space-y-2">
-                <div className="flex flex-col gap-1 md:flex-row md:items-center md:justify-between">
-                  <div>
-                    <p className="text-xs uppercase tracking-[0.2em] text-[var(--muted)]">
-                      {role.date}
-                    </p>
-                    <h3 className="text-xl font-semibold text-[var(--text-strong)]">
-                      {role.title}
-                    </h3>
-                    <p className="text-sm font-medium text-[var(--muted-strong)]">
-                      {role.company}
-                    </p>
+
+        <div className="relative pl-8 md:pl-12">
+          {/* Timeline line — centered at left-[11.5px] on mobile, left-[19.5px] on md */}
+          <div className="absolute left-[11.5px] top-2 bottom-2 w-px bg-[var(--border)] md:left-[19.5px]" />
+
+          <div className="reveal-stagger space-y-6">
+            {experience.map((role) => (
+              <div key={role.id} className="reveal relative">
+                {/* Timeline dot — centered on line, vertically centered with date */}
+                <div className="absolute left-[-25px] top-[3px] h-2.5 w-2.5 rounded-full border-2 border-[var(--accent)] bg-[var(--bg)] md:left-[-33px]" />
+
+                {/* Date */}
+                <p className="mb-2 font-mono text-xs leading-[18px] text-[var(--muted)]">
+                  {role.date}
+                </p>
+
+                {/* Card */}
+                <article className="card card-glow">
+                  <div className="flex items-start gap-4">
+                    <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-[var(--border)] bg-[var(--logo-bg)]">
+                      <Image
+                        src={`/${role.logo}`}
+                        alt={role.logoAlt}
+                        width={28}
+                        height={28}
+                        className="h-7 w-7 object-contain"
+                        style={{ filter: "var(--logo-filter)" }}
+                      />
+                    </div>
+                    <div className="min-w-0 flex-1">
+                      <h3 className="font-display text-lg font-bold tracking-tight text-[var(--text-strong)]">
+                        {role.title}
+                      </h3>
+                      <p className="text-sm font-medium text-[var(--muted-strong)]">
+                        {role.company}
+                      </p>
+                    </div>
                   </div>
-                </div>
-                <ul className="mt-3 space-y-2 text-sm text-[var(--muted)]">
-                  {role.responsibilities.map((item) => (
-                    <li key={item} className="flex gap-2 leading-relaxed md:leading-normal">
-                      <span className="mt-1.5 h-1.5 w-1.5 shrink-0 rounded-full bg-[var(--accent)]" />
-                      <span className="min-w-0">{item}</span>
-                    </li>
-                  ))}
-                </ul>
+
+                  <ul className="mt-4 space-y-2 text-sm text-[var(--text)]">
+                    {role.responsibilities.map((item) => (
+                      <li
+                        key={item}
+                        className="flex gap-2 leading-relaxed"
+                      >
+                        <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-[var(--accent)]" />
+                        <span className="min-w-0">{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </article>
               </div>
-            </article>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     </section>

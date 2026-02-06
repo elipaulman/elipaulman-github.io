@@ -5,90 +5,88 @@ import { useState } from "react";
 import { ThemeToggle } from "./ThemeToggle";
 import { DownloadIcon } from "./icons";
 
-type NavBarProps = {
-  resumePath: string;
-};
-
 const links = [
-  { href: "#about", label: "About" },
-  { href: "#skills", label: "Skills" },
-  { href: "#experience", label: "Experience" },
-  { href: "#projects", label: "Projects" },
-  { href: "#education", label: "Education" },
-  { href: "#faq", label: "FAQ" },
-  { href: "#contact", label: "Contact" },
+  { href: "#about", label: "about" },
+  { href: "#skills", label: "skills" },
+  { href: "#experience", label: "experience" },
+  { href: "#projects", label: "projects" },
+  { href: "#education", label: "education" },
+  { href: "#faq", label: "faq" },
+  { href: "#contact", label: "contact" },
 ];
 
-export function NavBar({ resumePath }: NavBarProps) {
+export function NavBar({ resumePath }: { resumePath: string }) {
   const [open, setOpen] = useState(false);
 
-  const handleLinkClick = () => setOpen(false);
-
   return (
-    <header className="sticky top-0 z-50 backdrop-blur-xl">
-      <div className="mx-auto flex max-w-6xl items-center justify-between gap-4 px-6 py-4">
+    <header className="sticky top-0 z-50 border-b border-[var(--border)] bg-[var(--bg)]/85 backdrop-blur-xl backdrop-saturate-150">
+      <div className="mx-auto flex max-w-5xl items-center justify-between px-5 py-3 sm:px-8">
         <Link
           href="#intro"
-          className="text-lg font-semibold tracking-tight text-[var(--text-strong)]"
+          className="font-display text-lg font-bold tracking-tight text-[var(--accent)]"
         >
-          Elijah Paulman
+          EP<span className="text-[var(--muted)]">.</span>
         </Link>
 
-        <div className="flex items-center gap-3">
-          <button
-            className="rounded-full border border-[var(--border)] bg-[var(--panel)] px-3 py-2 text-sm font-medium text-[var(--text-strong)] transition hover:-translate-y-0.5 hover:border-[var(--accent)] hover:text-[var(--accent)] md:hidden"
-            onClick={() => setOpen((prev) => !prev)}
-            aria-label="Toggle navigation"
-            aria-expanded={open}
-          >
-            Menu
-          </button>
-          <div className="hidden items-center gap-2 md:flex">
-            {links.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="rounded-full px-3 py-2 text-sm font-medium text-[var(--muted)] transition hover:-translate-y-0.5 hover:text-[var(--accent)]"
-              >
-                {link.label}
-              </Link>
-            ))}
-          </div>
-          <Link
-            href={resumePath}
-            className="hidden items-center gap-2 rounded-full border border-[var(--border)] bg-[var(--panel)] px-4 py-2 text-sm font-medium text-[var(--text-strong)] transition hover:-translate-y-0.5 hover:border-[var(--accent)] hover:text-[var(--accent)] hover:shadow-[0_10px_40px_rgba(0,0,0,0.25)] md:inline-flex"
-            download
-          >
-            <DownloadIcon className="h-4 w-4" />
-            Resume
-          </Link>
-          <ThemeToggle />
-        </div>
-      </div>
-
-      {open ? (
-        <div className="mx-auto mt-2 max-w-6xl space-y-2 px-6 pb-4 md:hidden">
+        <nav className="hidden items-center gap-0.5 md:flex">
           {links.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              onClick={handleLinkClick}
-              className="flex w-full items-center rounded-2xl border border-[var(--border)] bg-[var(--panel)] px-4 py-3 text-[var(--text-strong)] transition hover:-translate-y-0.5 hover:border-[var(--accent)] hover:text-[var(--accent)]"
+              className="relative rounded-md px-3 py-1.5 font-mono text-[0.7rem] text-[var(--muted)] transition-colors duration-200 hover:text-[var(--text-strong)]"
             >
               {link.label}
             </Link>
           ))}
+        </nav>
+
+        <div className="flex items-center gap-2">
           <Link
             href={resumePath}
-            onClick={handleLinkClick}
-            className="flex items-center justify-center gap-2 rounded-2xl border border-[var(--border)] bg-[var(--panel)] px-4 py-3 text-sm font-medium text-[var(--text-strong)] transition hover:-translate-y-0.5 hover:border-[var(--accent)] hover:text-[var(--accent)] hover:shadow-[0_10px_40px_rgba(0,0,0,0.25)]"
             download
+            className="hidden items-center gap-1.5 rounded-lg border border-[var(--border)] px-3 py-1.5 font-mono text-[0.7rem] text-[var(--muted)] transition-all duration-200 hover:border-[var(--border-hover)] hover:text-[var(--text-strong)] md:inline-flex"
           >
-            <DownloadIcon className="h-4 w-4" />
-            Resume
+            <DownloadIcon className="h-3.5 w-3.5" />
+            resume
           </Link>
+          <ThemeToggle />
+          <button
+            className="rounded-lg border border-[var(--border)] px-3 py-2 font-mono text-xs text-[var(--muted)] transition-all duration-200 hover:border-[var(--border-hover)] hover:text-[var(--text-strong)] md:hidden"
+            onClick={() => setOpen((p) => !p)}
+            aria-label="Toggle navigation"
+            aria-expanded={open}
+          >
+            {open ? "[x]" : "[=]"}
+          </button>
         </div>
-      ) : null}
+      </div>
+
+      {open && (
+        <nav className="border-t border-[var(--border)] px-5 py-4 sm:px-8 md:hidden">
+          <div className="space-y-1">
+            {links.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                onClick={() => setOpen(false)}
+                className="block rounded-lg px-4 py-2.5 font-mono text-sm text-[var(--muted)] transition-colors duration-200 hover:bg-[var(--panel-hover)] hover:text-[var(--text-strong)]"
+              >
+                <span className="text-[var(--accent)] opacity-50">// </span>
+                {link.label}
+              </Link>
+            ))}
+            <Link
+              href={resumePath}
+              download
+              onClick={() => setOpen(false)}
+              className="flex items-center gap-2 rounded-lg px-4 py-2.5 font-mono text-sm text-[var(--muted)] transition-colors duration-200 hover:bg-[var(--panel-hover)] hover:text-[var(--text-strong)]"
+            >
+              <DownloadIcon className="h-3.5 w-3.5" />
+              resume.pdf
+            </Link>
+          </div>
+        </nav>
+      )}
     </header>
   );
 }

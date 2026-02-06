@@ -1,7 +1,7 @@
 {
   "name": "Elijah Paulman",
   "shortName": "Eli",
-  "title": "Software Engineer specializing in AI/ML | Graduated Dec 2025",
+  "title": "Software Engineer at Apple | OSU CSE '25",
   "email": "eli.paulman@gmail.com",
   "schoolEmail": "paulman.2@osu.edu",
   "phone": "(513)-491-6464",
@@ -13,8 +13,8 @@
   "linkedIn": "https://www.linkedin.com/in/elijahpaulman/",
   "github": "https://github.com/elipaulman",
   "about": {
-    "short": "I am a Computer Science & Engineering graduate from The Ohio State University (December 2025) specializing in AI/ML. I have production experience at Amazon and London Computer Systems building scalable applications with a focus on intelligent automation.",
-    "detailed": "At Amazon, I automated catalog systems managing over 13,000 items, achieving 60% efficiency gains. At LCS, I built REST APIs serving over 100,000 users. I have developed AI-powered applications using LangChain and OpenAI APIs, led 20+ engineers as ESW President, and won multiple J.P. Morgan hackathons."
+    "short": "I'm a Software Quality Engineer at Apple, working on carrier services that power iPhone activation. I graduated from Ohio State (CSE, Dec 2025) and have shipped production systems at Amazon and London Computer Systems with a focus on automation and scalable architecture.",
+    "detailed": "At Apple, I test and automate carrier onboarding workflows for iPhone. Previously at Amazon, I automated catalog systems managing 13,000+ items with 60% efficiency gains. At LCS, I built REST APIs serving 100,000+ users. I've also developed AI-powered apps with LangChain, led 20+ engineers as ESW President, and won multiple J.P. Morgan hackathons."
   },
   "hobbies": "I enjoy playing guitar, mountain biking, skiing, kayaking, and spending time with friends and family. I also like to create cool projects on my 3D printer, and with Arduino."
 }

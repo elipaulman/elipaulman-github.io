@@ -1,31 +1,21 @@
 type SectionHeadingProps = {
-  eyebrow?: string;
+  tag: string;
   title: string;
   description?: string;
 };
 
-export function SectionHeading({
-  eyebrow,
-  title,
-  description,
-}: SectionHeadingProps) {
+export function SectionHeading({ tag, title, description }: SectionHeadingProps) {
   return (
-    <div className="mb-8 space-y-3">
-      {eyebrow ? (
-        <p className="text-xs font-semibold uppercase tracking-[0.2em] text-[var(--accent)]">
-          {eyebrow}
+    <div className="mb-12 space-y-4 text-center sm:text-left">
+      <span className="code-tag">{tag}</span>
+      <h2 className="heading-display text-3xl text-[var(--text-strong)] sm:text-4xl lg:text-5xl">
+        {title}
+      </h2>
+      {description && (
+        <p className="mx-auto max-w-2xl text-base leading-relaxed text-[var(--muted)] sm:mx-0">
+          {description}
         </p>
-      ) : null}
-      <div className="flex flex-col gap-3 md:flex-row md:items-end md:justify-between">
-        <h2 className="text-3xl font-semibold tracking-tight text-[var(--text-strong)] md:text-4xl">
-          {title}
-        </h2>
-        {description ? (
-          <p className="max-w-2xl text-sm text-[var(--muted)] md:text-base">
-            {description}
-          </p>
-        ) : null}
-      </div>
+      )}
     </div>
   );
 }
