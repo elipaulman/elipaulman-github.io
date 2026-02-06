@@ -29,7 +29,7 @@ export function SkillsSection() {
             return (
               <div key={cat.key} className="reveal card card-glow">
                 <p className="mb-4 font-mono text-xs text-[var(--accent)]">
-                  // {cat.label}
+                  {'// '}{cat.label}
                 </p>
                 <div className="flex flex-wrap gap-2">
                   {items.map((item) => (

@@ -35,7 +35,7 @@ export function ContactSection() {
               <MailIcon className="h-5 w-5 text-[var(--accent)]" />
             </div>
             <div className="min-w-0">
-              <p className="font-mono text-xs text-[var(--muted)]">// email</p>
+              <p className="font-mono text-xs text-[var(--muted)]">{'// email'}</p>
               <p className="truncate text-sm font-semibold text-[var(--text-strong)]">
                 {personal.email}
               </p>
@@ -50,7 +50,7 @@ export function ContactSection() {
               <PhoneIcon className="h-5 w-5 text-[var(--accent)]" />
             </div>
             <div>
-              <p className="font-mono text-xs text-[var(--muted)]">// phone</p>
+              <p className="font-mono text-xs text-[var(--muted)]">{'// phone'}</p>
               <p className="text-sm font-semibold text-[var(--text-strong)]">
                 {socials.phone}
               </p>
@@ -62,7 +62,7 @@ export function ContactSection() {
               <LocationIcon className="h-5 w-5 text-[var(--accent)]" />
             </div>
             <div>
-              <p className="font-mono text-xs text-[var(--muted)]">// location</p>
+              <p className="font-mono text-xs text-[var(--muted)]">{'// location'}</p>
               <p className="text-sm font-semibold text-[var(--text-strong)]">
                 {personal.location}
               </p>

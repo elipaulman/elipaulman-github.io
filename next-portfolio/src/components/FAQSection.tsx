@@ -27,7 +27,7 @@ export function FAQSection() {
               <summary className="flex cursor-pointer list-none items-center justify-between gap-3">
                 <span className="flex items-center gap-3">
                   <span className="font-mono text-xs text-[var(--accent)]">
-                    //
+                    {'//'}
                   </span>
                   <span className="font-display text-base font-semibold tracking-tight text-[var(--text-strong)]">
                     {item.question}
@@ -43,7 +43,7 @@ export function FAQSection() {
         </div>
 
         <p className="pt-2 text-center font-mono text-sm text-[var(--muted)]">
-          // still curious?{" "}
+          {'// still curious? '}
           <a
             href={`mailto:${personal.email}`}
             className="font-semibold text-[var(--accent)] hover:underline"
