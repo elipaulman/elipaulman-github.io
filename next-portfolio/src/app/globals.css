@@ -28,7 +28,7 @@
   --logo-filter: invert(1) hue-rotate(180deg);
 
   --line-number: rgba(255, 255, 255, 0.1);
-  --dot-color: rgba(255, 255, 255, 0.07);
+  --dot-color: rgba(255, 255, 255, 0.12);
 
   --font-mono: "JetBrains Mono", "Fira Code", "Cascadia Code", monospace;
   --font-display: "Syne", system-ui, sans-serif;
@@ -64,7 +64,7 @@
   --logo-filter: none;
 
   --line-number: rgba(15, 23, 42, 0.06);
-  --dot-color: rgba(15, 23, 42, 0.045);
+  --dot-color: rgba(15, 23, 42, 0.08);
 
   color-scheme: light;
 }
