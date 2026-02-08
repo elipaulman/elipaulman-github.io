@@ -37,7 +37,7 @@ export function ProjectsGrid() {
                         key={tag}
                         className="pill text-[0.65rem] px-2 py-0.5"
                       >
-                        {tag === "winner" ? "Winner" : tag}
+                        {tag === "winner" ? "Winner" : tag === "hackathon" ? "Hackathon" : tag}
                       </span>
                     ))}
                   </div>
