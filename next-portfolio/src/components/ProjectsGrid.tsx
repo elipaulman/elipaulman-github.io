@@ -6,6 +6,14 @@ import { SectionHeading } from "./SectionHeading";
 import { ExternalIcon } from "./icons";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 
+const formatTag = (tag: string): string => {
+  const tagMap: Record<string, string> = {
+    winner: "Winner",
+    hackathon: "Hackathon",
+  };
+  return tagMap[tag] || tag;
+};
+
 export function ProjectsGrid() {
   const reveal = useScrollReveal();
   const githubReposLink = socials.socialMedia.github.url;
@@ -37,7 +45,7 @@ export function ProjectsGrid() {
                         key={tag}
                         className="pill text-[0.65rem] px-2 py-0.5"
                       >
-                        {tag === "winner" ? "Winner" : tag}
+                        {formatTag(tag)}
                       </span>
                     ))}
                   </div>
