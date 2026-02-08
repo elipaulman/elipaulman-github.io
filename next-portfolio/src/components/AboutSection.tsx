@@ -17,7 +17,7 @@ export function AboutSection() {
         <SectionHeading
           tag="about"
           title="Who I Am"
-          description="I ship fast, keep things maintainable, and love pairing AI/ML with solid product instincts."
+          description="I ship fast, keep things maintainable, and love combining AI/ML with solid product instincts."
         />
 
         <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-start">

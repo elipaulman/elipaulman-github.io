@@ -26,7 +26,7 @@
         "Member of the Engineering Scholars program",
         "Member of the Claude Builder Club"
       ],
-      "goals": "In my roles and leadership positions, I prioritize promoting tech literacy, sustainability, and community outreach. I'm passionate about making technology accessible to all and advancing sustainability efforts."
+      "goals": "In my roles and leadership positions, I prioritize promoting tech literacy, sustainability, and community outreach. I'm passionate about making technology accessible to everyone and advancing sustainability efforts wherever I can."
     },
     "expanded": false
   },
@@ -39,13 +39,13 @@
   {
     "id": "goals",
     "question": "What are your goals?",
-    "answer": "I'm focused on AI/ML impact work and building products that ship quickly and deliver measurable value.",
+    "answer": "I'm focused on AI/ML impact work and building products that ship quickly and deliver real, measurable value to users.",
     "expanded": false
   },
   {
     "id": "hobbies",
     "question": "What are your hobbies?",
-    "answer": "I enjoy playing guitar, mountain biking, skiing, kayaking, and spending time with friends and family. I also like to create cool projects on my 3D printer, and with Arduino.",
+    "answer": "I enjoy playing guitar, mountain biking, skiing, kayaking, and spending time with friends and family. I also love tinkering—whether that's creating cool projects on my 3D printer, building with Arduino, or working on bikes and fixing things with my hands.",
     "expanded": false
   }
 ]
