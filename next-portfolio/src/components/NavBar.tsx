@@ -19,7 +19,7 @@ export function NavBar({ resumePath }: { resumePath: string }) {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-[var(--border)] bg-[var(--bg)]/70 backdrop-blur-2xl backdrop-saturate-180 shadow-[0_8px_32px_rgba(0,0,0,0.12)]">
+    <header className="sticky top-0 z-50 border-b border-[var(--border)] bg-[var(--bg)]/70 backdrop-blur-xl backdrop-saturate-180 shadow-[0_8px_32px_rgba(0,0,0,0.12)]">
       <div className="mx-auto flex max-w-5xl items-center justify-between px-5 py-3 sm:px-8">
         <Link
           href="#intro"
