@@ -19,7 +19,7 @@ export function NavBar({ resumePath }: { resumePath: string }) {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className="sticky top-0 z-50 border-b border-[var(--border)] bg-[var(--bg)]/85 backdrop-blur-xl backdrop-saturate-150">
+    <header className="sticky top-0 z-50 border-b border-[var(--border)] bg-[var(--bg)]/70 backdrop-blur-xl backdrop-saturate-180 shadow-[0_8px_32px_rgba(0,0,0,0.12)]">
       <div className="mx-auto flex max-w-5xl items-center justify-between px-5 py-3 sm:px-8">
         <Link
           href="#intro"
@@ -44,14 +44,14 @@ export function NavBar({ resumePath }: { resumePath: string }) {
           <Link
             href={resumePath}
             download
-            className="hidden items-center gap-1.5 rounded-lg border border-[var(--border)] px-3 py-1.5 font-mono text-[0.7rem] text-[var(--muted)] transition-all duration-200 hover:border-[var(--border-hover)] hover:text-[var(--text-strong)] md:inline-flex"
+            className="hidden items-center gap-1.5 rounded-xl border border-[var(--border)] bg-[var(--panel)] px-3 py-1.5 font-mono text-[0.7rem] text-[var(--muted)] backdrop-blur-xl backdrop-saturate-180 shadow-[0_2px_8px_rgba(0,0,0,0.08),inset_0_1px_0_rgba(255,255,255,0.08)] transition-all duration-300 hover:border-[var(--border-hover)] hover:text-[var(--text-strong)] hover:shadow-[0_4px_16px_rgba(0,0,0,0.12)] hover:scale-[1.05] md:inline-flex"
           >
             <DownloadIcon className="h-3.5 w-3.5" />
             resume
           </Link>
           <ThemeToggle />
           <button
-            className="rounded-lg border border-[var(--border)] px-3 py-2 font-mono text-xs text-[var(--muted)] transition-all duration-200 hover:border-[var(--border-hover)] hover:text-[var(--text-strong)] md:hidden"
+            className="rounded-xl border border-[var(--border)] bg-[var(--panel)] px-3 py-2 font-mono text-xs text-[var(--muted)] backdrop-blur-xl backdrop-saturate-180 shadow-[0_2px_8px_rgba(0,0,0,0.08),inset_0_1px_0_rgba(255,255,255,0.08)] transition-all duration-300 hover:border-[var(--border-hover)] hover:text-[var(--text-strong)] hover:scale-[1.05] md:hidden"
             onClick={() => setOpen((p) => !p)}
             aria-label="Toggle navigation"
             aria-expanded={open}
@@ -62,14 +62,14 @@ export function NavBar({ resumePath }: { resumePath: string }) {
       </div>
 
       {open && (
-        <nav className="border-t border-[var(--border)] px-5 py-4 sm:px-8 md:hidden">
+        <nav className="border-t border-[var(--border)] px-5 py-4 sm:px-8 md:hidden backdrop-blur-xl">
           <div className="space-y-1">
             {links.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
                 onClick={() => setOpen(false)}
-                className="block rounded-lg px-4 py-2.5 font-mono text-sm text-[var(--muted)] transition-colors duration-200 hover:bg-[var(--panel-hover)] hover:text-[var(--text-strong)]"
+                className="block rounded-xl px-4 py-2.5 font-mono text-sm text-[var(--muted)] backdrop-blur-sm bg-[var(--panel)]/50 border border-transparent shadow-[0_2px_8px_rgba(0,0,0,0.04)] transition-all duration-200 hover:bg-[var(--panel-hover)] hover:border-[var(--border)] hover:text-[var(--text-strong)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)]"
               >
                 <span className="text-[var(--accent)] opacity-50">{'// '}</span>
                 {link.label}
@@ -79,7 +79,7 @@ export function NavBar({ resumePath }: { resumePath: string }) {
               href={resumePath}
               download
               onClick={() => setOpen(false)}
-              className="flex items-center gap-2 rounded-lg px-4 py-2.5 font-mono text-sm text-[var(--muted)] transition-colors duration-200 hover:bg-[var(--panel-hover)] hover:text-[var(--text-strong)]"
+              className="flex items-center gap-2 rounded-xl px-4 py-2.5 font-mono text-sm text-[var(--muted)] backdrop-blur-sm bg-[var(--panel)]/50 border border-transparent shadow-[0_2px_8px_rgba(0,0,0,0.04)] transition-all duration-200 hover:bg-[var(--panel-hover)] hover:border-[var(--border)] hover:text-[var(--text-strong)] hover:shadow-[0_4px_12px_rgba(0,0,0,0.08)]"
             >
               <DownloadIcon className="h-3.5 w-3.5" />
               resume.pdf
