@@ -5,12 +5,12 @@
 :root {
   --bg: #0a0a0f;
   --bg-elevated: #141419;
-  --panel: rgba(255, 255, 255, 0.04);
-  --panel-hover: rgba(255, 255, 255, 0.065);
+  --panel: rgba(10, 10, 15, 0.85);
+  --panel-hover: rgba(20, 20, 25, 0.9);
   --panel-glass: linear-gradient(
     135deg,
-    rgba(255, 255, 255, 0.06) 0%,
-    rgba(255, 255, 255, 0.02) 100%
+    rgba(20, 20, 25, 0.9) 0%,
+    rgba(10, 10, 15, 0.85) 100%
   );
 
   --border: rgba(255, 255, 255, 0.1);
