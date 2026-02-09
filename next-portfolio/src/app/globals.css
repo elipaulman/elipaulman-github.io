@@ -5,11 +5,17 @@
 :root {
   --bg: #0a0a0f;
   --bg-elevated: #141419;
-  --panel: rgba(255, 255, 255, 0.03);
-  --panel-hover: rgba(255, 255, 255, 0.055);
+  --panel: rgba(10, 10, 15, 0.85);
+  --panel-hover: rgba(20, 20, 25, 0.9);
+  --panel-glass: linear-gradient(
+    135deg,
+    rgba(20, 20, 25, 0.9) 0%,
+    rgba(10, 10, 15, 0.85) 100%
+  );
 
-  --border: rgba(255, 255, 255, 0.07);
-  --border-hover: rgba(255, 255, 255, 0.14);
+  --border: rgba(255, 255, 255, 0.1);
+  --border-hover: rgba(255, 255, 255, 0.18);
+  --border-inner: rgba(255, 255, 255, 0.15);
 
   --text: #94a3b8;
   --text-strong: #f1f5f9;
@@ -23,7 +29,11 @@
   --accent-2-dim: rgba(56, 189, 248, 0.08);
 
   --glow: 0 0 80px -15px rgba(0, 229, 160, 0.12);
-  --card-shadow: 0 1px 2px rgba(0, 0, 0, 0.3), 0 0 0 1px var(--border);
+  --card-shadow: 
+    0 8px 32px rgba(0, 0, 0, 0.3),
+    0 2px 8px rgba(0, 0, 0, 0.2),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1),
+    0 0 0 1px var(--border);
   --logo-bg: rgba(255, 255, 255, 0.06);
   --logo-filter: invert(1) hue-rotate(180deg);
 
@@ -40,11 +50,17 @@
 :root[data-theme="light"] {
   --bg: #f8fafb;
   --bg-elevated: #ffffff;
-  --panel: #ffffff;
-  --panel-hover: #f1f5f9;
+  --panel: rgba(255, 255, 255, 0.85);
+  --panel-hover: rgba(241, 245, 249, 0.95);
+  --panel-glass: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.95) 0%,
+    rgba(255, 255, 255, 0.85) 100%
+  );
 
-  --border: rgba(15, 23, 42, 0.08);
-  --border-hover: rgba(15, 23, 42, 0.16);
+  --border: rgba(15, 23, 42, 0.12);
+  --border-hover: rgba(15, 23, 42, 0.2);
+  --border-inner: rgba(255, 255, 255, 0.6);
 
   --text: #475569;
   --text-strong: #0f172a;
@@ -58,7 +74,10 @@
   --accent-2-dim: rgba(37, 99, 235, 0.06);
 
   --glow: 0 4px 40px -12px rgba(5, 150, 105, 0.1);
-  --card-shadow: 0 1px 3px rgba(15, 23, 42, 0.04), 0 1px 2px rgba(15, 23, 42, 0.03),
+  --card-shadow: 
+    0 8px 32px rgba(15, 23, 42, 0.08),
+    0 2px 8px rgba(15, 23, 42, 0.04),
+    inset 0 1px 0 rgba(255, 255, 255, 0.8),
     0 0 0 1px var(--border);
   --logo-bg: rgba(15, 23, 42, 0.04);
   --logo-filter: none;
@@ -204,24 +223,50 @@ a {
 
 /* ───────────────────────── Card ───────────────────────── */
 .card {
-  border-radius: 14px;
+  border-radius: 16px;
   border: 1px solid var(--border);
-  background: var(--panel);
+  background: var(--panel-glass);
   padding: 1.5rem;
   box-shadow: var(--card-shadow);
-  backdrop-filter: blur(2px);
-  transition: border-color 0.25s ease, box-shadow 0.25s ease,
-    transform 0.25s ease;
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  position: relative;
+  overflow: hidden;
+  transition: 
+    border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    box-shadow 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    var(--border-inner) 50%,
+    transparent
+  );
+  opacity: 0.6;
 }
 
 .card:hover {
   border-color: var(--border-hover);
+  transform: translateY(-2px);
 }
 
 .card-glow:hover {
-  border-color: color-mix(in srgb, var(--accent) 40%, transparent);
-  box-shadow: var(--glow), var(--card-shadow);
-  transform: translateY(-1px);
+  border-color: color-mix(in srgb, var(--accent) 45%, transparent);
+  box-shadow: 
+    0 0 40px rgba(0, 229, 160, 0.15),
+    0 12px 40px rgba(0, 0, 0, 0.35),
+    inset 0 1px 0 rgba(255, 255, 255, 0.12),
+    0 0 0 1px color-mix(in srgb, var(--accent) 25%, transparent);
+  transform: translateY(-3px);
 }
 
 /* ───────────────────────── Pill badge ───────────────────────── */
@@ -230,16 +275,30 @@ a {
   align-items: center;
   gap: 0.3rem;
   padding: 0.3rem 0.65rem;
-  border-radius: 6px;
+  border-radius: 8px;
   background: var(--accent-dim);
-  border: 1px solid color-mix(in srgb, var(--accent) 15%, transparent);
+  border: 1px solid color-mix(in srgb, var(--accent) 18%, transparent);
   color: var(--text-strong);
   font-size: 0.75rem;
   font-weight: 500;
   font-family: var(--font-mono);
   letter-spacing: 0.02em;
-  transition: background 0.2s, border-color 0.2s;
+  transition: 
+    background 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+    border-color 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+    transform 0.25s cubic-bezier(0.4, 0, 0.2, 1);
   white-space: nowrap;
+  backdrop-filter: blur(10px) saturate(150%);
+  -webkit-backdrop-filter: blur(10px) saturate(150%);
+  box-shadow: 
+    0 2px 8px rgba(0, 0, 0, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+.pill:hover {
+  background: color-mix(in srgb, var(--accent-dim) 150%, transparent);
+  border-color: color-mix(in srgb, var(--accent) 25%, transparent);
+  transform: translateY(-1px);
 }
 
 /* ───────────────────────── Heading utility ───────────────────────── */

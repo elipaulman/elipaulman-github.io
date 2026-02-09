@@ -76,7 +76,7 @@ export function ContactSection() {
             href={socials.socialMedia.linkedin.url}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-2 rounded-lg border border-[var(--border)] px-4 py-2.5 font-mono text-sm text-[var(--muted)] transition hover:border-[var(--accent)] hover:text-[var(--accent)] hover:shadow-[0_0_20px_var(--accent-glow)]"
+            className="inline-flex items-center gap-2 rounded-xl border border-[var(--border)] bg-[var(--panel)] px-4 py-2.5 font-mono text-sm text-[var(--muted)] backdrop-blur-xl backdrop-saturate-180 shadow-[0_4px_16px_rgba(0,0,0,0.08),inset_0_1px_0_rgba(255,255,255,0.08)] transition-all duration-300 hover:border-[var(--accent)] hover:text-[var(--accent)] hover:shadow-[0_0_24px_var(--accent-glow),0_4px_16px_rgba(0,229,160,0.12)] hover:scale-[1.02]"
           >
             <LinkedInIcon className="h-4 w-4" />
             linkedin
@@ -85,7 +85,7 @@ export function ContactSection() {
             href={socials.socialMedia.github.url}
             target="_blank"
             rel="noreferrer"
-            className="inline-flex items-center gap-2 rounded-lg border border-[var(--border)] px-4 py-2.5 font-mono text-sm text-[var(--muted)] transition hover:border-[var(--accent)] hover:text-[var(--accent)] hover:shadow-[0_0_20px_var(--accent-glow)]"
+            className="inline-flex items-center gap-2 rounded-xl border border-[var(--border)] bg-[var(--panel)] px-4 py-2.5 font-mono text-sm text-[var(--muted)] backdrop-blur-xl backdrop-saturate-180 shadow-[0_4px_16px_rgba(0,0,0,0.08),inset_0_1px_0_rgba(255,255,255,0.08)] transition-all duration-300 hover:border-[var(--accent)] hover:text-[var(--accent)] hover:shadow-[0_0_24px_var(--accent-glow),0_4px_16px_rgba(0,229,160,0.12)] hover:scale-[1.02]"
           >
             <GitHubIcon className="h-4 w-4" />
             github
@@ -93,7 +93,7 @@ export function ContactSection() {
           <Link
             href={socials.resume.path}
             download
-            className="inline-flex items-center gap-2 rounded-lg border border-[var(--accent)] bg-[var(--accent-dim)] px-4 py-2.5 font-mono text-sm font-semibold text-[var(--text-strong)] transition hover:shadow-[0_0_20px_var(--accent-glow)]"
+            className="inline-flex items-center gap-2 rounded-xl border border-[var(--accent)] bg-[var(--accent-dim)] px-4 py-2.5 font-mono text-sm font-semibold text-[var(--text-strong)] backdrop-blur-xl backdrop-saturate-180 shadow-[0_4px_16px_rgba(0,229,160,0.12),inset_0_1px_0_rgba(255,255,255,0.1)] transition-all duration-300 hover:shadow-[0_0_32px_var(--accent-glow),0_4px_16px_rgba(0,229,160,0.2)] hover:scale-[1.02]"
           >
             <DownloadIcon className="h-4 w-4" />
             &gt; download resume.pdf
