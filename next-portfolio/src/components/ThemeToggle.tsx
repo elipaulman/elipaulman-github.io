@@ -40,7 +40,7 @@ export function ThemeToggle() {
     <button
       type="button"
       onClick={toggleTheme}
-      className="flex items-center gap-2 rounded-lg border border-[var(--border)] bg-transparent px-3 py-1.5 font-mono text-[0.7rem] text-[var(--muted)] transition-all duration-200 hover:border-[var(--border-hover)] hover:text-[var(--text-strong)]"
+      className="flex items-center gap-2 rounded-xl border border-[var(--border)] bg-[var(--panel)] px-3 py-1.5 font-mono text-[0.7rem] text-[var(--muted)] backdrop-blur-xl backdrop-saturate-180 shadow-[0_2px_8px_rgba(0,0,0,0.08),inset_0_1px_0_rgba(255,255,255,0.08)] transition-all duration-300 hover:border-[var(--border-hover)] hover:text-[var(--text-strong)] hover:shadow-[0_4px_16px_rgba(0,0,0,0.12)] hover:scale-[1.05]"
       aria-label="Toggle theme"
     >
       {theme === "dark" ? (
