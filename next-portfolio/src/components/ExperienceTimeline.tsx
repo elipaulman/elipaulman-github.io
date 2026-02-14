@@ -14,7 +14,7 @@ export function ExperienceTimeline() {
         <SectionHeading
           tag="experience"
           title="Building & Shipping"
-          description="Full-time roles, internships, and wins that taught me how to ship quickly, lead teams, and own outcomes."
+          description="Full-time roles, internships, and achievements that taught me how to ship quickly, lead teams, and own outcomes."
         />
 
         <div className="relative pl-8 md:pl-12">

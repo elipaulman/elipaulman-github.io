@@ -2,7 +2,7 @@
   {
     "id": "indoor-navigator",
     "title": "Indoor Navigator",
-    "description": "HackOHI/O 2025 campus navigation system with sensor-based indoor positioning, outdoor pathfinding, and garage navigation. Features classroom schedules for all buildings, ADA-compliant routing, and sensor fusion for real-time tracking without WiFi infrastructure.",
+    "description": "HackOHI/O 2025 multi-environment navigation system supporting indoor positioning, outdoor pathfinding, and garage routing. Features classroom schedules for all buildings, ADA-compliant routing, and sensor fusion for real-time tracking without WiFi infrastructure.",
     "techUsed": "JavaScript, HTML5 Canvas, PWA, Sensor Fusion, Python, Flask",
     "link": "https://hack-ohio-2025.onrender.com",
     "linkText": "View Live Demo",
@@ -27,7 +27,7 @@
   {
     "id": "legends-of-zelda",
     "title": "Legends of Zelda",
-    "description": "NES-inspired 2D game engine built from scratch with custom collision detection, sprite animation system, and state-based enemy AI. Implements design patterns for scalable game architecture.",
+    "description": "NES-inspired 2D game engine built from scratch with custom collision detection, sprite animation system, and state-based enemy AI. Implements design patterns for maintainable game architecture.",
     "techUsed": "C#, MonoGame Framework",
     "link": "https://github.com/elipaulman/Legends-Of-Zelda",
     "linkText": "View Repo"
