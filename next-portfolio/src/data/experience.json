@@ -20,9 +20,9 @@
     "logo": "images/Companies/Amazon-Logo.png",
     "logoAlt": "Amazon Logo",
     "responsibilities": [
-      "Built full-stack catalog system managing 13,000+ trade-in items with historical pricing and server-side filtering",
+      "Developed full-stack catalog system managing 13,000+ trade-in items with historical pricing and server-side filtering",
       "Automated catalog generation using Vue.js, AWS AppSync, and Lambda, reducing manual input by ~60%",
-      "Drove full development cycle from requirements to deployment with cross-functional stakeholders"
+      "Managed full development cycle from requirements to deployment with cross-functional stakeholders"
     ]
   },
   {
@@ -35,7 +35,7 @@
     "responsibilities": [
       "Led 20+ engineers in sustainable technology initiatives, managing project timelines and resources",
       "Drove green technology innovation with focus on environmental impact reduction",
-      "Established digital presence and outreach programs, increasing engagement by 40%"
+      "Designed and established digital presence and outreach programs, increasing engagement by 40%"
     ]
   },
   {
@@ -58,7 +58,7 @@
     "logo": "images/Companies/JP-Morgan-Chase-Logo.png",
     "logoAlt": "JPMC Logo",
     "responsibilities": [
-      "Won 1st place among 20+ teams by developing full-stack alumni networking platform for NYC cultural nonprofit",
+      "Won 1st place in competition against 20+ teams by developing full-stack alumni networking platform for NYC cultural nonprofit",
       "Delivered production-ready application using MERN stack with advanced user authentication and real-time features"
     ]
   },
@@ -96,7 +96,7 @@
     "logo": "images/Companies/JP-Morgan-Chase-Logo.png",
     "logoAlt": "JPMC Logo",
     "responsibilities": [
-      "Secured 1st place among 20+ competing teams by developing comprehensive web application for Pyramid CDC nonprofit",
+      "Secured 1st place in competition against 20+ teams by developing comprehensive web application for Pyramid CDC nonprofit",
       "Implemented user authentication, skills assessments, and personalized learning paths using modern web technologies"
     ]
   },
