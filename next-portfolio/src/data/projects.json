@@ -61,7 +61,7 @@
     "id": "tech-learning-platform",
     "title": "Tech Learning Platform",
     "description": "EdTech platform with adaptive learning paths and real-time progress analytics. Implements Firebase authentication, Firestore database with complex queries, and component-based React architecture for scalability.",
-    "techUsed": "React.js, Tailwind CSS, Firebase",
+    "techUsed": "React, Tailwind CSS, Firebase",
     "link": "https://github.com/elipaulman/Code_For_Good_2023",
     "linkText": "View Repo",
     "tags": ["hackathon", "winner"]
@@ -69,7 +69,7 @@
   {
     "id": "money-tracker",
     "title": "Money Tracker",
-    "description": "Full-stack financial dashboard with secure user authentication, CRUD operations for transactions, and data visualization. Features RESTful API design and MongoDB aggregation pipelines for spending insights.",
+    "description": "Full-stack financial dashboard with secure user authentication, CRUD operations for transactions, and data visualization. Features REST API design and MongoDB aggregation pipelines for spending insights.",
     "techUsed": "MERN Stack (MongoDB, Express, React, Node.js)",
     "link": "https://drive.google.com/drive/folders/1q3LZYRDItUGH2cQZ-w84OfMQLvAVJbbz",
     "linkText": "View Demo"
