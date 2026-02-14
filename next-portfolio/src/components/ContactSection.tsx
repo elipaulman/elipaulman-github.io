@@ -22,7 +22,7 @@ export function ContactSection() {
         <SectionHeading
           tag="contact"
           title="Let's Build Something"
-          description="I respond fastest on email or LinkedIn."
+          description="I'm most responsive via email and LinkedIn."
         />
 
         {/* Contact cards grid */}

@@ -79,7 +79,7 @@ export function ProjectsGrid() {
           rel="noreferrer"
           className="block rounded-xl border border-[var(--accent)] bg-[var(--accent-dim)] px-5 py-4 text-center font-mono text-sm font-medium text-[var(--text-strong)] backdrop-blur-xl backdrop-saturate-180 shadow-[0_4px_16px_rgba(0,229,160,0.12),inset_0_1px_0_rgba(255,255,255,0.1)] transition-all duration-300 hover:shadow-[0_0_40px_var(--accent-glow),0_4px_16px_rgba(0,229,160,0.2)] hover:scale-[1.01]"
         >
-          &gt; view all projects on github
+          &gt; View all projects on GitHub
         </Link>
       </div>
     </section>

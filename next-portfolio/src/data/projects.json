@@ -2,7 +2,7 @@
   {
     "id": "indoor-navigator",
     "title": "Indoor Navigator",
-    "description": "HackOHI/O 2025 campus navigation system with sensor-based indoor positioning, outdoor pathfinding, and garage navigation. Features classroom schedules for all buildings, ADA-compliant routing, and sensor fusion for real-time tracking without WiFi infrastructure.",
+    "description": "HackOHI/O 2025 multi-environment campus navigation system with indoor positioning, outdoor pathfinding, and garage routing. Features classroom schedules for all buildings, ADA-compliant routing, and sensor fusion for real-time tracking without WiFi infrastructure.",
     "techUsed": "JavaScript, HTML5 Canvas, PWA, Sensor Fusion, Python, Flask",
     "link": "https://hack-ohio-2025.onrender.com",
     "linkText": "View Live Demo",
@@ -27,7 +27,7 @@
   {
     "id": "legends-of-zelda",
     "title": "Legends of Zelda",
-    "description": "NES-inspired 2D game engine built from scratch with custom collision detection, sprite animation system, and state-based enemy AI. Implements design patterns for scalable game architecture.",
+    "description": "NES-inspired 2D game engine built from scratch with custom collision detection, sprite animation system, and state-based enemy AI. Implements design patterns for maintainable game architecture.",
     "techUsed": "C#, MonoGame Framework",
     "link": "https://github.com/elipaulman/Legends-Of-Zelda",
     "linkText": "View Repo"
@@ -35,7 +35,7 @@
   {
     "id": "alumni-social-platform",
     "title": "Alumni Social Platform",
-    "description": "Award-winning full-stack social network (JP Morgan Chase Code for Good). Built scalable REST API with JWT authentication, real-time messaging, and profile matching algorithms for LMCC alumni community.",
+    "description": "Award-winning full-stack social network (J.P. Morgan Chase & Co. Code for Good). Built scalable REST API with JWT authentication, real-time messaging, and profile matching algorithms for LMCC alumni community.",
     "techUsed": "MERN Stack, Tailwind CSS",
     "link": "https://alumni-network-platform-9aov.onrender.com",
     "linkText": "View Live Demo",
@@ -45,7 +45,7 @@
     "id": "weather-app",
     "title": "Weather App",
     "description": "Location-aware weather dashboard with geolocation integration and dynamic search. Features responsive design and real-time API data fetching with error handling and loading states.",
-    "techUsed": "OpenWeatherMap API, Github Pages, HTML, CSS",
+    "techUsed": "OpenWeatherMap API, GitHub Pages, HTML, CSS",
     "link": "https://epaulman.com/weather",
     "linkText": "View Live Demo"
   },
@@ -61,7 +61,7 @@
     "id": "tech-learning-platform",
     "title": "Tech Learning Platform",
     "description": "EdTech platform with adaptive learning paths and real-time progress analytics. Implements Firebase authentication, Firestore database with complex queries, and component-based React architecture for scalability.",
-    "techUsed": "React.js, Tailwind CSS, Firebase",
+    "techUsed": "React, Tailwind CSS, Firebase",
     "link": "https://github.com/elipaulman/Code_For_Good_2023",
     "linkText": "View Repo",
     "tags": ["hackathon", "winner"]
@@ -69,7 +69,7 @@
   {
     "id": "money-tracker",
     "title": "Money Tracker",
-    "description": "Full-stack financial dashboard with secure user authentication, CRUD operations for transactions, and data visualization. Features RESTful API design and MongoDB aggregation pipelines for spending insights.",
+    "description": "Full-stack financial dashboard with secure user authentication, CRUD operations for transactions, and data visualization. Features REST API design and MongoDB aggregation pipelines for spending insights.",
     "techUsed": "MERN Stack (MongoDB, Express, React, Node.js)",
     "link": "https://drive.google.com/drive/folders/1q3LZYRDItUGH2cQZ-w84OfMQLvAVJbbz",
     "linkText": "View Demo"
