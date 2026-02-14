@@ -3,34 +3,34 @@
     "id": "ohio-state",
     "institution": "Ohio State University",
     "degree": "B.S. Computer Science Engineering",
-    "dates": "Aug 2022 - Dec 2025",
+    "dates": "August 2022 - December 2025",
     "image": "images/testimonials/OhioLogo.jpg",
     "imageAlt": "Ohio State University",
     "details": [
       "3.85 GPA",
       "Graduated magna cum laude",
       "Engineering Scholars",
-      "Dean's list 2022-2025."
+      "Dean's List 2022-2025"
     ]
   },
   {
     "id": "sinclair",
     "institution": "Sinclair Community College",
-    "degree": "A.S Liberal Arts of Science",
-    "dates": "Aug 2020 - May 2022",
+    "degree": "A.S. Liberal Arts and Science",
+    "dates": "August 2020 - May 2022",
     "image": "images/testimonials/SinclairLogo.jpg",
     "imageAlt": "Sinclair Community College",
     "details": [
       "4.0 GPA",
       "50 CCP credits",
-      "Dean's list 2021-2022."
+      "Dean's List 2021-2022"
     ]
   },
   {
     "id": "lebanon-high",
     "institution": "Lebanon City Schools",
     "degree": "High School",
-    "dates": "Aug 2018 - May 2022",
+    "dates": "August 2018 - May 2022",
     "image": "images/testimonials/Lebanon1.png",
     "imageAlt": "Lebanon City Schools",
     "details": [
