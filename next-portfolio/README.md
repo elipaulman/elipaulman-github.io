@@ -35,4 +35,4 @@ npm run build        # outputs static site to ./out (includes /weather)
 
 ## Notes
 - Weather app uses OpenWeatherMap API and lives entirely in `public/weather/` so it ships with the static export.
-- Images/fonts are unoptimized for export; if you switch hosts (e.g., Vercel), you can re-enable Next image optimization.***
+- Images/fonts are unoptimized for export; if you switch hosts (e.g., Vercel), you can re-enable Next image optimization.

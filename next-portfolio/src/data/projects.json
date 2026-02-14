@@ -35,7 +35,7 @@
   {
     "id": "alumni-social-platform",
     "title": "Alumni Social Platform",
-    "description": "Award-winning full-stack social network (JP Morgan Chase Code for Good). Built scalable REST API with JWT authentication, real-time messaging, and profile matching algorithms for LMCC alumni community.",
+    "description": "Award-winning full-stack social network (J.P. Morgan Chase Code for Good). Built scalable REST API with JWT authentication, real-time messaging, and profile matching algorithms for LMCC alumni community.",
     "techUsed": "MERN Stack, Tailwind CSS",
     "link": "https://alumni-network-platform-9aov.onrender.com",
     "linkText": "View Live Demo",
@@ -45,7 +45,7 @@
     "id": "weather-app",
     "title": "Weather App",
     "description": "Location-aware weather dashboard with geolocation integration and dynamic search. Features responsive design and real-time API data fetching with error handling and loading states.",
-    "techUsed": "OpenWeatherMap API, Github Pages, HTML, CSS",
+    "techUsed": "OpenWeatherMap API, GitHub Pages, HTML, CSS",
     "link": "https://epaulman.com/weather",
     "linkText": "View Live Demo"
   },

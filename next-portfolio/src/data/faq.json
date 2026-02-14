@@ -4,7 +4,7 @@
     "question": "What are your technical skills?",
     "answer": {
       "programmingLanguages": "Java, C#, Python, TypeScript, JavaScript, C, SQL, HTML, CSS, x86 Assembly",
-      "software": "Git/GitHub, VS Code, AWS (Lambda, AppSync, S3), MongoDB, MySQL, Postman, Visual Studio, Firebase, Elasticsearch, Matlab, Microsoft Office, Google Suite, SolidWorks",
+      "software": "Git/GitHub, VS Code, AWS (Lambda, AppSync, S3), MongoDB, MySQL, Postman, Visual Studio, Firebase, Elasticsearch, MATLAB, Microsoft Office, Google Suite, SolidWorks",
       "frameworks": "React, Vue.js, Node.js, Express, Next.js, Flask, LangChain, Tailwind CSS, .NET",
       "otherSkills": "REST & GraphQL APIs, Machine Learning, Computer Vision, CI/CD, Data Structures & Algorithms, Agile Development, Test-Driven Development, Technical Documentation, Full Stack Development, IoT (ESP32), electronic and computer hardware, circuit assembly, 3D printing"
     },
