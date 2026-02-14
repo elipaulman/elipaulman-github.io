@@ -3,7 +3,7 @@
     "id": "ohio-state",
     "institution": "Ohio State University",
     "degree": "B.S. Computer Science Engineering",
-    "dates": "Aug 2022 - Dec 2025",
+    "dates": "August 2022 - December 2025",
     "image": "images/testimonials/OhioLogo.jpg",
     "imageAlt": "Ohio State University",
     "details": [
@@ -17,7 +17,7 @@
     "id": "sinclair",
     "institution": "Sinclair Community College",
     "degree": "A.S. Liberal Arts and Science",
-    "dates": "Aug 2020 - May 2022",
+    "dates": "August 2020 - May 2022",
     "image": "images/testimonials/SinclairLogo.jpg",
     "imageAlt": "Sinclair Community College",
     "details": [
@@ -30,7 +30,7 @@
     "id": "lebanon-high",
     "institution": "Lebanon City Schools",
     "degree": "High School",
-    "dates": "Aug 2018 - May 2022",
+    "dates": "August 2018 - May 2022",
     "image": "images/testimonials/Lebanon1.png",
     "imageAlt": "Lebanon City Schools",
     "details": [
