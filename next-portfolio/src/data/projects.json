@@ -2,7 +2,7 @@
   {
     "id": "indoor-navigator",
     "title": "Indoor Navigator",
-    "description": "HackOHI/O 2025 multi-environment navigation system supporting indoor positioning, outdoor pathfinding, and garage routing. Features classroom schedules for all buildings, ADA-compliant routing, and sensor fusion for real-time tracking without WiFi infrastructure.",
+    "description": "HackOHI/O 2025 multi-environment campus navigation system with indoor positioning, outdoor pathfinding, and garage routing. Features classroom schedules for all buildings, ADA-compliant routing, and sensor fusion for real-time tracking without WiFi infrastructure.",
     "techUsed": "JavaScript, HTML5 Canvas, PWA, Sensor Fusion, Python, Flask",
     "link": "https://hack-ohio-2025.onrender.com",
     "linkText": "View Live Demo",
