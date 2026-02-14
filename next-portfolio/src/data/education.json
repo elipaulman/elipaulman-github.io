@@ -10,20 +10,20 @@
       "3.85 GPA",
       "Graduated magna cum laude",
       "Engineering Scholars",
-      "Dean's list 2022-2025."
+      "Dean's List 2022-2025"
     ]
   },
   {
     "id": "sinclair",
     "institution": "Sinclair Community College",
-    "degree": "A.S Liberal Arts of Science",
+    "degree": "A.S. Liberal Arts and Science",
     "dates": "Aug 2020 - May 2022",
     "image": "images/testimonials/SinclairLogo.jpg",
     "imageAlt": "Sinclair Community College",
     "details": [
       "4.0 GPA",
       "50 CCP credits",
-      "Dean's list 2021-2022."
+      "Dean's List 2021-2022"
     ]
   },
   {
