@@ -1,11 +1,11 @@
 [
   {
     "id": "ohio-state",
-    "institution": "Ohio State University",
-    "degree": "B.S. Computer Science Engineering",
+    "institution": "The Ohio State University",
+    "degree": "B.S. Computer Science and Engineering",
     "dates": "August 2022 - December 2025",
     "image": "images/testimonials/OhioLogo.jpg",
-    "imageAlt": "Ohio State University",
+    "imageAlt": "The Ohio State University",
     "details": [
       "3.85 GPA",
       "Graduated magna cum laude",
@@ -16,7 +16,7 @@
   {
     "id": "sinclair",
     "institution": "Sinclair Community College",
-    "degree": "A.S. Liberal Arts and Science",
+    "degree": "A.S. Liberal Arts and Sciences",
     "dates": "August 2020 - May 2022",
     "image": "images/testimonials/SinclairLogo.jpg",
     "imageAlt": "Sinclair Community College",
@@ -28,11 +28,11 @@
   },
   {
     "id": "lebanon-high",
-    "institution": "Lebanon City Schools",
+    "institution": "Lebanon High School",
     "degree": "High School",
     "dates": "August 2018 - May 2022",
     "image": "images/testimonials/Lebanon1.png",
-    "imageAlt": "Lebanon City Schools",
+    "imageAlt": "Lebanon High School",
     "details": [
       "4.6 GPA",
       "Top 1% of class",

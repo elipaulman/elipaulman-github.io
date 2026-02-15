@@ -7,8 +7,8 @@
     "logo": "images/Companies/apple_logo.png",
     "logoAlt": "Apple Logo",
     "responsibilities": [
-      "Testing carrier services integrations that enable seamless iPhone activation and setup with wireless carriers",
-      "Automating testing platforms to improve efficiency and coverage across carrier onboarding workflows",
+      "Testing carrier service integrations that enable seamless iPhone activation and setup with wireless carriers",
+      "Automating test platforms to improve efficiency and coverage across carrier onboarding workflows",
       "Ensuring quality and reliability of native carrier onboarding experience for Apple customers"
     ]
   },
@@ -21,7 +21,7 @@
     "logoAlt": "Amazon Logo",
     "responsibilities": [
       "Developed full-stack catalog system managing 13,000+ trade-in items with historical pricing and server-side filtering",
-      "Automated catalog generation using Vue.js, AWS AppSync, and Lambda, reducing manual input by ~60%",
+      "Automated catalog generation using Vue.js, AWS AppSync, and Lambda, reducing manual effort by ~60%",
       "Managed full development cycle from requirements to deployment with cross-functional stakeholders"
     ]
   },
@@ -34,7 +34,7 @@
     "logoAlt": "ESW Logo",
     "responsibilities": [
       "Led 20+ engineers in sustainable technology initiatives, managing project timelines and resources",
-      "Drove green technology innovation with focus on environmental impact reduction",
+      "Drove green technology innovation with a focus on environmental impact reduction",
       "Designed and established digital presence and outreach programs, increasing engagement by 40%"
     ]
   },
@@ -47,7 +47,7 @@
     "logoAlt": "CodePath Logo",
     "responsibilities": [
       "Completed intensive 12-week program in algorithms, data structures, and system design",
-      "Practiced technical interviews with FAANG industry mentors and optimized coding solutions"
+      "Practiced technical interviews with industry mentors and optimized coding solutions"
     ]
   },
   {
@@ -58,7 +58,7 @@
     "logo": "images/Companies/JP-Morgan-Chase-Logo.png",
     "logoAlt": "JPMC Logo",
     "responsibilities": [
-      "Won 1st place in competition against 20+ teams by developing full-stack alumni networking platform for NYC cultural nonprofit",
+      "Won 1st place against 20+ teams by developing a full-stack alumni networking platform for an NYC cultural nonprofit",
       "Delivered production-ready application using MERN stack with advanced user authentication and real-time features"
     ]
   },
@@ -72,7 +72,7 @@
     "responsibilities": [
       "Developed REST APIs using C#/.NET and SQL for enterprise software serving 100,000+ users",
       "Resolved 20+ critical bugs and re-engineered query engine, achieving 40% performance improvement",
-      "Delivered 7 feature implementations for new leasing center module"
+      "Delivered 7 feature implementations for the new leasing center module"
     ]
   },
   {
@@ -83,8 +83,8 @@
     "logo": "images/Companies/IBM_logo.png",
     "logoAlt": "IBM Logo",
     "responsibilities": [
-      "Completed rigorous 8-week software engineering program covering algorithms, cybersecurity, and cloud-native development",
-      "Mastered modern web technologies including JavaScript, React, Node.js through hands-on projects and mentorship",
+      "Completed a rigorous 8-week software engineering program covering algorithms, cybersecurity, and cloud-native development",
+      "Mastered modern web technologies including JavaScript, React, and Node.js through hands-on projects and mentorship",
       "Built industry connections through networking with IBM engineers and technology leaders"
     ]
   },
@@ -96,7 +96,7 @@
     "logo": "images/Companies/JP-Morgan-Chase-Logo.png",
     "logoAlt": "JPMC Logo",
     "responsibilities": [
-      "Secured 1st place in competition against 20+ teams by developing comprehensive web application for Pyramid CDC nonprofit",
+      "Secured 1st place against 20+ teams by developing a comprehensive web application for the Pyramid CDC nonprofit",
       "Implemented user authentication, skills assessments, and personalized learning paths using modern web technologies"
     ]
   },
@@ -110,7 +110,7 @@
     "responsibilities": [
       "Developed comprehensive API testing framework with 50+ automated test cases using Postman and JIRA integration",
       "Executed rigorous REST API validation ensuring 100% accuracy between expected and actual JSON responses",
-      "Collaborated with development teams to identify and resolve 15+ critical software defects, reducing bug resolution time"
+      "Collaborated with development teams to identify and resolve 15+ critical software defects, significantly reducing bug resolution time"
     ]
   }
 ]

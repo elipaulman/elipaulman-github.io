@@ -65,8 +65,12 @@ function renderAnswer(item: (typeof faq)[number]) {
     return (
       <div className="space-y-2">
         <p>
-          <strong className="text-[var(--text-strong)]">Languages & Frameworks:</strong>{" "}
+          <strong className="text-[var(--text-strong)]">Languages:</strong>{" "}
           {item.answer.programmingLanguages}
+        </p>
+        <p>
+          <strong className="text-[var(--text-strong)]">Frameworks:</strong>{" "}
+          {item.answer.frameworks}
         </p>
         <p>
           <strong className="text-[var(--text-strong)]">Software:</strong>{" "}
