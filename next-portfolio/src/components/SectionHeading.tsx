@@ -8,7 +8,7 @@ export function SectionHeading({ tag, title, description }: SectionHeadingProps)
   return (
     <div className="mb-12 space-y-4 text-center sm:text-left">
       <span className="code-tag">{tag}</span>
-      <h2 className="heading-display text-3xl text-[var(--text-strong)] sm:text-4xl lg:text-5xl">
+      <h2 className="heading-display pb-2 text-3xl leading-normal text-[var(--text-strong)] sm:text-4xl lg:text-5xl">
         {title}
       </h2>
       {description && (
