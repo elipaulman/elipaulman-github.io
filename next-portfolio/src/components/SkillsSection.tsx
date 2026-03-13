@@ -32,8 +32,12 @@ export function SkillsSection() {
                   {'// '}{cat.label}
                 </p>
                 <div className="flex flex-wrap gap-2">
-                  {items.map((item) => (
-                    <span key={item.name} className="pill">
+                  {items.map((item, idx) => (
+                    <span
+                      key={item.name}
+                      className="pill badge-animate"
+                      style={{ animationDelay: `${idx * 60}ms` }}
+                    >
                       {item.name}
                     </span>
                   ))}
