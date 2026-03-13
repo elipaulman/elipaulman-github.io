@@ -1,10 +1,11 @@
 "use client";
 
 import Link from "next/link";
+import { useState } from "react";
 import { projects, socials } from "@/lib/data";
 import { SectionHeading } from "./SectionHeading";
 import { ExternalIcon } from "./icons";
-import { useScrollReveal } from "@/hooks/useScrollReveal";
+import { useScrollReveal, useAnimateOnce } from "@/hooks/useScrollReveal";
 
 const formatTag = (tag: string): string => {
   const tagMap: Record<string, string> = {
@@ -17,6 +18,38 @@ const formatTag = (tag: string): string => {
 export function ProjectsGrid() {
   const reveal = useScrollReveal();
   const githubReposLink = socials.socialMedia.github.url;
+  const animateOnce = useAnimateOnce();
+  const [tiltStyles, setTiltStyles] = useState<
+    Record<string, { transform: string; boxShadow: string }>
+  >({});
+
+  const handleMouseMove = (
+    e: React.MouseEvent<HTMLElement>,
+    id: string
+  ) => {
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+    const rect = e.currentTarget.getBoundingClientRect();
+    const x = e.clientX - rect.left - rect.width / 2;
+    const y = e.clientY - rect.top - rect.height / 2;
+    const rotateX = -(y / (rect.height / 2)) * 8;
+    const rotateY = (x / (rect.width / 2)) * 8;
+    const shadowX = (x / (rect.width / 2)) * 6;
+    const shadowY = (y / (rect.height / 2)) * 6;
+    setTiltStyles((prev) => ({
+      ...prev,
+      [id]: {
+        transform: `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`,
+        boxShadow: `${shadowX}px ${shadowY}px 20px rgba(var(--accent-rgb), 0.12)`,
+      },
+    }));
+  };
+
+  const handleMouseLeave = (id: string) => {
+    setTiltStyles((prev) => ({
+      ...prev,
+      [id]: { transform: "perspective(800px) rotateX(0deg) rotateY(0deg) translateZ(0)", boxShadow: "" },
+    }));
+  };
 
   return (
     <section id="projects" className="section-shell">
@@ -28,11 +61,23 @@ export function ProjectsGrid() {
         />
 
         {/* Project grid */}
-        <div className="reveal-stagger grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {projects.map((project) => (
+        <div
+          ref={animateOnce as React.RefCallback<HTMLDivElement>}
+          className="reveal-stagger grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
+          style={{ perspective: "800px" }}
+        >
+          {projects.map((project, index) => (
             <article
               key={project.id}
-              className="reveal card card-glow flex h-full flex-col"
+              data-animate-child
+              className="card card-glow card-enter-animate flex h-full flex-col"
+              style={{
+                animationDelay: `${index * 100}ms`,
+                transition: "transform 0.5s ease-out, box-shadow 0.5s ease-out, border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+                ...(tiltStyles[project.id] ?? {}),
+              }}
+              onMouseMove={(e) => handleMouseMove(e, project.id)}
+              onMouseLeave={() => handleMouseLeave(project.id)}
             >
               <div className="flex items-start justify-between gap-3">
                 <h3 className="font-display text-lg font-bold tracking-tight text-[var(--text-strong)]">
