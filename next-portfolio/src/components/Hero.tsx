@@ -21,9 +21,37 @@ export function Hero({ socials }: HeroProps) {
 
   return (
     <section id="intro" className="relative py-24 sm:py-32 lg:py-40">
-      <div className="space-y-8 text-center sm:text-left">
+      {/* Background glow layers */}
+      <div
+        aria-hidden="true"
+        style={{
+          position: "absolute",
+          inset: 0,
+          pointerEvents: "none",
+          zIndex: 0,
+          background:
+            "radial-gradient(ellipse 80% 60% at 50% 40%, rgba(var(--accent-rgb), 0.07) 0%, transparent 70%)",
+          animation: "hero-glow-pulse 4s ease-in-out infinite alternate",
+        }}
+      />
+      <div
+        aria-hidden="true"
+        style={{
+          position: "absolute",
+          inset: 0,
+          pointerEvents: "none",
+          zIndex: 0,
+          background:
+            "radial-gradient(ellipse 40% 40% at 80% 80%, rgba(var(--accent-rgb), 0.04) 0%, transparent 60%)",
+          animation: "hero-glow-pulse 6s ease-in-out infinite alternate-reverse",
+        }}
+      />
+      <div className="space-y-8 text-center sm:text-left" style={{ position: "relative", zIndex: 1 }}>
         {/* Avatar + greeting */}
-        <div className="flex items-center justify-center gap-4 sm:justify-start">
+        <div
+          className="flex items-center justify-center gap-4 sm:justify-start"
+          style={{ animation: "fade-slide-up 0.6s 100ms ease-out both" }}
+        >
           <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-full ring-[1.5px] ring-[var(--accent)] ring-offset-2 ring-offset-[var(--bg)]">
             <Image
               src="/images/EliStandingClear.png"
@@ -40,12 +68,18 @@ export function Hero({ socials }: HeroProps) {
         </div>
 
         {/* Name */}
-        <h1 className="heading-display text-5xl text-[var(--text-strong)] sm:text-6xl lg:text-7xl xl:text-8xl">
+        <h1
+          className="heading-display text-5xl text-[var(--text-strong)] sm:text-6xl lg:text-7xl xl:text-8xl"
+          style={{ animation: "fade-slide-up 0.6s 250ms ease-out both" }}
+        >
           {personal.name}
         </h1>
 
         {/* Typing subtitle */}
-        <div className="flex justify-center overflow-hidden sm:justify-start">
+        <div
+          className="flex justify-center overflow-hidden sm:justify-start"
+          style={{ animation: "fade-slide-up 0.6s 400ms ease-out both" }}
+        >
           <p
             className={`inline-block overflow-hidden whitespace-nowrap border-r-2 border-[var(--accent)] font-mono text-sm text-[var(--muted)] sm:text-base ${
               !showCursor ? "border-transparent" : ""
@@ -61,7 +95,10 @@ export function Hero({ socials }: HeroProps) {
         </div>
 
         {/* CTA buttons */}
-        <div className="flex flex-wrap items-center justify-center gap-3 pt-4 sm:justify-start">
+        <div
+          className="flex flex-wrap items-center justify-center gap-3 pt-4 sm:justify-start"
+          style={{ animation: "fade-slide-up 0.6s 550ms ease-out both" }}
+        >
           <Link
             href={`mailto:${socials.email.primary}`}
             className="inline-flex items-center gap-2 rounded-xl border border-[var(--accent)] bg-[var(--accent-dim)] px-5 py-2.5 font-mono text-sm font-medium text-[var(--text-strong)] backdrop-blur-xl backdrop-saturate-180 shadow-[0_4px_16px_rgba(0,229,160,0.12),inset_0_1px_0_rgba(255,255,255,0.1)] transition-all duration-300 hover:shadow-[0_0_32px_var(--accent-glow),0_4px_16px_rgba(0,229,160,0.2)] hover:border-[var(--accent)] hover:scale-[1.02]"
