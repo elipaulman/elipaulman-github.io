@@ -39,6 +39,8 @@
 
   --line-number: rgba(255, 255, 255, 0.1);
   --dot-color: rgba(255, 255, 255, 0.12);
+  --accent-rgb: 0, 229, 160;
+  --line-duration: 1s;
 
   --font-mono: "JetBrains Mono", "Fira Code", "Cascadia Code", monospace;
   --font-display: "Syne", system-ui, sans-serif;
@@ -84,6 +86,8 @@
 
   --line-number: rgba(15, 23, 42, 0.06);
   --dot-color: rgba(15, 23, 42, 0.08);
+  --accent-rgb: 5, 150, 105;
+  --line-duration: 1s;
 
   color-scheme: light;
 }
@@ -109,6 +113,83 @@
 @keyframes pulse-glow {
   0%, 100% { opacity: 0.4; }
   50% { opacity: 1; }
+}
+
+/* ───────────────────────── New animation keyframes ───────────────────────── */
+@media (prefers-reduced-motion: no-preference) {
+  @keyframes hero-glow-pulse {
+    from { opacity: 0.6; transform: scale(1); }
+    to   { opacity: 1;   transform: scale(1.05); }
+  }
+
+  @keyframes fade-slide-up {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  @keyframes badge-pop {
+    from { opacity: 0; transform: scale(0.7); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+
+  @keyframes dot-appear {
+    from { opacity: 0; transform: scale(0); }
+    to   { opacity: 1; transform: scale(1); }
+  }
+
+  @keyframes slide-from-left {
+    from { opacity: 0; transform: translateX(-20px); }
+    to   { opacity: 1; transform: translateX(0); }
+  }
+
+  @keyframes card-enter {
+    from { opacity: 0; transform: translateY(20px) scale(0.96); }
+    to   { opacity: 1; transform: translateY(0) scale(1); }
+  }
+
+  @keyframes line-draw {
+    from { transform: scaleY(0); }
+    to   { transform: scaleY(1); }
+  }
+}
+
+/* ───────────────────────── Scroll-triggered child animations ───────────────────────── */
+
+/* Badges start hidden; animate once the parent card gets .revealed by IntersectionObserver */
+.badge-animate {
+  opacity: 0;
+}
+.revealed .badge-animate {
+  animation: badge-pop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+.timeline-dot-animate {
+  opacity: 0;
+}
+.timeline-dot-animate.animate-in {
+  animation: dot-appear 0.4s cubic-bezier(0.34, 1.56, 0.64, 1) both;
+}
+
+.timeline-card-animate {
+  opacity: 0;
+}
+.timeline-card-animate.animate-in {
+  animation: slide-from-left 0.5s ease-out both;
+}
+
+.accent-line-draw {
+  transform: scaleY(0);
+  transform-origin: top;
+}
+.accent-line-draw.animate-in {
+  animation: line-draw var(--line-duration) ease-out both;
+}
+
+.card-enter-animate {
+  opacity: 0;
+}
+.card-enter-animate.animate-in {
+  animation: card-enter 0.5s ease-out both;
 }
 
 /* ───────────────────────── Resets & base ───────────────────────── */
@@ -256,17 +337,15 @@ a {
 
 .card:hover {
   border-color: var(--border-hover);
-  transform: translateY(-2px);
 }
 
 .card-glow:hover {
   border-color: color-mix(in srgb, var(--accent) 45%, transparent);
-  box-shadow: 
+  box-shadow:
     0 0 40px rgba(0, 229, 160, 0.15),
     0 12px 40px rgba(0, 0, 0, 0.35),
     inset 0 1px 0 rgba(255, 255, 255, 0.12),
     0 0 0 1px color-mix(in srgb, var(--accent) 25%, transparent);
-  transform: translateY(-3px);
 }
 
 /* ───────────────────────── Pill badge ───────────────────────── */
@@ -296,9 +375,9 @@ a {
 }
 
 .pill:hover {
-  background: color-mix(in srgb, var(--accent-dim) 150%, transparent);
-  border-color: color-mix(in srgb, var(--accent) 25%, transparent);
-  transform: translateY(-1px);
+  transform: scale(1.05);
+  box-shadow: 0 0 8px rgba(var(--accent-rgb), 0.4);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
 /* ───────────────────────── Heading utility ───────────────────────── */
@@ -352,5 +431,16 @@ a {
   * {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
+  }
+  .badge-animate,
+  .revealed .badge-animate,
+  .timeline-dot-animate,
+  .timeline-card-animate,
+  .accent-line-draw,
+  .card-enter-animate {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+    transition: none !important;
   }
 }
