@@ -3,15 +3,14 @@
 import Image from "next/image";
 import { experience } from "@/lib/data";
 import { SectionHeading } from "./SectionHeading";
-import { useScrollReveal, useAnimateOnce } from "@/hooks/useScrollReveal";
+import { useAnimateOnce } from "@/hooks/useScrollReveal";
 
 export function ExperienceTimeline() {
-  const reveal = useScrollReveal();
   const animateOnce = useAnimateOnce();
 
   return (
     <section id="experience" className="section-shell">
-      <div ref={reveal} className="reveal">
+      <div>
         <SectionHeading
           tag="experience"
           title="Building & Shipping"
@@ -27,9 +26,9 @@ export function ExperienceTimeline() {
               className="accent-line-draw absolute left-[11.5px] top-2 bottom-2 w-px bg-[var(--accent)] opacity-60 md:left-[19.5px]"
             />
 
-            <div className="reveal-stagger space-y-6">
+            <div className="space-y-6">
               {experience.map((role, index) => (
-                <div key={role.id} className="reveal relative">
+                <div key={role.id} className="relative">
                   {/* Timeline dot — centered on line, vertically centered with date */}
                   <div
                     data-animate-child
