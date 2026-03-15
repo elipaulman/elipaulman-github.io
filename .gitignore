@@ -50,3 +50,5 @@ build/
 # Claude Code
 .claude/
 .playwright-mcp/
+.superpowers
+docs
