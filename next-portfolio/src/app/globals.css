@@ -117,38 +117,48 @@
 
 /* ───────────────────────── New animation keyframes ───────────────────────── */
 @keyframes hero-glow-pulse {
-  from { opacity: 0.6; transform: scale(1); }
-  to   { opacity: 1;   transform: scale(1.05); }
+  from { opacity: 0.6; scale: 1; }
+  to   { opacity: 1;   scale: 1.05; }
 }
 
 @keyframes fade-slide-up {
-  from { opacity: 0; transform: translateY(16px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; translate: 0 16px; }
+  to   { opacity: 1; translate: 0 0; }
 }
 
 @keyframes badge-pop {
-  from { opacity: 0; transform: scale(0.7); }
-  to   { opacity: 1; transform: scale(1); }
+  from { opacity: 0; scale: 0.7; }
+  to   { opacity: 1; scale: 1; }
 }
 
 @keyframes dot-appear {
-  from { opacity: 0; transform: scale(0); }
-  to   { opacity: 1; transform: scale(1); }
+  from { opacity: 0; scale: 0; }
+  to   { opacity: 1; scale: 1; }
 }
 
 @keyframes slide-from-left {
-  from { opacity: 0; transform: translateX(-20px); }
-  to   { opacity: 1; transform: translateX(0); }
+  from { opacity: 0; translate: -20px 0; }
+  to   { opacity: 1; translate: 0 0; }
 }
 
 @keyframes card-enter {
-  from { opacity: 0; transform: translateY(20px) scale(0.96); }
-  to   { opacity: 1; transform: translateY(0) scale(1); }
+  from { opacity: 0; translate: 0 20px; scale: 0.96; }
+  to   { opacity: 1; translate: 0 0; scale: 1; }
 }
 
 @keyframes line-draw {
   from { transform: scaleY(0); }
   to   { transform: scaleY(1); }
+}
+
+@keyframes marquee-left {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@keyframes marquee-right {
+  from { transform: translateX(-50%); }
+  to   { transform: translateX(0); }
 }
 
 /* ───────────────────────── Scroll-triggered child animations ───────────────────────── */
@@ -192,6 +202,58 @@
 
 .card-tilt-ready {
   transition: border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* ───────────────────────── Marquee ───────────────────────── */
+@media (hover: hover) {
+  .marquee-wrapper:hover .marquee-track {
+    animation-play-state: paused;
+  }
+}
+
+.marquee-wrapper .pill {
+  font-size: 0.85rem;
+  padding: 0.45rem 1.1rem;
+  letter-spacing: 0.01em;
+}
+
+/* ───────────────────────── 3D tilt utilities ───────────────────────── */
+.tilt-perspective {
+  perspective: 1100px;
+}
+
+.tilt-stage {
+  transform-style: preserve-3d;
+  will-change: transform;
+}
+
+.tilt-layer {
+  transform-style: preserve-3d;
+}
+
+@keyframes float-z {
+  0%, 100% { transform: translateZ(var(--tz, 0px)) translateY(0); }
+  50%      { transform: translateZ(calc(var(--tz, 0px) + 4px)) translateY(-2px); }
+}
+
+.float-z {
+  animation: float-z 6s ease-in-out infinite;
+  transform: translateZ(var(--tz, 0px));
+}
+
+/* Glow plate that reads as depth under the tilt stage */
+.depth-grid {
+  position: absolute;
+  inset: -8%;
+  pointer-events: none;
+  background-image:
+    linear-gradient(rgba(var(--accent-rgb), 0.07) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(var(--accent-rgb), 0.07) 1px, transparent 1px);
+  background-size: 32px 32px;
+  mask-image: radial-gradient(ellipse 60% 50% at 50% 50%, #000, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse 60% 50% at 50% 50%, #000, transparent 75%);
+  transform: translateZ(-60px);
+  opacity: 0.9;
 }
 
 /* ───────────────────────── Resets & base ───────────────────────── */
@@ -418,32 +480,4 @@ a {
     color-mix(in srgb, var(--accent) 30%, transparent) 50%,
     transparent
   );
-}
-
-/* ───────────────────────── Reduced motion ───────────────────────── */
-@media (prefers-reduced-motion: reduce) {
-  .reveal {
-    opacity: 1;
-    transform: none;
-    transition: none;
-  }
-  .badge-animate,
-  .timeline-dot-animate,
-  .timeline-card-animate,
-  .accent-line-draw,
-  .card-enter-animate,
-  .card-tilt-ready {
-    opacity: 1 !important;
-    transform: none !important;
-    animation: none !important;
-    transition: none !important;
-  }
-  * {
-    animation-duration: 0.01ms !important;
-    animation-delay: 0ms !important;
-    transition-duration: 0.01ms !important;
-  }
-  .typing-cursor::after {
-    animation: none;
-  }
 }

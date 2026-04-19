@@ -20,7 +20,8 @@
     { "name": ".NET" },
     { "name": "REST APIs" },
     { "name": "GraphQL" },
-    { "name": "AWS (Lambda, AppSync, S3)" }
+    { "name": "AWS (Lambda, AppSync, S3)" },
+    { "name": "Selenium" }
   ],
   "tools": [
     { "name": "Git" },
@@ -29,7 +30,8 @@
     { "name": "MongoDB" },
     { "name": "Visual Studio" },
     { "name": "VS Code" },
-    { "name": "MATLAB" }
+    { "name": "MATLAB" },
+    { "name": "Splunk" }
   ],
   "skills": [
     { "name": "Machine Learning" },

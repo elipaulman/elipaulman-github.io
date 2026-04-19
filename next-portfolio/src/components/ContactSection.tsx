@@ -12,9 +12,13 @@ import {
   LocationIcon,
 } from "./icons";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
+import { useMouseTilt } from "@/hooks/useMouseTilt";
 
 export function ContactSection() {
   const reveal = useScrollReveal();
+  const emailTilt = useMouseTilt<HTMLAnchorElement>({ max: 8, lift: 10, leaveMs: 400 });
+  const phoneTilt = useMouseTilt<HTMLAnchorElement>({ max: 8, lift: 10, leaveMs: 400 });
+  const locationTilt = useMouseTilt<HTMLDivElement>({ max: 6, lift: 8, leaveMs: 400 });
 
   return (
     <section id="contact" className="section-shell">
@@ -26,15 +30,22 @@ export function ContactSection() {
         />
 
         {/* Contact cards grid */}
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div
+          className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
+          style={{ perspective: "1200px" }}
+        >
           <Link
             href={`mailto:${personal.email}`}
-            className="card card-glow flex items-center gap-4"
+            ref={emailTilt}
+            className="card card-glow tilt-stage flex items-center gap-4"
           >
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[var(--accent-dim)]">
+            <div
+              className="tilt-layer flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[var(--accent-dim)]"
+              style={{ transform: "translateZ(22px)" }}
+            >
               <MailIcon className="h-5 w-5 text-[var(--accent)]" />
             </div>
-            <div className="min-w-0">
+            <div className="tilt-layer min-w-0" style={{ transform: "translateZ(12px)" }}>
               <p className="font-mono text-xs text-[var(--muted)]">{'// email'}</p>
               <p className="truncate text-sm font-semibold text-[var(--text-strong)]">
                 {personal.email}
@@ -44,12 +55,16 @@ export function ContactSection() {
 
           <Link
             href={`tel:${socials.phone.replace(/\D/g, "")}`}
-            className="card card-glow flex items-center gap-4"
+            ref={phoneTilt}
+            className="card card-glow tilt-stage flex items-center gap-4"
           >
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[var(--accent-dim)]">
+            <div
+              className="tilt-layer flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[var(--accent-dim)]"
+              style={{ transform: "translateZ(22px)" }}
+            >
               <PhoneIcon className="h-5 w-5 text-[var(--accent)]" />
             </div>
-            <div>
+            <div className="tilt-layer" style={{ transform: "translateZ(12px)" }}>
               <p className="font-mono text-xs text-[var(--muted)]">{'// phone'}</p>
               <p className="text-sm font-semibold text-[var(--text-strong)]">
                 {socials.phone}
@@ -57,11 +72,17 @@ export function ContactSection() {
             </div>
           </Link>
 
-          <div className="card flex items-center gap-4">
-            <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[var(--accent-dim)]">
+          <div
+            ref={locationTilt}
+            className="card tilt-stage flex items-center gap-4"
+          >
+            <div
+              className="tilt-layer flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-[var(--accent-dim)]"
+              style={{ transform: "translateZ(22px)" }}
+            >
               <LocationIcon className="h-5 w-5 text-[var(--accent)]" />
             </div>
-            <div>
+            <div className="tilt-layer" style={{ transform: "translateZ(12px)" }}>
               <p className="font-mono text-xs text-[var(--muted)]">{'// location'}</p>
               <p className="text-sm font-semibold text-[var(--text-strong)]">
                 {personal.location}

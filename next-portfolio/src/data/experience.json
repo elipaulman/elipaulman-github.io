@@ -2,14 +2,14 @@
   {
     "id": "apple-sqe",
     "date": "January 2026 - Present",
-    "title": "Software Quality Engineer",
+    "title": "Software Quality Engineer — Tools & Automation",
     "company": "Apple",
     "logo": "images/Companies/apple_logo.png",
     "logoAlt": "Apple Logo",
     "responsibilities": [
-      "Testing carrier service integrations that enable seamless iPhone activation and setup with wireless carriers",
-      "Automating test platforms to improve efficiency and coverage across carrier onboarding workflows",
-      "Ensuring quality and reliability of native carrier onboarding experience for Apple customers"
+      "Engineering internal tools and automation frameworks to validate carrier service integrations powering iPhone activation at scale",
+      "Building automated test platforms that expand coverage and eliminate manual workflows across carrier onboarding pipelines",
+      "Driving quality and reliability of native carrier onboarding through scalable tooling and systems-level testing"
     ]
   },
   {
