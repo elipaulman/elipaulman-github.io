@@ -1,11 +1,11 @@
 "use client";
 
 import Link from "next/link";
-import { useRef } from "react";
 import { projects, socials } from "@/lib/data";
 import { SectionHeading } from "./SectionHeading";
 import { ExternalIcon } from "./icons";
 import { useAnimateOnce } from "@/hooks/useScrollReveal";
+import { useMouseTilt } from "@/hooks/useMouseTilt";
 
 const formatTag = (tag: string): string => {
   const tagMap: Record<string, string> = {
@@ -18,32 +18,7 @@ const formatTag = (tag: string): string => {
 export function ProjectsGrid() {
   const githubReposLink = socials.socialMedia.github.url;
   const animateOnce = useAnimateOnce();
-  const cardRefs = useRef<Map<string, HTMLElement>>(new Map());
-
-  const handleMouseMove = (
-    e: React.MouseEvent<HTMLElement>,
-    id: string
-  ) => {
-    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
-    const el = cardRefs.current.get(id);
-    if (!el) return;
-    const rect = e.currentTarget.getBoundingClientRect();
-    const x = e.clientX - rect.left - rect.width / 2;
-    const y = e.clientY - rect.top - rect.height / 2;
-    const rotateX = -(y / (rect.height / 2)) * 8;
-    const rotateY = (x / (rect.width / 2)) * 8;
-    const shadowX = (x / (rect.width / 2)) * 6;
-    const shadowY = (y / (rect.height / 2)) * 6;
-    el.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) translateZ(10px)`;
-    el.style.boxShadow = `${shadowX}px ${shadowY}px 20px rgba(var(--accent-rgb), 0.12)`;
-  };
-
-  const handleMouseLeave = (id: string) => {
-    const el = cardRefs.current.get(id);
-    if (!el) return;
-    el.style.transform = "";
-    el.style.boxShadow = "";
-  };
+  const tiltRef = useMouseTilt<HTMLElement>({ max: 7, lift: 10, leaveMs: 400 });
 
   return (
     <section id="projects" className="section-shell">
@@ -54,34 +29,23 @@ export function ProjectsGrid() {
           description="Production work, hackathon wins, and experiments that show how I approach architecture, UX, and impact."
         />
 
-        {/* Project grid */}
         <div
           ref={animateOnce as React.RefCallback<HTMLDivElement>}
           className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
-          style={{ perspective: "800px" }}
+          style={{ perspective: "1200px" }}
         >
           {projects.map((project, index) => (
             <article
               key={project.id}
               data-animate-child
-              className="card card-glow card-enter-animate flex h-full flex-col"
+              ref={tiltRef}
+              className="card card-glow tilt-stage card-enter-animate flex h-full flex-col"
               style={{ animationDelay: `${index * 100}ms` }}
-              ref={(el) => {
-                if (el) {
-                  cardRefs.current.set(project.id, el);
-                  const onEnd = () => {
-                    el.classList.add("card-tilt-ready");
-                    el.removeEventListener("animationend", onEnd);
-                  };
-                  el.addEventListener("animationend", onEnd);
-                } else {
-                  cardRefs.current.delete(project.id);
-                }
-              }}
-              onMouseMove={(e) => handleMouseMove(e, project.id)}
-              onMouseLeave={() => handleMouseLeave(project.id)}
             >
-              <div className="flex items-start justify-between gap-3">
+              <div
+                className="tilt-layer flex items-start justify-between gap-3"
+                style={{ transform: "translateZ(22px)" }}
+              >
                 <h3 className="font-display text-lg font-bold tracking-tight text-[var(--text-strong)]">
                   {project.title}
                 </h3>
@@ -98,13 +62,19 @@ export function ProjectsGrid() {
                   </div>
                 )}
               </div>
-              <p className="mt-2 text-sm text-[var(--text)] leading-relaxed">
+              <p
+                className="tilt-layer mt-2 text-sm text-[var(--text)] leading-relaxed"
+                style={{ transform: "translateZ(8px)" }}
+              >
                 {project.description}
               </p>
-              <p className="mt-3 font-mono text-xs text-[var(--accent)]">
+              <p
+                className="tilt-layer mt-3 font-mono text-xs text-[var(--accent)]"
+                style={{ transform: "translateZ(14px)" }}
+              >
                 {'// '}{project.techUsed.toLowerCase()}
               </p>
-              <div className="mt-auto pt-4">
+              <div className="tilt-layer mt-auto pt-4" style={{ transform: "translateZ(26px)" }}>
                 <Link
                   href={project.link}
                   target="_blank"
@@ -119,7 +89,6 @@ export function ProjectsGrid() {
           ))}
         </div>
 
-        {/* View all link */}
         <Link
           href={githubReposLink}
           target="_blank"

@@ -1,12 +1,17 @@
 "use client";
 
+import Image from "next/image";
 import Link from "next/link";
 import { personal, socials } from "@/lib/data";
 import { SectionHeading } from "./SectionHeading";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
+import { useMouseTilt } from "@/hooks/useMouseTilt";
 
 export function AboutSection() {
   const reveal = useScrollReveal();
+  const tiltRef = useMouseTilt<HTMLDivElement>({ max: 4, lift: 6, leaveMs: 450 });
+  const photoTiltRef = useMouseTilt<HTMLDivElement>({ max: 4, lift: 8, leaveMs: 450 });
+  const terminalTiltRef = useMouseTilt<HTMLDivElement>({ max: 5, lift: 8, leaveMs: 450 });
   const websiteUrl = personal.website.startsWith("http")
     ? personal.website
     : `https://${personal.website}`;
@@ -20,43 +25,95 @@ export function AboutSection() {
           description="I ship fast, keep things maintainable, and love combining AI/ML with strong product sense."
         />
 
-        <div className="grid gap-8 lg:grid-cols-[1.2fr_0.8fr] lg:items-start">
+        <div
+          className="grid gap-8 lg:grid-cols-2 lg:items-stretch"
+          style={{ perspective: "1400px" }}
+        >
           {/* Bio */}
-          <div className="space-y-6">
-            <div className="card">
-              <p className="leading-relaxed text-[var(--text)]">
+          <div className="flex flex-col gap-6">
+            <div ref={tiltRef} className="card tilt-stage flex-1">
+              <p
+                className="tilt-layer leading-relaxed text-[var(--text)]"
+                style={{ transform: "translateZ(10px)" }}
+              >
                 {personal.about.short}
               </p>
-              <p className="mt-4 leading-relaxed text-[var(--text)]">
+              <p
+                className="tilt-layer mt-4 leading-relaxed text-[var(--text)]"
+                style={{ transform: "translateZ(18px)" }}
+              >
                 {personal.about.detailed}
               </p>
             </div>
 
             <div className="grid gap-4 sm:grid-cols-2">
-              <div className="card">
-                <p className="font-mono text-xs text-[var(--accent)]">{'// focus'}</p>
-                <p className="mt-2 font-display text-sm font-semibold tracking-tight text-[var(--text-strong)]">
+              <div ref={tiltRef} className="card tilt-stage">
+                <p
+                  className="tilt-layer font-mono text-xs text-[var(--accent)]"
+                  style={{ transform: "translateZ(14px)" }}
+                >
+                  {'// focus'}
+                </p>
+                <p
+                  className="tilt-layer mt-2 font-display text-sm font-semibold tracking-tight text-[var(--text-strong)]"
+                  style={{ transform: "translateZ(20px)" }}
+                >
                   What I focus on
                 </p>
-                <p className="mt-1 text-sm text-[var(--muted)]">
+                <p
+                  className="tilt-layer mt-1 text-sm text-[var(--muted)]"
+                  style={{ transform: "translateZ(8px)" }}
+                >
                   Quality engineering, test automation, and building AI/ML-powered products with measurable impact.
                 </p>
               </div>
-              <div className="card">
-                <p className="font-mono text-xs text-[var(--accent)]">{'// method'}</p>
-                <p className="mt-2 font-display text-sm font-semibold tracking-tight text-[var(--text-strong)]">
+              <div ref={tiltRef} className="card tilt-stage">
+                <p
+                  className="tilt-layer font-mono text-xs text-[var(--accent)]"
+                  style={{ transform: "translateZ(14px)" }}
+                >
+                  {'// method'}
+                </p>
+                <p
+                  className="tilt-layer mt-2 font-display text-sm font-semibold tracking-tight text-[var(--text-strong)]"
+                  style={{ transform: "translateZ(20px)" }}
+                >
                   How I work
                 </p>
-                <p className="mt-1 text-sm text-[var(--muted)]">
+                <p
+                  className="tilt-layer mt-1 text-sm text-[var(--muted)]"
+                  style={{ transform: "translateZ(8px)" }}
+                >
                   Bias for action, fast iterations, clean API boundaries, and crisp documentation.
                 </p>
               </div>
             </div>
           </div>
 
+          {/* Photo + Terminal column */}
+          <div className="flex flex-col gap-4 h-full">
+          {/* Photo card */}
+          <div ref={photoTiltRef} className="card tilt-stage overflow-hidden p-2 flex-1 min-h-96">
+            <div className="relative h-full min-h-48 rounded-lg overflow-hidden">
+              <Image
+                src="/images/eli-photo-1.jpg"
+                alt="Elijah Paulman at an Apple campus event"
+                fill
+                className="object-cover object-[center_82%]"
+                sizes="(max-width: 1024px) 100vw, 400px"
+              />
+            </div>
+          </div>
+
           {/* Terminal card */}
-          <div className="card overflow-hidden">
-            <div className="flex items-center gap-2 border-b border-[var(--border)] pb-3 mb-4">
+          <div
+            ref={terminalTiltRef}
+            className="card tilt-stage overflow-hidden shrink-0"
+          >
+            <div
+              className="tilt-layer flex items-center gap-2 border-b border-[var(--border)] pb-3 mb-4"
+              style={{ transform: "translateZ(24px)" }}
+            >
               <span className="h-2.5 w-2.5 rounded-full bg-red-400/50" />
               <span className="h-2.5 w-2.5 rounded-full bg-yellow-400/50" />
               <span className="h-2.5 w-2.5 rounded-full bg-green-400/50" />
@@ -65,7 +122,10 @@ export function AboutSection() {
               </span>
             </div>
 
-            <div className="space-y-3 font-mono text-sm">
+            <div
+              className="tilt-layer space-y-3 font-mono text-sm"
+              style={{ transform: "translateZ(12px)" }}
+            >
               <TerminalRow label="name" value={personal.name} />
               <TerminalRow label="university" value={personal.university} />
               <TerminalRow
@@ -106,12 +166,16 @@ export function AboutSection() {
               <TerminalRow label="location" value={personal.location} />
             </div>
 
-            <div className="mt-6 flex flex-wrap gap-2">
+            <div
+              className="tilt-layer mt-6 flex flex-wrap gap-2"
+              style={{ transform: "translateZ(18px)" }}
+            >
               <span className="pill">Full-stack</span>
               <span className="pill">AI/ML</span>
               <span className="pill">Cloud</span>
               <span className="pill">Leadership</span>
             </div>
+          </div>
           </div>
         </div>
       </div>

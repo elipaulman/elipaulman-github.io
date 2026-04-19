@@ -4,9 +4,11 @@ import Image from "next/image";
 import { education } from "@/lib/data";
 import { SectionHeading } from "./SectionHeading";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
+import { useMouseTilt } from "@/hooks/useMouseTilt";
 
 export function EducationSection() {
   const reveal = useScrollReveal();
+  const tiltRef = useMouseTilt<HTMLElement>({ max: 6, lift: 9, leaveMs: 420 });
 
   return (
     <section id="education" className="section-shell">
@@ -17,13 +19,20 @@ export function EducationSection() {
           description="Programs and schools that shaped my foundation in computer science and engineering."
         />
 
-        <div className="reveal-stagger grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div
+          className="reveal-stagger grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
+          style={{ perspective: "1200px" }}
+        >
           {education.map((school) => (
             <article
               key={school.id}
-              className="reveal card flex h-full flex-col border-l-4 border-l-[var(--accent)]"
+              ref={tiltRef}
+              className="reveal card tilt-stage flex h-full flex-col border-l-4 border-l-[var(--accent)]"
             >
-              <div className="flex items-center gap-3">
+              <div
+                className="tilt-layer flex items-center gap-3"
+                style={{ transform: "translateZ(22px)" }}
+              >
                 <div className="relative h-10 w-10 shrink-0 overflow-hidden rounded-lg">
                   <Image
                     src={`/${school.image}`}
@@ -40,10 +49,16 @@ export function EducationSection() {
                   <p className="text-sm text-[var(--muted)]">{school.degree}</p>
                 </div>
               </div>
-              <p className="mt-2 font-mono text-xs text-[var(--muted)]">
+              <p
+                className="tilt-layer mt-2 font-mono text-xs text-[var(--muted)]"
+                style={{ transform: "translateZ(10px)" }}
+              >
                 {school.dates}
               </p>
-              <ul className="mt-3 space-y-1.5 text-sm text-[var(--text)]">
+              <ul
+                className="tilt-layer mt-3 space-y-1.5 text-sm text-[var(--text)]"
+                style={{ transform: "translateZ(6px)" }}
+              >
                 {school.details.map((detail) => (
                   <li key={detail} className="flex gap-2 leading-relaxed">
                     <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-[var(--accent)]" />
