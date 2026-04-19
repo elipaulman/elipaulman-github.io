@@ -96,11 +96,11 @@ export function AboutSection() {
           <div ref={photoTiltRef} className="card tilt-stage overflow-hidden p-2 flex-1 min-h-96">
             <div className="relative h-full min-h-48 rounded-lg overflow-hidden">
               <Image
-                src="/images/eli-photo-1.jpg"
+                src="/images/eli-photo-1-optimized.jpg"
                 alt="Elijah Paulman at an Apple campus event"
                 fill
                 className="object-cover object-[center_82%]"
-                sizes="(max-width: 1024px) 100vw, 400px"
+                sizes="(max-width: 640px) calc(100vw - 3rem), (max-width: 1024px) 90vw, 440px"
               />
             </div>
           </div>

@@ -23,33 +23,45 @@ function MarqueeRow({
   const doubled = [...items, ...items];
 
   return (
-    <div className="marquee-wrapper relative overflow-hidden py-1">
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-y-0 left-0 z-10 w-20"
-        style={{ background: "linear-gradient(90deg, var(--bg) 0%, transparent 100%)" }}
-      />
-      <div
-        aria-hidden="true"
-        className="pointer-events-none absolute inset-y-0 right-0 z-10 w-20"
-        style={{ background: "linear-gradient(270deg, var(--bg) 0%, transparent 100%)" }}
-      />
-      <div
-        className="marquee-track flex w-max gap-5"
-        style={{
-          animation: `${reverse ? "marquee-right" : "marquee-left"} ${duration}s linear infinite`,
-        }}
-      >
-        {doubled.map((item, idx) => (
+    <>
+      <div className="flex flex-wrap gap-2 md:hidden">
+        {items.map((item) => (
           <span
-            key={idx}
+            key={item.name}
             className="pill cursor-default select-none whitespace-nowrap"
           >
             {item.name}
           </span>
         ))}
       </div>
-    </div>
+      <div className="marquee-wrapper relative hidden overflow-hidden py-1 md:block">
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-y-0 left-0 z-10 w-20"
+          style={{ background: "linear-gradient(90deg, var(--bg) 0%, transparent 100%)" }}
+        />
+        <div
+          aria-hidden="true"
+          className="pointer-events-none absolute inset-y-0 right-0 z-10 w-20"
+          style={{ background: "linear-gradient(270deg, var(--bg) 0%, transparent 100%)" }}
+        />
+        <div
+          className="marquee-track flex w-max gap-5"
+          style={{
+            animation: `${reverse ? "marquee-right" : "marquee-left"} ${duration}s linear infinite`,
+          }}
+        >
+          {doubled.map((item, idx) => (
+            <span
+              key={`${item.name}-${idx}`}
+              className="pill cursor-default select-none whitespace-nowrap"
+            >
+              {item.name}
+            </span>
+          ))}
+        </div>
+      </div>
+    </>
   );
 }
 

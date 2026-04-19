@@ -8,6 +8,10 @@ export interface UseMouseTiltOptions {
   leaveMs?: number;
 }
 
+type TiltReadyNode = HTMLElement & {
+  __portfolioTiltSetup?: string;
+};
+
 export function useMouseTilt<T extends HTMLElement = HTMLElement>(
   options: UseMouseTiltOptions = {}
 ): RefCallback<T> {
@@ -16,26 +20,28 @@ export function useMouseTilt<T extends HTMLElement = HTMLElement>(
   return useCallback(
     (node: T | null) => {
       if (!node || typeof window === "undefined") return;
-      
-      let raf = 0;
 
-      // Fallback for touch devices: continuous, smooth automatic 3D wobble
-      if (window.matchMedia("(hover: none)").matches) {
-        const animate = (time: number) => {
-          // Create an organic, looping float pattern using slightly offset sine waves
-          const rx = Math.sin(time / 1000) * (max * 0.6);
-          const ry = Math.cos(time / 1300) * (max * 0.6);
-          node.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg) translateZ(${lift}px)`;
-          raf = requestAnimationFrame(animate);
-        };
-        raf = requestAnimationFrame(animate);
-        
-        return () => {
-          if (raf) cancelAnimationFrame(raf);
-          node.style.transform = "";
-        };
+      const setupSignature = `${max}:${lift}:${leaveMs}`;
+      const tiltNode = node as TiltReadyNode;
+
+      if ((tiltNode.__portfolioTiltSetup ?? "") === setupSignature) {
+        return;
       }
 
+      tiltNode.__portfolioTiltSetup = setupSignature;
+
+      const supportsHover = window.matchMedia(
+        "(hover: hover) and (pointer: fine)"
+      ).matches;
+      const isSmallViewport = window.matchMedia("(max-width: 768px)").matches;
+
+      if (!supportsHover || isSmallViewport) {
+        node.style.transform = "";
+        node.style.transition = "";
+        return;
+      }
+
+      let raf = 0;
       let restoreTimer = 0;
 
       const handleEnter = () => {
@@ -75,16 +81,6 @@ export function useMouseTilt<T extends HTMLElement = HTMLElement>(
       node.addEventListener("pointerenter", handleEnter);
       node.addEventListener("pointermove", handleMove);
       node.addEventListener("pointerleave", handleLeave);
-
-      return () => {
-        node.removeEventListener("pointerenter", handleEnter);
-        node.removeEventListener("pointermove", handleMove);
-        node.removeEventListener("pointerleave", handleLeave);
-        if (raf) cancelAnimationFrame(raf);
-        if (restoreTimer) window.clearTimeout(restoreTimer);
-        node.style.transform = "";
-        node.style.transition = "";
-      };
     },
     [max, lift, leaveMs]
   );
