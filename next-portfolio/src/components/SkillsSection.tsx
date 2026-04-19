@@ -12,10 +12,12 @@ const categories = [
 ];
 
 function MarqueeRow({
+  label,
   items,
   reverse,
   duration,
 }: {
+  label: string;
   items: { name: string }[];
   reverse: boolean;
   duration: number;
@@ -24,15 +26,23 @@ function MarqueeRow({
 
   return (
     <>
-      <div className="flex flex-wrap gap-2 md:hidden">
-        {items.map((item) => (
-          <span
-            key={item.name}
-            className="pill cursor-default select-none whitespace-nowrap"
-          >
-            {item.name}
-          </span>
-        ))}
+      <div className="card overflow-hidden md:hidden">
+        <div className="mb-4 border-b border-[var(--border)] pb-3">
+          <p className="font-mono text-xs font-medium tracking-wide text-[var(--accent)]">
+            {"// "}
+            {label}
+          </p>
+        </div>
+        <div className="flex flex-wrap gap-2">
+          {items.map((item) => (
+            <span
+              key={item.name}
+              className="pill cursor-default select-none whitespace-nowrap"
+            >
+              {item.name}
+            </span>
+          ))}
+        </div>
       </div>
       <div className="marquee-wrapper relative hidden overflow-hidden py-1 md:block">
         <div
@@ -81,11 +91,12 @@ export function SkillsSection() {
             const items = skills[cat.key] ?? [];
             return (
               <div key={cat.key}>
-                <p className="mb-3 font-mono text-sm font-medium text-[var(--accent)]">
+                <p className="mb-3 hidden font-mono text-sm font-medium text-[var(--accent)] md:block">
                   {"// "}
                   {cat.label}
                 </p>
                 <MarqueeRow
+                  label={cat.label}
                   items={items}
                   reverse={cat.reverse}
                   duration={Math.round(items.length * 4)}
