@@ -26,6 +26,7 @@ export function Hero({ socials }: HeroProps) {
       {/* Background glow layers */}
       <div
         aria-hidden="true"
+        className="hero-glow-layer"
         style={{
           position: "absolute",
           inset: 0,
@@ -38,6 +39,7 @@ export function Hero({ socials }: HeroProps) {
       />
       <div
         aria-hidden="true"
+        className="hero-glow-layer"
         style={{
           position: "absolute",
           inset: 0,
@@ -58,7 +60,7 @@ export function Hero({ socials }: HeroProps) {
           <div aria-hidden="true" className="depth-grid" />
           {/* Avatar + greeting */}
           <div
-            className="tilt-layer flex items-center justify-center gap-4 sm:justify-start"
+            className="hero-animate tilt-layer flex items-center justify-center gap-4 sm:justify-start"
             style={{
               transform: "translateZ(18px)",
               animation: "fade-slide-up 0.6s 100ms ease-out both",
@@ -66,7 +68,7 @@ export function Hero({ socials }: HeroProps) {
           >
             <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-full ring-[1.5px] ring-[var(--accent)] ring-offset-2 ring-offset-[var(--bg)]">
               <Image
-                src="/images/EliStandingClear.png"
+                src="/images/EliStandingClear-avatar.png"
                 alt="Elijah Paulman"
                 fill
                 className="object-cover object-top"
@@ -81,7 +83,7 @@ export function Hero({ socials }: HeroProps) {
 
           {/* Name */}
           <div
-            className="tilt-layer"
+            className="hero-animate tilt-layer"
             style={{
               transform: "translateZ(48px)",
               animation: "fade-slide-up 0.6s 250ms ease-out both",
@@ -94,14 +96,14 @@ export function Hero({ socials }: HeroProps) {
 
           {/* Typing subtitle */}
           <div
-            className="tilt-layer flex justify-center overflow-hidden sm:justify-start"
+            className="hero-animate tilt-layer flex justify-center overflow-hidden sm:justify-start"
             style={{
               transform: "translateZ(12px)",
               animation: "fade-slide-up 0.6s 400ms ease-out both",
             }}
           >
             <p
-              className={`inline-block overflow-hidden whitespace-nowrap border-r-2 border-[var(--accent)] font-mono text-sm text-[var(--muted)] sm:text-base ${
+              className={`hero-subtitle inline-block overflow-hidden whitespace-nowrap border-r-2 border-[var(--accent)] font-mono text-sm text-[var(--muted)] sm:text-base ${
                 !showCursor ? "border-transparent" : ""
               }`}
               style={{
@@ -116,7 +118,7 @@ export function Hero({ socials }: HeroProps) {
 
           {/* CTA buttons */}
           <div
-            className="tilt-layer flex flex-wrap items-center justify-center gap-3 pt-4 sm:justify-start"
+            className="hero-animate tilt-layer flex flex-wrap items-center justify-center gap-3 pt-4 sm:justify-start"
             style={{
               transform: "translateZ(28px)",
               animation: "fade-slide-up 0.6s 550ms ease-out both",

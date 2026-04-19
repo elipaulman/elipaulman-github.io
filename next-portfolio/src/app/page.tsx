@@ -38,7 +38,7 @@ export default function Home() {
     <>
       <div className="relative min-h-screen">
         {/* Subtle accent gradient at top */}
-        <div className="pointer-events-none fixed inset-0 -z-10 bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,var(--accent-dim),transparent)]" />
+        <div className="app-bg-glow pointer-events-none absolute inset-x-0 top-0 -z-10 h-[70vh] bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,var(--accent-dim),transparent)]" />
 
         <NavBar resumePath={socials.resume.path} />
         <main className="mx-auto max-w-5xl px-5 pb-14 sm:px-8 sm:pb-16">
