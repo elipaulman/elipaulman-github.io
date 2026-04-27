@@ -227,7 +227,6 @@
 
 .tilt-stage {
   transform-style: preserve-3d;
-  will-change: transform;
 }
 
 .tilt-layer {

@@ -14,7 +14,8 @@
     "description": "AI-powered repository intelligence platform leveraging RAG architecture with vector embeddings for semantic code search. Enables natural-language queries over codebases using LangChain and OpenAI models.",
     "techUsed": "Python, Flask, LangChain, OpenAI API, Elasticsearch, Next.js",
     "link": "https://github.com/elipaulman/Repo_Rover",
-    "linkText": "View Repo"
+    "linkText": "View Repo",
+    "tags": ["ai"]
   },
   {
     "id": "attendance-processor",
