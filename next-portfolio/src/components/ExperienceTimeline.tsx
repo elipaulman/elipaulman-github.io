@@ -11,7 +11,7 @@ export function ExperienceTimeline() {
   const tiltRef = useMouseTilt<HTMLElement>({ max: 5, lift: 8, leaveMs: 450 });
 
   return (
-    <section id="experience" className="section-shell">
+    <section id="experience" className="section-shell" style={{ overflow: 'visible', contentVisibility: 'visible' }}>
       <div>
         <SectionHeading
           tag="experience"
@@ -22,7 +22,7 @@ export function ExperienceTimeline() {
         <div ref={animateOnce}>
           <div
             className="relative pl-8 md:pl-12"
-            style={{ perspective: "1400px" }}
+            style={{ perspective: "1400px", overflow: "visible" }}
           >
             {/* Timeline line — centered at left-[11.5px] on mobile, left-[19.5px] on md */}
             <div className="absolute left-[11.5px] top-2 bottom-2 w-px bg-[var(--border)] md:left-[19.5px]" />
@@ -50,47 +50,49 @@ export function ExperienceTimeline() {
                   <article
                     data-animate-child
                     ref={tiltRef}
-                    className="card card-glow tilt-stage timeline-card-animate"
+                    className="tilt-stage timeline-card-animate"
                     style={{ animationDelay: `${index * 150 + 400}ms` }}
                   >
-                    <div
-                      className="tilt-layer flex items-start gap-4"
-                      style={{ transform: "translateZ(20px)" }}
-                    >
-                      <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-[var(--border)] bg-[var(--logo-bg)]">
-                        <Image
-                          src={`/${role.logo}`}
-                          alt={role.logoAlt}
-                          width={28}
-                          height={28}
-                          className="h-7 w-7 object-contain"
-                          style={{ filter: "var(--logo-filter)" }}
-                        />
+                    <div className="card card-glow">
+                      <div
+                        className="tilt-layer flex items-start gap-4"
+                        style={{ transform: "translateZ(20px)" }}
+                      >
+                        <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg border border-[var(--border)] bg-[var(--logo-bg)]">
+                          <Image
+                            src={`/${role.logo}`}
+                            alt={role.logoAlt}
+                            width={28}
+                            height={28}
+                            className="h-7 w-7 object-contain"
+                            style={{ filter: "var(--logo-filter)" }}
+                          />
+                        </div>
+                        <div className="min-w-0 flex-1">
+                          <h3 className="font-display text-lg font-bold tracking-tight text-[var(--text-strong)]">
+                            {role.title}
+                          </h3>
+                          <p className="text-sm font-medium text-[var(--muted-strong)]">
+                            {role.company}
+                          </p>
+                        </div>
                       </div>
-                      <div className="min-w-0 flex-1">
-                        <h3 className="font-display text-lg font-bold tracking-tight text-[var(--text-strong)]">
-                          {role.title}
-                        </h3>
-                        <p className="text-sm font-medium text-[var(--muted-strong)]">
-                          {role.company}
-                        </p>
-                      </div>
-                    </div>
 
-                    <ul
-                      className="tilt-layer mt-4 space-y-2 text-sm text-[var(--text)]"
-                      style={{ transform: "translateZ(8px)" }}
-                    >
-                      {role.responsibilities.map((item) => (
-                        <li
-                          key={item}
-                          className="flex gap-2 leading-relaxed"
-                        >
-                          <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-[var(--accent)]" />
-                          <span className="min-w-0">{item}</span>
-                        </li>
-                      ))}
-                    </ul>
+                      <ul
+                        className="tilt-layer mt-4 space-y-2 text-sm text-[var(--text)]"
+                        style={{ transform: "translateZ(8px)" }}
+                      >
+                        {role.responsibilities.map((item) => (
+                          <li
+                            key={item}
+                            className="flex gap-2 leading-relaxed"
+                          >
+                            <span className="mt-2 h-1 w-1 shrink-0 rounded-full bg-[var(--accent)]" />
+                            <span className="min-w-0">{item}</span>
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
                   </article>
                 </div>
               ))}
