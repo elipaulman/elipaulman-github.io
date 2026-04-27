@@ -11,7 +11,7 @@ export function EducationSection() {
   const tiltRef = useMouseTilt<HTMLElement>({ max: 6, lift: 9, leaveMs: 420 });
 
   return (
-    <section id="education" className="section-shell">
+    <section id="education" className="section-shell" style={{ overflow: 'visible', contentVisibility: 'visible' }}>
       <div ref={reveal} className="reveal space-y-8">
         <SectionHeading
           tag="education"
@@ -21,14 +21,15 @@ export function EducationSection() {
 
         <div
           className="reveal-stagger grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
-          style={{ perspective: "1200px" }}
+          style={{ perspective: "1200px", overflow: "visible" }}
         >
           {education.map((school) => (
             <article
               key={school.id}
               ref={tiltRef}
-              className="reveal card tilt-stage flex h-full flex-col border-l-4 border-l-[var(--accent)]"
+              className="reveal tilt-stage flex h-full flex-col"
             >
+              <div className="card border-l-4 border-l-[var(--accent)] flex h-full flex-col">
               <div
                 className="tilt-layer flex items-center gap-3"
                 style={{ transform: "translateZ(22px)" }}
@@ -66,6 +67,7 @@ export function EducationSection() {
                   </li>
                 ))}
               </ul>
+              </div>
             </article>
           ))}
         </div>

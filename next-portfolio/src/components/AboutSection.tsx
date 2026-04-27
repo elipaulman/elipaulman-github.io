@@ -17,7 +17,7 @@ export function AboutSection() {
     : `https://${personal.website}`;
 
   return (
-    <section id="about" className="section-shell">
+    <section id="about" className="section-shell" style={{ overflow: 'visible', contentVisibility: 'visible' }}>
       <div ref={reveal} className="reveal space-y-8">
         <SectionHeading
           tag="about"
@@ -27,11 +27,12 @@ export function AboutSection() {
 
         <div
           className="grid gap-8 lg:grid-cols-2 lg:items-stretch"
-          style={{ perspective: "1400px" }}
+          style={{ perspective: "1400px", overflow: "visible" }}
         >
           {/* Bio */}
           <div className="flex flex-col gap-6">
-            <div ref={tiltRef} className="card tilt-stage flex-1">
+            <div ref={tiltRef} className="tilt-stage flex-1">
+              <div className="card h-full">
               <p
                 className="tilt-layer leading-relaxed text-[var(--text)]"
                 style={{ transform: "translateZ(10px)" }}
@@ -44,10 +45,12 @@ export function AboutSection() {
               >
                 {personal.about.detailed}
               </p>
+              </div>
             </div>
 
             <div className="grid gap-4 sm:grid-cols-2">
-              <div ref={tiltRef} className="card tilt-stage">
+              <div ref={tiltRef} className="tilt-stage">
+                <div className="card">
                 <p
                   className="tilt-layer font-mono text-xs text-[var(--accent)]"
                   style={{ transform: "translateZ(14px)" }}
@@ -66,8 +69,10 @@ export function AboutSection() {
                 >
                   Quality engineering, test automation, and building AI/ML-powered products with measurable impact.
                 </p>
+                </div>
               </div>
-              <div ref={tiltRef} className="card tilt-stage">
+              <div ref={tiltRef} className="tilt-stage">
+                <div className="card">
                 <p
                   className="tilt-layer font-mono text-xs text-[var(--accent)]"
                   style={{ transform: "translateZ(14px)" }}
@@ -86,6 +91,7 @@ export function AboutSection() {
                 >
                   Bias for action, fast iterations, clean API boundaries, and crisp documentation.
                 </p>
+                </div>
               </div>
             </div>
           </div>
@@ -93,7 +99,8 @@ export function AboutSection() {
           {/* Photo + Terminal column */}
           <div className="flex flex-col gap-4 h-full">
           {/* Photo card */}
-          <div ref={photoTiltRef} className="card tilt-stage overflow-hidden p-2 flex-1 min-h-96">
+          <div ref={photoTiltRef} className="tilt-stage flex-1 min-h-96">
+            <div className="card overflow-hidden p-2 h-full">
             <div className="relative h-full min-h-48 rounded-lg overflow-hidden">
               <Image
                 src="/images/eli-photo-1-optimized.jpg"
@@ -103,13 +110,15 @@ export function AboutSection() {
                 sizes="(max-width: 640px) calc(100vw - 3rem), (max-width: 1024px) 90vw, 440px"
               />
             </div>
+            </div>
           </div>
 
           {/* Terminal card */}
           <div
             ref={terminalTiltRef}
-            className="card tilt-stage overflow-hidden shrink-0"
+            className="tilt-stage shrink-0"
           >
+            <div className="card overflow-hidden">
             <div
               className="tilt-layer flex items-center gap-2 border-b border-[var(--border)] pb-3 mb-4"
               style={{ transform: "translateZ(24px)" }}
@@ -174,6 +183,7 @@ export function AboutSection() {
               <span className="pill">AI/ML</span>
               <span className="pill">Cloud</span>
               <span className="pill">Leadership</span>
+            </div>
             </div>
           </div>
           </div>
