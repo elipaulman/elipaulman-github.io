@@ -79,7 +79,7 @@ export function SkillsSection() {
   const reveal = useScrollReveal();
 
   return (
-    <section id="skills" className="section-shell">
+    <section id="skills" className="section-shell" style={{ overflow: 'visible', contentVisibility: 'visible' }}>
       <div ref={reveal} className="reveal space-y-10">
         <SectionHeading
           tag="skills"

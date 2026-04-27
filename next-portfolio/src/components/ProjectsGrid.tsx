@@ -11,6 +11,7 @@ const formatTag = (tag: string): string => {
   const tagMap: Record<string, string> = {
     winner: "Winner",
     hackathon: "Hackathon",
+    ai: "AI",
   };
   return tagMap[tag] || tag;
 };
@@ -21,7 +22,7 @@ export function ProjectsGrid() {
   const tiltRef = useMouseTilt<HTMLElement>({ max: 7, lift: 10, leaveMs: 400 });
 
   return (
-    <section id="projects" className="section-shell">
+    <section id="projects" className="section-shell" style={{ overflow: 'visible', contentVisibility: 'visible' }}>
       <div className="space-y-8">
         <SectionHeading
           tag="projects"
@@ -32,16 +33,17 @@ export function ProjectsGrid() {
         <div
           ref={animateOnce as React.RefCallback<HTMLDivElement>}
           className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
-          style={{ perspective: "1200px" }}
+          style={{ perspective: "1200px", overflow: "visible" }}
         >
           {projects.map((project, index) => (
             <article
               key={project.id}
               data-animate-child
               ref={tiltRef}
-              className="card card-glow tilt-stage card-enter-animate flex h-full flex-col"
+              className="tilt-stage card-enter-animate"
               style={{ animationDelay: `${index * 100}ms` }}
             >
+              <div className="card card-glow flex h-full flex-col">
               <div
                 className="tilt-layer flex items-start justify-between gap-3"
                 style={{ transform: "translateZ(22px)" }}
@@ -84,6 +86,7 @@ export function ProjectsGrid() {
                   {project.linkText}
                   <ExternalIcon className="h-3.5 w-3.5" />
                 </Link>
+              </div>
               </div>
             </article>
           ))}

@@ -49,6 +49,7 @@ export function useMouseTilt<T extends HTMLElement = HTMLElement>(
           window.clearTimeout(restoreTimer);
           restoreTimer = 0;
         }
+        node.style.willChange = "transform";
         node.style.transition = "transform 120ms ease-out";
       };
 
@@ -60,7 +61,7 @@ export function useMouseTilt<T extends HTMLElement = HTMLElement>(
         const ry = px * max * 2;
         if (raf) cancelAnimationFrame(raf);
         raf = requestAnimationFrame(() => {
-          node.style.transition = "";
+          node.style.transition = "none";
           node.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg) translateZ(${lift}px)`;
         });
       };
@@ -74,6 +75,7 @@ export function useMouseTilt<T extends HTMLElement = HTMLElement>(
         node.style.transform = "";
         restoreTimer = window.setTimeout(() => {
           node.style.transition = "";
+          node.style.willChange = "";
           restoreTimer = 0;
         }, leaveMs);
       };
