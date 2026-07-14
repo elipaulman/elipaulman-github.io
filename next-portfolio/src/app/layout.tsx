@@ -1,13 +1,7 @@
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono, Syne } from "next/font/google";
+import { JetBrains_Mono, Source_Serif_4 } from "next/font/google";
 import "./globals.css";
 import { personal, socials } from "@/lib/data";
-
-const inter = Inter({
-  subsets: ["latin"],
-  variable: "--font-inter",
-  display: "swap",
-});
 
 const jetBrainsMono = JetBrains_Mono({
   subsets: ["latin"],
@@ -15,9 +9,9 @@ const jetBrainsMono = JetBrains_Mono({
   display: "swap",
 });
 
-const syne = Syne({
+const sourceSerif = Source_Serif_4({
   subsets: ["latin"],
-  variable: "--font-syne",
+  variable: "--font-source-serif",
   display: "swap",
 });
 
@@ -101,7 +95,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={`${inter.variable} ${jetBrainsMono.variable} ${syne.variable} bg-[var(--bg)] text-[var(--text)] antialiased`}>
+      <body className={`${jetBrainsMono.variable} ${sourceSerif.variable} bg-[var(--bg)] text-[var(--text)] antialiased`}>
         {children}
       </body>
     </html>

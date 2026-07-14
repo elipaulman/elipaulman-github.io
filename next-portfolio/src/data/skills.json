@@ -31,9 +31,11 @@
     { "name": "Visual Studio" },
     { "name": "VS Code" },
     { "name": "MATLAB" },
-    { "name": "Splunk" }
+    { "name": "Splunk" },
+    { "name": "Claude Code" }
   ],
   "skills": [
+    { "name": "AI-Assisted Development" },
     { "name": "Machine Learning" },
     { "name": "Computer Vision" },
     { "name": "CI/CD" },

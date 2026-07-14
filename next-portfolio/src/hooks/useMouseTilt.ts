@@ -63,6 +63,8 @@ export function useMouseTilt<T extends HTMLElement = HTMLElement>(
         raf = requestAnimationFrame(() => {
           node.style.transition = "none";
           node.style.transform = `rotateX(${rx}deg) rotateY(${ry}deg) translateZ(${lift}px)`;
+          node.style.setProperty("--mx", `${(px + 0.5) * 100}%`);
+          node.style.setProperty("--my", `${(py + 0.5) * 100}%`);
         });
       };
 

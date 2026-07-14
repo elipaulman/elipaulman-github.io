@@ -5,7 +5,8 @@ import { projects, socials } from "@/lib/data";
 import { SectionHeading } from "./SectionHeading";
 import { ExternalIcon } from "./icons";
 import { useAnimateOnce } from "@/hooks/useScrollReveal";
-import { useMouseTilt } from "@/hooks/useMouseTilt";
+import { useGroupTilt } from "@/hooks/useGroupTilt";
+import { mergeRefs } from "@/lib/mergeRefs";
 
 const formatTag = (tag: string): string => {
   const tagMap: Record<string, string> = {
@@ -19,7 +20,7 @@ const formatTag = (tag: string): string => {
 export function ProjectsGrid() {
   const githubReposLink = socials.socialMedia.github.url;
   const animateOnce = useAnimateOnce();
-  const tiltRef = useMouseTilt<HTMLElement>({ max: 7, lift: 10, leaveMs: 400 });
+  const groupTilt = useGroupTilt<HTMLDivElement>({ liftPx: 4, radiusPx: 260, leaveMs: 400 });
 
   return (
     <section id="projects" className="section-shell" style={{ overflow: 'visible', contentVisibility: 'visible' }}>
@@ -31,7 +32,7 @@ export function ProjectsGrid() {
         />
 
         <div
-          ref={animateOnce as React.RefCallback<HTMLDivElement>}
+          ref={mergeRefs(animateOnce as React.RefCallback<HTMLDivElement>, groupTilt)}
           className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3"
           style={{ perspective: "1200px", overflow: "visible" }}
         >
@@ -39,7 +40,7 @@ export function ProjectsGrid() {
             <article
               key={project.id}
               data-animate-child
-              ref={tiltRef}
+              data-group-tilt-card
               className="tilt-stage card-enter-animate"
               style={{ animationDelay: `${index * 100}ms` }}
             >
@@ -96,7 +97,7 @@ export function ProjectsGrid() {
           href={githubReposLink}
           target="_blank"
           rel="noreferrer"
-          className="block rounded-xl border border-[var(--accent)] bg-[var(--accent-dim)] px-5 py-4 text-center font-mono text-sm font-medium text-[var(--text-strong)] backdrop-blur-xl backdrop-saturate-180 shadow-[0_4px_16px_rgba(0,229,160,0.12),inset_0_1px_0_rgba(255,255,255,0.1)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_0_40px_var(--accent-glow),0_4px_16px_rgba(0,229,160,0.2)]"
+          className="btn btn-primary block px-5 py-4 text-center text-sm justify-center"
         >
           &gt; View all projects on GitHub
         </Link>
