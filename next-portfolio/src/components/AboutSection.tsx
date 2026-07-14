@@ -54,9 +54,9 @@ export function AboutSection() {
 
           {/* Photo + Terminal facts column */}
           <div className="flex flex-col gap-4">
-          <div ref={photoTiltRef} className="tilt-stage">
+          <div ref={photoTiltRef} className="tilt-stage mx-auto w-full max-w-md lg:max-w-none">
             <div className="card overflow-hidden p-2">
-            <div className="relative h-56 rounded-lg overflow-hidden sm:h-64">
+            <div className="relative aspect-[4/3] w-full rounded-lg overflow-hidden">
               <Image
                 src="/images/eli-photo-1-optimized.jpg"
                 alt="Elijah Paulman at an Apple campus event"
