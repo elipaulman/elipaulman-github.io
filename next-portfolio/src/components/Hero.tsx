@@ -1,29 +1,33 @@
 "use client";
 
-import Image from "next/image";
 import Link from "next/link";
-import { useEffect, useState } from "react";
 import { personal } from "@/lib/data";
 import type { Socials } from "@/types";
 import { GitHubIcon, LinkedInIcon, MailIcon, DocumentIcon } from "./icons";
 import { useMouseTilt } from "@/hooks/useMouseTilt";
+import { useTypewriterLoop } from "@/hooks/useTypewriterLoop";
+import { useTypewriterOnce } from "@/hooks/useTypewriterOnce";
 
 type HeroProps = {
   socials: Socials;
 };
 
-export function Hero({ socials }: HeroProps) {
-  const [showCursor, setShowCursor] = useState(true);
-  const tiltRef = useMouseTilt<HTMLDivElement>({ max: 5, lift: 6, leaveMs: 550 });
+const EYEBROW_COMMANDS = [
+  "whoami",
+  "cat about.md",
+  "ls experience/",
+  "git log --oneline -3",
+];
 
-  useEffect(() => {
-    const timer = setTimeout(() => setShowCursor(false), 4000);
-    return () => clearTimeout(timer);
-  }, []);
+const HEADLINE = `${personal.name} builds carrier\nsystems at Apple`;
+
+export function Hero({ socials }: HeroProps) {
+  const tiltRef = useMouseTilt<HTMLDivElement>({ max: 5, lift: 6, leaveMs: 550 });
+  const eyebrow = useTypewriterLoop(EYEBROW_COMMANDS);
+  const { text: headline, done: headlineDone } = useTypewriterOnce(HEADLINE, 650);
 
   return (
     <section id="intro" className="relative py-24 sm:py-32 lg:py-40">
-      {/* Background glow layers */}
       <div
         aria-hidden="true"
         className="hero-glow-layer"
@@ -37,51 +41,27 @@ export function Hero({ socials }: HeroProps) {
           animation: "hero-glow-pulse 4s ease-in-out infinite alternate",
         }}
       />
-      <div
-        aria-hidden="true"
-        className="hero-glow-layer"
-        style={{
-          position: "absolute",
-          inset: 0,
-          pointerEvents: "none",
-          zIndex: 0,
-          background:
-            "radial-gradient(ellipse 40% 40% at 80% 80%, rgba(var(--accent-rgb), 0.04) 0%, transparent 60%)",
-          animation: "hero-glow-pulse 6s ease-in-out infinite alternate-reverse",
-        }}
-      />
 
       <div className="tilt-perspective relative" style={{ zIndex: 1 }}>
-        <div
-          ref={tiltRef}
-          className="tilt-stage space-y-8 text-center sm:text-left"
-          style={{ position: "relative" }}
-        >
+        <div ref={tiltRef} className="tilt-stage space-y-6" style={{ position: "relative" }}>
           <div aria-hidden="true" className="depth-grid" />
-          {/* Avatar + greeting */}
+
+          {/* Terminal eyebrow */}
           <div
-            className="hero-animate tilt-layer flex items-center justify-center gap-4 sm:justify-start"
+            className="hero-animate tilt-layer"
             style={{
               transform: "translateZ(18px)",
               animation: "fade-slide-up 0.6s 100ms ease-out both",
             }}
           >
-            <div className="relative h-14 w-14 shrink-0 overflow-hidden rounded-full ring-[1.5px] ring-[var(--accent)] ring-offset-2 ring-offset-[var(--bg)]">
-              <Image
-                src="/images/EliStandingClear-avatar.png"
-                alt="Elijah Paulman"
-                fill
-                className="object-cover object-top"
-                sizes="56px"
-                priority
-              />
-            </div>
-            <p className="font-mono text-xs tracking-wide text-[var(--accent)]">
-              {'// hello, I\'m'}
+            <p className="min-h-[1.2em] font-mono text-xs tracking-wide text-[var(--accent)]" aria-hidden="true">
+              {"$ "}
+              {eyebrow}
+              <span className="typing-cursor" />
             </p>
           </div>
 
-          {/* Name */}
+          {/* Narrative headline */}
           <div
             className="hero-animate tilt-layer"
             style={{
@@ -89,36 +69,46 @@ export function Hero({ socials }: HeroProps) {
               animation: "fade-slide-up 0.6s 250ms ease-out both",
             }}
           >
-            <h1 className="heading-display text-5xl text-[var(--text-strong)] sm:text-6xl lg:text-7xl xl:text-8xl">
-              {personal.name}
+            <h1
+              className="min-h-[2.3em] font-mono font-semibold text-[var(--text-strong)] sm:min-h-[2.28em]"
+              style={{
+                fontSize: "clamp(2rem, 5vw, 3.4rem)",
+                lineHeight: 1.14,
+                letterSpacing: "-0.015em",
+              }}
+            >
+              {headline.split("\n").map((line, i) => (
+                <span key={i}>
+                  {i > 0 && <br />}
+                  {line}
+                </span>
+              ))}
+              <span className={`typing-cursor${headlineDone ? "" : " is-typing"}`} />
             </h1>
           </div>
 
-          {/* Typing subtitle */}
+          {/* Lede */}
           <div
-            className="hero-animate tilt-layer flex justify-center overflow-hidden sm:justify-start"
+            className="hero-animate tilt-layer"
             style={{
               transform: "translateZ(12px)",
               animation: "fade-slide-up 0.6s 400ms ease-out both",
             }}
           >
             <p
-              className={`hero-subtitle inline-block overflow-hidden whitespace-nowrap border-r-2 border-[var(--accent)] font-mono text-sm text-[var(--muted)] sm:text-base ${
-                !showCursor ? "border-transparent" : ""
-              }`}
-              style={{
-                "--typing-width": `${personal.title.length}ch`,
-                animation: `typing 3s steps(${personal.title.length}, end) forwards, blink-caret 0.75s step-end 5`,
-                width: "0",
-              } as React.CSSProperties}
+              className="max-w-[60ch] text-[var(--text)]"
+              style={{ fontSize: "1.1rem", lineHeight: 1.68 }}
             >
-              {personal.title}
+              Software Quality Engineer testing and automating{" "}
+              <span className="text-[var(--accent-2)]">iPhone carrier onboarding</span>. Ohio
+              State CSE &apos;25. Previously shipped automation at Amazon and REST APIs at
+              London Computer Systems.
             </p>
           </div>
 
           {/* CTA buttons */}
           <div
-            className="hero-animate tilt-layer flex flex-wrap items-center justify-center gap-3 pt-4 sm:justify-start"
+            className="hero-animate tilt-layer flex flex-wrap items-center gap-3 pt-2"
             style={{
               transform: "translateZ(28px)",
               animation: "fade-slide-up 0.6s 550ms ease-out both",
@@ -126,7 +116,7 @@ export function Hero({ socials }: HeroProps) {
           >
             <Link
               href={`mailto:${socials.email.primary}`}
-              className="inline-flex items-center gap-2 rounded-xl border border-[var(--accent)] bg-[var(--accent-dim)] px-5 py-2.5 font-mono text-sm font-medium text-[var(--text-strong)] backdrop-blur-xl backdrop-saturate-180 shadow-[0_4px_16px_rgba(0,229,160,0.12),inset_0_1px_0_rgba(255,255,255,0.1)] transition-all duration-300 hover:shadow-[0_0_32px_var(--accent-glow),0_4px_16px_rgba(0,229,160,0.2)] hover:border-[var(--accent)] hover:scale-[1.02]"
+              className="btn btn-primary px-5 py-2.5 text-sm"
             >
               <MailIcon className="h-4 w-4" />
               contact me
@@ -134,7 +124,7 @@ export function Hero({ socials }: HeroProps) {
             <Link
               href={socials.resume.path}
               download
-              className="inline-flex items-center gap-2 rounded-xl border border-[var(--border)] bg-[var(--panel)] px-5 py-2.5 font-mono text-sm text-[var(--muted)] backdrop-blur-xl backdrop-saturate-180 shadow-[0_4px_16px_rgba(0,0,0,0.08),inset_0_1px_0_rgba(255,255,255,0.08)] transition-all duration-300 hover:border-[var(--border-hover)] hover:text-[var(--text-strong)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.12)] hover:scale-[1.02]"
+              className="btn px-5 py-2.5 text-sm"
             >
               <DocumentIcon className="h-4 w-4" />
               resume.pdf
@@ -147,7 +137,7 @@ export function Hero({ socials }: HeroProps) {
                 href={socials.socialMedia.github.url}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center justify-center rounded-xl border border-[var(--border)] bg-[var(--panel)] p-2.5 text-[var(--muted)] backdrop-blur-xl backdrop-saturate-180 shadow-[0_4px_16px_rgba(0,0,0,0.08),inset_0_1px_0_rgba(255,255,255,0.08)] transition-all duration-300 hover:border-[var(--border-hover)] hover:text-[var(--text-strong)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.12)] hover:scale-[1.05]"
+                className="icon-btn"
                 aria-label="GitHub"
               >
                 <GitHubIcon className="h-4 w-4" />
@@ -156,7 +146,7 @@ export function Hero({ socials }: HeroProps) {
                 href={socials.socialMedia.linkedin.url}
                 target="_blank"
                 rel="noreferrer"
-                className="inline-flex items-center justify-center rounded-xl border border-[var(--border)] bg-[var(--panel)] p-2.5 text-[var(--muted)] backdrop-blur-xl backdrop-saturate-180 shadow-[0_4px_16px_rgba(0,0,0,0.08),inset_0_1px_0_rgba(255,255,255,0.08)] transition-all duration-300 hover:border-[var(--border-hover)] hover:text-[var(--text-strong)] hover:shadow-[0_8px_24px_rgba(0,0,0,0.12)] hover:scale-[1.05]"
+                className="icon-btn"
                 aria-label="LinkedIn"
               >
                 <LinkedInIcon className="h-4 w-4" />

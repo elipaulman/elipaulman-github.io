@@ -17,6 +17,11 @@ export type Personal = {
     detailed: string;
   };
   hobbies: string;
+  stats: {
+    value: number;
+    suffix: string;
+    label: string;
+  }[];
 };
 
 export type SocialMediaLink = {

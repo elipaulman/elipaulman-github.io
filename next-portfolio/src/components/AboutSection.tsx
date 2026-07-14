@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
 import { personal, socials } from "@/lib/data";
 import { SectionHeading } from "./SectionHeading";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
@@ -26,13 +27,13 @@ export function AboutSection() {
         />
 
         <div
-          className="grid gap-8 lg:grid-cols-2 lg:items-stretch"
+          className="grid gap-8 lg:grid-cols-2 lg:items-start"
           style={{ perspective: "1400px", overflow: "visible" }}
         >
           {/* Bio */}
           <div className="flex flex-col gap-6">
-            <div ref={tiltRef} className="tilt-stage flex-1">
-              <div className="card h-full">
+            <div ref={tiltRef} className="tilt-stage">
+              <div className="card">
               <p
                 className="tilt-layer leading-relaxed text-[var(--text)]"
                 style={{ transform: "translateZ(10px)" }}
@@ -48,75 +49,28 @@ export function AboutSection() {
               </div>
             </div>
 
-            <div className="grid gap-4 sm:grid-cols-2">
-              <div ref={tiltRef} className="tilt-stage">
-                <div className="card">
-                <p
-                  className="tilt-layer font-mono text-xs text-[var(--accent)]"
-                  style={{ transform: "translateZ(14px)" }}
-                >
-                  {'// focus'}
-                </p>
-                <p
-                  className="tilt-layer mt-2 font-display text-sm font-semibold tracking-tight text-[var(--text-strong)]"
-                  style={{ transform: "translateZ(20px)" }}
-                >
-                  What I focus on
-                </p>
-                <p
-                  className="tilt-layer mt-1 text-sm text-[var(--muted)]"
-                  style={{ transform: "translateZ(8px)" }}
-                >
-                  Quality engineering, test automation, and building AI/ML-powered products with measurable impact.
-                </p>
-                </div>
-              </div>
-              <div ref={tiltRef} className="tilt-stage">
-                <div className="card">
-                <p
-                  className="tilt-layer font-mono text-xs text-[var(--accent)]"
-                  style={{ transform: "translateZ(14px)" }}
-                >
-                  {'// method'}
-                </p>
-                <p
-                  className="tilt-layer mt-2 font-display text-sm font-semibold tracking-tight text-[var(--text-strong)]"
-                  style={{ transform: "translateZ(20px)" }}
-                >
-                  How I work
-                </p>
-                <p
-                  className="tilt-layer mt-1 text-sm text-[var(--muted)]"
-                  style={{ transform: "translateZ(8px)" }}
-                >
-                  Bias for action, fast iterations, clean API boundaries, and crisp documentation.
-                </p>
-                </div>
-              </div>
-            </div>
+            <StatsRow />
           </div>
 
-          {/* Photo + Terminal column */}
-          <div className="flex flex-col gap-4 h-full">
-          {/* Photo card */}
-          <div ref={photoTiltRef} className="tilt-stage flex-1 min-h-96">
-            <div className="card overflow-hidden p-2 h-full">
-            <div className="relative h-full min-h-48 rounded-lg overflow-hidden">
+          {/* Photo + Terminal facts column */}
+          <div className="flex flex-col gap-4">
+          <div ref={photoTiltRef} className="tilt-stage">
+            <div className="card overflow-hidden p-2">
+            <div className="relative h-56 rounded-lg overflow-hidden sm:h-64">
               <Image
                 src="/images/eli-photo-1-optimized.jpg"
                 alt="Elijah Paulman at an Apple campus event"
                 fill
-                className="object-cover object-[center_82%]"
+                className="object-cover object-[center_65%]"
                 sizes="(max-width: 640px) calc(100vw - 3rem), (max-width: 1024px) 90vw, 440px"
               />
             </div>
             </div>
           </div>
 
-          {/* Terminal card */}
           <div
             ref={terminalTiltRef}
-            className="tilt-stage shrink-0"
+            className="tilt-stage"
           >
             <div className="card overflow-hidden">
             <div
@@ -173,16 +127,10 @@ export function AboutSection() {
                 }
               />
               <TerminalRow label="location" value={personal.location} />
-            </div>
-
-            <div
-              className="tilt-layer mt-6 flex flex-wrap gap-2"
-              style={{ transform: "translateZ(18px)" }}
-            >
-              <span className="pill">Full-stack</span>
-              <span className="pill">AI/ML</span>
-              <span className="pill">Cloud</span>
-              <span className="pill">Leadership</span>
+              <TerminalRow
+                label="status"
+                value={<span className="text-[var(--accent)]">full-time @ Apple</span>}
+              />
             </div>
             </div>
           </div>
@@ -190,6 +138,70 @@ export function AboutSection() {
         </div>
       </div>
     </section>
+  );
+}
+
+function StatsRow() {
+  return (
+    <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+      {personal.stats.map((stat) => (
+        <Stat key={stat.label} {...stat} />
+      ))}
+    </div>
+  );
+}
+
+function Stat({
+  value,
+  suffix,
+  label,
+}: {
+  value: number;
+  suffix: string;
+  label: string;
+}) {
+  const ref = useRef<HTMLSpanElement>(null);
+  const [display, setDisplay] = useState("0");
+
+  useEffect(() => {
+    const node = ref.current;
+    if (!node) return;
+
+    const format = (n: number) =>
+      (n >= 1000 ? n.toLocaleString("en-US") : String(n)) + suffix;
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (!entry.isIntersecting) return;
+          observer.disconnect();
+          const duration = 1400;
+          const start = performance.now();
+          const step = (now: number) => {
+            const progress = Math.min((now - start) / duration, 1);
+            const eased = 1 - Math.pow(1 - progress, 3);
+            setDisplay(format(Math.floor(value * eased)));
+            if (progress < 1) requestAnimationFrame(step);
+          };
+          requestAnimationFrame(step);
+        });
+      },
+      { threshold: 0.5 }
+    );
+    observer.observe(node);
+    return () => observer.disconnect();
+  }, [value, suffix]);
+
+  return (
+    <div className="border-l-2 border-[var(--border)] pl-3 transition-colors duration-200 hover:border-[var(--accent)]">
+      <span
+        ref={ref}
+        className="block font-mono text-2xl font-semibold tabular-nums text-[var(--accent)]"
+      >
+        {display}
+      </span>
+      <span className="mt-1 block text-xs text-[var(--muted)]">{label}</span>
+    </div>
   );
 }
 
