@@ -37,8 +37,12 @@ export default function Home() {
   return (
     <>
       <div className="relative min-h-screen">
-        {/* Subtle accent gradient at top */}
-        <div className="app-bg-glow pointer-events-none absolute inset-x-0 top-0 -z-10 h-[70vh] bg-[radial-gradient(ellipse_80%_50%_at_50%_-20%,var(--accent-dim),transparent)]" />
+        {/* Slow-drifting ambient glow, fixed behind the whole page */}
+        <div className="ambient-glow app-bg-glow" aria-hidden="true">
+          <span className="a1" />
+          <span className="a2" />
+          <span className="a3" />
+        </div>
 
         <NavBar resumePath={socials.resume.path} />
         <main className="mx-auto max-w-5xl px-5 pb-14 sm:px-8 sm:pb-16">
