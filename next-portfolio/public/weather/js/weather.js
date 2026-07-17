@@ -252,12 +252,12 @@ function updateCurrentWeather(data) {
 
   currentWeatherContainer.innerHTML = `
     <div class="icon">
-      <img src="https://openweathermap.org/img/wn/${data.weather[0].icon}@2x.png" style="height: 5rem;" alt="${capitalizedCondition}" />
+      <img src="https://openweathermap.org/img/wn/${encodeURIComponent(String(data.weather[0].icon))}@2x.png" style="height: 5rem;" alt="${escapeHtml(capitalizedCondition)}" />
     </div>
     <div class="temp">${displayTemp}${tempUnit}</div>
-    <div class="summary">${capitalizedCondition}</div>
+    <div class="summary">${escapeHtml(capitalizedCondition)}</div>
     <div class="rain-chance"><i class="fas fa-tint"></i> Humidity: ${data.main.humidity}%</div>
-    <div class="location">${data.name}, ${data.sys.country}</div>
+    <div class="location">${escapeHtml(data.name)}, ${escapeHtml(data.sys.country)}</div>
     <div class="additional-info">
       <div><i class="fas fa-thermometer-half"></i> Feels like: ${currentUnit === 'fahrenheit' ? 
         convertTemperature(data.main.feels_like, 'kelvin', 'fahrenheit') : 
@@ -394,7 +394,7 @@ function showSuggestions(locations) {
   
   suggestionsContainer.innerHTML = locations.map(location => {
     const displayName = `${location.name}${location.state ? ', ' + location.state : ''}, ${location.country}`;
-    return `<div class="suggestion-item" data-lat="${location.lat}" data-lon="${location.lon}" data-name="${displayName}">${displayName}</div>`;
+    return `<div class="suggestion-item" data-lat="${escapeHtml(location.lat)}" data-lon="${escapeHtml(location.lon)}" data-name="${escapeHtml(displayName)}">${escapeHtml(displayName)}</div>`;
   }).join('');
   
   suggestionsContainer.style.display = 'block';
@@ -452,7 +452,7 @@ function showWeatherAlert(alert) {
   alertDiv.innerHTML = `
     <div class="alert-content">
       <i class="fas fa-exclamation-triangle"></i>
-      <span><strong>${alert.event}:</strong> ${alert.description}</span>
+      <span><strong>${escapeHtml(alert.event)}:</strong> ${escapeHtml(alert.description)}</span>
     </div>
   `;
   
@@ -518,11 +518,11 @@ function updateForecast(data) {
     forecastItem.innerHTML = `
       <div class="forecast-date">${formattedDate}</div>
       <div class="forecast-icon">
-        <img src="https://openweathermap.org/img/wn/${iconCode}@2x.png" alt="${capitalizedCondition}" />
+        <img src="https://openweathermap.org/img/wn/${encodeURIComponent(String(iconCode))}@2x.png" alt="${escapeHtml(capitalizedCondition)}" />
       </div>
       <div class="forecast-temp">${temperatureHigh}${tempUnit}</div>
       <div class="forecast-temp-low">${temperatureLow}${tempUnit}</div>
-      <div class="forecast-condition">${capitalizedCondition}</div>
+      <div class="forecast-condition">${escapeHtml(capitalizedCondition)}</div>
       <div class="rain-chance">
         <i class="fas fa-tint"></i> ${rainPercentage.toFixed(0)}%
       </div>
