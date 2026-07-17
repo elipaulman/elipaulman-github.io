@@ -252,7 +252,7 @@ function updateCurrentWeather(data) {
 
   currentWeatherContainer.innerHTML = `
     <div class="icon">
-      <img src="https://openweathermap.org/img/wn/${escapeHtml(data.weather[0].icon)}@2x.png" style="height: 5rem;" alt="${escapeHtml(capitalizedCondition)}" />
+      <img src="https://openweathermap.org/img/wn/${encodeURIComponent(String(data.weather[0].icon))}@2x.png" style="height: 5rem;" alt="${escapeHtml(capitalizedCondition)}" />
     </div>
     <div class="temp">${displayTemp}${tempUnit}</div>
     <div class="summary">${escapeHtml(capitalizedCondition)}</div>
@@ -394,7 +394,7 @@ function showSuggestions(locations) {
   
   suggestionsContainer.innerHTML = locations.map(location => {
     const displayName = `${location.name}${location.state ? ', ' + location.state : ''}, ${location.country}`;
-    return `<div class="suggestion-item" data-lat="${location.lat}" data-lon="${location.lon}" data-name="${escapeHtml(displayName)}">${escapeHtml(displayName)}</div>`;
+    return `<div class="suggestion-item" data-lat="${escapeHtml(location.lat)}" data-lon="${escapeHtml(location.lon)}" data-name="${escapeHtml(displayName)}">${escapeHtml(displayName)}</div>`;
   }).join('');
   
   suggestionsContainer.style.display = 'block';
@@ -518,7 +518,7 @@ function updateForecast(data) {
     forecastItem.innerHTML = `
       <div class="forecast-date">${formattedDate}</div>
       <div class="forecast-icon">
-        <img src="https://openweathermap.org/img/wn/${escapeHtml(iconCode)}@2x.png" alt="${escapeHtml(capitalizedCondition)}" />
+        <img src="https://openweathermap.org/img/wn/${encodeURIComponent(String(iconCode))}@2x.png" alt="${escapeHtml(capitalizedCondition)}" />
       </div>
       <div class="forecast-temp">${temperatureHigh}${tempUnit}</div>
       <div class="forecast-temp-low">${temperatureLow}${tempUnit}</div>
