@@ -457,14 +457,27 @@ html {
   padding: 24px;
 }
 
+.hero-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
 .icon {
-  font-size: 48px;
-  color: var(--text-strong);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.icon img {
+  height: 4.5rem;
+  width: 4.5rem;
 }
 
 .temp {
   font-family: var(--font-display);
-  font-size: 4rem;
+  font-size: 3.75rem;
   font-weight: 700;
   color: var(--text-strong);
   letter-spacing: -0.03em;
@@ -473,15 +486,23 @@ html {
 }
 
 .summary {
-  margin-top: 8px;
+  margin-top: 4px;
   font-family: var(--font-serif);
   font-size: 1.1rem;
   color: var(--text);
   text-align: center;
 }
 
+.location {
+  margin-top: 6px;
+  font-family: var(--font-serif);
+  font-size: 0.95rem;
+  color: var(--muted);
+  text-align: center;
+}
+
 .current-conditions > .rain-chance {
-  margin-top: 12px;
+  margin-top: 14px;
   font-family: var(--font-mono);
   font-size: 0.8rem;
   color: var(--accent-2);
@@ -491,75 +512,90 @@ html {
   border-radius: 6px;
 }
 
-.location {
-  margin-top: 12px;
-  font-family: var(--font-serif);
-  font-size: 0.95rem;
-  color: var(--muted);
-  text-align: center;
+/* ── Section shell (shared by highlights / forecast / chart / AQI) ── */
+.app-section {
+  width: 100%;
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border);
 }
 
-/* ── Additional Info ── */
-.additional-info {
+.section-label {
+  font-family: var(--font-display);
+  color: var(--text-strong);
+  text-align: center;
+  margin-bottom: 15px;
+  font-weight: 600;
+  font-size: 1rem;
+  letter-spacing: -0.02em;
+}
+
+.section-label i {
+  color: var(--accent);
+  margin-right: 6px;
+}
+
+/* ── Highlights (stat tiles) ── */
+.stats-grid {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-  gap: 8px;
-  margin-top: 20px;
-  padding-top: 20px;
-  border-top: 1px solid var(--border);
-  font-size: 13px;
-  max-width: 100%;
+  gap: 10px;
 }
 
-.additional-info > div {
-  padding: 10px 16px;
-  background: var(--panel);
+.stat-tile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 5px;
+  flex: 1 1 110px;
+  max-width: 150px;
+  padding: 14px 10px;
+  background: var(--bg-elevated);
   border: 1px solid var(--border);
   border-radius: 8px;
   text-align: center;
-  white-space: nowrap;
-  flex: 0 0 auto;
-  min-width: 140px;
-  color: var(--text);
-  font-family: var(--font-serif);
   transition: border-color 0.2s ease, transform 0.2s ease;
 }
 
-.additional-info > div:hover {
+.stat-tile:hover {
   border-color: var(--border-hover);
   transform: translateY(-1px);
 }
 
-.additional-info i {
-  margin-right: 6px;
+.stat-tile i {
   color: var(--accent);
+  font-size: 1rem;
+}
+
+.stat-label {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.stat-value {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--text-strong);
 }
 
 /* ── Forecast List ── */
-.forecast-list {
+.forecast-grid {
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
   gap: 12px;
-  margin: 24px auto;
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 20px;
-  max-width: 100%;
-}
-
-.forecast-list::before {
-  content: '';
-  width: 100%;
-  height: 0;
-  order: 1;
 }
 
 .forecast-item {
   --mx: 50%;
   --my: 50%;
+  flex: 1 1 130px;
+  max-width: 170px;
   background: var(--bg-elevated);
   border: 1px solid var(--border);
   border-radius: 8px;
@@ -572,10 +608,6 @@ html {
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 100%;
-  max-width: 160px;
-  min-width: 140px;
-  flex: 0 0 auto;
   position: relative;
   overflow: hidden;
 }
@@ -769,14 +801,6 @@ input::placeholder {
 }
 
 /* ── Air Quality Index ── */
-.air-quality-container {
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 20px;
-  margin: 20px 0;
-}
-
 .aqi-main {
   text-align: center;
   margin-bottom: 15px;
@@ -800,16 +824,15 @@ input::placeholder {
 }
 
 .air-pollutants {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   justify-content: center;
-  align-items: center;
-  justify-items: center;
   gap: 10px;
 }
 
 .air-pollutants > div {
-  width: 130px;
+  flex: 1 1 130px;
+  max-width: 160px;
   text-align: center;
   padding: 10px;
   background: var(--bg-elevated);
@@ -885,46 +908,8 @@ input::placeholder {
   }
 }
 
-/* ── Weather Chart ── */
-.weather-chart-container {
-  background: var(--panel);
-  border: 1px solid var(--border);
-  border-radius: 10px;
-  padding: 20px;
-  margin: 20px 0;
-}
-
-.weather-chart-container h3 {
-  font-family: var(--font-display);
-  color: var(--text-strong);
-  text-align: center;
-  margin-bottom: 15px;
-  font-weight: 600;
-  font-size: 1rem;
-  letter-spacing: -0.02em;
-}
-
-.weather-chart-container h3 i {
-  color: var(--accent);
-  margin-right: 6px;
-}
-
 #temperatureChart {
   max-height: 300px;
-}
-
-/* ── Forecast List Title ── */
-.forecast-list h3 {
-  font-family: var(--font-display) !important;
-  color: var(--text-strong) !important;
-  font-weight: 600 !important;
-  font-size: 1rem !important;
-  letter-spacing: -0.02em !important;
-}
-
-.forecast-list h3 i {
-  color: var(--accent);
-  margin-right: 6px;
 }
 
 /* ── PWA Install ── */
@@ -990,18 +975,13 @@ input::placeholder {
     gap: 10px;
   }
 
-  .forecast-list {
+  .forecast-grid {
     gap: 8px;
-    max-width: 400px;
-    margin: 20px auto;
-    padding: 16px;
   }
 
   .forecast-item {
     padding: 12px 8px;
     min-height: 140px;
-    max-width: 180px;
-    min-width: 160px;
   }
 
   .current-conditions {
@@ -1016,17 +996,6 @@ input::placeholder {
     font-size: 0.95rem;
   }
 
-  .additional-info {
-    gap: 6px;
-    font-size: 0.75rem;
-  }
-
-  .additional-info > div {
-    padding: 8px 10px;
-    min-width: 100px;
-    font-size: 0.7rem;
-  }
-
   .unit-toggle {
     min-width: 120px;
   }
@@ -1039,22 +1008,37 @@ input::placeholder {
     display: none;
   }
 
-  .air-quality-container,
-  .weather-chart-container {
-    margin: 15px 0;
-    padding: 15px;
+  .app-section {
+    margin-top: 18px;
+    padding-top: 18px;
+  }
+
+  .hero-row {
+    gap: 4px;
+  }
+
+  .icon img {
+    height: 3.75rem;
+    width: 3.75rem;
+  }
+
+  .stats-grid {
+    gap: 8px;
+  }
+
+  .stat-tile {
+    flex-basis: 90px;
+    max-width: 120px;
+    padding: 10px 6px;
   }
 
   .air-pollutants {
     gap: 8px;
-    max-width: 100%;
-    grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
   }
 
   .air-pollutants > div {
-    width: auto;
-    min-width: 100px;
-    max-width: 160px;
+    flex-basis: 100px;
+    max-width: 140px;
   }
 
   .pollutant-item[title]:hover::after {
@@ -1099,30 +1083,10 @@ input::placeholder {
   .rain-chance { font-size: 0.65rem; }
 }
 
-/* ── Tablet ── */
-@media (min-width: 481px) and (max-width: 767px) {
-  .forecast-list {
-    gap: 10px;
-    max-width: 600px;
-    margin: 20px auto;
-  }
-
-  .forecast-item {
-    max-width: 170px;
-    min-width: 150px;
-  }
-}
-
 /* ── Desktop ── */
 @media (min-width: 768px) {
-  .forecast-list {
-    gap: 12px;
-  }
-
   .forecast-item {
     min-height: 180px;
-    max-width: 180px;
-    min-width: 160px;
   }
 
   #temperatureChart {

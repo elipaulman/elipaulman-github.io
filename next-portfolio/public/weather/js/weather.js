@@ -1,7 +1,7 @@
 let lon;
 let lat;
 let currentWeatherContainer = document.querySelector(".current-conditions");
-let forecastList = document.querySelector(".forecast-list");
+let forecastList = document.querySelector("#forecast-grid");
 let currentUnit = 'fahrenheit';
 let currentWeatherData = null;
 let currentForecastData = null;
@@ -250,25 +250,43 @@ function updateCurrentWeather(data) {
   const displayWindChill = currentUnit === 'fahrenheit' ? windChillF : Math.round((windChillF - 32) * 5/9);
   const displayDewPoint = currentUnit === 'fahrenheit' ? dewPointF : Math.round((dewPointF - 32) * 5/9);
 
+  const displayFeelsLike = currentUnit === 'fahrenheit' ?
+    convertTemperature(data.main.feels_like, 'kelvin', 'fahrenheit') :
+    convertTemperature(data.main.feels_like, 'kelvin', 'celsius');
+
+  const stats = [
+    { icon: 'fa-thermometer-half', label: 'Feels like', value: `${displayFeelsLike}${tempUnit}` },
+    { icon: 'fa-wind', label: 'Wind', value: `${Math.round(data.wind.speed * 2.237)} mph` },
+    { icon: 'fa-eye', label: 'Visibility', value: `${(data.visibility / 1000).toFixed(1)} km` },
+    tempFahrenheit >= 80 ? { icon: 'fa-temperature-high', label: 'Heat index', value: `${displayHeatIndex}${tempUnit}` } : null,
+    tempFahrenheit <= 50 ? { icon: 'fa-snowflake', label: 'Wind chill', value: `${displayWindChill}${tempUnit}` } : null,
+    { icon: 'fa-tint', label: 'Dew point', value: `${displayDewPoint}${tempUnit}` },
+    uvIndex > 0 ? { icon: 'fa-sun', label: 'UV index', value: `${uvIndex} ${uvInfo.level}` } : null,
+    { icon: 'fa-sun', label: 'Sunrise', value: new Date(data.sys.sunrise * 1000).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) },
+    { icon: 'fa-moon', label: 'Sunset', value: new Date(data.sys.sunset * 1000).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'}) },
+  ].filter(Boolean);
+
+  const statsHtml = stats.map(stat => `
+      <div class="stat-tile">
+        <i class="fas ${stat.icon}"></i>
+        <span class="stat-label">${stat.label}</span>
+        <span class="stat-value">${escapeHtml(stat.value)}</span>
+      </div>`).join('');
+
   currentWeatherContainer.innerHTML = `
-    <div class="icon">
-      <img src="https://openweathermap.org/img/wn/${encodeURIComponent(String(data.weather[0].icon))}@2x.png" style="height: 5rem;" alt="${escapeHtml(capitalizedCondition)}" />
+    <div class="hero-row">
+      <div class="icon">
+        <img src="https://openweathermap.org/img/wn/${encodeURIComponent(String(data.weather[0].icon))}@2x.png" alt="${escapeHtml(capitalizedCondition)}" />
+      </div>
+      <div class="temp">${displayTemp}${tempUnit}</div>
     </div>
-    <div class="temp">${displayTemp}${tempUnit}</div>
     <div class="summary">${escapeHtml(capitalizedCondition)}</div>
-    <div class="rain-chance"><i class="fas fa-tint"></i> Humidity: ${data.main.humidity}%</div>
     <div class="location">${escapeHtml(data.name)}, ${escapeHtml(data.sys.country)}</div>
-    <div class="additional-info">
-      <div><i class="fas fa-thermometer-half"></i> Feels like: ${currentUnit === 'fahrenheit' ? 
-        convertTemperature(data.main.feels_like, 'kelvin', 'fahrenheit') : 
-        convertTemperature(data.main.feels_like, 'kelvin', 'celsius')}${tempUnit}</div>
-      <div><i class="fas fa-wind"></i> Wind: ${Math.round(data.wind.speed * 2.237)} mph</div>
-      <div><i class="fas fa-eye"></i> Visibility: ${(data.visibility / 1000).toFixed(1)} km</div>
-      ${tempFahrenheit >= 80 ? `<div><i class="fas fa-temperature-high"></i> Heat Index: ${displayHeatIndex}${tempUnit}</div>` : ''}
-      ${tempFahrenheit <= 50 ? `<div><i class="fas fa-snowflake"></i> Wind Chill: ${displayWindChill}${tempUnit}</div>` : ''}
-      <div><i class="fas fa-tint"></i> Dew Point: ${displayDewPoint}${tempUnit}</div>
-      <div><i class="fas fa-sun"></i> Sunrise: ${new Date(data.sys.sunrise * 1000).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</div>
-      <div><i class="fas fa-moon"></i> Sunset: ${new Date(data.sys.sunset * 1000).toLocaleTimeString([], {hour: '2-digit', minute:'2-digit'})}</div>
+    <div class="rain-chance"><i class="fas fa-tint"></i> Humidity: ${data.main.humidity}%</div>
+    <div class="app-section">
+      <h3 class="section-label"><i class="fas fa-list"></i> Highlights</h3>
+      <div class="stats-grid">${statsHtml}
+      </div>
     </div>
   `;
 }
@@ -466,7 +484,11 @@ function updateForecast(data) {
 
   const groupedForecasts = {};
   forecasts.forEach((forecast) => {
-    const forecastDate = new Date(forecast.dt_txt.split(" ")[0]).toDateString();
+    // Group by the local calendar day of the actual timestamp. dt_txt's date
+    // portion alone ("2026-07-17") parses as UTC midnight, which shifts to
+    // the previous day once toDateString() converts it to local time for
+    // anyone west of UTC -- misfiling early-morning entries under yesterday.
+    const forecastDate = new Date(forecast.dt * 1000).toDateString();
     if (!groupedForecasts[forecastDate]) {
       groupedForecasts[forecastDate] = [];
     }
@@ -475,8 +497,10 @@ function updateForecast(data) {
 
   forecastList.innerHTML = "";
 
-  const availableDays = Object.entries(groupedForecasts);
-  console.log(`Available forecast days: ${availableDays.length}`);
+  // OpenWeatherMap's 5-day/3-hour forecast can span parts of 6 calendar
+  // dates depending on what time it is now; cap to 5 so the grid matches
+  // the "5-Day Forecast" heading.
+  const availableDays = Object.entries(groupedForecasts).slice(0, 5);
 
   availableDays.forEach(([date, forecasts]) => {
     const temperatureHighArray = forecasts.map((f) =>
@@ -781,14 +805,14 @@ function updateAirQuality(data) {
   let airQualityContainer = document.querySelector('.air-quality-container');
   if (!airQualityContainer) {
     airQualityContainer = document.createElement('div');
-    airQualityContainer.className = 'air-quality-container';
+    airQualityContainer.className = 'air-quality-container app-section';
     const container = document.querySelector('.container');
     container.appendChild(airQualityContainer);
   }
   
   airQualityContainer.innerHTML = `
-    <h3 style="margin: 20px 0 15px 0; color: var(--text-strong); text-align: center; font-family: var(--font-display); font-weight: 600; font-size: 1rem; letter-spacing: -0.02em;">
-      <i class="fas fa-wind" style="color: var(--accent);"></i> Air Quality Index
+    <h3 class="section-label">
+      <i class="fas fa-wind"></i> Air Quality Index
     </h3>
     <div class="aqi-main" style="text-align: center; margin-bottom: 15px;">
       <div class="aqi-value" style="display: inline-block; padding: 8px 20px; border-radius: 8px; background: ${aqiInfo.color}; color: #000; font-weight: 600; font-family: var(--font-mono); font-size: 0.9rem; margin-bottom: 10px; cursor: help; transition: all 0.2s ease;"
