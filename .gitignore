@@ -1,9 +1,6 @@
 # Dependencies
 node_modules/
 
-# Package lock (for static site portfolio)
-package-lock.json
-
 # Logs
 logs
 *.log
