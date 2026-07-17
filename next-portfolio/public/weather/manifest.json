@@ -5,8 +5,8 @@
   "start_url": "/weather/",
   "scope": "/weather/",
   "display": "standalone",
-  "background_color": "#338aed",
-  "theme_color": "#338aed",
+  "background_color": "#0c0e0c",
+  "theme_color": "#0c0e0c",
   "orientation": "portrait-primary",
   "icons": [
     {

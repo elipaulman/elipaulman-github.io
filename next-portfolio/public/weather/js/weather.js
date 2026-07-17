@@ -76,7 +76,7 @@ function showErrorMessage(message) {
     <div class="error-message">
       <i class="fas fa-exclamation-triangle"></i>
       <p>${escapeHtml(message)}</p>
-      <button onclick="retryWeatherFetch()" style="margin-top: 10px; padding: 8px 16px; background: rgba(0,229,160,0.08); border: 1px solid #00e5a0; border-radius: 8px; color: #f1f5f9; cursor: pointer; font-family: var(--font-mono); font-size: 0.8rem;">
+      <button onclick="retryWeatherFetch()" style="margin-top: 10px; padding: 8px 16px; background: var(--accent-dim); border: 1px solid var(--accent); border-radius: 8px; color: var(--text-strong); cursor: pointer; font-family: var(--font-mono); font-size: 0.8rem;">
         Try Again
       </button>
     </div>
@@ -545,6 +545,10 @@ function updateForecast(data) {
 
 let temperatureChart = null;
 
+function getCssVar(name) {
+  return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
+}
+
 function createTemperatureChart(forecastData) {
   const ctx = document.getElementById('temperatureChart');
   if (!ctx) return;
@@ -568,7 +572,16 @@ function createTemperatureChart(forecastData) {
   if (temperatureChart) {
     temperatureChart.destroy();
   }
-  
+
+  const accentColor = getCssVar('--accent');
+  const accentRgb = getCssVar('--accent-rgb');
+  const accent2Color = getCssVar('--accent-2');
+  const accent2Rgb = getCssVar('--accent-2-rgb');
+  const mutedColor = getCssVar('--muted');
+  const gridColor = getCssVar('--border');
+
+  Chart.defaults.font.family = getCssVar('--font-mono');
+
   temperatureChart = new Chart(ctx, {
     type: 'line',
     data: {
@@ -576,16 +589,16 @@ function createTemperatureChart(forecastData) {
       datasets: [{
         label: `Temperature (${currentUnit === 'fahrenheit' ? '°F' : '°C'})`,
         data: temperatures,
-        borderColor: '#00e5a0',
-        backgroundColor: 'rgba(0, 229, 160, 0.08)',
+        borderColor: accentColor,
+        backgroundColor: `rgba(${accentRgb}, 0.1)`,
         borderWidth: 3,
         fill: true,
         tension: 0.4
       }, {
         label: 'Precipitation (%)',
         data: precipitation,
-        borderColor: '#64748b',
-        backgroundColor: 'rgba(100, 116, 139, 0.08)',
+        borderColor: accent2Color,
+        backgroundColor: `rgba(${accent2Rgb}, 0.1)`,
         borderWidth: 2,
         fill: false,
         yAxisID: 'y1'
@@ -597,27 +610,27 @@ function createTemperatureChart(forecastData) {
       plugins: {
         legend: {
           labels: {
-            color: '#94a3b8'
+            color: mutedColor
           }
         }
       },
       scales: {
         x: {
-          ticks: { color: '#64748b' },
-          grid: { color: 'rgba(255, 255, 255, 0.04)' }
+          ticks: { color: mutedColor },
+          grid: { color: gridColor }
         },
         y: {
           type: 'linear',
           display: true,
           position: 'left',
-          ticks: { color: '#64748b' },
-          grid: { color: 'rgba(255, 255, 255, 0.04)' }
+          ticks: { color: mutedColor },
+          grid: { color: gridColor }
         },
         y1: {
           type: 'linear',
           display: true,
           position: 'right',
-          ticks: { color: '#64748b' },
+          ticks: { color: mutedColor },
           grid: { drawOnChartArea: false }
         }
       }
@@ -702,12 +715,11 @@ document.getElementById("location-input").addEventListener("keypress", (e) => {
 
 function updatePageBackground(weatherMain) {
   const body = document.querySelector("body");
+  let midTone;
 
-  console.log("Weather condition received:", weatherMain);
-
-  switch(weatherMain?.toLowerCase()) {
+  switch (weatherMain?.toLowerCase()) {
     case 'clear':
-      body.style.background = "linear-gradient(180deg, #0a0a0f 0%, #0c1a15 50%, #0a0a0f 100%)";
+      midTone = "color-mix(in srgb, var(--accent) 12%, var(--bg))";
       break;
     case 'clouds':
     case 'overcast':
@@ -715,7 +727,7 @@ function updatePageBackground(weatherMain) {
     case 'scattered clouds':
     case 'broken clouds':
     case 'few clouds':
-      body.style.background = "linear-gradient(180deg, #0a0a0f 0%, #0f1419 50%, #0a0a0f 100%)";
+      midTone = "var(--bg-elevated)";
       break;
     case 'rain':
     case 'drizzle':
@@ -723,16 +735,16 @@ function updatePageBackground(weatherMain) {
     case 'moderate rain':
     case 'heavy rain':
     case 'shower rain':
-      body.style.background = "linear-gradient(180deg, #0a0a0f 0%, #0a0f1a 50%, #0a0a0f 100%)";
+      midTone = "color-mix(in srgb, var(--accent-2) 14%, var(--bg))";
       break;
     case 'thunderstorm':
     case 'thunderstorms':
-      body.style.background = "linear-gradient(180deg, #0a0a0f 0%, #0a0a12 50%, #050508 100%)";
+      midTone = "color-mix(in srgb, var(--accent-2) 22%, var(--bg-elevated))";
       break;
     case 'snow':
     case 'light snow':
     case 'heavy snow':
-      body.style.background = "linear-gradient(180deg, #0a0a0f 0%, #0f1219 50%, #0a0a0f 100%)";
+      midTone = "color-mix(in srgb, var(--accent-2) 6%, var(--bg-elevated))";
       break;
     case 'mist':
     case 'fog':
@@ -743,14 +755,13 @@ function updatePageBackground(weatherMain) {
     case 'ash':
     case 'squall':
     case 'tornado':
-      body.style.background = "linear-gradient(180deg, #0a0a0f 0%, #12121a 50%, #0a0a0f 100%)";
+      midTone = "color-mix(in srgb, var(--muted) 10%, var(--bg))";
       break;
     default:
-      console.log("Using default background for weather condition:", weatherMain);
-      body.style.background = "#0a0a0f";
+      midTone = "var(--bg)";
   }
 
-  body.style.color = "#94a3b8";
+  body.style.background = `linear-gradient(180deg, var(--bg) 0%, ${midTone} 50%, var(--bg) 100%)`;
 }
 
 function updateAirQuality(data) {
@@ -776,8 +787,8 @@ function updateAirQuality(data) {
   }
   
   airQualityContainer.innerHTML = `
-    <h3 style="margin: 20px 0 15px 0; color: #f1f5f9; text-align: center; font-family: var(--font-display); font-weight: 600; font-size: 1rem; letter-spacing: -0.02em;">
-      <i class="fas fa-wind" style="color: #00e5a0;"></i> Air Quality Index
+    <h3 style="margin: 20px 0 15px 0; color: var(--text-strong); text-align: center; font-family: var(--font-display); font-weight: 600; font-size: 1rem; letter-spacing: -0.02em;">
+      <i class="fas fa-wind" style="color: var(--accent);"></i> Air Quality Index
     </h3>
     <div class="aqi-main" style="text-align: center; margin-bottom: 15px;">
       <div class="aqi-value" style="display: inline-block; padding: 8px 20px; border-radius: 8px; background: ${aqiInfo.color}; color: #000; font-weight: 600; font-family: var(--font-mono); font-size: 0.9rem; margin-bottom: 10px; cursor: help; transition: all 0.2s ease;"
@@ -786,39 +797,39 @@ function updateAirQuality(data) {
            onmouseout="this.style.transform='scale(1)'">
         ${aqi} - ${aqiInfo.label}
       </div>
-      <div class="aqi-description" style="color: #94a3b8; font-size: 0.85rem;">
+      <div class="aqi-description" style="color: var(--text); font-size: 0.85rem;">
         ${aqiInfo.description}
       </div>
     </div>
     <div class="air-pollutants">
       <div class="pollutant-item"
            title="PM2.5 - Fine particulate matter smaller than 2.5 micrometers. Can penetrate deep into lungs and bloodstream. Main sources: vehicle emissions, industrial processes, wildfires.">
-        <div style="font-weight: 600; color: #f1f5f9;">PM2.5</div>
+        <div style="font-weight: 600; color: var(--text-strong);">PM2.5</div>
         <div>${components.pm2_5.toFixed(1)} µg/m³</div>
       </div>
       <div class="pollutant-item"
            title="PM10 - Coarse particulate matter smaller than 10 micrometers. Can irritate eyes, nose, and throat. Main sources: dust storms, construction, road dust.">
-        <div style="font-weight: 600; color: #f1f5f9;">PM10</div>
+        <div style="font-weight: 600; color: var(--text-strong);">PM10</div>
         <div>${components.pm10.toFixed(1)} µg/m³</div>
       </div>
       <div class="pollutant-item"
            title="O₃ - Ground-level ozone (smog). Can cause respiratory problems and eye irritation. Formed when sunlight reacts with pollutants from vehicles and industry.">
-        <div style="font-weight: 600; color: #f1f5f9;">O₃</div>
+        <div style="font-weight: 600; color: var(--text-strong);">O₃</div>
         <div>${components.o3.toFixed(1)} µg/m³</div>
       </div>
       <div class="pollutant-item"
            title="NO₂ - Nitrogen dioxide. Can cause respiratory issues and reduced lung function. Main sources: vehicle emissions, power plants, industrial activities.">
-        <div style="font-weight: 600; color: #f1f5f9;">NO₂</div>
+        <div style="font-weight: 600; color: var(--text-strong);">NO₂</div>
         <div>${components.no2.toFixed(1)} µg/m³</div>
       </div>
       ${components.so2 ? `<div class="pollutant-item"
            title="SO₂ - Sulfur dioxide. Can cause breathing difficulties and throat irritation. Main sources: fossil fuel combustion, industrial processes, volcanoes.">
-        <div style="font-weight: 600; color: #f1f5f9;">SO₂</div>
+        <div style="font-weight: 600; color: var(--text-strong);">SO₂</div>
         <div>${components.so2.toFixed(1)} µg/m³</div>
       </div>` : ''}
       ${components.co ? `<div class="pollutant-item"
            title="CO - Carbon monoxide. Colorless, odorless gas that can be deadly in high concentrations. Reduces oxygen delivery to organs. Main sources: vehicle emissions, faulty heating systems.">
-        <div style="font-weight: 600; color: #f1f5f9;">CO</div>
+        <div style="font-weight: 600; color: var(--text-strong);">CO</div>
         <div>${(components.co / 1000).toFixed(2)} mg/m³</div>
       </div>` : ''}
     </div>
@@ -863,3 +874,62 @@ function getUVIndexInfo(uvIndex) {
   if (uvIndex <= 10) return { level: 'Very High', color: '#ff0000', advice: 'Extra protection needed' };
   return { level: 'Extreme', color: '#8f3f97', advice: 'Avoid sun exposure' };
 }
+
+// ── Theme toggle ──
+// Shares the "theme" localStorage key with the portfolio's ThemeToggle
+// component so switching theme on either site stays in sync.
+function applyThemeIcon(theme) {
+  const btn = document.getElementById('theme-toggle');
+  if (!btn) return;
+  const icon = btn.querySelector('i');
+  const label = btn.querySelector('span');
+  if (icon) icon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+  if (label) label.textContent = theme === 'dark' ? 'light' : 'dark';
+}
+
+function setTheme(theme) {
+  document.documentElement.dataset.theme = theme;
+  applyThemeIcon(theme);
+
+  const metaThemeColor = document.querySelector('meta[name="theme-color"]');
+  if (metaThemeColor) {
+    metaThemeColor.setAttribute('content', getCssVar('--bg'));
+  }
+
+  if (currentForecastData) {
+    createTemperatureChart(currentForecastData);
+  }
+  if (currentWeatherData) {
+    updatePageBackground(currentWeatherData.weather[0].main);
+  }
+}
+
+function initThemeToggle() {
+  const btn = document.getElementById('theme-toggle');
+  if (!btn) return;
+
+  applyThemeIcon(document.documentElement.dataset.theme || 'dark');
+
+  btn.addEventListener('click', () => {
+    const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
+    localStorage.setItem('theme', next);
+    setTheme(next);
+    window.dispatchEvent(new Event('storage'));
+
+    if (typeof Analytics !== 'undefined') {
+      Analytics.trackEvent('theme_toggle', {
+        theme: next,
+        event_category: 'weather',
+        event_label: 'theme_toggle'
+      });
+    }
+  });
+
+  window.addEventListener('storage', (e) => {
+    if (e.key === 'theme' && e.newValue && e.newValue !== document.documentElement.dataset.theme) {
+      setTheme(e.newValue);
+    }
+  });
+}
+
+initThemeToggle();
