@@ -1136,4 +1136,17 @@ input::placeholder {
     animation-duration: 0.01ms !important;
     transition-duration: 0.01ms !important;
   }
+
+  /* Looping animations must be disabled outright under reduced motion.
+     Collapsing an infinite animation's duration to near-zero doesn't stop
+     it — the browser just cycles it as fast as it can repaint, which reads
+     as fast, jittery motion: the opposite of what this media query asks for. */
+  .loading i,
+  .fa-spin,
+  .loading p,
+  .ambient-glow .a1,
+  .ambient-glow .a2,
+  .ambient-glow .a3 {
+    animation: none !important;
+  }
 }

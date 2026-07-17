@@ -908,7 +908,7 @@ function initThemeToggle() {
   const btn = document.getElementById('theme-toggle');
   if (!btn) return;
 
-  applyThemeIcon(document.documentElement.dataset.theme || 'dark');
+  setTheme(document.documentElement.dataset.theme || 'dark');
 
   btn.addEventListener('click', () => {
     const next = document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark';
