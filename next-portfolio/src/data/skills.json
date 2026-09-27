@@ -19,19 +19,28 @@
     { "name": "Flask" },
     { "name": ".NET" },
     { "name": "REST APIs" },
+    { "name": "SOAP" },
     { "name": "GraphQL" },
     { "name": "AWS (Lambda, AppSync, S3)" },
-    { "name": "Selenium" }
+    { "name": "Spring Boot" },
+    { "name": "Selenium" },
+    { "name": "Playwright" },
+    { "name": "TestNG" }
   ],
   "tools": [
     { "name": "Git" },
     { "name": "GitHub" },
     { "name": "MySQL" },
     { "name": "MongoDB" },
+    { "name": "Cassandra" },
     { "name": "Visual Studio" },
     { "name": "VS Code" },
     { "name": "MATLAB" },
     { "name": "Splunk" },
+    { "name": "Jenkins" },
+    { "name": "Maven" },
+    { "name": "Kafka" },
+    { "name": "Allure" },
     { "name": "Claude Code" }
   ],
   "skills": [

@@ -7,9 +7,10 @@
     "logo": "images/Companies/apple_logo.png",
     "logoAlt": "Apple Logo",
     "responsibilities": [
-      "Engineering internal tools and automation frameworks to validate carrier service integrations powering iPhone activation at scale",
-      "Building automated test platforms that expand coverage and eliminate manual workflows across carrier onboarding pipelines",
-      "Driving quality and reliability of native carrier onboarding through scalable tooling and systems-level testing"
+      "Design and build automated test frameworks (Java, Spring Boot, Playwright, Selenium, TestNG) validating iPhone and iPad purchase flows, including carrier financing, trade-in, and promotions, across point of sale, Apple Online Store, and the Apple Store app",
+      "Built test automation from the ground up for iPad carrier financing following its rollout, covering all supported purchase flows",
+      "Lead test plan design and QA strategy for new carrier rate plans, promotions, and carrier API changes, and drive efforts to expand automated coverage for edge-case scenarios",
+      "Integrate automated tests into existing CI pipelines (Jenkins, Maven) with Allure reporting, and use Splunk to monitor reliability across carrier onboarding at scale"
     ]
   },
   {

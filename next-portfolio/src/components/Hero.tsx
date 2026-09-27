@@ -100,7 +100,7 @@ export function Hero({ socials }: HeroProps) {
               style={{ fontSize: "1.1rem", lineHeight: 1.68 }}
             >
               Software Quality Engineer testing and automating{" "}
-              <span className="text-[var(--accent-2)]">iPhone carrier onboarding</span>. Ohio
+              <span className="text-[var(--accent-2)]">carrier financing and purchase flows for iPhone and iPad</span>. Ohio
               State CSE &apos;25. Previously shipped automation at Amazon and REST APIs at
               London Computer Systems.
             </p>
