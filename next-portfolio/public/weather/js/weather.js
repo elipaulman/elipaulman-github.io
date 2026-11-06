@@ -785,7 +785,9 @@ function updatePageBackground(weatherMain) {
       midTone = "var(--bg)";
   }
 
-  body.style.background = `linear-gradient(180deg, var(--bg) 0%, ${midTone} 50%, var(--bg) 100%)`;
+  // The page keeps the portfolio's constant ground; the weather is shown in the hero band instead.
+  body.style.background = '';
+  void midTone;
 }
 
 function updateAirQuality(data) {
