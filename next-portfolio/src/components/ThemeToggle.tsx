@@ -19,7 +19,7 @@ function getThemeSnapshot(): Theme {
 }
 
 function getServerSnapshot(): Theme {
-  return "dark";
+  return "light";
 }
 
 export function ThemeToggle() {
@@ -40,17 +40,15 @@ export function ThemeToggle() {
     <button
       type="button"
       onClick={toggleTheme}
-      className="btn h-9 font-mono text-[0.7rem] px-3 py-0"
-      aria-label="Toggle theme"
+      className="chip-btn"
+      aria-label={`Switch to ${theme === "dark" ? "light" : "dark"} theme`}
     >
-      {theme === "dark" ? (
-        <SunIcon className="h-3.5 w-3.5" />
-      ) : (
-        <MoonIcon className="h-3.5 w-3.5" />
-      )}
-      <span className="hidden sm:inline">
-        {"// "}
-        {theme === "dark" ? "light" : "dark"}
+      <span suppressHydrationWarning style={{ display: "inline-flex" }}>
+        {theme === "dark" ? (
+          <SunIcon className="h-4 w-4" />
+        ) : (
+          <MoonIcon className="h-4 w-4" />
+        )}
       </span>
     </button>
   );

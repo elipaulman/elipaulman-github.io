@@ -1,59 +1,71 @@
-"use client";
-
 import Image from "next/image";
 import { experience } from "@/lib/data";
-import { SectionHeading } from "./SectionHeading";
-import { useScrollReveal } from "@/hooks/useScrollReveal";
+
+const MONTHS = [
+  "January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December",
+];
+
+/** Start of a date range like "May 2025 - August 2025" or "November 2024". */
+function startOf(date: string) {
+  const m = date.match(/([A-Za-z]+)\s+(\d{4})/);
+  const month = m ? MONTHS.indexOf(m[1]) : 0;
+  const year = m ? Number(m[2]) : 0;
+  return { year, key: year * 12 + month };
+}
 
 export function ExperienceTimeline() {
-  const reveal = useScrollReveal();
+  const sorted = [...experience].sort((a, b) => startOf(b.date).key - startOf(a.date).key);
+
+  const years: { year: number; roles: typeof sorted }[] = [];
+  for (const role of sorted) {
+    const { year } = startOf(role.date);
+    const last = years[years.length - 1];
+    if (last && last.year === year) last.roles.push(role);
+    else years.push({ year, roles: [role] });
+  }
 
   return (
-    <section id="experience" className="section-shell" style={{ overflow: 'visible', contentVisibility: 'visible' }}>
-      <div ref={reveal} className="reveal">
-        <SectionHeading
-          tag="experience --log --all"
-          title="Building & Shipping"
-          description="Full-time roles, internships, and achievements that taught me how to ship quickly, lead teams, and own outcomes."
-        />
+    <section id="experience" className="sec">
+      <div className="inner">
+        <h2 className="sec-title poster">Experience</h2>
 
-        <div>
-          {experience.map((role) => (
-            <div
-              key={role.id}
-              className="grid grid-cols-1 gap-3 border-b border-[var(--border-inner)] py-4 sm:grid-cols-[118px_1fr] sm:gap-5 last:border-b-0"
-            >
-              <p className="font-mono text-xs text-[var(--accent-2)] sm:pt-0.5">
-                {role.date}
+        <div className="tl">
+          {years.map(({ year, roles }) => (
+            <div key={year} className="tl-year">
+              <p className="tl-year-label poster" aria-label={String(year)}>
+                {year}
               </p>
-              <div className="flex min-w-0 gap-3.5">
-                <span className="flex h-12 w-12 shrink-0 items-center justify-center overflow-hidden rounded-lg border border-[var(--border)] bg-[var(--logo-bg)] p-2">
-                  <Image
-                    src={`/${role.logo}`}
-                    alt={role.logoAlt}
-                    width={40}
-                    height={40}
-                    className="h-full w-full object-contain"
-                    style={{ filter: "var(--logo-filter)" }}
-                  />
-                </span>
-                <div className="min-w-0">
-                  <p className="text-base font-semibold text-[var(--text-strong)]">
-                    {role.title}
-                  </p>
-                  <p className="mb-2.5 text-sm text-[var(--muted)]">{role.company}</p>
-                  <div className="space-y-1.5">
-                    {role.responsibilities.map((item) => (
-                      <p
-                        key={item}
-                        className="max-w-[75ch] text-sm leading-relaxed text-[var(--muted)]"
-                      >
-                        {item}
-                      </p>
-                    ))}
-                  </div>
-                </div>
-              </div>
+              <ol className="tl-list">
+                {roles.map((role) => (
+                  <li key={role.id} className="tl-item" data-current={/present/i.test(role.date)}>
+                    <article>
+                      <p className="entry-date">{role.date}</p>
+                      <div className="tl-head">
+                        <span className="logo logo-sm">
+                          <Image
+                            src={`/${role.logo}`}
+                            alt={role.logoAlt}
+                            fill
+                            sizes="44px"
+                            unoptimized
+                            className="object-contain p-1.5"
+                          />
+                        </span>
+                        <div>
+                          <h3 className="entry-org">{role.company}</h3>
+                          <p className="entry-role">{role.title}</p>
+                        </div>
+                      </div>
+                      <ul className="entry-body tl-body">
+                        {role.responsibilities.map((item) => (
+                          <li key={item}>{item}</li>
+                        ))}
+                      </ul>
+                    </article>
+                  </li>
+                ))}
+              </ol>
             </div>
           ))}
         </div>

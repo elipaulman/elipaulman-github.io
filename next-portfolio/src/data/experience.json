@@ -10,7 +10,8 @@
       "Design and build automated test frameworks (Java, Spring Boot, Playwright, Selenium, TestNG) validating iPhone and iPad purchase flows, including carrier financing, trade-in, and promotions, across point of sale, Apple Online Store, and the Apple Store app",
       "Built test automation from the ground up for iPad carrier financing following its rollout, covering all supported purchase flows",
       "Lead test plan design and QA strategy for new carrier rate plans, promotions, and carrier API changes, and drive efforts to expand automated coverage for edge-case scenarios",
-      "Integrate automated tests into existing CI pipelines (Jenkins, Maven) with Allure reporting, and use Splunk to monitor reliability across carrier onboarding at scale"
+      "Integrate automated tests into existing CI pipelines (Jenkins, Maven) with Allure reporting, and use Splunk to monitor reliability across carrier onboarding at scale",
+      "Automate the flow of buying carrier-activated devices for testing, build regression and reporting automation, and collaborate cross-functionally with other retail engineering teams"
     ]
   },
   {

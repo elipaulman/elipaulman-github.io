@@ -1,17 +1,12 @@
 import type { Metadata } from "next";
-import { JetBrains_Mono, Source_Serif_4 } from "next/font/google";
+import { Archivo } from "next/font/google";
 import "./globals.css";
 import { personal, socials } from "@/lib/data";
 
-const jetBrainsMono = JetBrains_Mono({
+const archivo = Archivo({
   subsets: ["latin"],
-  variable: "--font-jetbrains-mono",
-  display: "swap",
-});
-
-const sourceSerif = Source_Serif_4({
-  subsets: ["latin"],
-  variable: "--font-source-serif",
+  axes: ["wdth"],
+  variable: "--font-archivo",
   display: "swap",
 });
 
@@ -81,7 +76,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning className={archivo.variable}>
       <head>
         <script
           dangerouslySetInnerHTML={{
@@ -95,7 +90,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={`${jetBrainsMono.variable} ${sourceSerif.variable} bg-[var(--bg)] text-[var(--text)] antialiased`}>
+      <body className="antialiased">
         {children}
       </body>
     </html>
