@@ -1,82 +1,42 @@
-"use client";
-
 import Link from "next/link";
 import { personal, socials } from "@/lib/data";
-import { SectionHeading } from "./SectionHeading";
 import { DownloadIcon, GitHubIcon, LinkedInIcon } from "./icons";
-import { useScrollReveal } from "@/hooks/useScrollReveal";
+import { FxGround } from "./FxGround";
+
+const CLOSE = { bg: "#ff5a1f", surface: "#ff8a4c", ink: "#101114", muted: "#a3330c", accent: "#ffc27a", accentInk: "#101114" };
+const CLOSE_PARAMS = { speed: 0.35, grain: 0.7, tint: 0.6, contrast: 0.65, calm: 0.6, calmX: 0.3, calmY: 0.5 };
 
 export function ContactSection() {
-  const reveal = useScrollReveal();
-
   return (
-    <section id="contact" className="section-shell" style={{ overflow: 'visible', contentVisibility: 'visible' }}>
-      <div ref={reveal} className="reveal space-y-6">
-        <SectionHeading
-          tag="contact"
-          title="Let's Build Something"
-          description="I'm most responsive via email and LinkedIn."
-        />
+    <section id="contact" className="contact">
+      <FxGround id="grain-gradient" className="band-fx" palette={CLOSE} seed={31} params={CLOSE_PARAMS} />
+      <div className="inner">
+        <h2 className="contact-head poster">Let&rsquo;s talk</h2>
+        <Link href={`mailto:${personal.email}`} className="contact-mail">
+          {personal.email}
+        </Link>
 
-        <div className="card max-w-xl space-y-2.5 font-mono text-sm">
-          <Row label="email" value={personal.email} href={`mailto:${personal.email}`} />
-          <Row label="phone" value={socials.phone} href={`tel:${socials.phone.replace(/\D/g, "")}`} />
-          <Row label="location" value={personal.location} />
+        <div className="contact-actions">
+          <Link href={socials.socialMedia.linkedin.url} target="_blank" rel="noreferrer" className="btn btn-fill">
+            <LinkedInIcon className="h-4 w-4" />
+            LinkedIn
+          </Link>
+          <Link href={socials.socialMedia.github.url} target="_blank" rel="noreferrer" className="btn">
+            <GitHubIcon className="h-4 w-4" />
+            GitHub
+          </Link>
+          <Link href={socials.resume.path} download className="btn">
+            <DownloadIcon className="h-4 w-4" />
+            Resume
+          </Link>
         </div>
 
-        <div className="flex flex-wrap items-center gap-3">
-          <Link
-            href={socials.socialMedia.linkedin.url}
-            target="_blank"
-            rel="noreferrer"
-            className="btn btn-ghost px-4 py-2.5 text-sm"
-          >
-            <LinkedInIcon className="h-4 w-4" />
-            linkedin
-          </Link>
-          <Link
-            href={socials.socialMedia.github.url}
-            target="_blank"
-            rel="noreferrer"
-            className="btn btn-ghost px-4 py-2.5 text-sm"
-          >
-            <GitHubIcon className="h-4 w-4" />
-            github
-          </Link>
-          <Link
-            href={socials.resume.path}
-            download
-            className="btn btn-primary px-4 py-2.5 text-sm"
-          >
-            <DownloadIcon className="h-4 w-4" />
-            &gt; download resume.pdf
-          </Link>
+        <div className="contact-foot">
+          <span>{personal.location}</span>
+          <Link href={`tel:${socials.phone.replace(/\D/g, "")}`}>{socials.phone}</Link>
+          <span>Designed and built by {personal.name}</span>
         </div>
       </div>
     </section>
-  );
-}
-
-function Row({
-  label,
-  value,
-  href,
-}: {
-  label: string;
-  value: string;
-  href?: string;
-}) {
-  return (
-    <div className="flex gap-2">
-      <span className="shrink-0 text-[var(--accent)]">{label}</span>
-      <span className="text-[var(--muted)]">=</span>
-      {href ? (
-        <Link href={href} className="min-w-0 truncate text-[var(--text-strong)] hover:text-[var(--accent)]">
-          {value}
-        </Link>
-      ) : (
-        <span className="min-w-0 truncate text-[var(--text-strong)]">{value}</span>
-      )}
-    </div>
   );
 }

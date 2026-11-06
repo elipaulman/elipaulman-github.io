@@ -13,6 +13,7 @@ const eslintConfig = defineConfig([
     "build/**",
     "next-env.d.ts",
     "public/weather/js/weather.js",
+    "public/fx/**",
   ]),
 ]);
 

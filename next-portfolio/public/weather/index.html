@@ -1,9 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <!-- Set theme before first paint to avoid a flash of the wrong theme; reads
-         the same localStorage key the portfolio's ThemeToggle uses so the two
-         stay in sync across navigation. -->
+    <!-- Set theme before first paint; reads the same localStorage key the
+         portfolio's ThemeToggle uses so the two stay in sync. -->
     <script>
       (function() {
         const theme = localStorage.getItem('theme') ||
@@ -29,14 +28,14 @@
 
     <!-- PWA Manifest -->
     <link rel="manifest" href="./manifest.json" />
-    <meta name="theme-color" content="#0c0e0c" />
+    <meta name="theme-color" content="#ff5a1f" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="Weather App" />
 
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Source+Serif+4:wght@400;600;700&display=swap" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="./css/weather.css?v=dev-nocache" />
     <link rel="icon" type="image/x-icon" href="./images/weather-favicon.png" />
     <!-- Font Awesome for icons -->
@@ -44,63 +43,70 @@
   </head>
 
   <body>
-    <div class="ambient-glow" aria-hidden="true">
-      <span class="a1"></span>
-      <span class="a2"></span>
-      <span class="a3"></span>
-    </div>
-
-    <!-- Header -->
-    <header class="app-header">
-      <div class="app-header-inner">
-        <a href="/" class="header-logo">EP<span class="header-logo-dot">.</span></a>
-        <span class="header-title">weather</span>
-        <div class="header-actions">
-          <button type="button" id="theme-toggle" class="theme-toggle-btn" aria-label="Toggle theme">
+    <!-- Floating pill nav, same as the portfolio -->
+    <header class="nav">
+      <div class="nav-bar">
+        <a href="/" class="nav-brand">Elijah Paulman</a>
+        <nav class="nav-links" aria-label="Site">
+          <a href="/" class="nav-link">Portfolio</a>
+          <a href="/#projects" class="nav-link">Projects</a>
+        </nav>
+        <div class="nav-tools">
+          <button type="button" id="theme-toggle" class="chip-btn" aria-label="Toggle theme">
             <i class="fas fa-sun"></i>
-            <span>light</span>
+            <span>Light</span>
           </button>
-          <a href="/" class="header-back">&larr; portfolio</a>
         </div>
       </div>
     </header>
 
-    <!-- Search -->
-    <div class="location-input">
-      <div class="search-row">
-        <input
-          type="text"
-          id="location-input"
-          placeholder="Search city..."
-        />
-        <button id="get-weather-button">
-          <i class="fas fa-search"></i>
-        </button>
-      </div>
-      <div id="location-suggestions" class="location-suggestions"></div>
-    </div>
+    <!-- Hero band: grain-gradient ground, search, and current conditions -->
+    <section class="hero-band">
+      <div class="hero-fx" id="weather-fx" aria-hidden="true"></div>
 
-    <div class="container">
-      <!-- Weather Controls -->
-      <div class="weather-controls">
-        <div class="unit-toggle">
-          <button id="fahrenheit-btn" class="unit-btn active">&deg;F</button>
-          <button id="celsius-btn" class="unit-btn">&deg;C</button>
-        </div>
-        <button id="refresh-btn" class="refresh-btn" title="Refresh Weather">
-          <i class="fas fa-sync-alt"></i>
-        </button>
-      </div>
+      <div class="band-inner">
+        <h1 class="poster">Weather</h1>
 
-      <div class="current-conditions">
-        <div class="loading">
-          <i class="fas fa-spinner fa-spin"></i>
-          <p>Getting your location...</p>
+        <div class="location-input">
+          <div class="search-row">
+            <input
+              type="text"
+              id="location-input"
+              placeholder="Search a city"
+              aria-label="Search a city"
+              autocomplete="off"
+            />
+            <button id="get-weather-button" aria-label="Get weather">
+              <i class="fas fa-search"></i>
+              <span>Search</span>
+            </button>
+          </div>
+          <div id="location-suggestions" class="location-suggestions"></div>
+        </div>
+
+        <div class="weather-controls">
+          <div class="unit-toggle">
+            <button id="fahrenheit-btn" class="unit-btn active">&deg;F</button>
+            <button id="celsius-btn" class="unit-btn">&deg;C</button>
+          </div>
+          <button id="refresh-btn" class="refresh-btn" title="Refresh weather" aria-label="Refresh weather">
+            <i class="fas fa-sync-alt"></i>
+          </button>
+        </div>
+
+        <div class="current-conditions">
+          <div class="loading">
+            <i class="fas fa-spinner fa-spin"></i>
+            <p>Getting your location...</p>
+          </div>
         </div>
       </div>
+    </section>
+
+    <main class="container">
       <div class="forecast-list app-section">
         <h3 class="section-label">
-          <i class="fas fa-calendar-week"></i> 5-Day Forecast
+          <i class="fas fa-calendar-week"></i> 5-day forecast
         </h3>
         <div class="forecast-grid" id="forecast-grid">
           <!-- Forecast items will be dynamically generated by JavaScript -->
@@ -110,22 +116,39 @@
       <!-- Weather Chart Container -->
       <div class="weather-chart-container app-section" style="display: none;">
         <h3 class="section-label">
-          <i class="fas fa-chart-line"></i> 24-Hour Temperature Trend
+          <i class="fas fa-chart-line"></i> 24-hour temperature trend
         </h3>
         <canvas id="temperatureChart" width="400" height="200"></canvas>
       </div>
-    </div>
+    </main>
 
     <!-- Footer -->
     <footer class="app-footer">
       <span>Built by <a href="/">Elijah Paulman</a></span>
-      <span>&middot;</span>
-      <span>OpenWeatherMap API</span>
+      <span>Weather data from OpenWeatherMap</span>
     </footer>
 
     <!-- Chart.js CDN for data visualization -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="./js/analytics.js?v=dev-nocache"></script>
     <script src="./js/weather.js?v=dev-nocache"></script>
+
+    <!-- Same GPU ground as the portfolio hero (served from /fx). Falls back to a flat
+         orange band if the module or WebGL is unavailable. -->
+    <script type="module">
+      try {
+        const { default: fx } = await import('/fx/fx.js');
+        await fx.mount(document.getElementById('weather-fx'), 'grain-gradient', {
+          palette: {
+            bg: '#ff5a1f', surface: '#ff8a4c', ink: '#101114',
+            muted: '#a3330c', accent: '#ffc27a', accentInk: '#101114'
+          },
+          seed: 17,
+          params: { speed: 0.45, softness: 0.55, warp: 0.7, grain: 0.7, scatter: 0.55, tint: 0.65, contrast: 0.7, calm: 0.5, calmX: 0.5, calmY: 0.55 }
+        });
+      } catch (err) {
+        console.warn('fx ground unavailable', err);
+      }
+    </script>
   </body>
 </html>

@@ -1,159 +1,75 @@
-"use client";
-
+import Image from "next/image";
 import Link from "next/link";
-import { personal } from "@/lib/data";
+import { education, personal } from "@/lib/data";
+import { FxGround } from "./FxGround";
 import type { Socials } from "@/types";
-import { GitHubIcon, LinkedInIcon, MailIcon, DocumentIcon } from "./icons";
-import { useMouseTilt } from "@/hooks/useMouseTilt";
-import { useTypewriterLoop } from "@/hooks/useTypewriterLoop";
-import { useTypewriterOnce } from "@/hooks/useTypewriterOnce";
+import { DocumentIcon, MailIcon } from "./icons";
 
-type HeroProps = {
-  socials: Socials;
+const HERO_PALETTE = {
+  bg: "#ff5a1f",
+  surface: "#ff8a4c",
+  ink: "#101114",
+  muted: "#a3330c",
+  accent: "#ffc27a",
+  accentInk: "#101114",
 };
 
-const EYEBROW_COMMANDS = [
-  "whoami",
-  "cat about.md",
-  "ls experience/",
-  "git log --oneline -3",
-];
+const HERO_PARAMS = { speed: 0.45, softness: 0.55, warp: 0.7, grain: 0.7, scatter: 0.55, tint: 0.65, contrast: 0.7, calm: 0.5, calmX: 0.22, calmY: 0.82 };
 
-const HEADLINE = `${personal.name} builds carrier\nsystems at Apple`;
-
-export function Hero({ socials }: HeroProps) {
-  const tiltRef = useMouseTilt<HTMLDivElement>({ max: 5, lift: 6, leaveMs: 550 });
-  const eyebrow = useTypewriterLoop(EYEBROW_COMMANDS);
-  const { text: headline, done: headlineDone } = useTypewriterOnce(HEADLINE, 650);
+export function Hero({ socials }: { socials: Socials }) {
+  const [, ...rest] = personal.name.split(" ");
 
   return (
-    <section id="intro" className="relative py-24 sm:py-32 lg:py-40">
-      <div
-        aria-hidden="true"
-        className="hero-glow-layer"
-        style={{
-          position: "absolute",
-          inset: 0,
-          pointerEvents: "none",
-          zIndex: 0,
-          background:
-            "radial-gradient(ellipse 80% 60% at 50% 40%, rgba(var(--accent-rgb), 0.07) 0%, transparent 70%)",
-          animation: "hero-glow-pulse 4s ease-in-out infinite alternate",
-        }}
+    <section id="top" className="hero">
+      <FxGround
+        id="grain-gradient"
+        className="hero-fx"
+        palette={HERO_PALETTE}
+        seed={11}
+        params={HERO_PARAMS}
       />
 
-      <div className="tilt-perspective relative" style={{ zIndex: 1 }}>
-        <div ref={tiltRef} className="tilt-stage space-y-6" style={{ position: "relative" }}>
-          <div aria-hidden="true" className="depth-grid" />
+      <h1 className="hero-name poster" aria-label={personal.name}>
+        <span aria-hidden="true">
+          <i>{personal.shortName}</i>
+        </span>
+        <span aria-hidden="true">
+          <i>{rest.join(" ")}</i>
+        </span>
+      </h1>
 
-          {/* Terminal eyebrow */}
-          <div
-            className="hero-animate tilt-layer"
-            style={{
-              transform: "translateZ(18px)",
-              animation: "fade-slide-up 0.6s 100ms ease-out both",
-            }}
-          >
-            <p className="min-h-[1.2em] font-mono text-xs tracking-wide text-[var(--accent)]" aria-hidden="true">
-              {"$ "}
-              {eyebrow}
-              <span className="typing-cursor" />
-            </p>
-          </div>
+      <Image
+        src="/images/eli-cutout.webp"
+        alt=""
+        width={1200}
+        height={1800}
+        priority
+        unoptimized
+        className="hero-figure"
+      />
 
-          {/* Narrative headline */}
-          <div
-            className="hero-animate tilt-layer"
-            style={{
-              transform: "translateZ(48px)",
-              animation: "fade-slide-up 0.6s 250ms ease-out both",
-            }}
-          >
-            <h1
-              className="min-h-[2.3em] font-mono font-semibold text-[var(--text-strong)] sm:min-h-[2.28em]"
-              style={{
-                fontSize: "clamp(2rem, 5vw, 3.4rem)",
-                lineHeight: 1.14,
-                letterSpacing: "-0.015em",
-              }}
-            >
-              {headline.split("\n").map((line, i) => (
-                <span key={i}>
-                  {i > 0 && <br />}
-                  {line}
-                </span>
-              ))}
-              <span className={`typing-cursor${headlineDone ? "" : " is-typing"}`} />
-            </h1>
-          </div>
-
-          {/* Lede */}
-          <div
-            className="hero-animate tilt-layer"
-            style={{
-              transform: "translateZ(12px)",
-              animation: "fade-slide-up 0.6s 400ms ease-out both",
-            }}
-          >
-            <p
-              className="max-w-[60ch] text-[var(--text)]"
-              style={{ fontSize: "1.1rem", lineHeight: 1.68 }}
-            >
-              Software Quality Engineer testing and automating{" "}
-              <span className="text-[var(--accent-2)]">iPhone carrier onboarding</span>. Ohio
-              State CSE &apos;25. Previously shipped automation at Amazon and REST APIs at
-              London Computer Systems.
-            </p>
-          </div>
-
-          {/* CTA buttons */}
-          <div
-            className="hero-animate tilt-layer flex flex-wrap items-center gap-3 pt-2"
-            style={{
-              transform: "translateZ(28px)",
-              animation: "fade-slide-up 0.6s 550ms ease-out both",
-            }}
-          >
-            <Link
-              href={`mailto:${socials.email.primary}`}
-              className="btn btn-primary px-5 py-2.5 text-sm"
-            >
+      <div className="hero-foot">
+        <div>
+          <p className="hero-statement">
+            Software quality engineer at Apple, building test automation for buying
+            carrier-activated iPhones and iPads.
+          </p>
+          <div className="hero-actions">
+            <Link href={`mailto:${socials.email.primary}`} className="btn btn-fill">
               <MailIcon className="h-4 w-4" />
-              contact me
+              Email me
             </Link>
-            <Link
-              href={socials.resume.path}
-              download
-              className="btn px-5 py-2.5 text-sm"
-            >
+            <Link href={socials.resume.path} download className="btn">
               <DocumentIcon className="h-4 w-4" />
-              resume.pdf
+              Resume
             </Link>
-
-            <span className="mx-1 hidden h-5 w-px bg-[var(--border)] sm:block" />
-
-            <div className="flex gap-2">
-              <Link
-                href={socials.socialMedia.github.url}
-                target="_blank"
-                rel="noreferrer"
-                className="icon-btn"
-                aria-label="GitHub"
-              >
-                <GitHubIcon className="h-4 w-4" />
-              </Link>
-              <Link
-                href={socials.socialMedia.linkedin.url}
-                target="_blank"
-                rel="noreferrer"
-                className="icon-btn"
-                aria-label="LinkedIn"
-              >
-                <LinkedInIcon className="h-4 w-4" />
-              </Link>
-            </div>
           </div>
         </div>
+        <ul className="hero-facts">
+          <li>Software Quality Engineer, Apple</li>
+          <li>{education[0].degree.replace("B.S. ", "B.S. ")}, Ohio State</li>
+          <li>{personal.location}</li>
+        </ul>
       </div>
     </section>
   );
