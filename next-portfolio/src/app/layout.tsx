@@ -45,7 +45,12 @@ export const metadata: Metadata = {
     canonical: socials.website,
   },
   icons: {
-    icon: "/images/favicon-32x32.png",
+    icon: [
+      { url: "/icon.svg", type: "image/svg+xml" },
+      { url: "/favicon.ico", sizes: "48x48" },
+      { url: "/images/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+    ],
+    apple: "/images/apple-touch-icon.png",
   },
   openGraph: {
     title: `${personal.name} | Software Engineer`,

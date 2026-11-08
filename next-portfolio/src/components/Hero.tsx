@@ -3,7 +3,7 @@ import Link from "next/link";
 import { education, personal } from "@/lib/data";
 import { FxGround } from "./FxGround";
 import type { Socials } from "@/types";
-import { DocumentIcon, MailIcon } from "./icons";
+import { DocumentIcon, LinkedInIcon, MailIcon } from "./icons";
 
 const HERO_PALETTE = {
   bg: "#ff5a1f",
@@ -62,6 +62,15 @@ export function Hero({ socials }: { socials: Socials }) {
             <Link href={socials.resume.path} download className="btn">
               <DocumentIcon className="h-4 w-4" />
               Resume
+            </Link>
+            <Link
+              href={socials.socialMedia.linkedin.url}
+              target="_blank"
+              rel="noreferrer"
+              className="btn"
+            >
+              <LinkedInIcon className="h-4 w-4" />
+              LinkedIn
             </Link>
           </div>
         </div>

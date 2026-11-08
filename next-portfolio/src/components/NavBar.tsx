@@ -10,17 +10,12 @@ const links = [
   { href: "#experience", label: "Experience" },
   { href: "#projects", label: "Projects" },
   { href: "#skills", label: "Skills" },
+  { href: "#education", label: "Education" },
+  { href: "#beyond", label: "Beyond work" },
   { href: "#contact", label: "Contact" },
 ];
 
-const drawerLinks = [
-  ...links.slice(0, 4),
-  { href: "#education", label: "Education" },
-  { href: "#beyond", label: "Beyond work" },
-  links[4],
-];
-
-const sectionIds = ["about", "experience", "projects", "skills", "education", "beyond", "contact"];
+const sectionIds = links.map((link) => link.href.slice(1));
 
 export function NavBar({ name }: { name: string }) {
   const [open, setOpen] = useState(false);
@@ -69,7 +64,7 @@ export function NavBar({ name }: { name: string }) {
       >
         <div>
           <nav className="nav-drawer-inner" aria-label="Sections">
-            {drawerLinks.map((link) => (
+            {links.map((link) => (
               <Link
                 key={link.href}
                 href={link.href}
