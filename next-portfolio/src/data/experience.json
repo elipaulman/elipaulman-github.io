@@ -7,14 +7,11 @@
     "logo": "images/Companies/apple_logo.png",
     "logoAlt": "Apple Logo",
     "responsibilities": [
-      "Design and build automated test frameworks (Java, Spring Boot, Playwright, Selenium, TestNG) validating iPhone and iPad purchase flows, including carrier financing, trade-in, and promotions, across point of sale, Apple Online Store, and the Apple Store app",
-      "Built test automation from the ground up for iPad carrier financing following its rollout, covering all supported purchase flows",
-      "Built data-driven API tests that verify carrier request and response behavior across carrier integrations",
-      "Diagnosed and fixed test-isolation and flaky-test problems to keep automated runs dependable",
-      "Found 27 bugs (7 serious) before release and drove them to resolution with a 4-day median time-to-close",
-      "Lead test plan design and QA strategy for new carrier rate plans, promotions, and carrier API changes, and drive efforts to expand automated coverage for edge-case scenarios",
-      "Integrate automated tests into existing CI pipelines (Jenkins, Maven) with Allure reporting, build regression and reporting automation, and use Splunk to monitor reliability across carrier onboarding at scale",
-      "Collaborate cross-functionally with other retail engineering teams and review teammates' code to keep automation quality high"
+      "Build automated test frameworks (Java, Spring Boot, Playwright, Selenium, TestNG) for iPhone and iPad purchase flows across point of sale, the Apple Online Store, and the Apple Store app",
+      "Built iPad carrier financing test automation from the ground up following its rollout",
+      "Build data-driven API tests and fix flaky tests to keep automated runs dependable",
+      "Lead test plan design and QA strategy for new carrier plans, promotions, and API changes, working with other retail engineering teams",
+      "Integrate tests into CI (Jenkins, Maven) with Allure reporting, build regression and reporting automation, and monitor reliability with Splunk"
     ]
   },
   {
