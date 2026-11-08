@@ -38,15 +38,17 @@ export function Hero({ socials }: { socials: Socials }) {
         </span>
       </h1>
 
-      <Image
-        src="/images/eli-cutout.webp"
-        alt=""
-        width={884}
-        height={2200}
-        priority
-        unoptimized
-        className="hero-figure"
-      />
+      <div className="hero-figure-wrap">
+        <Image
+          src="/images/eli-cutout.webp"
+          alt=""
+          width={884}
+          height={2200}
+          priority
+          unoptimized
+          className="hero-figure"
+        />
+      </div>
 
       <div className="hero-foot">
         <div>
