@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { ThemeToggle } from "./ThemeToggle";
+import { LinkedInIcon } from "./icons";
 import { useScrollSpy } from "@/hooks/useScrollSpy";
 
 const links = [
@@ -22,7 +23,7 @@ const drawerLinks = [
 
 const sectionIds = ["about", "experience", "projects", "skills", "education", "beyond", "contact"];
 
-export function NavBar({ name }: { name: string }) {
+export function NavBar({ name, linkedinUrl }: { name: string; linkedinUrl: string }) {
   const [open, setOpen] = useState(false);
   const activeId = useScrollSpy(sectionIds);
 
@@ -47,6 +48,16 @@ export function NavBar({ name }: { name: string }) {
         </nav>
 
         <div className="nav-tools">
+          <a
+            href={linkedinUrl}
+            target="_blank"
+            rel="noreferrer"
+            className="chip-btn"
+            aria-label="LinkedIn profile"
+          >
+            <LinkedInIcon className="h-4 w-4" />
+            <span className="chip-label">LinkedIn</span>
+          </a>
           <ThemeToggle />
           <button
             type="button"
@@ -79,6 +90,14 @@ export function NavBar({ name }: { name: string }) {
                 {link.label}
               </Link>
             ))}
+            <a
+              href={linkedinUrl}
+              target="_blank"
+              rel="noreferrer"
+              onClick={() => setOpen(false)}
+            >
+              LinkedIn
+            </a>
           </nav>
         </div>
       </div>

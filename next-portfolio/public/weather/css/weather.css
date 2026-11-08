@@ -813,3 +813,9 @@ a {
     animation: none !important;
   }
 }
+
+.nav-tools {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
