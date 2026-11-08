@@ -268,9 +268,9 @@ a {
 .hero-figure {
   position: absolute;
   z-index: 2;
-  right: clamp(-4rem, 1vw, 3rem);
+  right: clamp(-6rem, -2.5vw, 0rem);
   bottom: 0;
-  height: min(98svh, 62vw);
+  height: min(84svh, 60vw);
   width: auto;
   max-width: none;
   pointer-events: none;
@@ -280,9 +280,11 @@ a {
 
 @media (max-width: 899px) {
   .hero-figure {
-    height: 50svh;
-    right: -6vw;
-    bottom: 13.5rem;
+    height: 46svh;
+    right: 4vw;
+    bottom: 13rem;
+    -webkit-mask-image: linear-gradient(to bottom, #000 80%, transparent);
+    mask-image: linear-gradient(to bottom, #000 80%, transparent);
   }
 }
 
