@@ -36,7 +36,7 @@ export default function Home() {
 
   return (
     <>
-      <NavBar name={personal.name} linkedinUrl={socials.socialMedia.linkedin.url} />
+      <NavBar name={personal.name} />
       <main>
         <Hero socials={socials} />
         <AboutSection />
