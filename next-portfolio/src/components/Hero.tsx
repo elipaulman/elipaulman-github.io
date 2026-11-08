@@ -41,8 +41,8 @@ export function Hero({ socials }: { socials: Socials }) {
       <Image
         src="/images/eli-cutout.webp"
         alt=""
-        width={1200}
-        height={1800}
+        width={884}
+        height={2200}
         priority
         unoptimized
         className="hero-figure"
