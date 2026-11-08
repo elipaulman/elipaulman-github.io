@@ -238,7 +238,13 @@ a {
 .hero-name {
   position: relative;
   z-index: 1;
-  font-size: clamp(6rem, 23.5vw, 22rem);
+  /* Fit both axes: never wider than the screen (PAULMAN is ~3.7em wide) and never so tall that
+     the hero outgrows a short window (name block is ~1.72em; the rest of the hero needs ~24rem). */
+  font-size: clamp(
+    4rem,
+    min(23.5vw, calc((100vw - 2 * var(--gutter)) / 3.7), calc((100svh - 24rem) / 1.72)),
+    22rem
+  );
   align-self: start;
 }
 
@@ -278,14 +284,59 @@ a {
   animation: show 0.9s ease 0.25s forwards;
 }
 
+/* On desktop the wrapper adds no box, so the photo stays positioned against the hero. */
+.hero-figure-wrap {
+  display: contents;
+}
+
 @media (max-width: 899px) {
+  /* Phones and small tablets: the photo fills the space left between the name and the intro
+     text (never less than 11rem), so it can't overlap the text and the buttons stay on screen. */
+  .hero {
+    grid-template-rows: auto minmax(11rem, 1fr) auto;
+  }
+
+  .hero-name {
+    grid-row: 1;
+  }
+
+  .hero-figure-wrap {
+    display: block;
+    position: relative;
+    grid-row: 2;
+    min-height: 11rem;
+    max-height: 46svh;
+    min-width: 0;
+  }
+
   .hero-figure {
-    height: 46svh;
-    right: 4vw;
-    bottom: 13rem;
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
+    max-height: none;
+    object-fit: contain;
+    object-position: right bottom;
     -webkit-mask-image: linear-gradient(to bottom, #000 80%, transparent);
     mask-image: linear-gradient(to bottom, #000 80%, transparent);
     filter: none; /* the shadow would be clipped into a visible box by the mask */
+  }
+
+  .hero-foot {
+    grid-row: 3;
+  }
+}
+
+@media (max-width: 480px) {
+  .hero-actions {
+    gap: 0.5rem;
+  }
+
+  .hero-actions .btn {
+    height: 2.75rem;
+    padding: 0 0.95rem;
+    gap: 0.4rem;
+    font-size: 0.92rem;
   }
 }
 
@@ -1019,4 +1070,14 @@ body {
   .hero-figure {
     filter: none;
   }
+}
+
+.nav-brand {
+  display: inline-flex;
+  align-items: center;
+  min-height: 2.75rem;
+}
+
+.work-link {
+  min-height: 2.75rem;
 }
