@@ -60,10 +60,10 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/images/Elijah_Paulman_Headshot.jpg",
+        url: "/images/og-card.png",
         width: 1200,
         height: 630,
-        alt: `${personal.name} — Software Engineer`,
+        alt: `${personal.name}, Software Quality Engineer at Apple`,
       },
     ],
   },
@@ -71,7 +71,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: `${personal.name} | Software Engineer`,
     description: personal.about.short,
-    images: ["/images/Elijah_Paulman_Headshot.jpg"],
+    images: ["/images/og-card.png"],
   },
 };
 
