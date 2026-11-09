@@ -1,17 +1,12 @@
 import type { Metadata } from "next";
-import { JetBrains_Mono, Source_Serif_4 } from "next/font/google";
+import { Archivo } from "next/font/google";
 import "./globals.css";
 import { personal, socials } from "@/lib/data";
 
-const jetBrainsMono = JetBrains_Mono({
+const archivo = Archivo({
   subsets: ["latin"],
-  variable: "--font-jetbrains-mono",
-  display: "swap",
-});
-
-const sourceSerif = Source_Serif_4({
-  subsets: ["latin"],
-  variable: "--font-source-serif",
+  axes: ["wdth"],
+  variable: "--font-archivo",
   display: "swap",
 });
 
@@ -50,7 +45,12 @@ export const metadata: Metadata = {
     canonical: socials.website,
   },
   icons: {
-    icon: "/images/favicon-32x32.png",
+    icon: [
+      { url: "/icon.svg", type: "image/svg+xml", sizes: "any" },
+      { url: "/favicon.ico", sizes: "48x48" },
+      { url: "/images/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+    ],
+    apple: "/images/apple-touch-icon.png",
   },
   openGraph: {
     title: `${personal.name} | Software Engineer`,
@@ -60,10 +60,10 @@ export const metadata: Metadata = {
     type: "website",
     images: [
       {
-        url: "/images/Elijah_Paulman_Headshot.jpg",
+        url: "/images/og-card.png",
         width: 1200,
         height: 630,
-        alt: `${personal.name} — Software Engineer`,
+        alt: `${personal.name}, Software Quality Engineer at Apple`,
       },
     ],
   },
@@ -71,7 +71,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: `${personal.name} | Software Engineer`,
     description: personal.about.short,
-    images: ["/images/Elijah_Paulman_Headshot.jpg"],
+    images: ["/images/og-card.png"],
   },
 };
 
@@ -81,7 +81,7 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" suppressHydrationWarning className={archivo.variable}>
       <head>
         <script
           dangerouslySetInnerHTML={{
@@ -95,7 +95,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={`${jetBrainsMono.variable} ${sourceSerif.variable} bg-[var(--bg)] text-[var(--text)] antialiased`}>
+      <body className="antialiased">
         {children}
       </body>
     </html>

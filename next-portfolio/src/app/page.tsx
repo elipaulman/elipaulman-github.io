@@ -6,7 +6,7 @@ import { SkillsSection } from "@/components/SkillsSection";
 import { ExperienceTimeline } from "@/components/ExperienceTimeline";
 import { ProjectsGrid } from "@/components/ProjectsGrid";
 import { EducationSection } from "@/components/EducationSection";
-import { FAQSection } from "@/components/FAQSection";
+import { BeyondSection } from "@/components/BeyondSection";
 import { ContactSection } from "@/components/ContactSection";
 import { personal, socials } from "@/lib/data";
 
@@ -36,45 +36,17 @@ export default function Home() {
 
   return (
     <>
-      <div className="relative min-h-screen">
-        {/* Slow-drifting ambient glow, fixed behind the whole page */}
-        <div className="ambient-glow app-bg-glow" aria-hidden="true">
-          <span className="a1" />
-          <span className="a2" />
-          <span className="a3" />
-        </div>
-
-        <NavBar resumePath={socials.resume.path} />
-        <main className="mx-auto max-w-5xl px-5 pb-14 sm:px-8 sm:pb-16">
-          <Hero socials={socials} />
-
-          <div className="accent-line" />
-          <AboutSection />
-          <SkillsSection />
-
-          <div className="accent-line" />
-          <ExperienceTimeline />
-
-          <div className="accent-line" />
-          <ProjectsGrid />
-
-          <div className="accent-line" />
-          <EducationSection />
-          <FAQSection />
-
-          <div className="accent-line" />
-          <ContactSection />
-
-          <footer className="mt-20 border-t border-[var(--border)] pt-8 pb-10 text-center">
-            <p className="font-mono text-xs text-[var(--muted)]">
-              Designed & built by {personal.name}
-            </p>
-            <p className="mt-2 font-mono text-[0.65rem] text-[var(--line-number)]">
-              Next.js + TypeScript &middot; {new Date().getFullYear()}
-            </p>
-          </footer>
-        </main>
-      </div>
+      <NavBar name={personal.name} />
+      <main>
+        <Hero socials={socials} />
+        <AboutSection />
+        <ExperienceTimeline />
+        <ProjectsGrid />
+        <SkillsSection />
+        <EducationSection />
+        <BeyondSection />
+        <ContactSection />
+      </main>
       <Script
         id="structured-data"
         type="application/ld+json"
