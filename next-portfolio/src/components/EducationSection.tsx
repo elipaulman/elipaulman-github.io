@@ -10,14 +10,14 @@ export function EducationSection() {
           {education.map((school) => (
             <article key={school.id} className="entry">
               <div className="entry-head">
-                <span className="logo" style={{ padding: 0 }}>
+                <span className="edu-logo" data-school={school.id}>
                   <Image
                     src={`/${school.image}`}
                     alt={school.imageAlt}
                     fill
-                    sizes="56px"
+                    sizes="(max-width: 640px) 68px, 88px"
                     unoptimized
-                    className="object-cover"
+                    className="edu-img"
                   />
                 </span>
                 <div>

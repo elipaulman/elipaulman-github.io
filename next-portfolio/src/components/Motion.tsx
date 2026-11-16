@@ -47,13 +47,30 @@ export function Motion() {
         // Only start from zero if it's still off-screen, so nothing flickers on load.
         if (el.getBoundingClientRect().top > window.innerHeight * 0.88) el.textContent = "0";
         const counter = { v: 0 };
-        gsap.to(counter, {
+        const tween = gsap.to(counter, {
           v: to,
           duration: 1.8,
           ease: "power3.out",
+          paused: true,
           onUpdate: () => (el.textContent = Math.round(counter.v).toLocaleString("en-US")),
           onComplete: () => (el.textContent = finalText),
-          scrollTrigger: { trigger: el, start: "top 88%", once: true },
+        });
+        // Play when the number scrolls into view. If the visitor jumps past it instead (anchor
+        // link, End key, loading at #projects), skip straight to the real value rather than
+        // leaving it stuck at zero.
+        const settle = () => {
+          if (tween.progress() < 1) tween.progress(1);
+        };
+        ScrollTrigger.create({
+          trigger: el,
+          start: "top 88%",
+          end: "bottom top",
+          onEnter: () => tween.play(),
+          onEnterBack: settle,
+          onLeave: settle,
+          onRefresh: (self) => {
+            if (self.progress >= 1) settle();
+          },
         });
       });
 
