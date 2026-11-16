@@ -13,6 +13,8 @@ const eslintConfig = defineConfig([
     "build/**",
     "next-env.d.ts",
     "public/weather/js/weather.js",
+    // Vendored third-party code (minified Chart.js): not ours to lint
+    "public/weather/js/*.min.js",
     "public/fx/**",
   ]),
 ]);
