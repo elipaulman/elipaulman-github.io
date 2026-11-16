@@ -20,6 +20,7 @@
   --inv-2: #a9acb5;
   --inv-rule: rgba(242, 243, 245, 0.22);
 
+  --ease: cubic-bezier(0.16, 1, 0.3, 1);
   --font: var(--font-archivo), "Helvetica Neue", Arial, sans-serif;
 
   --gutter: clamp(1.25rem, 4.2vw, 4rem);
@@ -257,12 +258,16 @@ a {
 .hero-name span > i {
   display: block;
   font-style: normal;
-  transform: translateY(105%);
-  animation: lift 0.9s cubic-bezier(0.16, 0.8, 0.2, 1) forwards;
 }
 
-.hero-name span:nth-child(2) > i {
-  animation-delay: 0.1s;
+/* Letters rise through the line's mask one after another (CSS only, so no flash before
+   hydration). --w is the width axis; Motion.tsx eases it near the cursor. */
+.hero-name .ch {
+  display: inline-block;
+  font-weight: inherit;
+  font-variation-settings: "wdth" var(--w, 62);
+  transform: translateY(105%);
+  animation: lift 1s var(--ease) calc(var(--i) * 48ms + 80ms) forwards;
 }
 
 @keyframes lift {
@@ -804,7 +809,7 @@ a {
   html {
     scroll-behavior: auto;
   }
-  .hero-name span > i {
+  .hero-name .ch {
     animation: none;
     transform: none;
   }
@@ -1080,4 +1085,157 @@ body {
 
 .work-link {
   min-height: 2.75rem;
+}
+
+/* ═════════════ Motion ═════════════
+   One curve (--ease), three durations (0.2s / 0.5s / 1s). The name is the one authored
+   moment; everything else is quiet and explains position or progress. */
+
+/* Hero copy settles in after the name */
+.hero-statement,
+.hero-actions .btn,
+.hero-facts li {
+  opacity: 0;
+  animation: settle 0.9s var(--ease) 0.7s forwards;
+}
+
+.hero-actions .btn:nth-child(2) {
+  animation-delay: 0.78s;
+}
+
+.hero-actions .btn:nth-child(3) {
+  animation-delay: 0.86s;
+}
+
+.hero-facts li:nth-child(2) {
+  animation-delay: 0.78s;
+}
+
+.hero-facts li:nth-child(3) {
+  animation-delay: 0.86s;
+}
+
+@keyframes settle {
+  from {
+    opacity: 0;
+    transform: translateY(14px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* Scroll progress: a hairline in the poster orange above the nav */
+.scroll-progress {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  z-index: 60;
+  background: var(--hot);
+  transform-origin: 0 50%;
+  transform: scaleX(0);
+  pointer-events: none;
+}
+
+/* About photo: unmasked once by Motion.tsx */
+.js-motion .about-photo {
+  clip-path: inset(0 0 100% 0);
+}
+
+/* Timeline: the spine draws as you scroll, dots fill as it reaches them */
+.js-motion .tl-list {
+  border-left-color: transparent;
+}
+
+.tl-list::before {
+  content: "";
+  position: absolute;
+  left: -2px;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--ink);
+  transform-origin: top;
+  transform: scaleY(0);
+  display: none;
+}
+
+.js-motion .tl-list::before {
+  display: block;
+  transform: scaleY(var(--p, 0));
+}
+
+.tl-item::before {
+  transition: background 0.5s var(--ease);
+}
+
+.js-motion .tl-item.is-reached:not([data-current="true"])::before {
+  background: var(--ink);
+}
+
+/* Project rows: the rule draws in from the left when the row arrives */
+.work-row::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 1px;
+  background: currentColor;
+  opacity: 0.22;
+  transform-origin: left;
+  transform: scaleX(0);
+  transition: transform 1.1s var(--ease);
+  pointer-events: none;
+}
+
+.js-motion .work-row {
+  border-bottom-color: transparent;
+}
+
+.js-motion .work-row.is-in::after {
+  transform: scaleX(1);
+}
+
+/* Hover: the arrow leans, the row itself stays put */
+.work-link svg {
+  transition: transform 0.35s var(--ease);
+}
+
+.work-row:hover .work-link svg {
+  transform: translate(3px, -3px);
+}
+
+/* Skills: a thick orange underline fades in under the word. The "/" separator is an
+   inline-block, so the underline never runs through it. */
+.skill-run span {
+  text-decoration: underline;
+  text-decoration-thickness: 0.12em;
+  text-underline-offset: 0.14em;
+  text-decoration-skip-ink: none;
+  text-decoration-color: transparent;
+  transition: text-decoration-color 0.25s var(--ease);
+}
+
+.skill-run span:hover {
+  text-decoration-color: var(--hot);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .hero-statement,
+  .hero-actions .btn,
+  .hero-facts li {
+    animation: none;
+    opacity: 1;
+  }
+  .scroll-progress {
+    display: none;
+  }
+  .work-row::after {
+    transform: none;
+    transition: none;
+  }
 }

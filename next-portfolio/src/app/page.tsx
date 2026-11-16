@@ -8,6 +8,7 @@ import { ProjectsGrid } from "@/components/ProjectsGrid";
 import { EducationSection } from "@/components/EducationSection";
 import { BeyondSection } from "@/components/BeyondSection";
 import { ContactSection } from "@/components/ContactSection";
+import { Motion } from "@/components/Motion";
 import { personal, socials } from "@/lib/data";
 
 export default function Home() {
@@ -37,6 +38,7 @@ export default function Home() {
   return (
     <>
       <NavBar name={personal.name} />
+      <Motion />
       <main>
         <Hero socials={socials} />
         <AboutSection />
