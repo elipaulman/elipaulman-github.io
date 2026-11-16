@@ -11,15 +11,6 @@
       })();
     </script>
 
-    <!-- Google tag (gtag.js) -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-6ENGFNQ089"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-6ENGFNQ089');
-    </script>
-
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -33,9 +24,8 @@
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="Weather App" />
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&display=swap" rel="stylesheet" />
+    <!-- Archivo is self-hosted (see @font-face in css/weather.css); nothing is requested from Google -->
+    <link rel="preload" href="./fonts/archivo-latin.woff2" as="font" type="font/woff2" crossorigin />
     <link rel="stylesheet" href="./css/weather.css?v=dev-nocache" />
     <link rel="icon" type="image/svg+xml" href="./images/weather-icon.svg" />
     <link rel="icon" type="image/png" href="./images/weather-favicon.png" />
@@ -131,7 +121,8 @@
     </footer>
 
     <!-- Chart.js CDN for data visualization -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <!-- Chart.js 4.6.1 (MIT), served from this site and pinned instead of loading "latest" from a CDN -->
+    <script src="./js/chart.umd.min.js"></script>
     <script src="./js/analytics.js?v=dev-nocache"></script>
     <script src="./js/weather.js?v=dev-nocache"></script>
 

@@ -3,6 +3,18 @@
    orange field with a grain-gradient ground, calm ruled panels below.
    Legacy variable names (--bg, --accent, --accent-rgb, ...) are kept because
    js/weather.js reads them for the chart and a few inline styles. */
+
+/* Archivo, self-hosted (latin subset, variable weight and width; SIL Open Font License).
+   Replaces the Google Fonts stylesheet so no visitor data is sent to Google. */
+@font-face {
+  font-family: "Archivo";
+  font-style: normal;
+  font-weight: 100 900;
+  font-stretch: 62% 125%;
+  font-display: swap;
+  src: url("../fonts/archivo-latin.woff2") format("woff2");
+}
+
 * {
   margin: 0;
   padding: 0;
