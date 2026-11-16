@@ -1746,3 +1746,22 @@ body {
   margin-bottom: -100vh;
   margin-bottom: -100lvh;
 }
+
+/* Double rules: every section title already draws a heavy underline, and the first row of blocks
+   beneath it (the About stats, the Beyond work blocks) drew its own top rule a short way below,
+   so two parallel lines read as a glitch. The first row now relies on the title's rule; the rules
+   between later rows stay as dividers. */
+.stat:nth-child(-n + 2),
+.beyond-block:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+
+@media (min-width: 900px) {
+  /* Wide layouts put every stat and every block in that first row */
+  .stat,
+  .beyond-block {
+    border-top: 0;
+    padding-top: 0;
+  }
+}
