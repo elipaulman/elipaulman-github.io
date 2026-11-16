@@ -1731,12 +1731,18 @@ body {
   padding-block: clamp(3.5rem, 7vw, 6rem);
 }
 
+/* The layer is sized to the LARGE viewport (lvh: the screen with the mobile address bar
+   hidden). With svh it ended short whenever the bar collapsed, leaving a bare strip at the bottom
+   that came and went as the bar moved. lvh is constant, unlike dvh, so the canvas is never resized
+   by the bar. The 100vh lines are the fallback for browsers without lvh. */
 .work > .band-fx {
   position: sticky;
   inset: auto;
   top: 0;
-  height: 100svh;
+  height: 100vh;
+  height: 100lvh;
   margin-inline: calc(-1 * var(--gutter));
   width: calc(100% + 2 * var(--gutter));
-  margin-bottom: -100svh;
+  margin-bottom: -100vh;
+  margin-bottom: -100lvh;
 }
