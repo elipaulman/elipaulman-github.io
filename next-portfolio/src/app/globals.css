@@ -1716,3 +1716,27 @@ body {
   object-fit: contain;
   padding: 3.4%;
 }
+
+/* Projects texture: a viewport-sized layer pinned behind the rows, not a canvas as tall as the
+   whole section. The section grows and shrinks as project panels open; a section-sized WebGL
+   canvas (millions of pixels) was reallocated and redrawn on every frame of that animation.
+   overflow: clip (not hidden) keeps the section from becoming a scroll container, which sticky
+   needs; the vertical padding moves to .inner so the pinned layer can span the whole section. */
+.work {
+  overflow: clip;
+  padding-block: 0;
+}
+
+.work > .inner {
+  padding-block: clamp(3.5rem, 7vw, 6rem);
+}
+
+.work > .band-fx {
+  position: sticky;
+  inset: auto;
+  top: 0;
+  height: 100svh;
+  margin-inline: calc(-1 * var(--gutter));
+  width: calc(100% + 2 * var(--gutter));
+  margin-bottom: -100svh;
+}
