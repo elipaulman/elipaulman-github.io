@@ -1692,3 +1692,76 @@ body {
     transition: none;
   }
 }
+
+/* Education logos: one consistent circular badge, larger than the timeline's, filled edge to edge */
+.edu-logo {
+  position: relative;
+  flex: none;
+  width: clamp(4.25rem, 8vw, 5.5rem);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  overflow: hidden;
+  background: #fff;
+  border: 1px solid var(--rule);
+}
+
+.edu-img {
+  object-fit: cover;
+}
+
+/* The Block O is a tall octagon cut out of its original tile: show it whole (never cropped).
+   3.4% padding puts its farthest corner at 92% of the circle's radius (measured from the
+   image), so it fills the badge with an even, small margin. */
+.edu-logo[data-school="ohio-state"] .edu-img {
+  object-fit: contain;
+  padding: 3.4%;
+}
+
+/* Projects texture: a viewport-sized layer pinned behind the rows, not a canvas as tall as the
+   whole section. The section grows and shrinks as project panels open; a section-sized WebGL
+   canvas (millions of pixels) was reallocated and redrawn on every frame of that animation.
+   overflow: clip (not hidden) keeps the section from becoming a scroll container, which sticky
+   needs; the vertical padding moves to .inner so the pinned layer can span the whole section. */
+.work {
+  overflow: clip;
+  padding-block: 0;
+}
+
+.work > .inner {
+  padding-block: clamp(3.5rem, 7vw, 6rem);
+}
+
+/* The layer is sized to the LARGE viewport (lvh: the screen with the mobile address bar
+   hidden). With svh it ended short whenever the bar collapsed, leaving a bare strip at the bottom
+   that came and went as the bar moved. lvh is constant, unlike dvh, so the canvas is never resized
+   by the bar. The 100vh lines are the fallback for browsers without lvh. */
+.work > .band-fx {
+  position: sticky;
+  inset: auto;
+  top: 0;
+  height: 100vh;
+  height: 100lvh;
+  margin-inline: calc(-1 * var(--gutter));
+  width: calc(100% + 2 * var(--gutter));
+  margin-bottom: -100vh;
+  margin-bottom: -100lvh;
+}
+
+/* Double rules: every section title already draws a heavy underline, and the first row of blocks
+   beneath it (the About stats, the Beyond work blocks) drew its own top rule a short way below,
+   so two parallel lines read as a glitch. The first row now relies on the title's rule; the rules
+   between later rows stay as dividers. */
+.stat:nth-child(-n + 2),
+.beyond-block:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+
+@media (min-width: 900px) {
+  /* Wide layouts put every stat and every block in that first row */
+  .stat,
+  .beyond-block {
+    border-top: 0;
+    padding-top: 0;
+  }
+}
