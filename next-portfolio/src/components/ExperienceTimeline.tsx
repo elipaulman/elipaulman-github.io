@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { experience } from "@/lib/data";
+import { RoleBullets } from "./RoleBullets";
 
 const MONTHS = [
   "January", "February", "March", "April", "May", "June",
@@ -57,11 +58,9 @@ export function ExperienceTimeline() {
                           <p className="entry-role">{role.title}</p>
                         </div>
                       </div>
-                      <ul className="entry-body tl-body">
-                        {role.responsibilities.map((item) => (
-                          <li key={item}>{item}</li>
-                        ))}
-                      </ul>
+                      <div className="tl-body">
+                        <RoleBullets items={role.responsibilities} />
+                      </div>
                     </article>
                   </li>
                 ))}

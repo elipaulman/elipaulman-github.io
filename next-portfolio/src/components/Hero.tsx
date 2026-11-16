@@ -16,6 +16,15 @@ const HERO_PALETTE = {
 
 const HERO_PARAMS = { speed: 0.45, softness: 0.55, warp: 0.7, grain: 0.7, scatter: 0.55, tint: 0.65, contrast: 0.7, calm: 0.5, calmX: 0.22, calmY: 0.82 };
 
+/** One element per letter so each can rise in turn and widen on its own (see Motion.tsx). */
+function letters(text: string, offset: number) {
+  return [...text].map((c, i) => (
+    <b key={i} className="ch" style={{ "--i": offset + i } as React.CSSProperties}>
+      {c === " " ? " " : c}
+    </b>
+  ));
+}
+
 export function Hero({ socials }: { socials: Socials }) {
   const [, ...rest] = personal.name.split(" ");
 
@@ -31,10 +40,10 @@ export function Hero({ socials }: { socials: Socials }) {
 
       <h1 className="hero-name poster" aria-label={personal.name}>
         <span aria-hidden="true">
-          <i>{personal.shortName}</i>
+          <i>{letters(personal.shortName, 0)}</i>
         </span>
         <span aria-hidden="true">
-          <i>{rest.join(" ")}</i>
+          <i>{letters(rest.join(" "), personal.shortName.length)}</i>
         </span>
       </h1>
 

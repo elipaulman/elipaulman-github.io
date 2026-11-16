@@ -8,6 +8,7 @@ import { ProjectsGrid } from "@/components/ProjectsGrid";
 import { EducationSection } from "@/components/EducationSection";
 import { BeyondSection } from "@/components/BeyondSection";
 import { ContactSection } from "@/components/ContactSection";
+import { Motion } from "@/components/Motion";
 import { personal, socials } from "@/lib/data";
 
 export default function Home() {
@@ -36,8 +37,12 @@ export default function Home() {
 
   return (
     <>
+      <a href="#main" className="skip-link">
+        Skip to content
+      </a>
       <NavBar name={personal.name} />
-      <main>
+      <Motion />
+      <main id="main">
         <Hero socials={socials} />
         <AboutSection />
         <ExperienceTimeline />

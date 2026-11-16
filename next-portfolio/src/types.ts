@@ -78,7 +78,22 @@ export type Project = {
   techUsed: string;
   link: string;
   linkText: string;
+  /** Optional source link shown in the expanded details. */
+  repo?: string;
   tags?: string[];
+  detail?: ProjectDetail;
+};
+
+export type ProjectDetail = {
+  /** One line of context: event, date, team size. */
+  meta: string;
+  /** The problem the project addresses. */
+  context: string;
+  highlights: string[];
+  /** What the author specifically did. */
+  role: string;
+  /** Practical heads-up, e.g. a demo on free hosting that wakes slowly. */
+  note?: string;
 };
 
 export type Education = {
