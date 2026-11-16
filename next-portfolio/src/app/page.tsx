@@ -37,9 +37,12 @@ export default function Home() {
 
   return (
     <>
+      <a href="#main" className="skip-link">
+        Skip to content
+      </a>
       <NavBar name={personal.name} />
       <Motion />
-      <main>
+      <main id="main">
         <Hero socials={socials} />
         <AboutSection />
         <ExperienceTimeline />

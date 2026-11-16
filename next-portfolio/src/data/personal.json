@@ -18,9 +18,25 @@
   },
   "hobbies": "I enjoy playing guitar, mountain biking, skiing, kayaking, and spending time with friends and family. I also love tinkering — whether that's creating projects on my 3D printer, building with Arduino, or working on bikes and fixing things with my hands.",
   "stats": [
-    { "value": 13000, "suffix": "+", "label": "catalog items automated" },
-    { "value": 60, "suffix": "%", "label": "manual effort reduced" },
-    { "value": 100000, "suffix": "+", "label": "users served (LCS APIs)" },
-    { "value": 20, "suffix": "+", "label": "engineers led at ESW" }
+    {
+      "value": 13000,
+      "suffix": "+",
+      "label": "trade-in items managed at Amazon"
+    },
+    {
+      "value": 60,
+      "suffix": "%",
+      "label": "manual effort cut at Amazon"
+    },
+    {
+      "value": 100000,
+      "suffix": "+",
+      "label": "users on London Computer Systems APIs"
+    },
+    {
+      "value": 20,
+      "suffix": "+",
+      "label": "engineers led as president"
+    }
   ]
 }

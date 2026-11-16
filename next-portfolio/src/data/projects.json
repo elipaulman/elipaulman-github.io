@@ -1,46 +1,146 @@
 [
   {
-    "id": "indoor-navigator",
-    "title": "Indoor Navigator",
-    "description": "HackOHI/O 2025 multi-environment campus navigation system with indoor positioning, outdoor pathfinding, and garage routing. Features classroom schedules for all buildings, ADA-compliant routing, and sensor fusion for real-time tracking without Wi-Fi infrastructure.",
-    "techUsed": "JavaScript, HTML5 Canvas, PWA, Sensor Fusion, Python, Flask",
-    "link": "https://hack-ohio-2025.onrender.com",
-    "linkText": "View Live Demo",
-    "tags": ["hackathon"]
-  },
-  {
-    "id": "repo-rover",
-    "title": "RepoRover",
-    "description": "AI-powered repository intelligence platform leveraging RAG architecture with vector embeddings for semantic code search. Enables natural-language queries over codebases using LangChain and OpenAI models.",
-    "techUsed": "Python, Flask, LangChain, OpenAI API, Elasticsearch, Next.js",
-    "link": "https://github.com/elipaulman/Repo_Rover",
-    "linkText": "View Repo",
-    "tags": ["ai"]
-  },
-  {
-    "id": "attendance-processor",
-    "title": "Attendance Processor",
-    "description": "Production data pipeline automating attendance reporting for Greater Ohio Virtual School. Processes complex CSV transformations with Pandas, reducing manual work from hours to seconds.",
-    "techUsed": "Python, Flask, Pandas",
-    "link": "https://govs-csv-processor.onrender.com/",
-    "linkText": "View Live Demo"
-  },
-  {
-    "id": "legends-of-zelda",
-    "title": "Legend of Zelda",
-    "description": "NES-inspired 2D game engine built from scratch with custom collision detection, sprite animation system, and state-based enemy AI. Implements design patterns for maintainable game architecture.",
-    "techUsed": "C#, MonoGame Framework",
-    "link": "https://github.com/elipaulman/Legends-Of-Zelda",
-    "linkText": "View Repo"
-  },
-  {
     "id": "alumni-social-platform",
     "title": "Alumni Social Platform",
     "description": "Award-winning full-stack social network (J.P. Morgan Chase & Co. Code for Good). Built a scalable REST API with JWT authentication, real-time messaging, and profile matching algorithms for the LMCC alumni community.",
     "techUsed": "MERN Stack, Tailwind CSS",
     "link": "https://alumni-network-platform-9aov.onrender.com",
     "linkText": "View Live Demo",
-    "tags": ["hackathon", "winner"]
+    "tags": [
+      "hackathon",
+      "winner",
+      "fullstack"
+    ],
+    "detail": {
+      "meta": "J.P. Morgan Code for Good · Nov 2024 · 1st place of 20+ teams",
+      "context": "A networking platform for alumni of the Lower Manhattan Cultural Council, an NYC cultural nonprofit, so graduates of its programs can find and talk to each other.",
+      "highlights": [
+        "REST API with JWT-based sign-in and protected routes",
+        "Real-time messaging between members",
+        "Profile matching that suggests relevant people to connect with",
+        "MERN stack with a Tailwind CSS front end, deployed on Render"
+      ],
+      "role": "Worked with a hackathon team on the full-stack MERN build, which included user authentication and real-time features. The team won first place against more than 20 teams. The source isn't public; the live demo is the best way to see it.",
+      "note": "Free hosting: the first load can take about 20 seconds to wake."
+    }
+  },
+  {
+    "id": "indoor-navigator",
+    "title": "Indoor Navigator",
+    "description": "HackOHI/O 2025 navigation app for Scott Lab: indoor positioning from phone sensors alone, A* routing across three floors, class schedules, and campus garage info. No Wi-Fi or beacons needed.",
+    "techUsed": "React, HTML5 Canvas, PWA, Sensor Fusion, Python, Flask, A*",
+    "link": "https://hack-ohio-2025.onrender.com",
+    "linkText": "View Live Demo",
+    "repo": "https://github.com/elipaulman/hack_ohio_2025",
+    "tags": [
+      "hackathon",
+      "fullstack"
+    ],
+    "detail": {
+      "meta": "HackOHI/O 2025 · Honda Friction Finder challenge · 4-person team",
+      "context": "Finding a room in a large building, especially the basement of Scott Lab, wastes time and makes people late. The challenge was to remove friction from how people move around campus.",
+      "highlights": [
+        "Dead reckoning from the phone's sensors: step detection from accelerometer peaks, heading from a gyroscope and compass complementary filter, and zero-velocity updates to limit drift",
+        "A* pathfinding over a corridor graph built from the building's CAD floor plans, across the basement, first and second floors, with a stairs or elevator option",
+        "Installable as a PWA, with classroom schedule lookup, campus garage info, and an outdoor map",
+        "Drift is documented honestly: roughly 2 to 7 meters depending on steps since the last recalibration"
+      ],
+      "role": "Built the path-following feature that moves your position along a route using step counts, including multi-floor navigation with per-floor position and a heading arrow. Calibrated the building's rotation offset so the map matches real-world direction, polished the navigation panel, and set up the deployed API service.",
+      "note": "Free hosting: the first load can take about 20 seconds to wake."
+    }
+  },
+  {
+    "id": "repo-rover",
+    "title": "RepoRover",
+    "description": "OSU capstone: ask questions about any GitHub repo and get answers with file and line citations. RAG over vector embeddings in Elasticsearch, with LangChain, OpenAI, and AI security reviews.",
+    "techUsed": "Python, Flask, LangChain, OpenAI API, Elasticsearch, Next.js",
+    "link": "https://github.com/elipaulman/Repo_Rover",
+    "linkText": "View Repo",
+    "tags": [
+      "ai",
+      "fullstack"
+    ],
+    "detail": {
+      "meta": "Ohio State capstone · 5-person team",
+      "context": "Understanding an unfamiliar codebase usually means cloning it and reading for hours. RepoRover fetches a repo through the GitHub API and lets you ask questions about it instead.",
+      "highlights": [
+        "Pipeline: GitHub API, LangChain chunking, OpenAI embeddings, then a k-nearest-neighbor index in Elasticsearch",
+        "Streamed chat answers that cite file paths and line numbers, with a built-in code viewer and markdown preview",
+        "Security assessments at repo or file scope that return severity-ranked findings with CWE categories and remediation steps",
+        "Prompt grounding that keeps answers tied to retrieved code, plus repo management and large-file handling"
+      ],
+      "role": "Built the AI security-assessment feature (repo and file scans backed by retrieval over the indexed code), the code viewer with markdown preview, resizable panels and image and PDF support, and repo management. Also tuned the prompts to keep answers grounded in the retrieved code."
+    }
+  },
+  {
+    "id": "tech-learning-platform",
+    "title": "Tech Learning Platform",
+    "description": "EdTech platform for the Pyramid CDC nonprofit (J.P. Morgan Code for Good 2023): learning roadmap, skills quizzes, reward progress, and an admin dashboard on Firebase auth with React and Tailwind.",
+    "techUsed": "React, Tailwind CSS, Firebase",
+    "link": "https://github.com/elipaulman/Code_For_Good_2023",
+    "linkText": "View Repo",
+    "tags": [
+      "hackathon",
+      "winner",
+      "fullstack"
+    ],
+    "detail": {
+      "meta": "J.P. Morgan Code for Good · Nov 2023 · 1st place of 20+ teams",
+      "context": "Pyramid CDC wanted a way for learners to build tech skills, see their progress, and stay motivated, with a view for staff to follow along.",
+      "highlights": [
+        "Firebase Authentication for sign-up and sign-in",
+        "Skills assessment quizzes and a roadmap of lessons",
+        "A reward bar that shows progress toward incentives",
+        "An admin dashboard for tracking learners, shown with seeded sample data in the demo"
+      ],
+      "role": "Set up the React app and built the front-end shell: the homepage, a responsive navbar with login, and the admin dashboard. Also built the profile, calendar and course pages, the learning-path selection, and the assessment and reward styling."
+    }
+  },
+  {
+    "id": "attendance-processor",
+    "title": "Attendance Processor",
+    "description": "Tool for Greater Ohio Virtual School that merges weekly attendance exports, matches students across files, and calculates hours ahead or behind. Cuts manual work from hours to seconds.",
+    "techUsed": "Python, Flask, Pandas",
+    "link": "https://govs-csv-processor.onrender.com/",
+    "linkText": "View Live Demo",
+    "repo": "https://github.com/elipaulman/GOVS",
+    "tags": [
+      "fullstack"
+    ],
+    "detail": {
+      "meta": "Greater Ohio Virtual School · Dec 2024 · solo build",
+      "context": "Staff were combining a weekly activity report and a cumulative attendance report by hand every week. The tool does the merge and the math.",
+      "highlights": [
+        "Matches students across the two reports by normalizing names, so formatting differences don't break the merge",
+        "Accepts CSV and Excel files up to 16 MB, converts time formats, and handles missing or malformed values",
+        "Pick which columns to export and how to sort; blank rows group students by hours required",
+        "Pytest tests, Gunicorn on Render, and a light and dark interface"
+      ],
+      "role": "Built it end to end: the Flask merge logic, drag-and-drop upload, the hours ahead or behind calculation and time formatting, column and sort options, the instructions page, a light and dark theme, tests, and the production deployment.",
+      "note": "Free hosting: the first load can take about 20 seconds to wake."
+    }
+  },
+  {
+    "id": "legends-of-zelda",
+    "title": "Legend of Zelda",
+    "description": "Team-built NES Zelda in C# and MonoGame: rooms loaded from CSV grids, state-based Link, enemies and items, per-type collision handling, and pause, game-over and win screens.",
+    "techUsed": "C#, MonoGame Framework",
+    "link": "https://github.com/elipaulman/Legends-Of-Zelda",
+    "linkText": "View Repo",
+    "tags": [
+      "systems"
+    ],
+    "detail": {
+      "meta": "Ohio State course project · Fall 2024 · 5-person team · 5 sprints",
+      "context": "A software-engineering course project where the goal was as much about how the team built it as what it does: sprints on Trello, weekly code metrics, and written peer code reviews.",
+      "highlights": [
+        "Rooms are CSV grids: 0 is empty and each integer maps to a block, enemy or item, so a room is edited in a spreadsheet",
+        "State pattern for Link, enemies and items, with dedicated collision handlers per object type, across 13 block types, 17 ground items, and 20+ entity classes",
+        "Hitbox toggle, a dev room, and debug controls for fast testing",
+        "Tracked in Visual Studio each week: maintainability index 79 and a clean build with no warnings"
+      ],
+      "role": "Built the game-over, win and popup screens, the dev room used for testing, and input handling for the end and win states, and refactored the drawing code. Wrote a peer code review each sprint, including one of the room-loading code."
+    }
   },
   {
     "id": "weather-app",
@@ -48,31 +148,61 @@
     "description": "Location-aware weather dashboard with geolocation integration and dynamic search. Features a responsive design, real-time API data fetching, error handling, and loading states.",
     "techUsed": "OpenWeatherMap API, GitHub Pages, HTML, CSS",
     "link": "https://epaulman.com/weather",
-    "linkText": "View Live Demo"
-  },
-  {
-    "id": "brutus-the-plumber",
-    "title": "Brutus the Plumber",
-    "description": "Low-level game implementation in C featuring a real-time physics engine, custom collision detection algorithms, and memory-efficient data structures. Console-rendered graphics with optimized frame updates.",
-    "techUsed": "C, Custom Graphics Library",
-    "link": "https://github.com/elipaulman/Mario_C_Simulation",
-    "linkText": "View Repo"
-  },
-  {
-    "id": "tech-learning-platform",
-    "title": "Tech Learning Platform",
-    "description": "EdTech platform with adaptive learning paths and real-time progress analytics. Implements Firebase authentication, Firestore database with complex queries, and a component-based React architecture for scalability.",
-    "techUsed": "React, Tailwind CSS, Firebase",
-    "link": "https://github.com/elipaulman/Code_For_Good_2023",
-    "linkText": "View Repo",
-    "tags": ["hackathon", "winner"]
+    "linkText": "View Live Demo",
+    "detail": {
+      "meta": "Personal project · hosted on this site",
+      "context": "A small self-contained dashboard for checking the weather where you are or anywhere you search.",
+      "highlights": [
+        "Uses the browser's geolocation to show local weather on load",
+        "Search by city, with live data from the OpenWeatherMap API",
+        "Explicit loading and error states so a failed request is never a blank screen"
+      ],
+      "role": "Solo, front end only: the geolocation and search flow, the API calls, and the loading and error states. There is no server to keep running."
+    }
   },
   {
     "id": "money-tracker",
     "title": "Money Tracker",
-    "description": "Full-stack financial dashboard with secure user authentication, CRUD operations for transactions, and data visualization. Features a REST API and MongoDB aggregation pipelines for spending insights.",
+    "description": "Full-stack expense tracker built on the MERN stack: add income and expenses with a date and description and see a running balance. Express REST API with Mongoose models on MongoDB.",
     "techUsed": "MERN Stack (MongoDB, Express, React, Node.js)",
     "link": "https://drive.google.com/drive/folders/1q3LZYRDItUGH2cQZ-w84OfMQLvAVJbbz",
-    "linkText": "View Demo"
+    "linkText": "View Demo",
+    "repo": "https://github.com/elipaulman/money_tracker",
+    "tags": [
+      "fullstack"
+    ],
+    "detail": {
+      "meta": "Personal project · Oct 2023 · solo",
+      "context": "A first end-to-end MERN app, built to learn how the pieces connect from form to database and back.",
+      "highlights": [
+        "Express API with POST and GET routes for transactions, with required-field validation",
+        "Mongoose model and MongoDB persistence for each transaction",
+        "One input takes a signed amount and a name, like \"+120 Groceries\", and parses it",
+        "Balance is computed live from every stored transaction"
+      ],
+      "role": "Solo: the Express API and routes, the Mongoose data model, and the React front end, including the amount-and-name input parsing and the live balance."
+    }
+  },
+  {
+    "id": "brutus-the-plumber",
+    "title": "Brutus the Plumber",
+    "description": "C systems lab for OSU CSE 2421 on an instructor-provided graphics library: bit-packed state decoding, a generic callback-driven linked list, and manual memory management.",
+    "techUsed": "C, Linked Lists, Bit Manipulation",
+    "link": "https://github.com/elipaulman/Mario_C_Simulation",
+    "linkText": "View Repo",
+    "tags": [
+      "systems"
+    ],
+    "detail": {
+      "meta": "Ohio State course lab · CSE 2421 · spring 2024 · solo",
+      "context": "A systems-programming lab: the graphics and simulation harness are provided, and the work is the low-level code underneath it.",
+      "highlights": [
+        "Bit-field decoders that unpack color, jump velocity and position from packed 16-bit codes",
+        "A generic linked list in C with ordered insert, sort, and a conditional delete driven by callbacks",
+        "Callback functions that order characters by score and by screen position",
+        "Manual allocation and cleanup, checked with the course's debug build"
+      ],
+      "role": "Solo coursework: implemented the bit-field decoders, the linked-list operations (ordered insert, sort, conditional delete), and the ordering callbacks. The lab README logs about 13 hours."
+    }
   }
 ]

@@ -10,11 +10,10 @@ const EASE = "expo.out"; // the same curve as --ease in globals.css
 
 /**
  * The page's motion, kept deliberately small:
- *  - the name widens letter by letter near the cursor (the one playful moment)
  *  - the timeline spine draws and its dots fill as you scroll
- *  - project rules draw in as rows arrive; the photo unmasks once
+ *  - the About photo unmasks once (project rules are drawn by ProjectList)
  *  - a hairline scroll progress
- * Everything is gated on prefers-reduced-motion; the cursor effect also needs a fine pointer.
+ * Everything is gated on prefers-reduced-motion. (The name's entrance is pure CSS in globals.css.)
  */
 export function Motion() {
   useGSAP(() => {
@@ -36,6 +35,26 @@ export function Motion() {
         yPercent: 6,
         ease: "none",
         scrollTrigger: { trigger: ".hero", start: "top top", end: "bottom top", scrub: true },
+      });
+
+      /* Impact numbers count up once, the first time they scroll into view */
+      const finals: Array<() => void> = [];
+      document.querySelectorAll<HTMLElement>(".stat-num").forEach((el) => {
+        const to = Number(el.dataset.to);
+        if (!Number.isFinite(to)) return;
+        const finalText = el.textContent ?? String(to);
+        finals.push(() => (el.textContent = finalText));
+        // Only start from zero if it's still off-screen, so nothing flickers on load.
+        if (el.getBoundingClientRect().top > window.innerHeight * 0.88) el.textContent = "0";
+        const counter = { v: 0 };
+        gsap.to(counter, {
+          v: to,
+          duration: 1.8,
+          ease: "power3.out",
+          onUpdate: () => (el.textContent = Math.round(counter.v).toLocaleString("en-US")),
+          onComplete: () => (el.textContent = finalText),
+          scrollTrigger: { trigger: el, start: "top 88%", once: true },
+        });
       });
 
       /* About photo: a single unmask with a slow settle */
@@ -79,122 +98,8 @@ export function Motion() {
         });
       });
 
-      /* Project rows: the rule draws when the row arrives */
-      ScrollTrigger.batch(".work-row", {
-        start: "top 88%",
-        once: true,
-        onEnter: (rows) =>
-          rows.forEach((row, i) =>
-            gsap.delayedCall(i * 0.08, () => row.classList.add("is-in")),
-          ),
-      });
-
-      /* The name: letters widen through the font's width axis as the cursor passes */
-      const fine = gsap.matchMedia();
-      fine.add("(hover: hover) and (pointer: fine)", () => {
-        const name = document.querySelector<HTMLElement>(".hero-name");
-        const hero = document.querySelector<HTMLElement>(".hero");
-        if (!name || !hero) return;
-        const chars = Array.from(name.querySelectorAll<HTMLElement>(".ch"));
-        const REST = 62;
-        const WIDE = 78;
-        const REST_LS = -0.012; // em, matches .poster
-        const MIN_LS = -0.04;
-
-        const setW = chars.map((el) =>
-          gsap.quickTo(el, "--w", { duration: 0.7, ease: "power3.out" }),
-        );
-
-        // Each line behaves like an accordion: as letters widen, the gaps between the others
-        // tighten so the name keeps its footprint and never crowds the portrait.
-        const lines = Array.from(name.querySelectorAll<HTMLElement>("span > i")).map((el) => ({
-          el,
-          chars: Array.from(el.querySelectorAll<HTMLElement>(".ch")),
-          restWidth: 0,
-          ls: REST_LS,
-        }));
-        const span = (cs: HTMLElement[]) =>
-          cs[cs.length - 1].getBoundingClientRect().right - cs[0].getBoundingClientRect().left;
-        const fontSize = () => parseFloat(getComputedStyle(name).fontSize);
-        const settleSpacing = () => {
-          const fs = fontSize();
-          for (const l of lines) {
-            const gaps = Math.max(1, l.chars.length - 1);
-            const delta = span(l.chars) - l.restWidth;
-            l.ls = gsap.utils.clamp(MIN_LS, REST_LS, l.ls - (delta / (gaps * fs)) * 0.6);
-            l.el.style.letterSpacing = `${l.ls}em`;
-          }
-        };
-        let tickUntil = 0;
-        const tick = () => {
-          settleSpacing();
-          if (performance.now() > tickUntil) gsap.ticker.remove(tick);
-        };
-        const keepTicking = () => {
-          tickUntil = performance.now() + 900;
-          gsap.ticker.remove(tick);
-          gsap.ticker.add(tick);
-        };
-
-        // Letter centres at their resting width, relative to the name block.
-        let centres: { x: number; y: number }[] = [];
-        let radius = 0;
-        const measure = () => {
-          gsap.ticker.remove(tick);
-          gsap.set(chars, { "--w": REST });
-          for (const l of lines) {
-            l.ls = REST_LS;
-            l.el.style.letterSpacing = "";
-            l.restWidth = span(l.chars);
-          }
-          centres = chars.map((el) => ({
-            x: el.offsetLeft + el.offsetWidth / 2,
-            y: el.offsetTop + el.offsetHeight / 2,
-          }));
-          radius = fontSize() * 0.95;
-        };
-        // Wait out the entrance so offsets are stable.
-        const ready = gsap.delayedCall(1.6, measure);
-        window.addEventListener("resize", measure);
-
-        let raf = 0;
-        const onMove = (e: PointerEvent) => {
-          if (!centres.length || raf) return;
-          raf = requestAnimationFrame(() => {
-            raf = 0;
-            const r = name.getBoundingClientRect();
-            const px = e.clientX - r.left;
-            const py = e.clientY - r.top;
-            centres.forEach((c, i) => {
-              const d = Math.hypot(px - c.x, (py - c.y) * 0.6);
-              const t = Math.max(0, 1 - d / radius);
-              const k = t * t * (3 - 2 * t); // smoothstep
-              setW[i](REST + (WIDE - REST) * k);
-            });
-            keepTicking();
-          });
-        };
-        const onLeave = () => {
-          setW.forEach((s) => s(REST));
-          keepTicking();
-        };
-        hero.addEventListener("pointermove", onMove);
-        hero.addEventListener("pointerleave", onLeave);
-
-        return () => {
-          if (raf) cancelAnimationFrame(raf);
-          ready.kill();
-          gsap.ticker.remove(tick);
-          lines.forEach((l) => (l.el.style.letterSpacing = ""));
-          window.removeEventListener("resize", measure);
-          hero.removeEventListener("pointermove", onMove);
-          hero.removeEventListener("pointerleave", onLeave);
-          gsap.set(chars, { clearProps: "--w" });
-        };
-      });
-
       return () => {
-        fine.revert();
+        finals.forEach((restore) => restore());
         html.classList.remove("js-motion");
       };
     });

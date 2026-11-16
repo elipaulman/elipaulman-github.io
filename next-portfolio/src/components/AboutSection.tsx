@@ -12,6 +12,19 @@ export function AboutSection() {
       <FxGround id="grain-gradient" className="band-fx" palette={PAPER} darkPalette={PAPER_DARK} seed={23} params={PAPER_PARAMS} />
       <div className="inner">
         <h2 className="sec-title poster">About</h2>
+        <dl className="stats">
+          {personal.stats.map((stat) => (
+            <div key={stat.label} className="stat">
+              <dt className="stat-label">{stat.label}</dt>
+              <dd className="stat-value poster">
+                <span className="stat-num" data-to={stat.value}>
+                  {stat.value.toLocaleString("en-US")}
+                </span>
+                {stat.suffix}
+              </dd>
+            </div>
+          ))}
+        </dl>
         <div className="about">
           <div>
             <p className="about-lead">

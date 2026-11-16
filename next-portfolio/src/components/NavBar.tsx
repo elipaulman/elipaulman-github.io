@@ -4,6 +4,7 @@ import Link from "next/link";
 import { useState } from "react";
 import { ThemeToggle } from "./ThemeToggle";
 import { useScrollSpy } from "@/hooks/useScrollSpy";
+import { socials } from "@/lib/data";
 
 const links = [
   { href: "#about", label: "About" },
@@ -16,6 +17,9 @@ const links = [
 ];
 
 const sectionIds = links.map((link) => link.href.slice(1));
+
+const emailHref = `mailto:${socials.email.primary}`;
+const resumeHref = `/${socials.resume.path}`;
 
 export function NavBar({ name }: { name: string }) {
   const [open, setOpen] = useState(false);
@@ -42,6 +46,12 @@ export function NavBar({ name }: { name: string }) {
         </nav>
 
         <div className="nav-tools">
+          <a href={emailHref} className="nav-cta">
+            Email
+          </a>
+          <a href={resumeHref} download className="nav-cta nav-cta-light">
+            Resume
+          </a>
           <ThemeToggle />
           <button
             type="button"
@@ -75,6 +85,14 @@ export function NavBar({ name }: { name: string }) {
               </Link>
             ))}
           </nav>
+          <div className="nav-drawer-actions">
+            <a href={emailHref} onClick={() => setOpen(false)}>
+              Email me
+            </a>
+            <a href={resumeHref} download onClick={() => setOpen(false)}>
+              Resume
+            </a>
+          </div>
         </div>
       </div>
     </header>
